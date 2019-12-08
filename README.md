@@ -3,7 +3,7 @@ GitHub Repo for MSc Group Project: Positive Sentiment Analysis Website
 
 ## Repo Contents
 ### Product
-- [alpha-build](alpha-build) -- Combined 'NLP' and Frontend Website
+- [Alpha Build](alpha-build) -- Combined 'NLP' and Frontend Website
 
 ### Testing & Development Phase
 - [NLP](nlp-testing) -- All NLP Jupyter notebooks, and other research in testing different NLP implementations.
