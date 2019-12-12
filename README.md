@@ -11,7 +11,7 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 - [Backend Testing](backend-testing) -- Backend Server-side testing e.g. Firebase, AWS
 
 ## Project Prep Work during Holidays
-- Natural Language Processing (NLP)
+- Natural Language Processing (NLP) & Sentiment Analysis Model
     - Research different NLP Python Libraries to use
     - Find Labelled Open-source Datasets on Sentiment Analysis (any time, e.g. Twitter Data, News Data, Research Papers).
     - Make Basic NLP Model that reads in Text and picks out Key words
