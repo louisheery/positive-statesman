@@ -1,5 +1,5 @@
 # The Positive Statesman
-GitHub Repo for MSc Group Project: Positive Sentiment Analysis Website
+GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment analysis"
 
 ## Repo Contents
 ### Product
