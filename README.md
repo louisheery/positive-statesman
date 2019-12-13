@@ -7,7 +7,7 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
     - Cloud Computing: Incl. Researching capabilities of Firebase, AWS etc
     - Backend Frameworks: Research which is best one(s) to use.
     
- 2. [Frontend Frameworks (Louis)]((mvp/frontend)
+ 2. [Frontend Frameworks (Louis)](mvp/frontend)
     - Frontend Frameworks: Research which is best one(s) to use.
 
 3. [ML Models & Classifiers (NLP, Text, Images) (Max S.)](mvp/nlp-ml)
@@ -24,6 +24,10 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 
 ### Libraries and Technologies to research
 - NLP: NLP Toolkit, Bert, Vadar
+- Backend Hosting:
+- Backend Libraries:
+- Frontend Libraries:
+- News APIs:
 
 ## Repo Contents
 ### Product
