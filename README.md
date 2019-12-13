@@ -34,9 +34,7 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 - [Alpha Build](alpha-build) -- Combined 'NLP' and Frontend Website
 
 ### Testing & Development Phase
-- [NLP](nlp-testing) -- All NLP Jupyter notebooks, and other research in testing different NLP implementations.
-- [Frontend Testing](frontend-testing) -- Frontend Website, JavaScript, React etc mockups
-- [Backend Testing](backend-testing) -- Backend Server-side testing e.g. Firebase, AWS
+- [MVP](mvp) -- Minimum Viable Product work
 
 ## Project Info
 ### Tech Stack
