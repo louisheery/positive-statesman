@@ -2,23 +2,23 @@
 GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment analysis"
 
 ## Christmas Holiday Work
-1. Server Infastructure (Einar, Michael)
+1. [Backend Server Infastructure (Einar, Michael)](mvp/backend)
     - Web Hosting: Incl. seeing which hosting providers give us free credit for being students @ Imperial
     - Cloud Computing: Incl. Researching capabilities of Firebase, AWS etc
     - Backend Frameworks: Research which is best one(s) to use.
     
- 2. Frontend Frameworks (Louis)
+ 2. [Frontend Frameworks (Louis)]((mvp/frontend)
     - Frontend Frameworks: Research which is best one(s) to use.
 
-3. ML Models & Classifiers (NLP, Text, Images) (Max S.)
+3. [ML Models & Classifiers (NLP, Text, Images) (Max S.)](mvp/nlp-ml)
     - Test out and compare capabilities of differnent ML Classifiers: Incl. Bert, Vadar, NLPK, ImageAI, etc.
 
-4. Fetching Stories & APIs (Max C., Lenni)
+4. [Fetching Stories & APIs (Max C., Lenni)](mvp/fetching-apis)
     - APIs: Incl. Looking at potential APIs, ways to fetch news from websites, whether they are free etc.
     - RSS Feeds of Popular News sites
     - (Web crawling)
     
-5. App Requirements (ALL)
+5. [App Requirements (ALL)](mvp/app-requirements)
     - User Stories & Flow Charts of User Actions on the Website
     - Features (Core & Addon Features) which we want to include in Website -> then which can go in the MVP.
 
