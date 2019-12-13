@@ -5,6 +5,9 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 ### Product
 - [Alpha Build](alpha-build) -- Combined 'NLP' and Frontend Website
 
+### Libraries and Technologies to use
+- NLP: NLP Toolkit, Bert, Vadar
+
 ### Testing & Development Phase
 - [NLP](nlp-testing) -- All NLP Jupyter notebooks, and other research in testing different NLP implementations.
 - [Frontend Testing](frontend-testing) -- Frontend Website, JavaScript, React etc mockups
