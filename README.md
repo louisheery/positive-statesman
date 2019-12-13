@@ -1,6 +1,34 @@
 # The Positive Statesman
 GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment analysis"
 
+## Christmas Holiday Work
+1. [Backend Server Infastructure (Einar, Michael)](mvp/backend)
+    - Web Hosting: Incl. seeing which hosting providers give us free credit for being students @ Imperial
+    - Cloud Computing: Incl. Researching capabilities of Firebase, AWS etc
+    - Backend Frameworks: Research which is best one(s) to use.
+    
+ 2. [Frontend Frameworks (Louis)](mvp/frontend)
+    - Frontend Frameworks: Research which is best one(s) to use.
+
+3. [ML Models & Classifiers (NLP, Text, Images) (Max S.)](mvp/nlp-ml)
+    - Test out and compare capabilities of differnent ML Classifiers: Incl. Bert, Vadar, NLPK, ImageAI, etc.
+
+4. [Fetching Stories & APIs (Max C., Lenni)](mvp/fetching-apis)
+    - APIs: Incl. Looking at potential APIs, ways to fetch news from websites, whether they are free etc.
+    - RSS Feeds of Popular News sites
+    - (Web crawling)
+    
+5. [App Requirements (ALL)](mvp/app-requirements)
+    - User Stories & Flow Charts of User Actions on the Website
+    - Features (Core & Addon Features) which we want to include in Website -> then which can go in the MVP.
+
+### Libraries and Technologies to research
+- NLP: NLP Toolkit, Bert, Vadar
+- Backend Hosting:
+- Backend Libraries:
+- Frontend Libraries:
+- News APIs:
+
 ## Repo Contents
 ### Product
 - [Alpha Build](alpha-build) -- Combined 'NLP' and Frontend Website
@@ -10,7 +38,16 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 - [Frontend Testing](frontend-testing) -- Frontend Website, JavaScript, React etc mockups
 - [Backend Testing](backend-testing) -- Backend Server-side testing e.g. Firebase, AWS
 
-## Project Prep Work during Holidays
+## Project Info
+### Tech Stack
+![alt text](https://github.com/louisheery/positive-statesman/blob/master/file-dump/graphics/potential-tech-stack.png)
+
+### Mockups
+![alt text](https://github.com/louisheery/positive-statesman/blob/master/file-dump/graphics/potential-news-feed-mockup.png)
+
+
+---
+### OLD Project Prep Work during Holidays
 - Natural Language Processing (NLP) & Sentiment Analysis Model
     - Research different NLP Python Libraries to use
     - Find Labelled Open-source Datasets on Sentiment Analysis (any time, e.g. Twitter Data, News Data, Research Papers).
@@ -31,9 +68,3 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
     - Look at the Server-side hosting products avaliable e.g. Firebase, Parse Server
     - Set up Firebase account, and get basic Storage account up and running
     - Look and how Firebase or other integrates with ML and NLP Server-side products, and which it supports
-
-## Tech Stack
-![alt text](https://github.com/louisheery/positive-statesman/blob/master/file-dump/graphics/potential-tech-stack.png)
-
-## Mockups
-![alt text](https://github.com/louisheery/positive-statesman/blob/master/file-dump/graphics/potential-news-feed-mockup.png)
