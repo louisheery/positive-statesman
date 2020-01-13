@@ -24,6 +24,7 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
 
 ### Libraries and Technologies to research
 - NLP: NLP Toolkit, Bert, Vadar
+- NLP Datasets [Google Dataset Search](https://toolbox.google.com/datasetsearch/search?query=positive%20sentiment)
 - Backend Hosting:
 - Backend Libraries:
 - Frontend Libraries:
