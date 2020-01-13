@@ -67,3 +67,14 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
     - Look at the Server-side hosting products avaliable e.g. Firebase, Parse Server
     - Set up Firebase account, and get basic Storage account up and running
     - Look and how Firebase or other integrates with ML and NLP Server-side products, and which it supports
+    
+### Selection
+
+Front-End Framework: React + Bootstrap
+Backend Framework: Flask/Django
+Webhosting: Azure
+APIs: TheGuardian, NewsAPI, Aylien
+NLP: Google Bird
+Codebase: GitHub
+Project Management: Slack, Trello, Basecamp
+
