@@ -7,7 +7,7 @@
 | Other libraries can be required | Written in TypeScript, not JS friendly Harder to get started with some complex aspects ➜ longer to get MVP done | Older version of Angular ➜ less plugins? Harder to get started with some complex aspects ➜ longer to get MVP done Low popularity | Not maintained by a big company Young framework Can be overly flexible ➜ problematic? | jQuery is old, and can be very slow Not intended for complex projects Not intended for development of mobile applications |
 
 ## Potential React-based Stack
-| React | JS-based Frontend|
+| React | JS-based Frontend |
 | React Router | Maps sections of the App with different URLs e.g. positivestatesman.com/topics/politics |
 | React Redux | Used for managing current state of the app, probably less relavent for MVP |
 
