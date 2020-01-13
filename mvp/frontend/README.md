@@ -1,10 +1,6 @@
 # MVP/Frontend
 ## Frontend Frameworks
-
-| React | Angular | Angular JS | Vue | jQuery |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Fast implementation High Performance Good Libraries & Plugins React Native for Mobile App More of a linear learning curve than Angular (i.e. easier to get an MVP done) Component-based -> better separation of concerns support | Works across different types of Apps (Web, Mobile etc) Components & Modules based | JavaScript friendly Faster development than Angular | Component-based -> better separation of concerns support Fast implementation Simple syntax | Beginner friendly Good libraries & Plugins |
-| Other libraries can be required | Written in TypeScript, not JS friendly Harder to get started with some complex aspects ➜ longer to get MVP done | Older version of Angular ➜ less plugins? Harder to get started with some complex aspects ➜ longer to get MVP done Low popularity | Not maintained by a big company Young framework Can be overly flexible ➜ problematic? | jQuery is old, and can be very slow Not intended for complex projects Not intended for development of mobile applications |
+![alt text](https://github.com/louisheery/positive-statesman-/blob/master/mvp/frontend/frameworks-table.png)
 
 ## Potential React-based Stack
 | Components | Property |
