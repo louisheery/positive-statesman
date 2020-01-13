@@ -1,6 +1,6 @@
 # MVP/Frontend
 ## Frontend Frameworks
-![alt text](https://github.com/louisheery/positive-statesman-/blob/master/mvp/frontend/frameworks-table.png)
+![alt text](https://github.com/louisheery/positive-statesman/blob/master/mvp/frontend/frameworks-table.png)
 
 ## Potential React-based Stack
 | Components | Property |
