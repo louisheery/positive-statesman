@@ -1,1 +1,0 @@
-# MVP/App-requirements
