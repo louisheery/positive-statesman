@@ -11,7 +11,7 @@ GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment a
     - Frontend Frameworks: Research which is best one(s) to use.
 
 3. [ML Models & Classifiers (NLP, Text, Images) (Max S.)](mvp/nlp-ml)
-    - Test out and compare capabilities of differnent ML Classifiers: Incl. Bert, Vadar, NLPK, ImageAI, etc.
+    - Test out and compare capabilities of differnent ML Classifiers: Incl. BERT, Vader, NLTK, ImageAI, etc.
 
 4. [Fetching Stories & APIs (Max C., Lenni)](mvp/fetching-apis)
     - APIs: Incl. Looking at potential APIs, ways to fetch news from websites, whether they are free etc.
@@ -74,7 +74,7 @@ Front-End Framework: React + Bootstrap
 Backend Framework: Flask/Django
 Webhosting: Azure
 APIs: TheGuardian, NewsAPI, Aylien
-NLP: Google Bird
+NLP: Google BERT
 Codebase: GitHub
 Project Management: Slack, Trello, Basecamp
 
