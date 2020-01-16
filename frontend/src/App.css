@@ -7,13 +7,32 @@
 
 }
 
-.NewsFeed {
-  margin: auto;
+.HeaderBarAddButton {
+  margin-right: 65px;
+}
+
+.HeaderBarFlexGrow {
+  flex-grow: 1;
+}
+
+.NewsFeedGrid {
+  margin-left: 100px;
+  margin-right: 100px;
   margin-top: 100px;
-  width: 500px;
+  flex-grow: 1;
+  width: auto;
 }
 
 .NewsItem {
   margin-top: 25px;
   margin-bottom: 25px;
+}
+
+.NewsFeedCard {
+  height: auto;
+  width: auto;
+}
+
+.NewsFeedCardPositivity {
+  border: 10px;
 }

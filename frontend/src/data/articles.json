@@ -1,5 +1,5 @@
 {
-    "Top100Articles": [
+    "Articles": [
         {
             "ArticleTitle": "Big Ben: Would Brexit bongs cost £500,000?",
             "ArticlePublisher": "BBC News",
@@ -7,7 +7,8 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/0B22/production/_110505820_gettyimages-1192391732-2.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Politics",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 80
         },
         {
             "ArticleTitle": "Flybe: Government strikes a deal to rescue troubled airline",
@@ -16,7 +17,8 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/130BB/production/_110511087_gettyimages-1052445928.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Business",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 70
         },
         {
             "ArticleTitle": "Huawei: 'No smoking gun' in US's 5G dossier",
@@ -25,7 +27,8 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/101C6/production/_110509956_3a484bf1-24fb-479e-8029-73c2e6f015cd.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Technology",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 50
         },
         {
             "ArticleTitle": "Big Ben: Would Brexit bongs cost £500,000?",
@@ -34,7 +37,8 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/0B22/production/_110505820_gettyimages-1192391732-2.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Politics",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 40
         },
         {
             "ArticleTitle": "Flybe: Government strikes a deal to rescue troubled airline",
@@ -43,7 +47,8 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/130BB/production/_110511087_gettyimages-1052445928.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Business",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 20
         },
         {
             "ArticleTitle": "Huawei: 'No smoking gun' in US's 5G dossier",
@@ -52,7 +57,28 @@
             "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/101C6/production/_110509956_3a484bf1-24fb-479e-8029-73c2e6f015cd.jpg",
             "ArticleDate": "14/01/20",
             "ArticleTopic": "Technology",
-            "ArticleLocation": "London, UK"
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 10
+        },
+        {
+            "ArticleTitle": "Flybe: Government strikes a deal to rescue troubled airline",
+            "ArticlePublisher": "BBC News",
+            "ArticleURL": "https://www.bbc.co.uk/news/business-51113895",
+            "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/130BB/production/_110511087_gettyimages-1052445928.jpg",
+            "ArticleDate": "14/01/20",
+            "ArticleTopic": "Business",
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 20
+        },
+        {
+            "ArticleTitle": "Huawei: 'No smoking gun' in US's 5G dossier",
+            "ArticlePublisher": "BBC News",
+            "ArticleURL": "https://www.bbc.co.uk/news/technology-51112232",
+            "ArticleImageURL": "https://ichef.bbci.co.uk/news/834/cpsprodpb/101C6/production/_110509956_3a484bf1-24fb-479e-8029-73c2e6f015cd.jpg",
+            "ArticleDate": "14/01/20",
+            "ArticleTopic": "Technology",
+            "ArticleLocation": "London, UK",
+            "ArticlePositivity": 10
         }
     ]
 }
