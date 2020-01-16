@@ -1,5 +1,4 @@
 asgiref==3.2.3
-cloudpickle==0.6.1
 Django==3.0.2
 djangorestframework==3.11.0
 pytz==2019.3
