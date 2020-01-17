@@ -23,12 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7m=wxrp7x_rfa#sn5cep#ka@2tvzw^dw49sto38tf27x#im=gv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = [
-    'localhost',
-    'positive-statesman-api.azurewebsites.net',
-]
+ALLOWED_HOSTS = [ os.environ.get('ALLOWED_HOSTS', 'localhost') ]
 
 
 # Application definition
@@ -58,9 +55,14 @@ MIDDLEWARE = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CORS_ORIGIN_WHITELIST = [
+    os.environ.get('URL_WHITELIST', 'http://localhost:3000'),
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get('URL_WHITELIST', 'http://localhost:3000'),
+]
 
 ROOT_URLCONF = 'backend.urls'
 
