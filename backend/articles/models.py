@@ -8,6 +8,7 @@ class Article(models.Model):
     image_url = models.CharField(max_length=256, default='')
     publisher = models.CharField(max_length=30, default='')
     publish_date = models.DateTimeField(default=datetime.now())
+    sentiment_score = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['created']
