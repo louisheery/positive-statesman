@@ -3,6 +3,8 @@ import HeaderBar from './components/HeaderBar';
 import NewsFeed from './components/NewsFeed';
 import './App.css';
 import AddArticlePopup from './components/AddArticlePopup';
+import { fetchArticles } from './apiIntegration';
+
 
 class App extends React.Component {
 
