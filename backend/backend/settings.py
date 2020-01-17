@@ -25,7 +25,9 @@ SECRET_KEY = '7m=wxrp7x_rfa#sn5cep#ka@2tvzw^dw49sto38tf27x#im=gv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'positive-statesman-api.azurewebsites.net',
+]
 
 
 # Application definition
