@@ -5,7 +5,6 @@ from rest_framework.parsers import JSONParser
 from articles.models import Article
 from articles.serializers import ArticleSerializer
 
-@csrf_exempt
 def article_list(request):
     """
     List all articles, or create a new article.
@@ -24,7 +23,6 @@ def article_list(request):
 
         return JsonResponse(serializer.errors, status=400)
 
-@csrf_exempt
 def article_detail(request, pk):
     """
     Retrieve, update or delete an article.
