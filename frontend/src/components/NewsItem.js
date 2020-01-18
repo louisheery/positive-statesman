@@ -49,7 +49,7 @@ class NewsItem extends Component {
                             <Typography style={{fontSize: '10pt'}} color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
                             <Typography style={{ fontSize: '10pt' }} color="textSecondary" component="p">{Article.ArticlePublisher}{"  "}{Article.ArticleDate}</Typography>
                             <center>
-                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" disableElevation>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="happy">😀</span>
                                 </Button>
 
