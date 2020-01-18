@@ -35,47 +35,41 @@ class NewsItem extends Component {
 
 
         return (
-            <div key={this.props.i} className="NewsItem">
+            <div>
                 <Card className="NewsFeedCard">
                     <CardActionArea href={Article.ArticleURL}>
                         <CardMedia
                             component="img"
                             alt=""
-                            height="150"
+                            height="50"
                             image={Article.ArticleImageURL}
                             title={Article.ArticleTitle}
                         />
                         <CardContent>
-                            <Typography variant="title1" color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
-                            <Typography variant="body1" color="textSecondary" component="p">{Article.ArticlePublisher}</Typography>
-                            <Typography variant="body1" color="textSecondary" component="p">{Article.ArticleDate}</Typography>
-                            <br />
-                            <Typography>
-                                <center>
-                                    <Button variant="outlined" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
-                                        <Button variant="uncontained" color="primary" disableElevation>
-                                            <span role="img" aria-label="sheep">😀</span>
-                                        </Button>
+                            <Typography style={{fontSize: '10pt'}} color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
+                            <Typography style={{ fontSize: '10pt' }} color="textSecondary" component="p">{Article.ArticlePublisher}{"  "}{Article.ArticleDate}</Typography>
+                            <center>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" disableElevation>
+                                    <span role="img" aria-label="happy">😀</span>
+                                </Button>
 
-                                        <Button variant="uncontained" color="primary" onClick={this.handleClickPlaceholder}  disableElevation>
-                                            <span role="img" aria-label="sheep">😐</span>
-                                        </Button>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
+                                    <span role="img" aria-label="neural">😐</span>
+                                </Button>
 
-                                        <Button variant="uncontained" color="primary" onClick={this.handleClickPlaceholder}  disableElevation>
-                                            <span role="img" aria-label="sheep">🙁</span>
-                                        </Button>
-                                    </Button>
-                                
-                                <br />
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
+                                    <span role="img" aria-label="sad">🙁</span>
+                                </Button>
+                            
                                 <br />
                                 <Button className="NewsFeedCardPositivity" variant="outlined" color="primary" disableElevation disabled>
                                     <span role="img" style={positivityTextStyle}>{Article.ArticlePositivity}% Positivity</span>
                                 </Button>
-                                </center>
-                            </Typography>
+                            </center>
                         </CardContent>
                     </CardActionArea>
                 </Card>
+                
             </div>
 
         )
