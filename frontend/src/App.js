@@ -4,6 +4,7 @@ import NewsFeed from './components/NewsFeed';
 import NewsTickerBar from './components/NewsTickerBar'
 import './App.css';
 import AddArticlePopup from './components/AddArticlePopup';
+import { fetchArticles } from './apiIntegration';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
