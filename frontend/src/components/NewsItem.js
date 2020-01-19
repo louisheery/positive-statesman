@@ -44,7 +44,7 @@ class NewsItem extends Component {
                             height="50"
                             image={Article.ArticleImageURL}
                             title={Article.ArticleTitle}
-                        />
+                />
                         <CardContent>
                             <Typography style={{fontSize: '10pt'}} color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
                             <Typography style={{ fontSize: '10pt' }} color="textSecondary" component="p">{Article.ArticlePublisher}{"  "}{Article.ArticleDate}</Typography>

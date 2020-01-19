@@ -10,6 +10,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import fetchedArticle from '../data/fetchedArticle';
 import NewsItem from './NewsItem';
 
+const API = 'http://positive-statesman-api.azurewebsites.net'
+const APIPUTURL = '/addArticle/' // ???? check with backend what url scheme is
+const PROXYURL = "https://cors-anywhere.herokuapp.com/";
+
 class AddArticlePopup extends Component {
 
     constructor(props){
@@ -34,7 +38,22 @@ class AddArticlePopup extends Component {
 
     handleClickAddArticle = () => {
         
+        // Note to Self (Louis): I'd recommend changing this to a Form,
+        // and using like: const urlToSend = event.target.elements.urlBox.value
+        // and then sending that variable in API POST request
+        // instead of this random setting prop variable and then retriving prop variable stuff
+        // event.preventDefault();
+        // const urlToSend = event.target.elements.urlBox.value
+        // apiFunction(urlToSend); -> then need promise thing to check it worked
 
+        // PUT REQUEST
+        // 
+        fetch(PROXYURL + API + APIPUTURL, { mode: 'cors', method: 'PUT', body: {'url': 'bbc.co.uk/example'} })
+            .then(response => response.json())
+            .then(json => {
+                // WHAT TO DO IT IT SUCCEEDS -> i.e. reload homepage with article displayed??
+            })
+            .catch(error => error);
 
             //show loading
             this.setState({ isEnterURLDisplayed: false})
