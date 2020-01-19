@@ -42,7 +42,6 @@ class NewsFeed extends Component {
 
                     <GridList cols={5} style={{flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
 
-                        {/* REPLACE 'articles.Article' with 'this.state.rowArticles' to call from API */}
                         {
                             articles.Articles.map((article, i) => {
                                 return (
