@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewsFeedRow from './NewsFeedRow';
+import Grid from '@material-ui/core/Grid';
 
 const QUERY_TOPARTICLES = '/articles'
 const QUERY_ARTARTICLES = '/articles/art'
@@ -26,7 +27,7 @@ class NewsFeed extends Component {
         super(props)
 
         this.state = {
-            homeScreenNewsFeedRows: [QUERY_TOPARTICLES, QUERY_ECONARTICLES, QUERY_POLITICSARTICLES],
+            homeScreenNewsFeedRows: [QUERY_TOPARTICLES, QUERY_TOPARTICLES, QUERY_TOPARTICLES],
         }
     }
 
