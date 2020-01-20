@@ -37,7 +37,6 @@ class NewsFeed extends Component {
 
 
     render() {
-
         return (
             // NewsFeed = ClassName
             <div className="NewsFeedGrid">
@@ -49,8 +48,6 @@ class NewsFeed extends Component {
                     })
                 }
             </div>
-
-
         )
     }
 }

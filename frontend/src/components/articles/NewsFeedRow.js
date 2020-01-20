@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NewsItem from './NewsItem';
-import articles from '../data/articles';
+import articles from '../../data/articles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
@@ -46,10 +46,7 @@ class NewsFeed extends Component {
                 <Typography variant="h5">{this.props.newsFeedRowTitle}</Typography>
                 
                 <div>
-
-                    <GridList cols={5} style={{flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
-
-                        {/* REPLACE 'articles.Article' with 'this.state.rowArticles' to call from API */}
+                    <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
                         {
                             this.state.rowArticles.map((article, i) => {
                                 return (
@@ -57,14 +54,12 @@ class NewsFeed extends Component {
                                     <GridListTile style={{height: '220px', width: '250px', margin: '10px'}} key={Math.random()}>
 
                                         <NewsItem key={this.props.i} Article={article} />
-                                        
+
                                     </GridListTile>
                                 )
                             })
                         }
-
                     </GridList>
-
                 </div>
             </div>
 

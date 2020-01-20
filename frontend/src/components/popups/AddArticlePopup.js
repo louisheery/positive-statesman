@@ -7,12 +7,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import fetchedArticle from '../data/fetchedArticle';
-import NewsItem from './NewsItem';
-
-const API = 'http://positive-statesman-api.azurewebsites.net'
-const APIPUTURL = '/addArticle/' // ???? check with backend what url scheme is
-const PROXYURL = "https://cors-anywhere.herokuapp.com/";
+import fetchedArticle from '../../data/fetchedArticle';
+import NewsItem from '../articles/NewsItem';
 
 class AddArticlePopup extends Component {
 
