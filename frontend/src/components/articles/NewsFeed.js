@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NewsFeedRow from './NewsFeedRow';
-import Grid from '@material-ui/core/Grid';
 
 const QUERY_TOPARTICLES = '/articles'
 const QUERY_ARTARTICLES = '/articles/art'
@@ -33,20 +32,17 @@ class NewsFeed extends Component {
 
 
     render() {
-
         return (
-        // NewsFeed = ClassName
+            // NewsFeed = ClassName
             <div className="NewsFeedGrid">
-                    {
-                        this.state.homeScreenNewsFeedRows.map((newsFeedRow, i) => {
-                            return (
-                                <NewsFeedRow key={newsFeedRow + Math.random() + i} newsFeedRow={newsFeedRow} />
-                            );
-                        })
-                    }
+                {
+                    this.state.homeScreenNewsFeedRows.map((newsFeedRow, i) => {
+                        return (
+                            <NewsFeedRow key={newsFeedRow + Math.random() + i} newsFeedRow={newsFeedRow} />
+                        );
+                    })
+                }
             </div>
-
-
         )
     }
 }

@@ -7,8 +7,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import fetchedArticle from '../data/fetchedArticle';
-import NewsItem from './NewsItem';
+import fetchedArticle from '../../data/fetchedArticle';
+import NewsItem from '../articles/NewsItem';
 
 class AddArticlePopup extends Component {
 
