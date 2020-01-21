@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
+import Login from './pages/Login'
 
 // STYLE
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -43,7 +44,7 @@ class Root extends Component {
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
-                    <HeaderBar userIsLoggedIn={this.state.userIsLoggedIn} addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
+                    <HeaderBar location={this.props.location} userIsLoggedIn={this.state.userIsLoggedIn} addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
                     <Switch>
                         {/* HeaderBar component needs to be placed here*/}
                         <Route path="/business" component={Category} />
@@ -54,6 +55,7 @@ class Root extends Component {
                         <Route path="/gaming" component={Category} />
                         <Route path="/culture" component={Category} />
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/login" component={Login} />
                         <Redirect to="/" />
                     </Switch >
                 </MuiThemeProvider>
