@@ -14,7 +14,7 @@ class NewsItem extends Component {
 
         // Call API to register vote here
     }
-    
+
     render() {
 
         const { Article } = this.props; // like this.props.ArticlArticleeData
@@ -22,16 +22,16 @@ class NewsItem extends Component {
         var positivityTextStyle
 
         if (Article.ArticlePositivity > 70) {
-            positivityTextStyle = { color: 'green'};
+            positivityTextStyle = { color: 'green' };
         }
         else if (Article.ArticlePositivity > 50) {
-            positivityTextStyle = { color: 'orange'};
+            positivityTextStyle = { color: 'orange' };
         }
         else {
-            positivityTextStyle = { color: 'red'};
+            positivityTextStyle = { color: 'red' };
         }
 
-        
+
 
 
         return (
@@ -46,21 +46,21 @@ class NewsItem extends Component {
                             title={Article.ArticleTitle}
                         />
                         <CardContent>
-                            <Typography style={{fontSize: '10pt'}} color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
+                            <Typography style={{ fontSize: '10pt' }} color="textPrimary" component="p">{Article.ArticleTitle}</Typography>
                             <Typography style={{ fontSize: '10pt' }} color="textSecondary" component="p">{Article.ArticlePublisher}{"  "}{Article.ArticleDate}</Typography>
                             <center>
-                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="happy">😀</span>
                                 </Button>
 
-                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="neural">😐</span>
                                 </Button>
 
-                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} variant="uncontained" color="primary" onClick={this.handleClickPlaceholder} disableElevation>
+                                <Button style={{ padding: '0px', marginBottom: "5px", flexGrow: '0' }} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="sad">🙁</span>
                                 </Button>
-                            
+
                                 <br />
                                 <Button className="NewsFeedCardPositivity" variant="outlined" color="primary" disableElevation disabled>
                                     <span role="img" style={positivityTextStyle}>{Article.ArticlePositivity}% Positivity</span>
@@ -69,7 +69,7 @@ class NewsItem extends Component {
                         </CardContent>
                     </CardActionArea>
                 </Card>
-                
+
             </div>
 
         )

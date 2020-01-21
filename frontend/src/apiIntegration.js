@@ -15,10 +15,10 @@ async function getCsrfToken() {
   return data.csrfToken;
 }
 
-async function fetchArticles() {
-  const response = await fetch(`${API_HOST}/articles`)
-  const articles = await response.json();
-  return articles;
+async function fetchArticles(fetchRequest, articleToReturn = "") {
+    const response = await fetch(`${API_HOST}/articles/${articleToReturn}`);
+    const articles = await response.json();
+    return articles;
 }
 
 async function postToBackend(endpoint, method, data) {

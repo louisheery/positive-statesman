@@ -12,7 +12,7 @@ import NewsItem from '../articles/NewsItem';
 
 class AddArticlePopup extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -33,20 +33,35 @@ class AddArticlePopup extends Component {
     }
 
     handleClickAddArticle = () => {
-        
 
+        // Note to Self (Louis): I'd recommend changing this to a Form,
+        // and using like: const urlToSend = event.target.elements.urlBox.value
+        // and then sending that variable in API POST request
+        // instead of this random setting prop variable and then retriving prop variable stuff
+        // event.preventDefault();
+        // const urlToSend = event.target.elements.urlBox.value
+        // apiFunction(urlToSend); -> then need promise thing to check it worked
 
-            //show loading
-            this.setState({ isEnterURLDisplayed: false})
-            // wait 2 seconds
-            
+        // PUT REQUEST
+/*
+        fetch(PROXYURL + API + APIPUTURL, { mode: 'cors', method: 'PUT', body: { 'url': 'bbc.co.uk/example' } })
+            .then(response => response.json())
+            .then(json => {
+                // WHAT TO DO IT IT SUCCEEDS -> i.e. reload homepage with article displayed??
+            })
+            .catch(error => error);
+*/
+        //show loading
+        this.setState({ isEnterURLDisplayed: false })
+        // wait 2 seconds
+
 
         if (this.state.currentArticleURL === "found") {
-            this.setState({isLoadingDisplayed: true })
+            this.setState({ isLoadingDisplayed: true })
             // Send article URL to backend
             // I.e. Send this.state.currentArticleURL
             // WAIT FOR API CALL TO HAPPEN
-            this.setState({ isLoadingDisplayed: false, isSuccessDisplayed: true})
+            this.setState({ isLoadingDisplayed: false, isSuccessDisplayed: true })
 
         } else {
             this.setState({ isLoadingDisplayed: true })
@@ -60,11 +75,11 @@ class AddArticlePopup extends Component {
     }
 
     handleClickCloseBox = () => {
-        
+
         // Close Popup
         this.setState({ isEnterURLDisplayed: true, isLoadingDisplayed: false, isSuccessDisplayed: false, isFailedDisplayed: false })
         this.props.handleArticlePopupOpening()
-        
+
     }
 
     render() {
@@ -75,7 +90,7 @@ class AddArticlePopup extends Component {
 
             dialogContent = (
                 <div>
-                <DialogTitle id="form-dialog-title">Add Article</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Add Article</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Enter the URL of the News Article you would like to add:
@@ -98,16 +113,16 @@ class AddArticlePopup extends Component {
                     <DialogContent fullWidth="true" maxWidth='lg'>
                         <DialogTitle id="form-dialog-title">Add Article</DialogTitle>
                         <center>
-                        <DialogContentText>
-                            Loading
+                            <DialogContentText>
+                                Loading
                         </DialogContentText>
-                        <CircularProgress />
+                            <CircularProgress />
                         </center>
                     </DialogContent>
-                
-                <DialogActions>
-                    <Button onClick={this.handleClickCloseBox}>Close</Button>
-                </DialogActions>
+
+                    <DialogActions>
+                        <Button onClick={this.handleClickCloseBox}>Close</Button>
+                    </DialogActions>
                 </div>
             )
         }
@@ -134,19 +149,19 @@ class AddArticlePopup extends Component {
         if (this.state.isSuccessDisplayed) {
             dialogContent = (
                 <div>
-                <div style={{ marginLeft: '50px', marginRight: '50px'}}>
-                    {
-                    fetchedArticle.Articles.map((article, i) => {
-                            return (<NewsItem key={i} Article={article} />);
-                        })
-                    }
-                    
-                </div>
-                <DialogActions>
-                    <center>
-                    <Button onClick={this.handleClickCloseBox}>Close</Button>
-                    </center>
-                </DialogActions>
+                    <div style={{ marginLeft: '50px', marginRight: '50px' }}>
+                        {
+                            fetchedArticle.Articles.map((article, i) => {
+                                return (<NewsItem key={i} Article={article} />);
+                            })
+                        }
+
+                    </div>
+                    <DialogActions>
+                        <center>
+                            <Button onClick={this.handleClickCloseBox}>Close</Button>
+                        </center>
+                    </DialogActions>
                 </div>
             )
         }
@@ -160,7 +175,7 @@ class AddArticlePopup extends Component {
                 </Dialog>
             </div>
 
-            
+
         )
     }
 }

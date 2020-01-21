@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ticker from 'react-ticker'
+import Typography from '@material-ui/core/Typography'
 
 class NewsTickerBar extends Component {
 
@@ -8,8 +9,8 @@ class NewsTickerBar extends Component {
             <div className="NewsTickerGrid">
             <Ticker>
                 {({ index }) => (
-                        <div style={{ backgroundColor: '#e3f3f4'}}>
-                            <h3 style={{ backgroundColor: '#e3f3f4', paddingTop: '10px', paddingBottom: '10px'}}>Business  60%↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Politics  30%↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sport  70%↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Culture  80%↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                        <div style={{ backgroundColor: '#e3f3f4', marginTop: '10px', marginBottom: '10px'}}>
+                            <Typography variant="body1" style={{ textDecoration: "None", backgroundColor: '#e3f3f4', paddingTop: '10px', paddingBottom: '10px' }}>Business  60%↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Politics  30%↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sport  70%↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Culture  80%↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Typography>
                     </div>
                 )}
             </Ticker>
