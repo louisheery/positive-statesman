@@ -24,12 +24,12 @@ class NewsFeed extends Component {
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
-/*
-        fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
-            .then(response => response.json())
-            .then(rowArticles => this.setState({ rowArticles }));
-
-*/
+        /*
+                fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
+                    .then(response => response.json())
+                    .then(rowArticles => this.setState({ rowArticles }));
+        
+        */
 
         var fetchedArticles = await fetchArticles(this.props.newsFeedRow)
         this.setState({ rowArticles: fetchedArticles })
@@ -38,20 +38,19 @@ class NewsFeed extends Component {
     }
 
     render() {
-        console.log("HI-->", this.state.rowArticles)
 
         return (
             // NewsFeed = ClassName
-            <div style={{ display: 'fixed', flexWrap: 'nowrap',  overflow: 'show', backgroundColor: 'white' }}>
+            <div style={{ display: 'fixed', flexWrap: 'nowrap', overflow: 'show', backgroundColor: 'white' }}>
                 <Typography variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                
+
                 <div>
                     <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
                         {
                             this.state.rowArticles.map((article, i) => {
                                 return (
-                                    
-                                    <GridListTile style={{height: '220px', width: '250px', margin: '10px'}} key={Math.random()}>
+
+                                    <GridListTile style={{ height: '220px', width: '250px', margin: '10px' }} key={Math.random()}>
 
                                         <NewsItem key={this.props.i} Article={article} />
 

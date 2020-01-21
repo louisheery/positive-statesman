@@ -36,28 +36,11 @@ class Home extends React.Component {
 
   render() {
     return (
-        <div>
-        
-          {(this.state.loginPageDisplayed) ? (
-            <div>
-              <Container maxWidth="lg" align="center" style={{ marginTop: '150px' }}>
-                <Typography variant="h5" align="center" component="div" style={{ backgroundColor: '#FFF', height: '100vh' }}>
-                  Login to The Positive Statesman
-  
-                    <div align="center" style={{ marginTop: '50px' }}>
-                    <GoogleButton onClick={() => alert('API magic happens now')} />
-                  </div>
-                </Typography>
-              </Container>
-            </div>
-          ) : (
-              <div>
-                <NewsTickerBar />
-                <NewsFeed addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} />
-                <AddArticlePopup addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
-              </div>
-            )}
-        </div>
+      <div>
+        <NewsTickerBar />
+        <NewsFeed addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} />
+        <AddArticlePopup addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
+      </div>
     )
   }
 }
