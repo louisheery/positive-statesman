@@ -4,7 +4,7 @@ import articles from '../../data/articles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
-import { fetchArticles } from '../apiIntegration';
+import { fetchArticles } from '../../apiIntegration';
 
 const API = 'http://positive-statesman-api.azurewebsites.net'
 const PROXYURL = "https://cors-anywhere.herokuapp.com/";

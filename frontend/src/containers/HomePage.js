@@ -20,7 +20,7 @@ class HomePage extends React.Component {
     handleArticlePopupOpening() {
         this.setState({ addArticlePopupIsOpen: !this.state.addArticlePopupIsOpen })
     }
-
+    
     render() {
         return (
             <div>

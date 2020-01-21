@@ -43,14 +43,14 @@ class AddArticlePopup extends Component {
         // apiFunction(urlToSend); -> then need promise thing to check it worked
 
         // PUT REQUEST
-        // 
+/*
         fetch(PROXYURL + API + APIPUTURL, { mode: 'cors', method: 'PUT', body: { 'url': 'bbc.co.uk/example' } })
             .then(response => response.json())
             .then(json => {
                 // WHAT TO DO IT IT SUCCEEDS -> i.e. reload homepage with article displayed??
             })
             .catch(error => error);
-
+*/
         //show loading
         this.setState({ isEnterURLDisplayed: false })
         // wait 2 seconds
