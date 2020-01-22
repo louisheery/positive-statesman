@@ -4,3 +4,4 @@ __pycache__/
 yarn-error.log*
 node_modules/
 .vscode/
+.DS_Store

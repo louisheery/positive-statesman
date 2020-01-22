@@ -14,13 +14,13 @@ async function getCsrfToken() {
 }
 
 async function fetchArticles(fetchRequest, articleToReturn = "") {
-    const response = await fetch(`/articles/${articleToReturn}`);
+    const response = await fetch(`/api/articles/${articleToReturn}`);
     const articles = await response.json();
     return articles;
 }
 
 async function postToBackend(endpoint, method, data) {
-  const response = await fetch(`/${endpoint}/`, {
+  const response = await fetch(`/api/${endpoint}/`, {
     method: method,
     headers: { 'X-CSRFToken': await getCsrfToken() },
     credentials: 'include',
