@@ -1,0 +1,16 @@
+.HeaderBar {
+  margin-left: 65px;
+  margin-right: 50px;
+  width: 100%;
+  height: 50px;
+  background-color: blue;
+
+}
+
+.NewsFeedGrid {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 0px;
+  flex-grow: 1;
+  width: auto;
+}
