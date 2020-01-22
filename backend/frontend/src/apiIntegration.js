@@ -1,14 +1,12 @@
 import Cookies from 'js-cookie';
 
-const API_HOST = process.env.REACT_APP_API_HOST;
-
 async function getCsrfToken() {
   const csrftoken = Cookies.get('csrftoken');
   if (csrftoken) {
     return csrftoken;
   }
 
-  const response = await fetch(`${API_HOST}/csrf/`, {
+  const response = await fetch(`/csrf/`, {
     credentials: 'include',
   });
   const data = await response.json();
@@ -16,13 +14,13 @@ async function getCsrfToken() {
 }
 
 async function fetchArticles(fetchRequest, articleToReturn = "") {
-    const response = await fetch(`${API_HOST}/articles/${articleToReturn}`);
+    const response = await fetch(`/articles/${articleToReturn}`);
     const articles = await response.json();
     return articles;
 }
 
 async function postToBackend(endpoint, method, data) {
-  const response = await fetch(`${API_HOST}/${endpoint}/`, {
+  const response = await fetch(`/${endpoint}/`, {
     method: method,
     headers: { 'X-CSRFToken': await getCsrfToken() },
     credentials: 'include',
