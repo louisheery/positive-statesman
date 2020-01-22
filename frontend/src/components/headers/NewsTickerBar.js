@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import Ticker from 'react-ticker'
 import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+
+import styles from '../../../src/assets/styles/components/headers/NewsTickerBar.js';
 
 class NewsTickerBar extends Component {
 
     render() {
+
+        const { classes } = this.props;
+
+        
         return (
-            <div className="NewsTickerGrid">
+            <div className={classes.grid}>
             <Ticker>
                 {({ index }) => (
                         <div style={{ backgroundColor: '#e3f3f4', marginTop: '10px', marginBottom: '10px'}}>
@@ -19,4 +26,4 @@ class NewsTickerBar extends Component {
     }
 }
 
-export default NewsTickerBar
+export default withStyles(styles)(NewsTickerBar)

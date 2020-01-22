@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NewsFeedRow from './NewsFeedRow';
+import { withStyles } from '@material-ui/core/styles';
 
+import styles from '../../../src/assets/styles/components/articles/NewsFeed.js';
 
 const newsFeedDictionary = {
     QUERY_TOPARTICLES: ['articles', 'Top Articles'],
@@ -24,7 +26,6 @@ const newsFeedDictionary = {
 }
 
 
-
 class NewsFeed extends Component {
 
     constructor(props) {
@@ -37,9 +38,12 @@ class NewsFeed extends Component {
 
 
     render() {
+
+        const { classes } = this.props;
+
         return (
             // NewsFeed = ClassName
-            <div className="NewsFeedGrid">
+            <div className={classes.grid}>
                 {
                     this.state.homeScreenNewsFeedRows.map((newsFeedRow, i) => {
                         return (
@@ -52,4 +56,4 @@ class NewsFeed extends Component {
     }
 }
 
-export default NewsFeed
+export default withStyles(styles)(NewsFeed)

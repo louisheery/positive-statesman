@@ -5,16 +5,23 @@ import GoogleButton from 'react-google-button';
 import HeaderBar from '../headers/HeaderBar';
 
 
+import { withStyles } from '@material-ui/core/styles';
+
+import styles from '../../../src/assets/styles/components/pages/Login.js';
+
 class Login extends React.Component {
 
     render() {
+
+        const { classes } = this.props;
+        
         return (
             <div>
-                <Container maxWidth="lg" align="center" style={{ marginTop: '150px' }}>
-                    <Typography variant="h5" align="center" component="div" style={{ backgroundColor: '#FFF', height: '100vh' }}>
+                <Container className={classes.container} maxWidth="lg" align="center" >
+                    <Typography className={classes.header} variant="h5" align="center" component="div">
                         Login to The Positive Statesman
         
-                <div align="center" style={{ marginTop: '50px' }}>
+                <div className={classes.GoogleButton} align="center">
                             <GoogleButton onClick={() => alert('API magic happens now')} />
                         </div>
                     </Typography>
@@ -24,4 +31,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withStyles(styles)(Login)

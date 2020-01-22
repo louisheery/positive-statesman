@@ -10,6 +10,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import fetchedArticle from '../../data/fetchedArticle';
 import NewsItem from '../articles/NewsItem';
 
+import { withStyles } from '@material-ui/core/styles';
+
+import styles from '../../../src/assets/styles/components/popups/AddArticlePopup.js';
+
 class AddArticlePopup extends Component {
 
     constructor(props) {
@@ -84,6 +88,8 @@ class AddArticlePopup extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
         let dialogContent;
 
         if (this.state.isEnterURLDisplayed) {
@@ -149,7 +155,7 @@ class AddArticlePopup extends Component {
         if (this.state.isSuccessDisplayed) {
             dialogContent = (
                 <div>
-                    <div style={{ marginLeft: '50px', marginRight: '50px' }}>
+                    <div className={classes.resultDialog}>
                         {
                             fetchedArticle.Articles.map((article, i) => {
                                 return (<NewsItem key={i} Article={article} />);
@@ -180,4 +186,4 @@ class AddArticlePopup extends Component {
     }
 }
 
-export default AddArticlePopup
+export default withStyles(styles)(AddArticlePopup)
