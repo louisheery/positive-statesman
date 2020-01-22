@@ -1,2 +1,6 @@
-/node_modules
+env/
+__pycache__/
+*.py[cod]
+yarn-error.log*
+node_modules/
 .vscode/
