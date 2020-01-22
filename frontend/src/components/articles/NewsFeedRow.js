@@ -5,11 +5,14 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { fetchArticles } from '../../apiIntegration';
+import { withStyles } from '@material-ui/core/styles';
+
+import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
 
 const API = 'http://positive-statesman-api.azurewebsites.net'
 const PROXYURL = "https://cors-anywhere.herokuapp.com/";
 
-class NewsFeed extends Component {
+class NewsFeedRow extends Component {
 
     constructor(props) {
         super(props)
@@ -39,9 +42,10 @@ class NewsFeed extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
         return (
-            // NewsFeed = ClassName
-            <div style={{ display: 'fixed', flexWrap: 'nowrap', overflow: 'show', backgroundColor: 'white' }}>
+            <div className={classes.container}>
                 <Typography variant="h5">{this.props.newsFeedRowTitle}</Typography>
 
                 <div>
@@ -50,7 +54,7 @@ class NewsFeed extends Component {
                             this.state.rowArticles.map((article, i) => {
                                 return (
 
-                                    <GridListTile style={{ height: '220px', width: '250px', margin: '10px' }} key={Math.random()}>
+                                    <GridListTile style={{ height: '220px', width: '250px', padding: '10px' }} key={Math.random()}>
 
                                         <NewsItem key={this.props.i} Article={article} />
 
@@ -67,4 +71,4 @@ class NewsFeed extends Component {
     }
 }
 
-export default NewsFeed
+export default withStyles(styles)(NewsFeedRow)

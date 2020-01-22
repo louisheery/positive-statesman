@@ -9,14 +9,10 @@ import AddArticlePopup from '../popups/AddArticlePopup';
 
 // STYLE
 
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import GoogleButton from 'react-google-button';
 
-// API
-import { fetchArticles } from '../../apiIntegration';
+import { withStyles } from '@material-ui/core/styles';
 
-
+import styles from '../../../src/assets/styles/components/pages/Home.js';
 
 class Home extends React.Component {
 
@@ -35,6 +31,9 @@ class Home extends React.Component {
   }
 
   render() {
+
+    const { classes } = this.props;
+    
     return (
       <div>
         <NewsTickerBar />
@@ -45,4 +44,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withStyles(styles)(Home)

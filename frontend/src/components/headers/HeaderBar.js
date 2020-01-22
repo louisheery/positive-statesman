@@ -12,6 +12,10 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
+import { withStyles } from '@material-ui/core/styles'
+
+import styles from '../../../src/assets/styles/components/headers/HeaderBar.js';
+
 
 function a11yProps(index) {
     return {
@@ -38,15 +42,19 @@ class HeaderBar extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
+
         return (
+            
 
             <AppBar>
-                <Toolbar style={{ marginLeft: '65px', marginRight: '65px' }}>
+                <Toolbar className={classes.toolbar}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
 
-                    <Button component={Link} to={'/'} style={{ textTransform: 'none', marginLeft: '20px' }} disableElevation
+                    <Button className={classes.psButton} component={Link} to={'/'} style={{ textTransform: 'none' }} disableElevation
                         variant="contained"
                         color="primary"
                         startIcon={<SvgIcon>
@@ -58,8 +66,8 @@ class HeaderBar extends Component {
 
                     {/* ADD SEARCH BAR HERE */}
 
-                    <div className="HeaderBarFlexGrow" />
-                    <div className="HeaderBarAddButton">
+                    <div className={classes.flexDiv} />
+                    <div className={classes.addButton} >
                         <Button variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
                             Add Story
                         </Button>
@@ -74,30 +82,30 @@ class HeaderBar extends Component {
                     }
                 </Toolbar>
 
-                <Tabs style={{ background: '#007ea7', paddingLeft: "5%", paddingRight: "5%" }}
-                    value={this.props.location.pathname}
+                <Tabs style={{ backgroundColor: '#007ea7', paddingLeft: '5%', paddingRight: '5%' }}
+                    value={0} // this.props.location.pathname
                     onChange={this.handleChange}
                     indicatorColor="secondary"
                     variant="scrollable"
                     aria-label="scrollable auto tabs example"
                 >
 
-                    <Tab component={Link} to={'/'} value="/" style={{ flexGrow: "1" }} label={<span color="#FFF" role="img" aria-label="home">Home</span>} {...a11yProps(0)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/'} value="/" label={<span color="#FFF" role="img" aria-label="home">Home</span>} {...a11yProps(0)} />
 
 
-                    <Tab component={Link} to={'/business'} value="/business" style={{ flexGrow: "1" }} label="Business" {...a11yProps(1)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/business'} value="/business" label="Business" {...a11yProps(1)} />
 
-                    <Tab component={Link} to={'/politics'} value="/politics" style={{ flexGrow: "1" }} label="Politics" {...a11yProps(2)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/politics'} value="/politics" label="Politics" {...a11yProps(2)} />
 
-                    <Tab component={Link} to={'/sport'} value="/sport" style={{ flexGrow: "1" }} label="Sport" {...a11yProps(3)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/sport'} value="/sport" label="Sport" {...a11yProps(3)} />
 
-                    <Tab component={Link} to={'/science'} value="/science" style={{ flexGrow: "1" }} label="Science" {...a11yProps(4)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/science'} value="/science" label="Science" {...a11yProps(4)} />
 
-                    <Tab component={Link} to={'/health'} value="/health" style={{ flexGrow: "1" }} label="Health" {...a11yProps(5)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/health'} value="/health" label="Health" {...a11yProps(5)} />
 
-                    <Tab component={Link} to={'/gaming'} value="/gaming" style={{ flexGrow: "1" }} label="Gaming" {...a11yProps(6)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/gaming'} value="/gaming" label="Gaming" {...a11yProps(6)} />
 
-                    <Tab component={Link} to={'/culture'} value="/culture" style={{ flexGrow: "1" }} label="Culture" {...a11yProps(7)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/culture'} value="/culture" label="Culture" {...a11yProps(7)} />
 
                 </Tabs>
 
@@ -107,4 +115,4 @@ class HeaderBar extends Component {
     }
 }
 
-export default withRouter(HeaderBar)
+export default withStyles(styles)(HeaderBar)
