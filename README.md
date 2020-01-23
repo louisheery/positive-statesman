@@ -25,54 +25,37 @@ git push origin adding-react-router
 git sweep
 ```
 
-## Quickstart for Azure CLI
-### Only required once
-1. Install the Azure CLI
-https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
-
-2. Login to Azure CLI
+## How to run server
+1. Start the server
 ```
-az login
+python3 manage.py runserver
 ```
 
-3. Create an Azure CLI deployment user
-Items wrapped in '<' and '>' need to be replaced with your choices
-If your password uses special characters wrap it within quotes as such 'password'
+Server is now running at localhost:8000/
+
+### If there are any errors running server do the following
+
+1. Activate the correct python environment
 ```
-az webapp deployment user set --user-name <username> --password <password>
+source env/bin/activate
 ```
 
-## How to add Azure remotes
-### Only required once
-1. Add the frontend remote
+2. Install any missing requirements
 ```
-git remote add frontend https://positive-statesman.scm.azurewebsites.net:443/positive-statesman.git
+pip3 install -r requirements.txt
 ```
 
-2. Add the backend remote
+## How to automatically compile frontend code as you work
+1. Run yarn dev to automatically compile the frontend with webpack
 ```
-git remote add backend https://positive-statesman-api.scm.azurewebsites.net:443/positive-statesman-api.git
-```
-
-## How to Push Code to Azure
-1. Update your 'Local' version of 'Master' Branch
-```
-git pull origin master
+yarn dev
 ```
 
-2. Make sure you are in the positive-statesman/ directory
+### If there are any errors running yarn watch
+1. You may need to update yarn (npm) packages
 
-3. Push the corresponding folder to the corresponding azure remote.
-
-### Frontend
 ```
-git subtree push --prefix frontend frontend master
-```
-
-
-### Backend
-```
-git subtree push --prefix backend backend master
+yarn install
 ```
 
 ## Repo Contents
