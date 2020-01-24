@@ -74,7 +74,7 @@ def generate_articles():
             publisher=publisher,
             publish_date=publish_date,
             sentiment_score=s_score,
-            full_text=full_text)
+            text_full=full_text)
         article.save()
 
 
