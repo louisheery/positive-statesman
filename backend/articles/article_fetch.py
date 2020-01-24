@@ -1,28 +1,35 @@
-#############################################################################
-# Title:    Basic Script for Text Fetching and Sentiment Analysis           #
-# Author:   ms519                                                           #
-# Date:     22/01/2020                                                      #
-#############################################################################
+"""
+Description:    Article Scraping and Sentiment Analaysis Script for MVP
+Author:         ms519, lhs19, mgeorge2
 
-# In the requirements.txt   -> pip3 install vaderSentiment
-#                           -> pip3 install newsapi-python 
 
-# TODO:
-# - Functions:
-#   - generate_articles()
-#   - fetch_metadata()
-#   - get_full_text()
+TODO:
+- Set up requirements.txt:
+    -> pip3 install vaderSentiment
+    -> pip3 install newsapi-python 
+- Functions:
+   - generate_articles()
+   - fetch_metadata()
+   - get_full_text()
+"""
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from newsapi import NewsApiClient
 import models
 
-# Description:  Function to fetch and create Article Models
-# Input:        none
-# Output:       none
-
 def generate_articles():
     
+    """
+    Function to generate article models to put into the database.
+
+    Args:
+        none
+
+    Returns:
+        none
+
+    """
+
     api_client = NewsApiClient(api_key = '9d8a507d17344549bada8196027fe870')
     vader_analyser = SentimentIntensityAnalyzer()
     
@@ -44,27 +51,55 @@ def generate_articles():
         p = models.Article(s_score)
         p.save
 
-# Description:  Function to fetch article meta data from news api
-# Input:        none
-# Output:       list of metadata
+def fetch_metadata(api_client):
 
-def fetch_metadata(key):
-    a = []
-    return a
+    """
+    Function to fetch article metadata from news-api.
 
-# Description:  Function to fetch the full text as a string
-# Input:        link as string
-# Output:       full text as string
+    Args:
+        api_client(NewsApiClient): News API client object, provided from generate_articles()
+
+    Returns:
+        meta_list(list): List of fetched metadata
+
+    """
+    ## TO BE IMPLEMENTED ##
+
+    meta_list = []
+    return meta_list[]
+
 
 def get_full_text(link):
-    full_text = "lol"
+
+    """
+    Fetch full text of an article based on a link using alyien.
+
+    Args:
+        link(string): URL of the article to be fetched
+
+    Returns:
+        full_text(list): full article text
+
+    """
+    ## TO BE IMPLEMENTED ##
+
+    full_text = ""
     return full_text
 
-# Description:  Function to calculate the compound Vader Score of a String
-# Input:        text as string
-# Output:       compund scores of the string
+def sentiment_score(analyser, text):
 
-def sentiment_score(analyser,text):
+    """
+    Analyse the sentiment score of a given string.
+
+    Args:
+        analyser(SentimentIntensityAnalyser): Vader analyser
+        text(string): string of the article to be analysed
+
+    Returns:
+        scores['compound'](int): compound sentiment score of the article
+
+    """
+
     scores = analyser.polarity_scores(text)
     return scores['compound']
 
