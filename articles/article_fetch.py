@@ -19,7 +19,6 @@ import aylien_news_api
 from aylien_news_api.rest import ApiException
 from articles.models import Article
 from articles.serializers import ArticleSerializer
-import models
 
 
 ############################# FUNCTION DEFINITION #############################
@@ -76,8 +75,6 @@ def generate_articles():
             published_date=published_date,
             sentiment_score=s_score)
         article.save()
-        
-        p.save()
 
 
 def fetch_articles(api_instance):
