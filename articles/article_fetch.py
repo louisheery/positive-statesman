@@ -17,7 +17,7 @@ TODO:
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import aylien_news_api
 from aylien_news_api.rest import ApiException
-from articles.models import Article
+from articles.models import Article, Publisher
 from articles.serializers import ArticleSerializer
 
 
@@ -56,7 +56,7 @@ def generate_articles():
         title = story.title
         publish_date = story.published_at
         url = story.links.permalink
-        publisher = story.source.name
+        publisher = Publisher.objects.get_or_create(name=story.source.name)[0]
         image_url = ''
         for media in story.media:
             if (media.type == 'image'):
@@ -73,7 +73,8 @@ def generate_articles():
             image_url=image_url,
             publisher=publisher,
             publish_date=publish_date,
-            sentiment_score=s_score)
+            sentiment_score=s_score,
+            full_text=full_text)
         article.save()
 
 
