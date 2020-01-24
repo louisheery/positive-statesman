@@ -114,6 +114,13 @@ python3 manage.py createsuperuser
 
 8. Please don't delete anything!!!
 
+## How to print an ER-Diagram
+
+1. Install: brew install graphviz
+
+2. Execute: python3 manage.py graph_models articles -o file_dump/diagrams/er_diagram_`date "+%Y%m%d-%H%M%S"`.svg
+
+3. You can now find the svg file in file_dump/diagrams/
 ## Repo Contents
 
 ### Libraries and Technologies to research

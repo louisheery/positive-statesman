@@ -7,6 +7,7 @@ django-cors-headers==3.2.1
 djangorestframework==3.11.0
 httplib2==0.17.0
 psycopg2-binary==2.8.4
+pygraphviz==1.5 # brew install graphviz
 python-dateutil==2.8.1
 pytz==2019.3
 six==1.14.0
