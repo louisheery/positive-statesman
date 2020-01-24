@@ -47,14 +47,14 @@ def generate_articles():
     # 1.    Fetch articles
 
     api_response = fetch_articles(api_instance)
-    article_list = api_response.stories
+    stories = api_response.stories
     # TBD error handling
 
     # 2.    Get the full text for every article
     # 2.1       Analyse sentiment
     for story in stories:
         title = story.title
-        published_date = story.published_at
+        publish_date = story.published_at
         url = story.links.permalink
         publisher = story.source.name
         image_url = ''
@@ -72,7 +72,7 @@ def generate_articles():
             url=url,
             image_url=image_url,
             publisher=publisher,
-            published_date=published_date,
+            publish_date=publish_date,
             sentiment_score=s_score)
         article.save()
 
