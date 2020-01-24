@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'articles.apps.ArticlesConfig',
     'frontend',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

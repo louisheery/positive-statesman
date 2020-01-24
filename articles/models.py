@@ -34,7 +34,6 @@ class Image(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    articles = models.ManyToManyField('Article', blank=True)
     class Meta:
         ordering = ['name']
 
