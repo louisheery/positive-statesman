@@ -17,6 +17,8 @@ TODO:
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import aylien_news_api
 from aylien_news_api.rest import ApiException
+from articles.models import Article
+from articles.serializers import ArticleSerializer
 import models
 
 
@@ -66,14 +68,14 @@ def generate_articles():
     # 2.2       Create Article Model Instances
 
         ## Database integration not working yet ##
-        p = models.Article.create(
-            created,
-            title,
-            url,
-            image_url,
-            publisher,
-            published_date,
-            s_score)
+        article = Article(
+            title=title,
+            url=url,
+            image_url=image_url,
+            publisher=publisher,
+            published_date=published_date,
+            sentiment_score=s_score)
+        article.save()
         
         p.save()
 
