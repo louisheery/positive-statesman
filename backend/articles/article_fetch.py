@@ -7,15 +7,20 @@ TODO:
 - Set up requirements.txt:
     -> pip3 install vaderSentiment
     -> pip3 install newsapi-python 
-- Functions:
+- Write / finish functions:
    - generate_articles()
    - fetch_metadata()
    - get_full_text()
+- Write function tests 
+- Figure out what error message means:
+    django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
 """
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from newsapi import NewsApiClient
 import models
+
+############################# FUNCTION DEFINITION #############################
 
 def generate_articles():
     
@@ -48,8 +53,9 @@ def generate_articles():
     
     # 2.2       Create Article Model Instances
 
-        p = models.Article(s_score)
-        p.save
+        ## Database integration not working yet ##
+        # p = models.Article.create(meta[0],meta[1],meta[2],meta[3],meta[4],meta[6],s_score)
+        # p.save()
 
 def fetch_metadata(api_client):
 
@@ -66,7 +72,7 @@ def fetch_metadata(api_client):
     ## TO BE IMPLEMENTED ##
 
     meta_list = []
-    return meta_list[]
+    return meta_list
 
 
 def get_full_text(link):
@@ -103,4 +109,31 @@ def sentiment_score(analyser, text):
     scores = analyser.polarity_scores(text)
     return scores['compound']
 
+############################## FUNCTION TESTING ###############################
 
+# TEST: fetch_metadata(...)
+
+# TEST: get_full_text(...)
+
+# TEST: sentiment_score(...)
+
+sentiment_analyser = SentimentIntensityAnalyzer()
+sample_text = "Hospitals in the Chinese city of Wuhan have been \
+ thrown into chaos and the movement of about 33 million people has been \
+    restricted by an unprecedented and indefinite lockdown imposed to halt the \
+        spread of the deadly new coronavirus. At least 10 cities in central \
+            Hubei province have been shut down in an effort to stop the virus, \
+                which by Friday had killed 26 people across China and affected \
+                    more than 800. The World Health Organisation described the \
+                        outbreak as an emergency for China, but stopped short \
+                            of declaring it to be a public health emergency of \
+                                international concern."
+
+print("Compound Sentiment Score: ", sentiment_score(sentiment_analyser, sample_text))
+
+# TEST: generate_articles(...)
+
+################################# DRIVER CODE #################################
+"""
+generate_articles()
+"""

@@ -12,3 +12,8 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['created']
+
+    @classmethod
+    def create(cls, created, title, url, image_url, publisher, publish_date, sentiment_score):
+        article = cls(created=created, title=title, url=url, image_url=image_url, publish_date=publish_date,publisher=publisher,sentiment_score=sentiment_score)
+        return article
