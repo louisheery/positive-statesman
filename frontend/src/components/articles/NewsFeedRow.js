@@ -5,6 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { fetchArticles } from '../../apiIntegration';
 import { withStyles } from '@material-ui/core/styles';
+import Articles from '../../data/articles.json';
 
 import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
 
@@ -33,12 +34,23 @@ class NewsFeedRow extends Component {
         var fetchedArticles = await fetchArticles(this.props.newsFeedRow)
         this.setState({ rowArticles: fetchedArticles })
 
-
     }
+
+    
 
     render() {
 
         const { classes } = this.props;
+
+// this.state.rowArticles
+// this.props.Articles
+
+
+        // NOTE: STILL NEED TO FIX THIS SORTING
+        // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
+        var sorter = require('sort-json-array');
+        var sorted = sorter(Articles.Articles, 'sentiment_score').reverse();
+
 
         return (
             <div className={classes.container}>
@@ -47,17 +59,17 @@ class NewsFeedRow extends Component {
                 <div>
                     <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
                         {
-                            this.state.rowArticles.map((article, i) => {
+                            Articles.Articles.map((article, i) => {
                                 return (
 
-                                    <GridListTile style={{ height: '220px', width: '250px', padding: '10px' }} key={Math.random()}>
+                                    <GridListTile style={{ height: '270px', width: '250px', padding: '10px' }} key={Math.random()}>
 
-                                        <NewsItem key={this.props.i} Article={article} />
+                                        <NewsItem key={article.id} Article={article} />
 
                                     </GridListTile>
                                 )
-                            }).sort((a, b) => (a.sentiment_score > b.sentiment_score) ? 1 : -1)
-                        }
+                            })
+                    }
                     </GridList>
                 </div>
             </div>

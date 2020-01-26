@@ -14,7 +14,7 @@ async function getCsrfToken() {
 }
 
 async function fetchArticles(articleToReturn = "") {
-  const response = await fetch(`/api/articles/${articleToReturn}`);
+  const response = await fetch(`/api/articles${articleToReturn}`);
     const articles = await response.json();
     return articles;
 }
