@@ -5,24 +5,24 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/articles/NewsFeed.js';
 
 const newsFeedDictionary = {
-    QUERY_TOPARTICLES: ['articles', 'Top Articles'],
-    QUERY_ARTARTICLES: ['articles/art', 'Art, Culture & Entertainment'],
-    QUERY_CRIMEARTICLES: ['articles/crime', 'Crime, Law & Justice'],
-    QUERY_DISASTERARTICLES: ['articles/disaster', 'Distaster & Accident'],
-    QUERY_ECONARTICLES: ['articles/econ', 'Economy, Business & Finance'],
-    QUERY_EDUARTICLES: ['articles/edu', 'Education'],
-    QUERY_ENVIRONARTICLES: ['articles/environ', 'Environmental Issues'],
-    QUERY_HEALTHARTICLES: ['articles/health', 'Health'],
-    QUERY_HUMANARTICLES: ['articles/human', 'Human Interest'],
-    QUERY_LABOURARTICLES: ['articles/labour', 'Labour'],
-    QUERY_LIFESTYLEARTICLES: ['articles/lifestyle', 'Lifestyle'],
-    QUERY_POLITICSARTICLES: ['articles/politics', 'Politics'],
-    QUERY_RELIGIONARTICLES: ['articles/religion', 'Religion'],
-    QUERY_SCITECHARTICLES: ['articles/scitech', 'Science & Technology'],
-    QUERY_SOCIALISSUESARTICLES: ['articles/socialissues', 'Social Issues'],
-    QUERY_SPORTARTICLES: ['articles/sport', 'Sport'],
-    QUERY_CONFLICTARTICLES: ['articles/conflict', 'Unrest, Conflicts & War'],
-    QUERY_WEATHERARTICLES: ['articles/weather', 'Weather'],
+    QUERY_TOPARTICLES: ['/', 'Top Articles'],
+    QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment'],
+    QUERY_CRIMEARTICLES: ['/crime', 'Crime, Law & Justice'],
+    QUERY_DISASTERARTICLES: ['/disaster', 'Distaster & Accident'],
+    QUERY_ECONARTICLES: ['/econ', 'Economy, Business & Finance'],
+    QUERY_EDUARTICLES: ['/edu', 'Education'],
+    QUERY_ENVIRONARTICLES: ['/environ', 'Environmental Issues'],
+    QUERY_HEALTHARTICLES: ['/health', 'Health'],
+    QUERY_HUMANARTICLES: ['/human', 'Human Interest'],
+    QUERY_LABOURARTICLES: ['/labour', 'Labour'],
+    QUERY_LIFESTYLEARTICLES: ['/lifestyle', 'Lifestyle'],
+    QUERY_POLITICSARTICLES: ['/politics', 'Politics'],
+    QUERY_RELIGIONARTICLES: ['/religion', 'Religion'],
+    QUERY_SCITECHARTICLES: ['/scitech', 'Science & Technology'],
+    QUERY_SOCIALISSUESARTICLES: ['/socialissues', 'Social Issues'],
+    QUERY_SPORTARTICLES: ['/sport', 'Sport'],
+    QUERY_CONFLICTARTICLES: ['/conflict', 'Unrest, Conflicts & War'],
+    QUERY_WEATHERARTICLES: ['/weather', 'Weather'],
 }
 
 
@@ -32,7 +32,7 @@ class NewsFeed extends Component {
         super(props)
 
         this.state = {
-            homeScreenNewsFeedRows: [newsFeedDictionary.QUERY_TOPARTICLES, newsFeedDictionary.QUERY_ECONARTICLES, newsFeedDictionary.QUERY_POLITICSARTICLES, newsFeedDictionary.QUERY_SPORTARTICLES, newsFeedDictionary.QUERY_ENVIRONARTICLES],
+            homeScreenNewsFeedRows: [newsFeedDictionary.QUERY_TOPARTICLES, newsFeedDictionary.QUERY_TOPARTICLES, newsFeedDictionary.QUERY_TOPARTICLES, newsFeedDictionary.QUERY_TOPARTICLES, newsFeedDictionary.QUERY_TOPARTICLES],
         }
     }
 
