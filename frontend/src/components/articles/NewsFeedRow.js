@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NewsItem from './NewsItem';
-import articles from '../../data/articles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
@@ -8,9 +7,6 @@ import { fetchArticles } from '../../apiIntegration';
 import { withStyles } from '@material-ui/core/styles';
 
 import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
-
-const API = 'http://positive-statesman-api.azurewebsites.net'
-const PROXYURL = "https://cors-anywhere.herokuapp.com/";
 
 class NewsFeedRow extends Component {
 

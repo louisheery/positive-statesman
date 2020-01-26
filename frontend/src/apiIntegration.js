@@ -13,8 +13,8 @@ async function getCsrfToken() {
   return data.csrfToken;
 }
 
-async function fetchArticles(fetchRequest, articleToReturn = "") {
-    const response = await fetch(`/api/articles/${articleToReturn}`);
+async function fetchArticles(articleToReturn = "") {
+  const response = await fetch(`/api/articles/${articleToReturn}`);
     const articles = await response.json();
     return articles;
 }
