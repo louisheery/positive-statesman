@@ -2,6 +2,7 @@ const styles = {
   title: {
     fontSize: '10pt',
     color: 'black',
+    rowsMax: '2',
   },
 
   voteButton: {

@@ -6,6 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles'
+import moment from 'moment';
 
 import styles from '../../../src/assets/styles/components/articles/NewsItem.js';
 
@@ -54,7 +55,7 @@ class NewsItem extends Component {
                         />
                         <CardContent>
                             <Typography className={classes.title} color="textPrimary" component="p">{Article.title}</Typography>
-                            <Typography className={classes.title} color="textSecondary" component="p">{Article.publisher}{"  "}{Article.publish_date}</Typography>
+                            <Typography className={classes.title} color="textSecondary" component="p">{Article.publisher}{"  "}{moment(`${Article.publish_date}`).format('DD/MM/YY')}</Typography>
                             <center>
                                 <Button className={classes.voteButton} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="happy">😀</span>
