@@ -49,7 +49,7 @@ class NewsFeedRow extends Component {
         // NOTE: STILL NEED TO FIX THIS SORTING
         // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
         var sorter = require('sort-json-array');
-        var sorted = sorter(Articles.Articles, 'sentiment_score').reverse();
+        var sortedArticles = sorter(this.state.rowArticles, 'sentiment_score').reverse();
 
 
         return (
@@ -59,7 +59,7 @@ class NewsFeedRow extends Component {
                 <div>
                     <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
                         {
-                            Articles.Articles.map((article, i) => {
+                            sortedArticles.map((article, i) => {
                                 return (
 
                                     <GridListTile style={{ height: '270px', width: '250px', padding: '10px' }} key={Math.random()}>

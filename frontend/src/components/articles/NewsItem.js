@@ -40,7 +40,7 @@ class NewsItem extends Component {
         }
 
 
-        var maxTitleLength = 62;
+        var maxTitleLength = 60;
 
         return (
             <div>
