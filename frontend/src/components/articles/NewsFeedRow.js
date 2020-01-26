@@ -56,7 +56,7 @@ class NewsFeedRow extends Component {
 
                                     </GridListTile>
                                 )
-                            })
+                            }).sort((a, b) => (a.sentiment_score > b.sentiment_score) ? 1 : -1)
                         }
                     </GridList>
                 </div>
