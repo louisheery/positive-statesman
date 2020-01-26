@@ -40,7 +40,7 @@ class NewsItem extends Component {
         }
 
 
-
+        var maxTitleLength = 60;
 
         return (
             <div>
@@ -49,13 +49,13 @@ class NewsItem extends Component {
                         <CardMedia
                             component="img"
                             alt=""
-                            height="50"
+                            height="60"
                             image={Article.image_url}
                             title={Article.title}
                         />
                         <CardContent>
-                            <Typography className={classes.title} color="textPrimary" component="p">{Article.title}</Typography>
-                            <Typography className={classes.title} color="textSecondary" component="p">{Article.publisher}{"  "}{moment(`${Article.publish_date}`).format('DD/MM/YY')}</Typography>
+                            <Typography className={classes.title}>{(Article.title).substring(0, maxTitleLength)}</Typography>
+                            <Typography className={classes.subtitle}>{Article.publisher}<span style={{float:'right'}}>{moment(`${Article.publish_date}`).format('DD/MM/YY')}</span></Typography>
                             <center>
                                 <Button className={classes.voteButton} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="happy">😀</span>

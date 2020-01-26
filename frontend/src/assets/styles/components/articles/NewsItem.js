@@ -2,7 +2,12 @@ const styles = {
   title: {
     fontSize: '10pt',
     color: 'black',
-    rowsMax: '2',
+    height: '40px',
+  },
+
+  subtitle: {
+    fontSize: '9pt',
+    color: '#404040',
   },
 
   voteButton: {
@@ -16,8 +21,9 @@ const styles = {
   },
 
   NewsFeedCard: {
-    height: 'auto',
+    height: '290px',
     width: 'auto',
+    transitionDuration: '0.3s',
   },
 
 }
