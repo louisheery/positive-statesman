@@ -17,9 +17,8 @@ TODO:
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import aylien_news_api
 from aylien_news_api.rest import ApiException
-from articles.models import Article
+from articles.models import Article, Publisher
 from articles.serializers import ArticleSerializer
-import models
 
 
 ############################# FUNCTION DEFINITION #############################
@@ -48,16 +47,16 @@ def generate_articles():
     # 1.    Fetch articles
 
     api_response = fetch_articles(api_instance)
-    article_list = api_response.stories
+    stories = api_response.stories
     # TBD error handling
 
     # 2.    Get the full text for every article
     # 2.1       Analyse sentiment
     for story in stories:
         title = story.title
-        published_date = story.published_at
+        publish_date = story.published_at
         url = story.links.permalink
-        publisher = story.source.name
+        publisher = Publisher.objects.get_or_create(name=story.source.name)[0]
         image_url = ''
         for media in story.media:
             if (media.type == 'image'):
@@ -73,11 +72,10 @@ def generate_articles():
             url=url,
             image_url=image_url,
             publisher=publisher,
-            published_date=published_date,
-            sentiment_score=s_score)
+            publish_date=publish_date,
+            sentiment_score=s_score,
+            text_full=full_text)
         article.save()
-        
-        p.save()
 
 
 def fetch_articles(api_instance):

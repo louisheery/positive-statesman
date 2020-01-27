@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import NewsItem from './NewsItem';
-import articles from '../../data/articles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { fetchArticles } from '../../apiIntegration';
 import { withStyles } from '@material-ui/core/styles';
+import Articles from '../../data/articles.json';
 
 import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
-
-const API = 'http://positive-statesman-api.azurewebsites.net'
-const PROXYURL = "https://cors-anywhere.herokuapp.com/";
 
 class NewsFeedRow extends Component {
 
@@ -37,12 +34,23 @@ class NewsFeedRow extends Component {
         var fetchedArticles = await fetchArticles(this.props.newsFeedRow)
         this.setState({ rowArticles: fetchedArticles })
 
-
     }
+
+    
 
     render() {
 
         const { classes } = this.props;
+
+// this.state.rowArticles
+// this.props.Articles
+
+
+        // NOTE: STILL NEED TO FIX THIS SORTING
+        // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
+        var sorter = require('sort-json-array');
+        var sortedArticles = sorter(this.state.rowArticles, 'sentiment_score').reverse();
+
 
         return (
             <div className={classes.container}>
@@ -51,17 +59,17 @@ class NewsFeedRow extends Component {
                 <div>
                     <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
                         {
-                            this.state.rowArticles.map((article, i) => {
+                            sortedArticles.map((article, i) => {
                                 return (
 
-                                    <GridListTile style={{ height: '220px', width: '250px', padding: '10px' }} key={Math.random()}>
+                                    <GridListTile style={{ height: '270px', width: '250px', padding: '10px' }} key={Math.random()}>
 
-                                        <NewsItem key={this.props.i} Article={article} />
+                                        <NewsItem key={article.id} Article={article} />
 
                                     </GridListTile>
                                 )
                             })
-                        }
+                    }
                     </GridList>
                 </div>
             </div>
