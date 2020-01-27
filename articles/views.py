@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from articles.models import Article
 from articles.serializers import ArticleSerializer
-from article_fetch import generate_articles
+from articles import article_fetch
 
 def article_list(request):
     """
@@ -51,5 +51,8 @@ def article_detail(request, pk):
         return HttpResponse(status=204)
 
 def fetch_articles(request):
-    generate_articles()
-    return "true"
+    if request.method == 'GET':
+        print("success")
+        article_fetch.generate_articles()
+        return JsonResponse({"response":"success"}, safe=False)
+    
