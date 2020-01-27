@@ -83,8 +83,10 @@ def fetch_articles(api_instance):
         api_response = api_instance.list_stories(
             published_at_start='NOW-1DAYS',
             published_at_end='NOW',
-            source_domain=['bbc.co.uk'],
-            language=['en']
+            per_page=100,
+            #source_domain=['bbc.co.uk'],
+            language=['en'],
+            #next_page_cursor=next_page_cursor
         )
         return api_response
     except ApiException as e:

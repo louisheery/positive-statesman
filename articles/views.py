@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from articles.models import Article
 from articles.serializers import ArticleSerializer
+from articles import article_fetch
 
 def article_list(request):
     """
@@ -48,3 +49,10 @@ def article_detail(request, pk):
     elif request.method == 'DELETE':
         article.delete()
         return HttpResponse(status=204)
+
+def fetch_articles(request):
+    if request.method == 'GET':
+        print("success")
+        article_fetch.generate_articles()
+        return JsonResponse({"response":"success"}, safe=False)
+    
