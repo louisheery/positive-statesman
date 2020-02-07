@@ -1,19 +1,72 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+from django.db.models import Q, Count
+from rest_framework import generics
+from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from articles.models import Article
+from articles.models import Article, Category, Publisher
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
 
-def article_list(request):
-    """
-    List all articles, or create a new article.
-    """
+
+def valid_filter(param):
+    return param != '' and param is not None
+
+def article_filter(request):
+    '''
+    List articles according to a particular filter
+    '''
+
     if request.method == 'GET':
+
         articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        categories = Category.objects.all()
+        publishers = Publisher.objects.all()
+
+        category = request.GET.get('category')
+        publisher = request.GET.get('publisher')
+        id_only = request.GET.get('id')
+        sentiment_score_min = request.GET.get('sentiment_score_min')
+        sentiment_score_max = request.GET.get('sentiment_score_max')
+
+        articleLimit = request.GET.get('limit')
+        articleOffset = request.GET.get('offset')
+
+        # Only 1 Article of particular ID
+        if valid_filter(id_only):
+            articles = articles.filter(id=id_only)
+
+        # Filter by Category, Publisher, Sentiment Score Range
+        if valid_filter(category):
+            articles = articles.filter(categories__name=category)
+
+        if valid_filter(publisher):
+            articles = articles.filter(publisher__name=publisher)
+
+        if valid_filter(sentiment_score_min):
+            articles = articles.filter(sentiment_score__gte=sentiment_score_min)
+
+        if valid_filter(sentiment_score_max):
+            articles = articles.filter(sentiment_score__lt=sentiment_score_max)
+
+
+        # Article Limit and Offset
+        if valid_filter(articleOffset) and valid_filter(articleLimit):
+            return articles[int(articleOffset): int(articleOffset) + int(articleLimit)]
+
+        elif valid_filter(articleLimit):
+            return articles[0: int(articleLimit)]
+
+        else:
+            return articles
+
+            #articles = serializers.serialize('json', articles)
+            #serializer = ArticleSerializer(articles, many=True)
+            #print(serializer)
+            #return JsonResponse(serializer.data, safe=False)
+
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -23,6 +76,19 @@ def article_list(request):
             return JsonResponse(serializer.data, status=201)
 
         return JsonResponse(serializer.errors, status=400)
+
+class ArticleList(generics.ListAPIView):
+
+    serialiserClass = ArticleSerializer
+
+    def get_queryset(self):
+        articles = article_filter(self.request)
+        return articles
+
+    def list(self, request):
+        articles = self.get_queryset()
+        serialiser = self.serialiserClass(articles, many=True)
+        return Response(serialiser.data)
 
 def article_detail(request, pk):
     """

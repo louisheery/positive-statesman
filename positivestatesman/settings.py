@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'frontend',
     'django_extensions',
+    'django_filters',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -54,6 +54,26 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    
+}
+
+'''
+OLD REST_FRAMEWORK SETTINGS:
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
+PARAMETER TO DEFAULT TO PARSE JSON DATA:
+'DEFAULT_PARSER_CLASSES': (
+    'rest_framework.parsers.JSONParser',
+)
+'''
 
 CORS_ALLOW_CREDENTIALS = True
 
