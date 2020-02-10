@@ -2,14 +2,15 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GoogleButton from 'react-google-button';
-import HeaderBar from '../headers/HeaderBar';
-
+import Button from '@material-ui/core/Button';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import styles from '../../../src/assets/styles/components/pages/Login.js';
 
 class Login extends React.Component {
+
+
 
     render() {
 
@@ -21,8 +22,9 @@ class Login extends React.Component {
                     <Typography className={classes.header} variant="h5" align="center" component="div">
                         Login to The Positive Statesman
         
-                <div className={classes.GoogleButton} align="center">
+                        <div className={classes.GoogleButton} align="center">
                             <GoogleButton onClick={() => alert('API magic happens now')} />
+                            
                         </div>
                     </Typography>
                 </Container>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 // COMPONENTS
 import HeaderBar from './headers/HeaderBar'
+import SideBar from './headers/SideBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Login from './pages/Login'
@@ -45,6 +46,8 @@ class Root extends Component {
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} userIsLoggedIn={this.state.userIsLoggedIn} addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
+                    
+                    {/*<SideBar />*/}
                     <Switch>
                         {/* HeaderBar component needs to be placed here*/}
                         <Route path="/business" component={Category} />

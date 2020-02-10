@@ -5,11 +5,19 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { fetchArticles } from '../../apiIntegration';
 import { withStyles } from '@material-ui/core/styles';
-import Articles from '../../data/articles.json';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import { Button } from '@material-ui/core';
+import moment from 'moment';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import { NavLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
 
-class NewsFeedRow extends Component {
+class NewsFeedRowOld extends Component {
 
     constructor(props) {
         super(props)
@@ -31,16 +39,16 @@ class NewsFeedRow extends Component {
         
         */
 
-        var fetchedArticles = await fetchArticles(this.props.newsFeedRow)
+        var fetchedArticles = await fetchArticles(6, 0)
         this.setState({ rowArticles: fetchedArticles })
 
     }
 
-    
+
 
     render() {
 
-        const { classes } = this.props;
+        const { classes, width } = this.props;
 
 // this.state.rowArticles
 // this.props.Articles
@@ -51,25 +59,116 @@ class NewsFeedRow extends Component {
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.rowArticles, 'sentiment_score').reverse();
 
+        var numberRowColumns;
+        
+        switch(this.props.width) {
+            case 'xs':
+                numberRowColumns = 1;
+                break;
+            case 'sm':
+                numberRowColumns = 2;
+                break;
+            case 'md':
+                numberRowColumns = 3;
+                break;
+            case 'lg':
+                numberRowColumns = 4;
+                break;
+            default:
+                numberRowColumns = 5;
+                break;
+        }    
 
         return (
             <div className={classes.container}>
-                <Typography variant="h5">{this.props.newsFeedRowTitle}</Typography>
-
+                
+                <NavLink to={`/${this.props.newsFeedRow}`} style={{ textDecoration: 'none', color: 'unset' }} >
+                <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                </NavLink>
                 <div>
-                    <GridList cols={5} style={{ flexWrap: 'nowrap', transform: 'translateZ(0)' }}>
+                    <GridList className={classes.gridList} cellHeight={150} rows={2} cols={numberRowColumns} spacing={20}>
+
                         {
                             sortedArticles.map((article, i) => {
+
+                                var positivityTextStyle
+
+                                var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
+
+                                if (positivityScorePcnt > 70) {
+                                    positivityTextStyle = { color: 'green' };
+                                }
+                                else if (positivityScorePcnt > 50) {
+                                    positivityTextStyle = { color: 'orange' };
+                                }
+                                else {
+                                    positivityTextStyle = { color: 'red' };
+                                }
+
                                 return (
 
-                                    <GridListTile style={{ height: '270px', width: '250px', padding: '10px' }} key={Math.random()}>
+                    
+                                    <GridListTile key={article.image_url} cols={1} rows={1}>
+                                        <img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%'}} src={article.image_url} alt={article.title}  />
+                                        <Link href={article.url}>
+                                        <GridListTileBar
+                                            style={this.props.newsFeedRowColor}
+                                            
+                                            title={<span>{article.title}</span>}
+                                            titlePosition='top'
+                                            rows={3}
+                                            classes={{
+                                                root: classes.otherTopArticleRoot,
+                                                title: classes.otherTopArticleTitle,
+                                            }}
+                                        />
+                                        </Link>
 
-                                        <NewsItem key={article.id} Article={article} />
+                                        <GridListTileBar
+                                            style={this.props.newsFeedRowColor}
+                                            subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
+                                            rows={3}
+                                            classes={{
+                                                root: classes.otherTopArticleSecondaryRoot,
+                                                subtitle: classes.otherTopArticleSecondarySubtitle,
+                                            }}
+                                        />
 
+
+                                        <GridListTileBar
+                                            style={this.props.newsFeedRowColor}
+                                            className={classes.voteBar}
+                                            titlePosition="bottom"
+                                            title={
+                                                <div style={{ width: '100%' }}>
+                                                    <span style={{ float: 'left', display: 'inline-block' }}>
+
+                                                        <IconButton className={classes.voteIcon}>
+                                                            <span role="img" aria-label="happy">😀</span>
+                                                        </IconButton>
+                                                        <IconButton className={classes.voteIcon}>
+                                                            <span role="img" aria-label="neural">😐</span>
+                                                        </IconButton>
+                                                        <IconButton className={classes.voteIcon}>
+                                                            <span role="img" aria-label="sad">🙁</span>
+                                                        </IconButton>
+
+                                                    </span>
+                                                    <span style={{ float: 'right', display: 'inline-block' }}>
+
+                                                        <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
+                                                            <span role="img" style={positivityTextStyle}>{positivityScorePcnt}%</span>
+                                                        </Button>
+
+                                                    </span>
+                                                </div>
+                                            }
+                                        />
                                     </GridListTile>
+
                                 )
                             })
-                    }
+                        }
                     </GridList>
                 </div>
             </div>
@@ -79,4 +178,4 @@ class NewsFeedRow extends Component {
     }
 }
 
-export default withStyles(styles)(NewsFeedRow)
+export default withWidth()(withStyles(styles)(NewsFeedRowOld))
