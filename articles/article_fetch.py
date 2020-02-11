@@ -17,7 +17,7 @@ TODO:
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import aylien_news_api
 from aylien_news_api.rest import ApiException
-from articles.models import Article, Publisher
+from articles.models import Article, Publisher, Location, Category
 from articles.serializers import ArticleSerializer
 
 
@@ -66,16 +66,45 @@ def generate_articles():
 
     # 2.2       Create Article Model Instances
 
-        ## Database integration not working yet ##
-        article = Article(
-            title=title,
+        ## Database integration not working yet ##            
+        publisher, created = Publisher.objects.get_or_create(
+            name=story.source.name,
+        )
+        publisher.url = story.source.home_page_url
+        publisher.save()
+
+
+        article, created = Article.objects.get_or_create(
             url=url,
-            image_url=image_url,
-            publisher=publisher,
-            publish_date=publish_date,
-            sentiment_score=s_score,
-            text_full=full_text)
-        article.save()
+            defaults={
+            'title':title,
+            'image_url':image_url,
+            'publisher':publisher,
+            'publish_date':publish_date,
+            'sentiment_score':s_score,
+            'text_full':full_text})
+
+
+        for entity in story.entities.body:
+            location_type = False
+            if "City" in entity.types:
+                location_type = "city"
+            if "Region" in entity.types:
+                location_type = "region"
+            if "Country" in entity.types:
+                location_type = "country"
+            if location_type:
+                location, created = Location.objects.get_or_create(
+                    name=entity.text,
+                    location_type=location_type
+                )
+                article.locations.add(location)
+
+        for category in story.categories:
+            tax_id = category.taxonomy + category.id
+            category = Category.objects.filter(taxonomy_id=tax_id).first()
+            article.categories.add(category)
+        
 
 
 def fetch_articles(api_instance):
@@ -93,7 +122,7 @@ def fetch_articles(api_instance):
         print("Exception when calling DefaultApi->list_stories: %s\n" % e)
 
 
-def get_article(api_instancelink):
+def get_article(api_instance, url):
     try:
         api_response = api_instance.list_stories(
             published_at_end='NOW',
