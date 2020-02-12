@@ -141,7 +141,7 @@ class NewsFeedRowOld extends Component {
                                                 <div style={{ width: '100%' }}>
                                                     <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                        <ArticleVote />
+                                                        <ArticleVote articleId={article.id}/>
 
                                                     </span>
                                                     <span style={{ float: 'right', display: 'inline-block' }}>
