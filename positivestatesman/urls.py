@@ -23,6 +23,4 @@ urlpatterns = [
     path('api/', include('articles.urls')),
     path('', include('frontend.urls')),
     path('admin/', admin.site.urls),
-    path('csrf/', views.csrf),
-    path('ping/', views.ping),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
