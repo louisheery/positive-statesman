@@ -102,6 +102,17 @@ const styles = {
             backgroundColor: 'white',
       },
 
+      otherArticleTileVoteDiv: {
+            width: '100%'
+      },
+
+      rowTitle: {
+            textDecoration: 'none',
+            color: 'unset'
+      },
+
+      
+
 }
 
 export default styles;
