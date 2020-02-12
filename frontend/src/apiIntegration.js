@@ -37,7 +37,8 @@ async function fetchArticles(articleLimit = "", articleOffset = "", articleCateg
   if (articleSentimentMax != null) {
     articleSentimentMax = "&sentiment_score_max=" + articleSentimentMax;
   }
-  const response = await fetch(`/api/articles?${articleCategory}&${articlePublisher}&${articleLimit}&${articleOffset}&${articleSentimentMin}&${articleSentimentMax}`);
+  //const response = await fetch(`/api/articles?${articleCategory}&${articlePublisher}&${articleLimit}&${articleOffset}&${articleSentimentMin}&${articleSentimentMax}`);
+  const response = await fetch(`/api/articles/`)
   const articles = await response.json();
   return articles;
 }
