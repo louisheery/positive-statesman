@@ -75,17 +75,6 @@ PARAMETER TO DEFAULT TO PARSE JSON DATA:
 )
 '''
 
-CORS_ALLOW_CREDENTIALS = True
-
-
-CORS_ORIGIN_WHITELIST = [
-    os.environ.get('URL_WHITELIST', 'http://localhost:3000'),
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    os.environ.get('URL_WHITELIST', 'http://localhost:3000'),
-]
-
 ROOT_URLCONF = 'positivestatesman.urls'
 
 TEMPLATES = [
