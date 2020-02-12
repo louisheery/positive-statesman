@@ -34,7 +34,7 @@ class NewsFeedRowOld extends Component {
         
         */
 
-        var fetchedArticles = await fetchArticles(8, this.props.newsFeedRow)
+        var fetchedArticles = await fetchArticles({limit: 8, offset: this.props.newsFeedRow})
         this.setState({ rowArticles: fetchedArticles })
 
     }
