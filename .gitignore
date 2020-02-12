@@ -7,3 +7,4 @@ node_modules/
 .DS_Store
 db.squlite3
 static/
+articles/migrations
