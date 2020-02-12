@@ -12,7 +12,7 @@ async function fetchArticles(params = {}) {
   });
   
   const response = await fetch(query)
-  const articles = await response.json();
+  const articles = response.json();
   return articles;
 }
 
