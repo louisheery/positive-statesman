@@ -67,12 +67,12 @@ class NewsFeedNew extends Component {
         return (
             // NewsFeed = ClassName
             <div className={classes.grid}>
-                
+
                 <NewsFeedTop />
                 {
                     this.state.homeScreenNewsFeedRows.map((newsFeedRow, i) => {
                         return (
-                            <NewsFeedRow key={newsFeedRow[0] + Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowColor={newsFeedRow[2]}  />
+                            <NewsFeedRow key={newsFeedRow[0] + Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowColor={newsFeedRow[2]} />
                         );
                     })
                 }

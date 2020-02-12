@@ -23,7 +23,7 @@ class NewsFeedNew extends Component {
         super(props)
 
         this.state = {
-            homeScreenNewsFeedRows: [newsFeedDictionary.QUERY_TODAY, newsFeedDictionary.QUERY_THISWEEK, newsFeedDictionary.QUERY_THISMONTH, newsFeedDictionary.QUERY_ALLTIME, newsFeedDictionary.QUERY_USA, newsFeedDictionary.QUERY_UK, newsFeedDictionary.QUERY_WORLD, ],
+            homeScreenNewsFeedRows: [newsFeedDictionary.QUERY_TODAY, newsFeedDictionary.QUERY_THISWEEK, newsFeedDictionary.QUERY_THISMONTH, newsFeedDictionary.QUERY_ALLTIME, newsFeedDictionary.QUERY_USA, newsFeedDictionary.QUERY_UK, newsFeedDictionary.QUERY_WORLD,],
         }
     }
 
@@ -35,12 +35,12 @@ class NewsFeedNew extends Component {
         return (
             // NewsFeed = ClassName
             <div className={classes.grid}>
-                
+
                 <NewsFeedTop />
                 {
                     this.state.homeScreenNewsFeedRows.map((newsFeedRow, i) => {
                         return (
-                            <NewsFeedRow key={newsFeedRow[0] + Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowColor={{backgroundColor: 'white'}}  />
+                            <NewsFeedRow key={newsFeedRow[0] + Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowColor={{ backgroundColor: 'white' }} />
                         );
                     })
                 }

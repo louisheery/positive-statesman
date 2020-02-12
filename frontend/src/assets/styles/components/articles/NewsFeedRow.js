@@ -95,19 +95,6 @@ const styles = {
 
       },
 
-      voteIcon: {
-            color: 'white',
-            "&:hover": {
-                  backgroundColor: 'grey',
-                  borderRadius: '50%'
-            },
-            margin: '1px',
-            borderRadius: '50%',
-            paddingLeft: '2pt',
-            paddingRight: '2pt',
-
-      },
-
       positivityScore: {
             marginTop: '12px',
             marginBottom: '12px',

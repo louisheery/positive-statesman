@@ -39,14 +39,14 @@ class NewsFeedRowOld extends Component {
 
     }
 
-    
+
 
     render() {
 
         const { classes } = this.props;
 
-// this.state.rowArticles
-// this.props.Articles
+        // this.state.rowArticles
+        // this.props.Articles
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -71,23 +71,23 @@ class NewsFeedRowOld extends Component {
 
                                     </GridListTile>
 
-/*
-                                    <GridListTile key={article.img}>
-                                        <img src={article.img} alt={article.title} />
-                                        <GridListTileBar
-                                            title={article.title}
-                                            subtitle={<span>by: {article.author}</span>}
-                                            actionIcon={
-                                                <IconButton aria-label={`info about ${article.title}`} className={classes.icon}>
-                                                    <InfoIcon />
-                                                </IconButton>
-                                            }
-                                        />
-                                    </GridListTile>
-*/
+                                    /*
+                                                                        <GridListTile key={article.img}>
+                                                                            <img src={article.img} alt={article.title} />
+                                                                            <GridListTileBar
+                                                                                title={article.title}
+                                                                                subtitle={<span>by: {article.author}</span>}
+                                                                                actionIcon={
+                                                                                    <IconButton aria-label={`info about ${article.title}`} className={classes.icon}>
+                                                                                        <InfoIcon />
+                                                                                    </IconButton>
+                                                                                }
+                                                                            />
+                                                                        </GridListTile>
+                                    */
                                 )
                             })
-                    }
+                        }
                     </GridList>
                 </div>
             </div>

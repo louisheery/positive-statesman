@@ -137,20 +137,6 @@ topArticleSubtitle: {
         paddingBottom: '5px',
 
   },
-  
-  voteIcon: {
-        "&:hover": {
-              backgroundColor: 'grey',
-        },
-        borderRadius: '100%',
-        color: 'white',
-        margin: '1px',
-        paddingTop: '12',
-        paddingBottom: '12',
-        paddingLeft: '2pt',
-        paddingRight: '2pt',
-
-  },
 
 positivityScore: {
       marginTop: '12px',

@@ -24,7 +24,7 @@ class Category extends Component {
                 </Hidden>
 
                 <NewsFeedCategory />
-                
+
             </div>
         )
     }
