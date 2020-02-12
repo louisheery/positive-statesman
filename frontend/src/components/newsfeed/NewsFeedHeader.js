@@ -37,22 +37,9 @@ class NewsFeedHeader extends Component {
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
-<<<<<<< HEAD:frontend/src/components/articles/NewsFeedTop.js
-        /*
-                fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
-                    .then(response => response.json())
-                    .then(rowArticles => this.setState({ rowArticles }));
-        
-        */
-
-        var topArticle = await fetchArticles({limit: 1, offset: 0, category: this.props.newsFeedRow, sentiment_score_min: 0.8, sentiment_score_max: 0.95})
-        this.setState({ topArticle: topArticle })
-        var topArticles = await fetchArticles({limit: 4, offset: 1, category: this.props.newsFeedRow, sentiment_score_min: 0.9})
-=======
         var topArticle = await fetchArticles({ limit: 1, offset: 0, category: this.props.newsFeedRow, sentiment_score_min: 0.8, sentiment_score_max: 0.95 })
         this.setState({ topArticle: topArticle })
         var topArticles = await fetchArticles({ limit: 4, offset: 1, category: this.props.newsFeedRow, sentiment_score_min: 0.9 })
->>>>>>> 1bfae5399f9a62c093e4f8cd1a50bcbe3755db55:frontend/src/components/newsfeed/NewsFeedHeader.js
         this.setState({ topArticles: topArticles })
 
     }

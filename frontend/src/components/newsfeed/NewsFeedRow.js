@@ -44,11 +44,7 @@ class NewsFeedRow extends Component {
         
         */
 
-<<<<<<< HEAD:frontend/src/components/articles/NewsFeedRow.js
-        var fetchedArticles = await fetchArticles({limit: 6, offset: 0})
-=======
         var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
->>>>>>> 1bfae5399f9a62c093e4f8cd1a50bcbe3755db55:frontend/src/components/newsfeed/NewsFeedRow.js
         this.setState({ rowArticles: fetchedArticles })
 
     }
