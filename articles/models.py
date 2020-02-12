@@ -22,7 +22,7 @@ class Article(models.Model):
 
 class Publisher(models.Model):
     name = models.CharField(max_length=50)
-    url = models.CharField(max_length=400)
+    url = models.CharField(max_length=400, default='')
     class Meta:
         ordering = ['name']
 
@@ -35,7 +35,7 @@ class Image(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    taxonomy_id = models.CharField(max_length=100)
+    taxonomy_id = models.CharField(max_length=100, default='')
     class Meta:
         ordering = ['name']
 
