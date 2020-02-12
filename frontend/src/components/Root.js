@@ -2,17 +2,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-// COMPONENTS
+// REACT COMPONENTS
 import HeaderBar from './headers/HeaderBar'
-import SideBar from './headers/SideBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Login from './pages/Login'
+import FeedbackButton from './popups/FeedbackButton';
 
-// STYLE
+// STYLES
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-// Custom Theme
+// MATERIAL UI THEME
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -27,29 +27,13 @@ const theme = createMuiTheme({
 
 class Root extends Component {
 
-    constructor(props) {
-        super(props);
-        this.handleArticlePopupOpening = this.handleArticlePopupOpening.bind(this);
-        this.state = {
-            addArticlePopupIsOpen: false,
-            userIsLoggedIn: false,
-            loginPageDisplayed: false,
-        };
-    }
-
-    handleArticlePopupOpening() {
-        this.setState({ addArticlePopupIsOpen: !this.state.addArticlePopupIsOpen })
-    }
-
     render() {
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
-                    <HeaderBar location={this.props.location} userIsLoggedIn={this.state.userIsLoggedIn} addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
-
-                    {/*<SideBar />*/}
+                    <HeaderBar location={this.props.location} />
+                    <FeedbackButton />
                     <Switch>
-                        {/* HeaderBar component needs to be placed here*/}
                         <Route path="/business" component={Category} />
                         <Route path="/politics" component={Category} />
                         <Route path="/sport" component={Category} />
@@ -60,9 +44,9 @@ class Root extends Component {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Redirect to="/" />
-                    </Switch >
+                    </Switch>
                 </MuiThemeProvider>
-            </Router >
+            </Router>
         )
     }
 }

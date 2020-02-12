@@ -1,9 +1,12 @@
+// REACT LIBRARIES
 import React, { Component } from 'react';
+
+// EXTERNAL REACT LIBRARIES & COMPONENTS
 import IconButton from '@material-ui/core/IconButton';
 
+// STYLES
 import { withStyles } from '@material-ui/core/styles';
-
-import styles from '../../assets/styles/components/articles/ArticleVote.js';
+import styles from '../../assets/styles/components/newsfeed/ArticleVote.js';
 
 class ArticleVote extends Component {
 

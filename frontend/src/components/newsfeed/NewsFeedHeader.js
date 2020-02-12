@@ -1,22 +1,27 @@
+// REACT LIBRARIES
 import React, { Component } from 'react';
+
+// OTHER LIBRARIES
+import moment from 'moment';
+import { fetchArticles } from '../../apiIntegration';
+
+// INTERNAL REACT COMPONENTS
+import ArticleVote from './ArticleVote';
+
+// EXTERNAL REACT LIBRARIES & COMPONENTS
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
-import { fetchArticles } from '../../apiIntegration';
-import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
-import moment from 'moment';
 import Link from '@material-ui/core/Link';
 import withWidth from '@material-ui/core/withWidth';
-import Hidden from '@material-ui/core/Hidden';
-import ArticleVote from './ArticleVote';
-
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
-import styles from '../../../src/assets/styles/components/articles/NewsFeedTop.js';
+// STYLES
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedHeader.js';
 
-class NewsFeedRow extends Component {
+class NewsFeedHeader extends Component {
 
     constructor(props) {
         super(props)
@@ -32,16 +37,9 @@ class NewsFeedRow extends Component {
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
-        /*
-                fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
-                    .then(response => response.json())
-                    .then(rowArticles => this.setState({ rowArticles }));
-        
-        */
-
-        var topArticle = await fetchArticles(1, 0, this.props.newsFeedRow, 0.8, 0.95)
+        var topArticle = await fetchArticles({ limit: 1, offset: 0, category: this.props.newsFeedRow, sentiment_score_min: 0.8, sentiment_score_max: 0.95 })
         this.setState({ topArticle: topArticle })
-        var topArticles = await fetchArticles(4, 1, this.props.newsFeedRow, 0.9)
+        var topArticles = await fetchArticles({ limit: 4, offset: 1, category: this.props.newsFeedRow, sentiment_score_min: 0.9 })
         this.setState({ topArticles: topArticles })
 
     }
@@ -52,19 +50,13 @@ class NewsFeedRow extends Component {
 
         const { classes } = this.props;
 
-        // this.state.rowArticles
-        // this.props.Articles
-
-
         // NOTE: STILL NEED TO FIX THIS SORTING
         // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
         var sorter = require('sort-json-array');
         var sortedArticle = sorter(this.state.topArticle, 'sentiment_score').reverse();
-        console.log(sortedArticle)
 
-        var sorter = require('sort-json-array');
+        sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.topArticles, 'sentiment_score').reverse();
-        console.log(sortedArticles)
 
         var numberTopColumns;
         var topArticleShown;
@@ -129,15 +121,12 @@ class NewsFeedRow extends Component {
 
                                         return (
 
-
-
-
-                                            <GridListTile key={article.image_url} cols={2} rows={2}>
-                                                <img src={article.image_url} alt={article.title} style={{ height: '100%' }} />
+                                            <GridListTile key={Math.random() + i} cols={2} rows={2}>
+                                                <img className={classes.articleTileImage} src={article.image_url} alt={article.title} />
                                                 <Link href={article.url}>
                                                     <GridListTileBar
                                                         title={<span>{article.title}</span>}
-                                                        subtitle={<span><span style={{ display: "inline-block" }}>{article.text_full}</span></span>}
+                                                        subtitle={<span><span className={classes.articleTileSubtitle}>{article.text_full}</span></span>}
                                                         titlePosition='top'
                                                         rows={3}
                                                         classes={{
@@ -149,7 +138,7 @@ class NewsFeedRow extends Component {
                                                 </Link>
 
                                                 <GridListTileBar
-                                                    subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
+                                                    subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', display: 'inline-block', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
                                                     rows={3}
                                                     classes={{
                                                         root: classes.topArticleSecondaryRoot,
@@ -162,7 +151,7 @@ class NewsFeedRow extends Component {
                                                     className={classes.voteBar}
                                                     titlePosition="bottom"
                                                     title={
-                                                        <div style={{ width: '100%' }}>
+                                                        <div className={classes.articleTileVoteDiv}>
                                                             <span style={{ float: 'left', display: 'inline-block' }}>
 
                                                                 <ArticleVote />
@@ -208,8 +197,8 @@ class NewsFeedRow extends Component {
                                     return (
 
 
-                                        <GridListTile key={article.image_url} cols={numberOtherTopColumns} rows={1}>
-                                            <img src={article.image_url} alt={article.title} style={{ height: '100%', width: '100%' }} />
+                                        <GridListTile key={Math.random() + i} cols={numberOtherTopColumns} rows={1}>
+                                            <img src={article.image_url} alt={article.title} className={classes.otherArticleTileImage} />
                                             <Link href={article.url}>
                                                 <GridListTileBar
                                                     title={<span>{article.title}</span>}
@@ -222,7 +211,7 @@ class NewsFeedRow extends Component {
                                                 />
                                             </Link>
                                             <GridListTileBar
-                                                subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
+                                                subtitle={<span><span style={{float: 'left', display: 'inline-block', marginTop: '10px'}}>{article.publisher}</span><span style={{float: 'right', display: 'inline-block', marginTop: '10px'}}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
                                                 rows={3}
                                                 classes={{
                                                     root: classes.otherTopArticleSecondaryRoot,
@@ -236,7 +225,7 @@ class NewsFeedRow extends Component {
                                                 className={classes.voteBar}
                                                 titlePosition="bottom"
                                                 title={
-                                                    <div style={{ width: '100%' }}>
+                                                    <div className={classes.otherTopArticleSecondaryVoteDiv}>
                                                         <span style={{ float: 'left', display: 'inline-block' }}>
 
                                                             <ArticleVote />
@@ -267,4 +256,4 @@ class NewsFeedRow extends Component {
     }
 }
 
-export default withWidth()(withStyles(styles)(NewsFeedRow))
+export default withWidth()(withStyles(styles)(NewsFeedHeader))

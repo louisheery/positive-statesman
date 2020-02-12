@@ -1,4 +1,10 @@
+// REACT LIBRARIES
 import React, { Component } from 'react';
+
+// REACT COMPONENTS
+import fetchedArticle from '../../data/fetchedArticle';
+
+// NON-REACT LIBRARIES & COMPONENTS
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,11 +13,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import fetchedArticle from '../../data/fetchedArticle';
-import NewsItem from '../articles/NewsItem';
 
+// STYLES
 import { withStyles } from '@material-ui/core/styles';
-
 import styles from '../../../src/assets/styles/components/popups/AddArticlePopup.js';
 
 class AddArticlePopup extends Component {
@@ -158,7 +162,7 @@ class AddArticlePopup extends Component {
                     <div className={classes.resultDialog}>
                         {
                             fetchedArticle.Articles.map((article, i) => {
-                                return (<NewsItem key={i} Article={article} />);
+                                return ({/*<NewsItem key={i} Article={article} />*/});
                             })
                         }
 
