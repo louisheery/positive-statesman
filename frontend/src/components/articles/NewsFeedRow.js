@@ -109,7 +109,7 @@ class NewsFeedRowOld extends Component {
 
                     
                                     <GridListTile key={article.image_url} cols={1} rows={1}>
-                                        <img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%'}} src={article.image_url} alt={article.title}  />
+                                        {/*<img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%'}} src={article.image_url} alt={article.title}  />*/}
                                         <Link href={article.url}>
                                         <GridListTileBar
                                             style={this.props.newsFeedRowColor}
