@@ -1,30 +1,18 @@
-async function fetchArticles(articleLimit = "", articleOffset = "", articleCategory = "", articleSentimentMin = "", articleSentimentMax = "", articlePublisher = "",) {
-  if (articleCategory != null) {
-    articleCategory = "category=" + articleCategory;
-  }
+const allowedParams = ['category', 'publisher', 'limit', 'offset', 'sentiment_score_min', 'sentiment_score_max'];
 
-  if (articlePublisher != null) {
-    articlePublisher = "publisher=" + articlePublisher;
-  }
-  
-  if (articleLimit != null) {
-      articleLimit = "&limit=" + articleLimit;
+async function fetchArticles(params = {}) {
+  let query = '/api/articles/';
+  let first = true;
+  allowedParams.forEach(param => {
+    if (params[param]) {
+      query += first ? '?' : '&'
+      query += `${param}=${params[param]}` 
+      first = false;
     }
-
-  if (articleOffset != null) {
-    articleOffset = "&offset=" + articleOffset;
-  }
-
-  if (articleSentimentMin != null) {
-    articleSentimentMin = "&sentiment_score_min=" + articleSentimentMin;
-  }
-
-  if (articleSentimentMax != null) {
-    articleSentimentMax = "&sentiment_score_max=" + articleSentimentMax;
-  }
-  //const response = await fetch(`/api/articles?${articleCategory}&${articlePublisher}&${articleLimit}&${articleOffset}&${articleSentimentMin}&${articleSentimentMax}`);
-  const response = await fetch(`/api/articles/`)
-  const articles = await response.json();
+  });
+  
+  const response = await fetch(query)
+  const articles = response.json();
   return articles;
 }
 
