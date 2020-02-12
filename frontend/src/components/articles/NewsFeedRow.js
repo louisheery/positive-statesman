@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import NewsItem from './NewsItem';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { fetchArticles } from '../../apiIntegration';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
 import { Button } from '@material-ui/core';
 import moment from 'moment';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import withWidth from '@material-ui/core/withWidth';
 import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+
+import ArticleVote from './ArticleVote';
 
 import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
 
@@ -50,8 +48,8 @@ class NewsFeedRowOld extends Component {
 
         const { classes, width } = this.props;
 
-// this.state.rowArticles
-// this.props.Articles
+        // this.state.rowArticles
+        // this.props.Articles
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -60,8 +58,8 @@ class NewsFeedRowOld extends Component {
         var sortedArticles = sorter(this.state.rowArticles, 'sentiment_score').reverse();
 
         var numberRowColumns;
-        
-        switch(this.props.width) {
+
+        switch (this.props.width) {
             case 'xs':
                 numberRowColumns = 1;
                 break;
@@ -77,13 +75,13 @@ class NewsFeedRowOld extends Component {
             default:
                 numberRowColumns = 5;
                 break;
-        }    
+        }
 
         return (
             <div className={classes.container}>
-                
+
                 <NavLink to={`/${this.props.newsFeedRow}`} style={{ textDecoration: 'none', color: 'unset' }} >
-                <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                    <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
                 </NavLink>
                 <div>
                     <GridList className={classes.gridList} cellHeight={150} rows={2} cols={numberRowColumns} spacing={20}>
@@ -107,21 +105,21 @@ class NewsFeedRowOld extends Component {
 
                                 return (
 
-                    
+
                                     <GridListTile key={article.image_url} cols={1} rows={1}>
-                                        <img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%'}} src={article.image_url} alt={article.title}  />
+                                        <img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%' }} src={article.image_url} alt={article.title} />
                                         <Link href={article.url}>
-                                        <GridListTileBar
-                                            style={this.props.newsFeedRowColor}
-                                            
-                                            title={<span>{article.title}</span>}
-                                            titlePosition='top'
-                                            rows={3}
-                                            classes={{
-                                                root: classes.otherTopArticleRoot,
-                                                title: classes.otherTopArticleTitle,
-                                            }}
-                                        />
+                                            <GridListTileBar
+                                                style={this.props.newsFeedRowColor}
+
+                                                title={<span>{article.title}</span>}
+                                                titlePosition='top'
+                                                rows={3}
+                                                classes={{
+                                                    root: classes.otherTopArticleRoot,
+                                                    title: classes.otherTopArticleTitle,
+                                                }}
+                                            />
                                         </Link>
 
                                         <GridListTileBar
@@ -143,15 +141,7 @@ class NewsFeedRowOld extends Component {
                                                 <div style={{ width: '100%' }}>
                                                     <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="happy">😀</span>
-                                                        </IconButton>
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="neural">😐</span>
-                                                        </IconButton>
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="sad">🙁</span>
-                                                        </IconButton>
+                                                        <ArticleVote />
 
                                                     </span>
                                                     <span style={{ float: 'right', display: 'inline-block' }}>

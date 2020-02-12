@@ -55,7 +55,7 @@ class NewsItem extends Component {
                         />
                         <CardContent>
                             <Typography className={classes.title}>{(Article.title).substring(0, maxTitleLength)}</Typography>
-                            <Typography className={classes.subtitle}>{Article.publisher}<span style={{float:'right'}}>{moment(`${Article.publish_date}`).format('DD/MM/YY')}</span></Typography>
+                            <Typography className={classes.subtitle}>{Article.publisher}<span style={{ float: 'right' }}>{moment(`${Article.publish_date}`).format('DD/MM/YY')}</span></Typography>
                             <center>
                                 <Button className={classes.voteButton} color="primary" onClick={this.handleClickPlaceholder} disableElevation>
                                     <span role="img" aria-label="happy">😀</span>

@@ -10,6 +10,7 @@ import moment from 'moment';
 import Link from '@material-ui/core/Link';
 import withWidth from '@material-ui/core/withWidth';
 import Hidden from '@material-ui/core/Hidden';
+import ArticleVote from './ArticleVote';
 
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
@@ -45,14 +46,14 @@ class NewsFeedRow extends Component {
 
     }
 
-    
+
 
     render() {
 
         const { classes } = this.props;
 
-// this.state.rowArticles
-// this.props.Articles
+        // this.state.rowArticles
+        // this.props.Articles
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -60,7 +61,7 @@ class NewsFeedRow extends Component {
         var sorter = require('sort-json-array');
         var sortedArticle = sorter(this.state.topArticle, 'sentiment_score').reverse();
         console.log(sortedArticle)
-        
+
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.topArticles, 'sentiment_score').reverse();
         console.log(sortedArticles)
@@ -68,7 +69,7 @@ class NewsFeedRow extends Component {
         var numberTopColumns;
         var topArticleShown;
         var numberOtherTopColumns;
-  
+
 
         switch (this.props.width) {
             case 'xs':
@@ -96,7 +97,7 @@ class NewsFeedRow extends Component {
                 topArticleShown = true;
                 numberOtherTopColumns = 1.5;
                 break;
-        } 
+        }
 
         return (
             <div className={classes.container}>
@@ -105,174 +106,158 @@ class NewsFeedRow extends Component {
                 <div className={classes.gridRoot}>
                     <GridList className={classes.subContainer} cellHeight={160} cols={numberTopColumns}>
 
-                        
-                    {topArticleShown && (
-                        <GridList className={classes.gridList} cellHeight={160}  cols={2} rows={2}>
 
-                        {
-                            sortedArticle.map((article, i) => {
+                        {topArticleShown && (
+                            <GridList className={classes.gridList} cellHeight={160} cols={2} rows={2}>
 
-                                var positivityTextStyle
+                                {
+                                    sortedArticle.map((article, i) => {
 
-                                var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
-                                
-                                if (positivityScorePcnt > 70) {
-                                    positivityTextStyle = { color: 'green' };
+                                        var positivityTextStyle
+
+                                        var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
+
+                                        if (positivityScorePcnt > 70) {
+                                            positivityTextStyle = { color: 'green' };
+                                        }
+                                        else if (positivityScorePcnt > 50) {
+                                            positivityTextStyle = { color: 'orange' };
+                                        }
+                                        else {
+                                            positivityTextStyle = { color: 'red' };
+                                        }
+
+                                        return (
+
+
+
+
+                                            <GridListTile key={article.image_url} cols={2} rows={2}>
+                                                <img src={article.image_url} alt={article.title} style={{ height: '100%' }} />
+                                                <Link href={article.url}>
+                                                    <GridListTileBar
+                                                        title={<span>{article.title}</span>}
+                                                        subtitle={<span><span style={{ display: "inline-block" }}>{article.text_full}</span></span>}
+                                                        titlePosition='top'
+                                                        rows={3}
+                                                        classes={{
+                                                            root: classes.topArticleRoot,
+                                                            title: classes.topArticleTitle,
+                                                            subtitle: classes.topArticleSubtitle,
+                                                        }}
+                                                    />
+                                                </Link>
+
+                                                <GridListTileBar
+                                                    subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
+                                                    rows={3}
+                                                    classes={{
+                                                        root: classes.topArticleSecondaryRoot,
+                                                        subtitle: classes.topArticleSecondarySubtitle,
+                                                    }}
+                                                />
+
+
+                                                <GridListTileBar
+                                                    className={classes.voteBar}
+                                                    titlePosition="bottom"
+                                                    title={
+                                                        <div style={{ width: '100%' }}>
+                                                            <span style={{ float: 'left', display: 'inline-block' }}>
+
+                                                                <ArticleVote />
+
+                                                            </span>
+                                                            <span style={{ float: 'right', display: 'inline-block' }}>
+
+                                                                <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
+                                                                    <span role="img" style={positivityTextStyle}>{positivityScorePcnt}% Positivity</span>
+                                                                </Button>
+
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                />
+                                            </GridListTile>
+
+                                        )
+                                    })
                                 }
-                                else if (positivityScorePcnt > 50) {
-                                    positivityTextStyle = { color: 'orange' };
-                                }
-                                else {
-                                    positivityTextStyle = { color: 'red' };
-                                }
-
-                                return (
-
-                                
-
-
-                                    <GridListTile key={article.image_url} cols={2} rows={2}>
-                                        <img src={article.image_url} alt={article.title} style={{height: '100%'}} />
-                                        <Link href={article.url}>
-                                        <GridListTileBar
-                                            title={<span>{article.title}</span>}
-                                            subtitle={<span><span style={{display: "inline-block"}}>{article.text_full}</span></span>}
-                                            titlePosition='top'
-                                            rows={3}
-                                            classes={{
-                                                root: classes.topArticleRoot,
-                                                title: classes.topArticleTitle,
-                                                subtitle: classes.topArticleSubtitle,
-                                            }}
-                                        />
-                                        </Link>
-
-                                        <GridListTileBar
-                                            subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
-                                            rows={3}
-                                            classes={{
-                                                root: classes.topArticleSecondaryRoot,
-                                                subtitle: classes.topArticleSecondarySubtitle,
-                                            }}
-                                        />
-
-
-                                        <GridListTileBar
-                                        className={classes.voteBar}
-                                            titlePosition="bottom"
-                                            title={
-                                                <div style={{width: '100%'}}>
-                                                    <span style={{ float: 'left', display: 'inline-block'}}>
-                                                    
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="happy">😀</span>
-                                                </IconButton>
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="neural">😐</span>
-                                                </IconButton>
-                                                <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="sad">🙁</span>
-                                                </IconButton>
-                                                  
-                                                    </span>
-                                                <span style={{ float: 'right', display: 'inline-block'}}>
-
-                                                        <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
-                                                            <span role="img" style={positivityTextStyle}>{positivityScorePcnt}% Positivity</span>
-                                                        </Button>
-
-                                                        </span>
-                                                </div>
-                                            }
-                                        />
-                                    </GridListTile>
-
-                                )
-                            })
-                        }
-                    </GridList>
+                            </GridList>
                         )}
 
                         <GridList className={classes.gridList} cellHeight={160} rows={2} cols={3} >
 
-                        {
-                            sortedArticles.map((article, i) => {
+                            {
+                                sortedArticles.map((article, i) => {
 
-                                var positivityTextStyle
+                                    var positivityTextStyle
 
-                                var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
+                                    var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
 
-                                if (positivityScorePcnt > 70) {
-                                    positivityTextStyle = { color: 'green' };
-                                }
-                                else if (positivityScorePcnt > 50) {
-                                    positivityTextStyle = { color: 'orange' };
-                                }
-                                else {
-                                    positivityTextStyle = { color: 'red' };
-                                }
+                                    if (positivityScorePcnt > 70) {
+                                        positivityTextStyle = { color: 'green' };
+                                    }
+                                    else if (positivityScorePcnt > 50) {
+                                        positivityTextStyle = { color: 'orange' };
+                                    }
+                                    else {
+                                        positivityTextStyle = { color: 'red' };
+                                    }
 
-                                return (
-
-                                    
-                                    <GridListTile key={article.image_url} cols={numberOtherTopColumns} rows={1}>
-                                        <img src={article.image_url} alt={article.title} style={{ height: '100%', width: '100%' }} />
-                                        <Link href={article.url}>
-                                        <GridListTileBar
-                                            title={<span>{article.title}</span>}
-                                            titlePosition='top'
-                                            rows={3}
-                                            classes={{
-                                                root: classes.otherTopArticleRoot,
-                                                title: classes.otherTopArticleTitle,
-                                            }}
-                                        />
-                                        </Link>
-                                        <GridListTileBar
-                                            subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
-                                            rows={3}
-                                            classes={{
-                                                root: classes.otherTopArticleSecondaryRoot,
-                                                subtitle: classes.otherTopArticleSecondarySubtitle,
-                                            }}
-                                        />
-                                        
+                                    return (
 
 
-                                        <GridListTileBar
-                                            className={classes.voteBar}
-                                            titlePosition="bottom"
-                                            title={
-                                                <div style={{ width: '100%' }}>
-                                                    <span style={{ float: 'left', display: 'inline-block' }}>
+                                        <GridListTile key={article.image_url} cols={numberOtherTopColumns} rows={1}>
+                                            <img src={article.image_url} alt={article.title} style={{ height: '100%', width: '100%' }} />
+                                            <Link href={article.url}>
+                                                <GridListTileBar
+                                                    title={<span>{article.title}</span>}
+                                                    titlePosition='top'
+                                                    rows={3}
+                                                    classes={{
+                                                        root: classes.otherTopArticleRoot,
+                                                        title: classes.otherTopArticleTitle,
+                                                    }}
+                                                />
+                                            </Link>
+                                            <GridListTileBar
+                                                subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
+                                                rows={3}
+                                                classes={{
+                                                    root: classes.otherTopArticleSecondaryRoot,
+                                                    subtitle: classes.otherTopArticleSecondarySubtitle,
+                                                }}
+                                            />
 
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="happy">😀</span>
-                                                        </IconButton>
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="neural">😐</span>
-                                                        </IconButton>
-                                                        <IconButton className={classes.voteIcon}>
-                                                            <span role="img" aria-label="sad">🙁</span>
-                                                        </IconButton>
 
-                                                    </span>
-                                                    <span style={{ float: 'right', display: 'inline-block' }}>
 
-                                                        <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
-                                                            <span role="img" style={positivityTextStyle}>{positivityScorePcnt}%</span>
-                                                        </Button>
+                                            <GridListTileBar
+                                                className={classes.voteBar}
+                                                titlePosition="bottom"
+                                                title={
+                                                    <div style={{ width: '100%' }}>
+                                                        <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                    </span>
-                                                </div>
-                                            }
-                                        />
-                                    </GridListTile>
+                                                            <ArticleVote />
 
-                                )
-                            })
-                    }
-                    </GridList>
+                                                        </span>
+                                                        <span style={{ float: 'right', display: 'inline-block' }}>
+
+                                                            <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
+                                                                <span role="img" style={positivityTextStyle}>{positivityScorePcnt}%</span>
+                                                            </Button>
+
+                                                        </span>
+                                                    </div>
+                                                }
+                                            />
+                                        </GridListTile>
+
+                                    )
+                                })
+                            }
+                        </GridList>
                     </GridList>
                 </div>
             </div>

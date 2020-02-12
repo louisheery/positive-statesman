@@ -32,14 +32,14 @@ class Home extends React.Component {
   render() {
 
     const { classes } = this.props;
-    
+
     return (
       <div>
         <Hidden only={['xs', 'sm']}>
-        <NewsTickerBar />
+          <NewsTickerBar />
         </Hidden>
-        <Hidden only={[ 'md', 'lg', 'xl']}>
-        <div style={{height: '160px'}}></div>
+        <Hidden only={['md', 'lg', 'xl']}>
+          <div style={{ height: '160px' }}></div>
         </Hidden>
 
         <NewsFeed />

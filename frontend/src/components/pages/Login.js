@@ -15,16 +15,16 @@ class Login extends React.Component {
     render() {
 
         const { classes } = this.props;
-        
+
         return (
             <div>
                 <Container className={classes.container} maxWidth="lg" align="center" >
                     <Typography className={classes.header} variant="h5" align="center" component="div">
                         Login to The Positive Statesman
-        
+
                         <div className={classes.GoogleButton} align="center">
                             <GoogleButton onClick={() => alert('API magic happens now')} />
-                            
+
                         </div>
                     </Typography>
                 </Container>

@@ -15,14 +15,6 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/headers/SideBar.js';
 
 
-function a11yProps(index) {
-    return {
-        id: `scrollable-auto-tab-${index}`,
-        'aria-controls': `scrollable-auto-tabpanel-${index}`,
-    };
-}
-
-
 class SideBar extends Component {
 
     constructor(props) {
@@ -39,11 +31,11 @@ class SideBar extends Component {
 
 
         return (
-            
+
             <Drawer open={true}>
-                
+
             </Drawer>
-            
+
         )
     }
 }

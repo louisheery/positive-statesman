@@ -58,7 +58,7 @@ class HeaderBar extends Component {
 
 
         return (
-            
+
 
             <AppBar>
 
@@ -121,19 +121,19 @@ class HeaderBar extends Component {
                             <Hidden only={['xs', 'sm']}>
                                 <div className={classes.flexDiv}>
                                     <center>
-                                <div className={classes.searchBar}>
-                                    <div className={classes.searchBarIcon}>
-                                        <SearchIcon />
-                                    </div>
-                                    <InputBase
-                                        placeholder="Search"
-                                        classes={{
-                                            root: classes.searchBox,
-                                            input: classes.searchBoxText,
-                                        }}
-                                        inputProps={{ 'aria-label': 'search' }}
-                                    />
-                                </div>
+                                        <div className={classes.searchBar}>
+                                            <div className={classes.searchBarIcon}>
+                                                <SearchIcon />
+                                            </div>
+                                            <InputBase
+                                                placeholder="Search"
+                                                classes={{
+                                                    root: classes.searchBox,
+                                                    input: classes.searchBoxText,
+                                                }}
+                                                inputProps={{ 'aria-label': 'search' }}
+                                            />
+                                        </div>
                                     </center>
                                 </div>
                             </Hidden>
@@ -146,7 +146,7 @@ class HeaderBar extends Component {
 
                             <div className={classes.addButton} >
                                 <Hidden only={['xs', 'sm']}>
-                                    <Button style={{width: '120px'}} display={{ xs: 'none', md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
+                                    <Button style={{ width: '120px' }} display={{ xs: 'none', md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
                                         Add Story
                         </Button>
                                 </Hidden>
@@ -167,8 +167,8 @@ class HeaderBar extends Component {
                                 </div>
                             }
                         </Toolbar>
-                     
-                 )}
+
+                    )}
 
 
                 <Tabs style={{ backgroundColor: '#007ea7', paddingLeft: '5%', paddingRight: '5%' }}
@@ -198,7 +198,7 @@ class HeaderBar extends Component {
 
                 </Tabs>
 
-                
+
 
 
             </AppBar>

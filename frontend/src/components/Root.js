@@ -46,7 +46,7 @@ class Root extends Component {
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} userIsLoggedIn={this.state.userIsLoggedIn} addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
-                    
+
                     {/*<SideBar />*/}
                     <Switch>
                         {/* HeaderBar component needs to be placed here*/}
