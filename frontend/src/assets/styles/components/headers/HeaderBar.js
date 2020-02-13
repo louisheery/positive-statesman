@@ -9,6 +9,7 @@ const styles = {
 
   psButton: {
     marginLeft: '20px',
+    textTransform: 'none',
   },
 
   psButtonSmall: {
@@ -19,6 +20,10 @@ const styles = {
   psButtonSmallText: {
     fontFamily: 'roboto',
     fontSize: '3vw',
+  },
+
+  addStoryButton: {
+    width: '120px',
   },
 
   searchBar: {
@@ -73,7 +78,7 @@ const styles = {
   headerTab: {
     flexGrow: '1',
   },
-  
+
   flexDiv: {
     flexGrow: '1',
     alignItems: 'center',
@@ -82,7 +87,13 @@ const styles = {
 
   addButton: {
     marginRight: '65px',
-},
+  },
+
+  tabBar: {
+    backgroundColor: '#007ea7',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+  },
 
 }
 

@@ -1,11 +1,16 @@
+// REACT LIBRARIES
 import React, { Component } from 'react';
-import NewsFeedCategory from '../articles/NewsFeedCategory';
-import NewsTickerBar from '../headers/NewsTickerBar'
 
+// INTERNAL REACT COMPONENTS
+import NewsFeedCategory from '../newsfeed/NewsFeedCategory';
+// import NewsTickerBar from '../headers/NewsTickerBar'
+
+// EXTERNAL REACT LIBRARIES & COMPONENTS
+// import Hidden from '@material-ui/core/Hidden';
+
+// STYLES
 import { withStyles } from '@material-ui/core/styles';
-
 import styles from '../../../src/assets/styles/components/pages/Category.js';
-import Hidden from '@material-ui/core/Hidden';
 
 class Category extends Component {
 
@@ -15,16 +20,19 @@ class Category extends Component {
         const { classes } = this.props;
 
         return (
+
             <div>
-                <Hidden only={['xs', 'sm']}>
-                    <NewsTickerBar />
-                </Hidden>
-                <Hidden only={['md', 'lg', 'xl']}>
-                    <div style={{ height: '160px' }}></div>
-                </Hidden>
-
+            {/* News Ticker Bar is hidden until it is linked to API */}
+{/*
+        <Hidden only={['xs', 'sm']}>
+          <NewsTickerBar />
+        </Hidden>
+        <Hidden only={['md', 'lg', 'xl']}>
+          <div className={classes.mainDiv}></div>
+        </Hidden>
+*/}
+                <div className={classes.mainPadding}></div>
                 <NewsFeedCategory />
-
             </div>
         )
     }

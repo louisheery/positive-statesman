@@ -1,33 +1,19 @@
 // REACT LIBRARIES
-import React from 'react';
+import React, { Component } from 'react';
 
-// REACT COMPONENTS
-import NewsFeedOld from '../articles/NewsFeedOld';
-import NewsFeed from '../articles/NewsFeed';
-import NewsTickerBar from '../headers/NewsTickerBar'
-import AddArticlePopup from '../popups/AddArticlePopup';
+// INTERNAL REACT COMPONENTS
+import NewsFeed from '../newsfeed/NewsFeed';
+// import NewsTickerBar from '../headers/NewsTickerBar'
 
-// STYLE
+// EXTERNAL REACT LIBRARIES & COMPONENTS
+// import Hidden from '@material-ui/core/Hidden';
+
+// STYLES
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/pages/Home.js';
-import NewsFeedTop from '../articles/NewsFeedTop';
-import Hidden from '@material-ui/core/Hidden';
 
-class Home extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.handleArticlePopupOpening = this.handleArticlePopupOpening.bind(this);
-    this.state = {
-      addArticlePopupIsOpen: false,
-      userIsLoggedIn: false,
-      loginPageDisplayed: false,
-    };
-  }
-
-  handleArticlePopupOpening() {
-    this.setState({ addArticlePopupIsOpen: !this.state.addArticlePopupIsOpen })
-  }
+class Home extends Component {
 
   render() {
 
@@ -35,16 +21,17 @@ class Home extends React.Component {
 
     return (
       <div>
+        {/* News Ticker Bar is being hidden until it is linked to API */}
+{/*
         <Hidden only={['xs', 'sm']}>
           <NewsTickerBar />
         </Hidden>
         <Hidden only={['md', 'lg', 'xl']}>
-          <div style={{ height: '160px' }}></div>
+          <div className={classes.mainDiv}></div>
         </Hidden>
-
+*/}
+        <div className={classes.mainPadding}></div>
         <NewsFeed />
-        {/*<NewsFeedOld addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} />*/}
-        <AddArticlePopup addArticlePopupIsOpen={this.state.addArticlePopupIsOpen} handleArticlePopupOpening={this.handleArticlePopupOpening} />
       </div>
     )
   }

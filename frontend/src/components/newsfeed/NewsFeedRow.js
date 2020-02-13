@@ -1,21 +1,28 @@
+// REACT LIBRARIES
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
+// OTHER LIBRARIES
+import { fetchArticles } from '../../apiIntegration';
+import moment from 'moment';
+
+// INTERNAL REACT COMPONENTS
+import ArticleVote from './ArticleVote';
+
+// EXTERNAL REACT LIBRARIES & COMPONENTS
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
-import { fetchArticles } from '../../apiIntegration';
-import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import moment from 'moment';
 import withWidth from '@material-ui/core/withWidth';
-import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
-import ArticleVote from './ArticleVote';
+// STYLES
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../../assets/styles/components/newsfeed/NewsFeedRow.js';
 
-import styles from '../../../src/assets/styles/components/articles/NewsFeedRow.js';
-
-class NewsFeedRowOld extends Component {
+class NewsFeedRow extends Component {
 
     constructor(props) {
         super(props)
@@ -37,7 +44,7 @@ class NewsFeedRowOld extends Component {
         
         */
 
-        var fetchedArticles = await fetchArticles({limit: 6, offset: 0})
+        var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
         this.setState({ rowArticles: fetchedArticles })
 
     }
@@ -46,7 +53,7 @@ class NewsFeedRowOld extends Component {
 
     render() {
 
-        const { classes, width } = this.props;
+        const { classes } = this.props;
 
         // this.state.rowArticles
         // this.props.Articles
@@ -80,7 +87,7 @@ class NewsFeedRowOld extends Component {
         return (
             <div className={classes.container}>
 
-                <NavLink to={`/${this.props.newsFeedRow}`} style={{ textDecoration: 'none', color: 'unset' }} >
+                <NavLink to={`/${this.props.newsFeedRow}`} className={classes.rowTitle}>
                     <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
                 </NavLink>
                 <div>
@@ -106,11 +113,10 @@ class NewsFeedRowOld extends Component {
                                 return (
 
 
-                                    <GridListTile key={article.image_url} cols={1} rows={1}>
-                                        <img style={{ colorOverlay: 'red', opacity: '0.3', height: '100%' }} src={article.image_url} alt={article.title} />
+                                    <GridListTile key={Math.random() + i} cols={1} rows={1}>
                                         <Link href={article.url}>
                                             <GridListTileBar
-                                                style={this.props.newsFeedRowColor}
+                                                style={{ backgroundColor: 'white' }}
 
                                                 title={<span>{article.title}</span>}
                                                 titlePosition='top'
@@ -123,7 +129,7 @@ class NewsFeedRowOld extends Component {
                                         </Link>
 
                                         <GridListTileBar
-                                            style={this.props.newsFeedRowColor}
+                                            style={{ backgroundColor: 'white' }}
                                             subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
                                             rows={3}
                                             classes={{
@@ -134,11 +140,11 @@ class NewsFeedRowOld extends Component {
 
 
                                         <GridListTileBar
-                                            style={this.props.newsFeedRowColor}
+                                            style={{ backgroundColor: 'white' }}
                                             className={classes.voteBar}
                                             titlePosition="bottom"
                                             title={
-                                                <div style={{ width: '100%' }}>
+                                                <div className={classes.otherArticleTileVoteDiv}>
                                                     <span style={{ float: 'left', display: 'inline-block' }}>
 
                                                         <ArticleVote />
@@ -168,4 +174,4 @@ class NewsFeedRowOld extends Component {
     }
 }
 
-export default withWidth()(withStyles(styles)(NewsFeedRowOld))
+export default withWidth()(withStyles(styles)(NewsFeedRow))
