@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import { userFeedback } from '../../apiIntegration.js'
 
-import styles from '../../assets/styles/components/articles/ArticleVote.js';
+import styles from '../../assets/styles/components/newsfeed/ArticleVote.js';
 
 class ArticleVote extends Component {
 
