@@ -39,9 +39,9 @@ class NewsFeedRow extends Component {
         
         */
 
-        var topArticle = await fetchArticles(1, 0, this.props.newsFeedRow, 0.8, 0.95)
+        var topArticle = await fetchArticles({limit: 1, offset: 0, category: this.props.newsFeedRow, sentiment_score_min: 0.8, sentiment_score_max: 0.95})
         this.setState({ topArticle: topArticle })
-        var topArticles = await fetchArticles(4, 1, this.props.newsFeedRow, 0.9)
+        var topArticles = await fetchArticles({limit: 4, offset: 1, category: this.props.newsFeedRow, sentiment_score_min: 0.9})
         this.setState({ topArticles: topArticles })
 
     }
