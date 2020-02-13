@@ -154,7 +154,7 @@ class NewsFeedHeader extends Component {
                                                         <div className={classes.articleTileVoteDiv}>
                                                             <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                                <ArticleVote />
+                                                                <ArticleVote articleId={article.id} />
 
                                                             </span>
                                                             <span style={{ float: 'right', display: 'inline-block' }}>
@@ -228,7 +228,7 @@ class NewsFeedHeader extends Component {
                                                     <div className={classes.otherTopArticleSecondaryVoteDiv}>
                                                         <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                            <ArticleVote />
+                                                            <ArticleVote articleId={article.id}/>
 
                                                         </span>
                                                         <span style={{ float: 'right', display: 'inline-block' }}>

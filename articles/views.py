@@ -120,4 +120,26 @@ def fetch_articles(request):
         print("success")
         article_fetch.generate_articles()
         return JsonResponse({"response":"success"}, safe=False)
-    
+
+# MaxC: This is not optimal and needs to be changed to a POST method. We
+# shouldn't be writing to the database on a GET request. A POST method does
+# however require csrf token authentication and is therfore put on hold for the 
+# moment  
+def user_feedback(request, article_pk, vote):
+    try:
+        article = Article.objects.get(pk=article_pk)
+    except Article.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        if vote == "positive" or vote == "neutral" or vote == "negative":
+            if vote == "positive":
+                article.score_user_numerator += 1
+            if vote == "negative":
+                article.score_user_numerator -= 1
+            if vote == "neutral":
+                article.score_user_denominator += 1
+            article.score_user_denominator += 1
+            article.save()
+            return HttpResponse(status=200)
+        return HttpResponse(status=404)

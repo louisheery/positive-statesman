@@ -5,6 +5,6 @@ yarn-error.log*
 node_modules/
 .vscode/
 .DS_Store
-db.squlite3
+db.sqlite3
 static/
 articles/migrations
