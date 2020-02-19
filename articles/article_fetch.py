@@ -113,7 +113,9 @@ def fetch_articles(api_instance):
             published_at_start='NOW-1DAYS',
             published_at_end='NOW',
             per_page=100,
-            #source_domain=['bbc.co.uk'],
+            categories_taxonomy='iab-qag',
+            categories_id=['IAB15-10', 'IAB11', 'IAB3', 'IAB17'],
+            #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
             language=['en'],
             #next_page_cursor=next_page_cursor
         )
