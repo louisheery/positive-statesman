@@ -19,6 +19,7 @@ import aylien_news_api
 from aylien_news_api.rest import ApiException
 from articles.models import Article, Publisher, Location, Category
 from articles.serializers import ArticleSerializer
+from django.http import HttpResponse, JsonResponse
 
 
 ############################# FUNCTION DEFINITION #############################
@@ -53,57 +54,7 @@ def generate_articles():
     # 2.    Get the full text for every article
     # 2.1       Analyse sentiment
     for story in stories:
-        title = story.title
-        publish_date = story.published_at
-        url = story.links.permalink
-        publisher = Publisher.objects.get_or_create(name=story.source.name)[0]
-        image_url = ''
-        for media in story.media:
-            if (media.type == 'image'):
-                image_url = media.url
-        full_text = story.body
-        s_score = sentiment_score(vader_analyser, full_text)
-
-    # 2.2       Create Article Model Instances
-
-        ## Database integration not working yet ##            
-        publisher, created = Publisher.objects.get_or_create(
-            name=story.source.name,
-        )
-        publisher.url = story.source.home_page_url
-        publisher.save()
-
-
-        article, created = Article.objects.get_or_create(
-            url=url,
-            defaults={
-            'title':title,
-            'image_url':image_url,
-            'publisher':publisher,
-            'publish_date':publish_date,
-            'sentiment_score':s_score,
-            'text_full':full_text})
-
-
-        for entity in story.entities.body:
-            location_type = False
-            if "City" in entity.types:
-                location_type = "city"
-            if "Region" in entity.types:
-                location_type = "region"
-            if "Country" in entity.types:
-                location_type = "country"
-            if location_type:
-                location, created = Location.objects.get_or_create(
-                    name=entity.text,
-                    location_type=location_type
-                )
-                article.locations.add(location)
-
-        for category in story.categories:
-            tax_id = category.taxonomy + category.id
-            category = Category.objects.filter(taxonomy_id=tax_id).first()
-            article.categories.add(category)
+        save_from_story()
         
 
 
@@ -124,16 +75,23 @@ def fetch_articles(api_instance):
         print("Exception when calling DefaultApi->list_stories: %s\n" % e)
 
 
-def get_article(api_instance, url):
+def save_article(url):
     try:
         api_response = api_instance.list_stories(
             published_at_end='NOW',
             links_permalink=[url],
         )
-        return api_response.stories[0]
+        if api_response.stories.count == 0:
+            return JsonResponse({"msg": "No article found for this url"}, status=404)
+        if api_response.stories.count > 1:
+            return JsonResponse({"msg": "More than one article found for this url"}, status=404)
+
+        story = api_response.stories[0]
+        save_from_story(story)
+        return JsonResponse({"msg": "Success"}, status=200)
 
     except ApiException as e:
-        print("Exception when calling DefaultApi->list_stories: %s\n" % e)
+        return JsonResponse({"msg": "Internal API error"}, status=500)
 
 
 def sentiment_score(analyser, text):
@@ -149,6 +107,61 @@ def sentiment_score(analyser, text):
 
     scores = analyser.polarity_scores(text)
     return scores['compound']
+
+def save_from_story(story):
+    title = story.title
+    publish_date = story.published_at
+    url = story.links.permalink
+    publisher = Publisher.objects.get_or_create(name=story.source.name)[0]
+    image_url = ''
+    for media in story.media:
+        if (media.type == 'image'):
+            image_url = media.url
+    full_text = story.body
+    s_score = sentiment_score(vader_analyser, full_text)
+
+# 2.2       Create Article Model Instances
+
+    ## Database integration not working yet ##            
+    publisher, created = Publisher.objects.get_or_create(
+        name=story.source.name,
+    )
+    publisher.url = story.source.home_page_url
+    publisher.save()
+
+
+    article, created = Article.objects.get_or_create(
+        url=url,
+        defaults={
+        'title':title,
+        'image_url':image_url,
+        'publisher':publisher,
+        'publish_date':publish_date,
+        'sentiment_score':s_score,
+        'text_full':full_text})
+
+
+    for entity in story.entities.body:
+        location_type = False
+        if "City" in entity.types:
+            location_type = "city"
+        if "Region" in entity.types:
+            location_type = "region"
+        if "Country" in entity.types:
+            location_type = "country"
+        if location_type:
+            location, created = Location.objects.get_or_create(
+                name=entity.text,
+                location_type=location_type
+            )
+            article.locations.add(location)
+
+    for category in story.categories:
+        tax_id = category.taxonomy + category.id
+        category = Category.objects.filter(taxonomy_id=tax_id).first()
+        article.categories.add(category)
+
+    return
 
 ############################## FUNCTION TESTING ###############################
 

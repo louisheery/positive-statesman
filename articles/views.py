@@ -8,6 +8,8 @@ from rest_framework.parsers import JSONParser
 from articles.models import Article, Category, Publisher
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
+from rest_framework import status
+
 
 
 def valid_filter(param):
@@ -142,3 +144,8 @@ def user_feedback(request, article_pk, vote):
             article.save()
             return HttpResponse(status=200)
         return HttpResponse(status=404)
+
+
+def submit_article(request):
+    url = request.POST.get("title", "")
+    return article_fetch.save_article(url)
