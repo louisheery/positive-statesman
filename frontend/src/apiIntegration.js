@@ -30,4 +30,12 @@ async function userFeedback(pk, vote) {
   })*/
 }
 
-export { fetchArticles, userFeedback }
+// MaxC: We definitely need a POST request here because we cannot attach a
+// different URL to the URL which is used for the API fetch request. Who ever
+// does this part should also change the userFeedback function above to a POST 
+// request
+async function addStory(url) {
+  console.log("User submitted url: " + String(url))
+}
+
+export { fetchArticles, userFeedback, addStory }

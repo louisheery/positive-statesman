@@ -1,3 +1,9 @@
+// This is Louis overcomplicated version of the header bar. I we can use it as
+// inspiration for our new simple header barr and add the features once we
+// actually need them.
+
+
+
 // REACT LIBRARIES
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -21,7 +27,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
-import styles from '../../../src/assets/styles/components/headers/HeaderBar.js';
+import styles from '../../../assets/styles/components/headers/HeaderBar.js';
 
 
 function a11yProps(index) {

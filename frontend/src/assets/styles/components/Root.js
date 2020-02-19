@@ -1,7 +1,7 @@
 const styles = {
 
     appBarSpacer: {
-        height: 60
+        height: 112
     }
 
 }

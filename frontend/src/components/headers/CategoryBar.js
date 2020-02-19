@@ -24,14 +24,16 @@ class CategoryBar extends Component {
         this.setState({tabValue: newValue})
     }
 
-
-    
-
     render() {
         const { classes } = this.props
         return (
             <div>
-                <Tabs className={classes.tabs} onChange={this.handleChangeTabs} variant="fullWidth" value={this.state.tabValue}>
+                <Tabs 
+                    className={classes.tabs} 
+                    onChange={this.handleChangeTabs}
+                    value={this.state.tabValue}
+                    variant="fullWidth"
+                >
                     <Tab label="Top Stories" component={Link} value={"top"} to="/" />
                     <Tab label="Business" component={Link} value={"business"} to="/business" />
                     <Tab label="Politics" component={Link} value={"politics"} to="/politics" />
