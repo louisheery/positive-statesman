@@ -8,6 +8,8 @@ from rest_framework.parsers import JSONParser
 from articles.models import Article, Category, Publisher
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
+from rest_framework import status
+
 
 
 def valid_filter(param):
@@ -39,7 +41,7 @@ def article_filter(request):
 
         # Filter by Category, Publisher, Sentiment Score Range
         if valid_filter(category):
-            articles = articles.filter(categories__name=category)
+            articles = articles.filter(categories__taxonomy_id=category)
 
         if valid_filter(publisher):
             articles = articles.filter(publisher__name=publisher)
@@ -49,7 +51,6 @@ def article_filter(request):
 
         if valid_filter(sentiment_score_max):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
-
 
         # Article Limit and Offset
         if valid_filter(articleOffset) and valid_filter(articleLimit):
@@ -134,12 +135,17 @@ def user_feedback(request, article_pk, vote):
     if request.method == 'GET':
         if vote == "positive" or vote == "neutral" or vote == "negative":
             if vote == "positive":
-                article.score_user_numerator += 1
-            if vote == "negative":
-                article.score_user_numerator -= 1
+                article.user_score_positive += 1
             if vote == "neutral":
-                article.score_user_denominator += 1
-            article.score_user_denominator += 1
+                article.user_score_neutral += 1
+            if vote == "negative":
+                article.user_score_negative += 1
+            article.user_score_count += 1
             article.save()
             return HttpResponse(status=200)
         return HttpResponse(status=404)
+
+
+def submit_article(request):
+    url = request.POST.get("title", "")
+    return article_fetch.save_article(url)
