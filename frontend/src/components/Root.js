@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // REACT COMPONENTS
-//import HeaderBar from './headers/HeaderBar'
-import HeaderBarMax from './headers/HeaderBarMax'
+//import HeaderBar from './headers/backup/HeaderBar'
+import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Login from './pages/Login'
@@ -35,7 +35,7 @@ class Root extends Component {
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
-                    <HeaderBarMax location={this.props.location} />
+                    <HeaderBar location={this.props.location} />
                     <div className={classes.appBarSpacer}/>
                     <FeedbackButton />
                     <Switch>

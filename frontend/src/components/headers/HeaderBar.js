@@ -17,13 +17,13 @@ import CategoryBar from './CategoryBar'
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
-import styles from '../../../src/assets/styles/components/headers/HeaderBarMax.js';
+import styles from '../../assets/styles/components/headers/HeaderBar.js';
 
 // API
 import { addStory } from '../../apiIntegration.js'
 
 
-class HeaderBarMax extends Component {
+class HeaderBar extends Component {
 
     constructor(props) {
         super(props);
@@ -81,6 +81,6 @@ class HeaderBarMax extends Component {
     }
 }
 
-export default withStyles(styles)(HeaderBarMax)
+export default withStyles(styles)(HeaderBar)
 
 
