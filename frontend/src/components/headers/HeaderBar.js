@@ -1,6 +1,7 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 // INTERNAL REACT COMPONENTS
 
@@ -18,6 +19,9 @@ import Hidden from '@material-ui/core/Hidden';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AddIcon from '@material-ui/icons/Add';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
@@ -40,6 +44,10 @@ class HeaderBar extends Component {
             open: false,
             searchBarMobileOpen: false,
         };
+    }
+
+    handleCallToRouter = (value) => {
+        this.props.history.push(value);
     }
 
 
@@ -186,13 +194,26 @@ class HeaderBar extends Component {
                             <div className={classes.flexDiv}></div>
                             {/* { desktopSearchBar } */}
 
+                            <Hidden only={['xs', 'sm']}>
                             <div className={classes.addButton} >
-                                <Hidden only={['xs', 'sm']}>
-                                    <Button className={classes.addStoryButton} display={{ xs: 'none', md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
+                               
+                                    <Button className={classes.addStoryButton} display={{ md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
                                         Add Story
                                     </Button>
-                                </Hidden>
+                                
                             </div>
+                            </Hidden>
+
+                            <Hidden only={['md', 'lg', 'xl']}>
+                            <div className={classes.addButtonMobile} >
+                                    <Button className={classes.addStoryButtonMobile} display={{ xs: 'inline-block', sm: 'inline-block' }} variant="contained" color="secondary" disableElevation onClick={this.props.handleArticlePopupOpening}>
+                                        <center>
+                                        <AddCircleOutlineIcon style={{display: 'block'}} />
+                                        </center>
+                                    </Button>
+                                
+                            </div>
+                            </Hidden>
                             {/* { userAccountLoginSection }  */}
                         </Toolbar>
 
@@ -200,7 +221,7 @@ class HeaderBar extends Component {
 
                 {/* Second Row of Header Bar i.e. Navigation Panels */}
                 <Tabs className={classes.tabBar}
-                    value={"/"} // FIX THIS -- this.props.location.pathname
+                    value={this.props.history.location.pathname} // FIX THIS -- this.props.location.pathname
                     onChange={this.handleChange}
                     indicatorColor="secondary"
                     variant="scrollable"
@@ -215,18 +236,18 @@ class HeaderBar extends Component {
 
                     <Tab className={classes.headerTab} component={Link} to={'/sport'} value="/sport" label="Sport" {...a11yProps(3)} />
 
-                    <Tab className={classes.headerTab} component={Link} to={'/science'} value="/science" label="Science" {...a11yProps(4)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/tech'} value="/tech" label="Tech" {...a11yProps(4)} />
 
-                    <Tab className={classes.headerTab} component={Link} to={'/health'} value="/health" label="Health" {...a11yProps(5)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/science'} value="/science" label="Science" {...a11yProps(5)} />
 
-                    <Tab className={classes.headerTab} component={Link} to={'/gaming'} value="/gaming" label="Gaming" {...a11yProps(6)} />
+                    <Tab className={classes.headerTab} component={Link} to={'/arts'} value="/arts" label="Arts" {...a11yProps(6)} />
 
-                    <Tab className={classes.headerTab} component={Link} to={'/culture'} value="/culture" label="Culture" {...a11yProps(7)} />
-
+                    <Tab className={classes.headerTab} component={Link} to={'/travel'} value="/travel" label="Travel" {...a11yProps(7)} />
+                    
                 </Tabs>
             </AppBar>
         )
     }
 }
 
-export default withStyles(styles)(HeaderBar)
+export default withRouter(withStyles(styles)(HeaderBar))

@@ -32,7 +32,8 @@ class Category extends Component {
         </Hidden>
 */}
                 <div className={classes.mainPadding}></div>
-                <NewsFeedCategory />
+                <NewsFeedCategory categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+                <p></p>
             </div>
         )
     }

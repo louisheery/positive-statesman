@@ -26,6 +26,13 @@ const styles = {
     width: '120px',
   },
 
+  addStoryButtonMobile: {
+    width: '50px',
+    marginLeft: '10px',
+    display: 'inline-block',
+    float: 'right'
+  },
+
   searchBar: {
     position: 'relative',
     borderRadius: '5px',
@@ -87,6 +94,14 @@ const styles = {
 
   addButton: {
     marginRight: '65px',
+    
+  },
+
+  addButtonMobile: {
+    marginRight: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 
   tabBar: {
