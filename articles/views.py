@@ -39,7 +39,7 @@ def article_filter(request):
 
         # Filter by Category, Publisher, Sentiment Score Range
         if valid_filter(category):
-            articles = articles.filter(categories__name=category)
+            articles = articles.filter(categories__taxonomy_id=category)
 
         if valid_filter(publisher):
             articles = articles.filter(publisher__name=publisher)
@@ -49,7 +49,6 @@ def article_filter(request):
 
         if valid_filter(sentiment_score_max):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
-
 
         # Article Limit and Offset
         if valid_filter(articleOffset) and valid_filter(articleLimit):
