@@ -133,12 +133,12 @@ def user_feedback(request, article_pk, vote):
     if request.method == 'GET':
         if vote == "positive" or vote == "neutral" or vote == "negative":
             if vote == "positive":
-                article.score_user_numerator += 1
-            if vote == "negative":
-                article.score_user_numerator -= 1
+                article.user_score_positive += 1
             if vote == "neutral":
-                article.score_user_denominator += 1
-            article.score_user_denominator += 1
+                article.user_score_neutral += 1
+            if vote == "negative":
+                article.user_score_negative += 1
+            article.user_score_count += 1
             article.save()
             return HttpResponse(status=200)
         return HttpResponse(status=404)
