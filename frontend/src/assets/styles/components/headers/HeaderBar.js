@@ -3,23 +3,27 @@ import { fade } from '@material-ui/core/styles';
 const styles = {
 
   addStoryPaper: {
+    paddingLeft: '10px',
     marginLeft: 'auto',
+    marginRight: '20px',
   },
   logo: {
-    marginRight: 'auto'
-  },
-
-  // Louis styles (currently not in use)
-
-  toolbar: {
-    marginLeft: '80px',
-    marginRight: '65px',
-  },
-
-  psButton: {
+    marginRight: 'auto',
     marginLeft: '20px',
     textTransform: 'none',
   },
+
+  toolbar: {
+    paddingLeft: '5%',
+    paddingRight: '5%',
+  },
+
+  addStoryButton: {
+    marginLeft: 'auto',
+    marginRight: '20px',
+  },
+
+  // Louis styles (currently not in use)
 
   psButtonSmall: {
     color: 'white',
@@ -29,10 +33,6 @@ const styles = {
   psButtonSmallText: {
     fontFamily: 'roboto',
     fontSize: '3vw',
-  },
-
-  addStoryButton: {
-    width: '120px',
   },
 
   searchBar: {
@@ -84,10 +84,6 @@ const styles = {
     width: '100%',
   },
 
-  headerTab: {
-    flexGrow: '1',
-  },
-
   flexDiv: {
     flexGrow: '1',
     alignItems: 'center',
@@ -98,11 +94,7 @@ const styles = {
     marginRight: '65px',
   },
 
-  tabBar: {
-    backgroundColor: '#007ea7',
-    paddingLeft: '5%',
-    paddingRight: '5%',
-  },
+  
 
 }
 

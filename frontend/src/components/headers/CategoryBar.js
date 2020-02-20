@@ -32,13 +32,14 @@ class CategoryBar extends Component {
                     className={classes.tabs} 
                     onChange={this.handleChangeTabs}
                     value={this.state.tabValue}
-                    variant="fullWidth"
+                    variant="scrollable"
                 >
-                    <Tab component={Link} to="/" value={"top"} label="Top Stories"  />
-                    <Tab component={Link} to={'/business'} value="/business" label="Business" />
-                    <Tab component={Link} to={'/politics'} value="/politics" label="Politics" />
-                    <Tab component={Link} to={'/sport'} value="/sport" label="Sport" />
-                    <Tab component={Link} to={'/arts'} value="/arts" label="Arts" />
+                    <Tab className={classes.tab} component={Link} to="/" value={"top"} label="Home"  />
+                    <Tab className={classes.tab} component={Link} to={'/business'} value="/business" label="Business" />
+                    <Tab className={classes.tab} component={Link} to={'/politics'} value="/politics" label="Politics" />
+                    <Tab className={classes.tab} component={Link} to={'/sport'} value="/sport" label="Sport" />
+                    <Tab className={classes.tab} component={Link} to={'/arts'} value="/arts" label="Arts" />
+                    <Tab className={classes.tab} component={Link} to={'/science'} value="/science" label="Science" />
                 </Tabs>
             </div>
         )

@@ -47,7 +47,7 @@ class Root extends Component {
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
                     <div className={classes.appBarSpacer}/>
-                    <FeedbackButton />
+                    
                     <Switch>
                         {
                             Object.keys(categoryDictionary).map(function (key, i) {
@@ -68,10 +68,24 @@ class Root extends Component {
                                     />
                                 )
                             })}
-                        <Route exact path="/" component={Home} />
+                        <Route
+                            exact path="/"
+                            render={props => (
+                                <div>
+                                    <Home
+                                        key={Math.random()}
+                                        categoryName={"Top Stories"}
+                                        categoryId={""}
+                                        {...props}
+                                    />
+                                </div>
+                            )}
+                        />
+
                         <Route exact path="/login" component={Login} />
                         <Redirect to="/" />
                     </Switch>
+                    <FeedbackButton />
                 </MuiThemeProvider>
             </Router>
         )
