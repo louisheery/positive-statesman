@@ -28,7 +28,8 @@ class HeaderBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: ""
+            url: "",
+            addArticle: false,
         }
     }
 
@@ -38,6 +39,11 @@ class HeaderBar extends Component {
 
     handleClickSubmit = () => {
         addStory(this.state.url)
+        this.handleClickAdd()
+    }
+
+    handleClickAdd = (event) => {
+        this.setState({ addArticle: !this.state.addArticle })
     }
 
 
@@ -48,7 +54,7 @@ class HeaderBar extends Component {
                 <AppBar position="fixed">
 
                     {/* MAIN HEADER BAR */}
-                    <Toolbar>
+                    <Toolbar className={classes.toolbar}>
 
                         {/* LOGO */}
                         <Button className={classes.logo} component={Link} to={'/'} disableElevation
@@ -61,15 +67,35 @@ class HeaderBar extends Component {
                                     The Positive Statesman
                                 </Typography>
                             </Hidden>
+
+                            <Hidden smUp>
+                                <Typography variant="body2">
+                                    The Positive Statesman
+                                </Typography>
+                            </Hidden>
                         </Button>
 
                         {/* ADD STORY SECTION */}
-                        <Paper className={classes.addStoryPaper}>
-                            <InputBase placeholder="URL to Article" onChange={this.handleChangeInput} />
-                            <Button onClick={this.handleClickSubmit}>
-                                Add Story
+
+                        
+
+                        {(this.state.addArticle) ? (
+
+                            <Paper className={classes.addStoryPaper}>
+                                <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} />
+                                <Button onClick={this.handleClickSubmit}>
+                                    Submit
                             </Button>
-                        </Paper>
+
+                            </Paper>
+                        )
+                        
+                        : (
+                            <Button className = {classes.addStoryButton} display={{ md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.handleClickAdd}>
+                            Add Story
+                            </Button>
+                        )}
+                        
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
