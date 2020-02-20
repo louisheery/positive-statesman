@@ -34,11 +34,11 @@ class CategoryBar extends Component {
                     value={this.state.tabValue}
                     variant="fullWidth"
                 >
-                    <Tab label="Top Stories" component={Link} value={"top"} to="/" />
-                    <Tab label="Business" component={Link} value={"business"} to="/business" />
-                    <Tab label="Politics" component={Link} value={"politics"} to="/politics" />
-                    <Tab label="Sports" component={Link} value={"sports"} to="/sports" />
-                    <Tab label="Culture" component={Link} value={"culture"} to="/culture" />
+                    <Tab component={Link} to="/" value={"top"} label="Top Stories"  />
+                    <Tab component={Link} to={'/business'} value="/business" label="Business" />
+                    <Tab component={Link} to={'/politics'} value="/politics" label="Politics" />
+                    <Tab component={Link} to={'/sport'} value="/sport" label="Sport" />
+                    <Tab component={Link} to={'/arts'} value="/arts" label="Arts" />
                 </Tabs>
             </div>
         )

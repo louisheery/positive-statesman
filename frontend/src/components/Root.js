@@ -28,6 +28,16 @@ const theme = createMuiTheme({
 },
 )
 
+const categoryDictionary = {
+    ART: ['/arts', 'Art, Culture & Entertainment', 'iptc-qagIAB1'],
+    BUSINESS: ['/business', 'Business', 'iptc-qagIAB3'],
+    POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
+    SCIENCE: ['/science', 'Science', 'iptc-qagIAB15'],
+    SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
+    TECH: ['/tech', 'Technology', 'iptc-qagIAB19'],
+    TRAVEL: ['/travel', 'Travel', 'iptc-qagIAB20'],
+}
+
 class Root extends Component {
 
     render() {
@@ -39,13 +49,25 @@ class Root extends Component {
                     <div className={classes.appBarSpacer}/>
                     <FeedbackButton />
                     <Switch>
-                        <Route path="/business" component={Category} />
-                        <Route path="/politics" component={Category} />
-                        <Route path="/sport" component={Category} />
-                        <Route path="/science" component={Category} />
-                        <Route path="/health" component={Category} />
-                        <Route path="/gaming" component={Category} />
-                        <Route path="/culture" component={Category} />
+                        {
+                            Object.keys(categoryDictionary).map(function (key, i) {
+                                return (
+                                    <Route
+                                        key={i}
+                                        path={categoryDictionary[key][0]}
+                                        render={props => (
+                                            <div>
+                                                <Category
+                                                    key={Math.random() + i}
+                                                    categoryName={categoryDictionary[key][1]}
+                                                    categoryId={categoryDictionary[key][2]}
+                                                    {...props}
+                                                />
+                                            </div>
+                                        )}
+                                    />
+                                )
+                            })}
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Redirect to="/" />
