@@ -37,9 +37,9 @@ class NewsFeedHeader extends Component {
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
-        var topArticle = await fetchArticles({ limit: 1, offset: 0, category: this.props.newsFeedRow, sentiment_score_min: 0.8, sentiment_score_max: 0.95 })
+        var topArticle = await fetchArticles({ limit: 1, offset: 0, category: this.props.categoryId, sentiment_score_min: 0.85 })
         this.setState({ topArticle: topArticle })
-        var topArticles = await fetchArticles({ limit: 4, offset: 1, category: this.props.newsFeedRow, sentiment_score_min: 0.9 })
+        var topArticles = await fetchArticles({ limit: 4, offset: 1, category: this.props.categoryId, sentiment_score_min: 0.75 })
         this.setState({ topArticles: topArticles })
 
     }
@@ -93,7 +93,7 @@ class NewsFeedHeader extends Component {
 
         return (
             <div className={classes.container}>
-                <Typography variant="h4">Top Stories</Typography>
+                <Typography variant="h4">{this.props.categoryName}</Typography>
 
                 <div className={classes.gridRoot}>
                     <GridList className={classes.subContainer} cellHeight={160} cols={numberTopColumns}>
