@@ -43,8 +43,6 @@ def generate_articles():
     client = aylien_news_api.ApiClient(configuration)
     api_instance = aylien_news_api.DefaultApi(client)
     
-    vader_analyser = SentimentIntensityAnalyzer()
-    
     # 1.    Fetch articles
 
     api_response = fetch_articles(api_instance)
@@ -54,7 +52,7 @@ def generate_articles():
     # 2.    Get the full text for every article
     # 2.1       Analyse sentiment
     for story in stories:
-        save_from_story()
+        save_from_story(story)
         
 
 
@@ -84,14 +82,17 @@ def save_article(url):
     client = aylien_news_api.ApiClient(configuration)
     api_instance = aylien_news_api.DefaultApi(client)
     try:
+        print("URRRLLLL:")
+        print(url)
         api_response = api_instance.list_stories(
             published_at_end='NOW',
             links_permalink=[url],
         )
-        if api_response.stories.count == 0:
+        if len(api_response.stories) == 0:
             return JsonResponse({"msg": "No article found for this url"}, status=404)
-        if api_response.stories.count > 1:
-            return JsonResponse({"msg": "More than one article found for this url"}, status=404)
+        if len(api_response.stories) > 1:
+            # print(api_response.stories)
+            return JsonResponse({"msg": "More than one article found for this url. Articles found: " + str(len(api_response.stories))}, status=404)
 
         story = api_response.stories[0]
         save_from_story(story)
@@ -125,6 +126,7 @@ def save_from_story(story):
         if (media.type == 'image'):
             image_url = media.url
     full_text = story.body
+    vader_analyser = SentimentIntensityAnalyzer()
     s_score = sentiment_score(vader_analyser, full_text)
 
 # 2.2       Create Article Model Instances
