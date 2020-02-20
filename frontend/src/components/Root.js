@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // REACT COMPONENTS
+//import HeaderBar from './headers/backup/HeaderBar'
 import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
@@ -10,6 +11,8 @@ import Login from './pages/Login'
 import FeedbackButton from './popups/FeedbackButton';
 
 // STYLES
+import { withStyles } from '@material-ui/core/styles';
+import styles from '../../src/assets/styles/components/Root.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // MATERIAL UI THEME
@@ -28,10 +31,12 @@ const theme = createMuiTheme({
 class Root extends Component {
 
     render() {
+        const { classes } = this.props
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
+                    <div className={classes.appBarSpacer}/>
                     <FeedbackButton />
                     <Switch>
                         <Route path="/business" component={Category} />
@@ -51,4 +56,4 @@ class Root extends Component {
     }
 }
 
-export default Root
+export default withStyles(styles)(Root)

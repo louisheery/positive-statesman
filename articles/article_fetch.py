@@ -76,6 +76,13 @@ def fetch_articles(api_instance):
 
 
 def save_article(url):
+    apikey = "087e404043fb6f7df4c4ed55e72f3f7f"
+    appid = "dc8dc66d"
+    configuration = aylien_news_api.Configuration()
+    configuration.api_key['X-AYLIEN-NewsAPI-Application-ID'] = appid
+    configuration.api_key['X-AYLIEN-NewsAPI-Application-Key'] = apikey
+    client = aylien_news_api.ApiClient(configuration)
+    api_instance = aylien_news_api.DefaultApi(client)
     try:
         api_response = api_instance.list_stories(
             published_at_end='NOW',

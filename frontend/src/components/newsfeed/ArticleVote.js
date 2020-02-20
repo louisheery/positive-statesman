@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
+
+// API
 import { userFeedback } from '../../apiIntegration.js'
 
 import styles from '../../assets/styles/components/newsfeed/ArticleVote.js';

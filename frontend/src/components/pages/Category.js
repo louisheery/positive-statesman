@@ -14,28 +14,24 @@ import styles from '../../../src/assets/styles/components/pages/Category.js';
 
 class Category extends Component {
 
-
-    render() {
-
-        const { classes } = this.props;
-
-        return (
-
-            <div>
-            {/* News Ticker Bar is hidden until it is linked to API */}
-{/*
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        {/* News Ticker Bar is hidden until it is linked to API */}
+        {/*
         <Hidden only={['xs', 'sm']}>
           <NewsTickerBar />
         </Hidden>
         <Hidden only={['md', 'lg', 'xl']}>
           <div className={classes.mainDiv}></div>
         </Hidden>
-*/}
-                <div className={classes.mainPadding}></div>
-                <NewsFeedCategory />
-            </div>
-        )
-    }
+        */}
+        <div className={classes.mainPadding}></div>
+        <NewsFeedCategory />
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(Category)

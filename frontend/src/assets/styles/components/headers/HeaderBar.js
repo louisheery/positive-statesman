@@ -2,6 +2,15 @@ import { fade } from '@material-ui/core/styles';
 
 const styles = {
 
+  addStoryPaper: {
+    marginLeft: 'auto',
+  },
+  logo: {
+    marginRight: 'auto'
+  },
+
+  // Louis styles (currently not in use)
+
   toolbar: {
     marginLeft: '80px',
     marginRight: '65px',
