@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // INTERNAL REACT COMPONENTS
-import NewsFeedCategory from '../newsfeed/NewsFeedCategory';
+import NewsFeed from '../newsfeed/NewsFeed';
 // import NewsTickerBar from '../headers/NewsTickerBar'
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
@@ -32,7 +32,7 @@ class Category extends Component {
         </Hidden>
 */}
                 <div className={classes.mainPadding}></div>
-                <NewsFeedCategory categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+            <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
                 <p></p>
             </div>
         )

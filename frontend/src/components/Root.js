@@ -64,7 +64,20 @@ class Root extends Component {
                                 )}
                             />
                         )})}
-                        <Route exact path="/" component={Home} />
+                        <Route
+                            exact path="/"
+                            render={props => (
+                                <div>
+                                    <Home
+                                        key={Math.random()}
+                                        categoryName={'Top Stories'}
+                                        categoryId={''}
+                                        {...props}
+                                    />
+                                </div>
+                            )}
+                            
+                        />
                         <Route exact path="/login" component={Login} />
                         <Redirect to="/" />
                     </Switch>

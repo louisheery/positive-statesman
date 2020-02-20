@@ -31,7 +31,7 @@ class Home extends Component {
         </Hidden>
 */}
         <div className={classes.mainPadding}></div>
-        <NewsFeed />
+        <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
       </div>
     )
   }
