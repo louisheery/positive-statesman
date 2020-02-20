@@ -28,7 +28,7 @@ class NewsFeedRow extends Component {
         super(props)
 
         this.state = {
-            rowArticles: [],  // articles to be displayed in row
+            articles: [],  // articles to be displayed in row
 
         }
     }
@@ -40,12 +40,12 @@ class NewsFeedRow extends Component {
         /*
                 fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
                     .then(response => response.json())
-                    .then(rowArticles => this.setState({ rowArticles }));
+                    .then(articles => this.setState({ articles }));
         
         */
 
         var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
-        this.setState({ rowArticles: fetchedArticles })
+        this.setState({ articles: fetchedArticles })
 
     }
 
@@ -55,14 +55,14 @@ class NewsFeedRow extends Component {
 
         const { classes } = this.props;
 
-        // this.state.rowArticles
+        // this.state.articles
         // this.props.Articles
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
         // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
         var sorter = require('sort-json-array');
-        var sortedArticles = sorter(this.state.rowArticles, 'sentiment_score').reverse();
+        var sortedArticles = sorter(this.state.articles, 'sentiment_score').reverse();
 
         var numberRowColumns;
 
