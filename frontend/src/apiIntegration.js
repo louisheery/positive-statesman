@@ -1,5 +1,5 @@
 const allowedParams = ['category', 'publisher', 'limit', 'offset', 'sentiment_score_min', 'sentiment_score_max'];
-/*
+
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -14,7 +14,6 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-*/
 
 async function fetchArticles(params = {}) {
   let query = '/api/articles/';
@@ -52,7 +51,6 @@ async function userFeedback(pk, vote) {
 // request
 async function addStory(url) {
   console.log("User submitted url: " + String(url))
-  /*
   var csrftoken = getCookie('csrftoken');
 
   fetch(`/api/submit-article/`, {
@@ -69,8 +67,6 @@ async function addStory(url) {
         console.log(data);
     });
 });
-*/
-
 }
 
 export { fetchArticles, userFeedback, addStory }
