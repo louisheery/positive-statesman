@@ -16,7 +16,6 @@ import styles from '../../../src/assets/styles/components/pages/Home.js'
 class Home extends Component {
 
   render() {
-    const { classes } = this.props
     return (
       <div>
         {/* News Ticker Bar is being hidden until it is linked to API */}
@@ -28,7 +27,7 @@ class Home extends Component {
           <div className={classes.mainDiv}></div>
         </Hidden>
         */}
-        <NewsFeed />
+        <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
       </div>
     )
   }
