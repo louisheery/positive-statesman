@@ -147,5 +147,5 @@ def user_feedback(request, article_pk, vote):
 
 
 def submit_article(request):
-    url = request.POST.get("title", "")
+    url = request.POST.get("url", "")
     return article_fetch.save_article(url)
