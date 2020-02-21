@@ -24,6 +24,8 @@ import styles from '../../assets/styles/components/newsfeed/NewsFeedRow.js';
 
 class NewsFeedRow extends Component {
 
+    _isMounted = false;
+
     constructor(props) {
         super(props)
 
@@ -34,6 +36,9 @@ class NewsFeedRow extends Component {
     }
 
     async componentDidMount() {
+
+        this._isMounted = true;
+
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
@@ -45,8 +50,14 @@ class NewsFeedRow extends Component {
         */
 
         var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
-        this.setState({ articles: fetchedArticles })
+        if (this._isMounted) {
+            this.setState({ articles: fetchedArticles })
+        }
 
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
 
