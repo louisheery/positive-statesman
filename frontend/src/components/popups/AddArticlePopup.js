@@ -162,7 +162,7 @@ class AddArticlePopup extends Component {
                     <div className={classes.resultDialog}>
                         {
                             fetchedArticle.Articles.map((article, i) => {
-                                return ({/*<NewsItem key={i} Article={article} />*/});
+                                return ({/*<NewsItem key={i} Article={article} />*/ });
                             })
                         }
 

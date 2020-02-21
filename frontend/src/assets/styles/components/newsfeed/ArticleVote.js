@@ -6,10 +6,14 @@ const styles = {
             backgroundColor: '#007ea7',
             borderRadius: '50%'
         },
-        margin: '1px',
+        "&:active": {
+            backgroundColor: '#e3f3f4',
+            borderRadius: '50%'
+        },
+        
+        margin: '2px',
         borderRadius: '50%',
-        paddingLeft: '2pt',
-        paddingRight: '2pt',
+        padding: '5px',
 
     }
 
