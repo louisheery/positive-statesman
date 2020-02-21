@@ -37,11 +37,11 @@ class NewsFeed extends Component {
 
         if (this.props.categoryId === '') {
             this.childState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
+                newsFeedRow: [this.state.newsFeedDictionary.QUERY_BUSINESSARTICLES, this.state.newsFeedDictionary.QUERY_POLITICSARTICLES, this.state.newsFeedDictionary.QUERY_SPORTARTICLES, this.state.newsFeedDictionary.QUERY_TECHARTICLES, this.state.newsFeedDictionary.QUERY_SCIENCEARTICLES, this.state.newsFeedDictionary.QUERY_ARTARTICLES, this.state.newsFeedDictionary.QUERY_TRAVELARTICLES,]
             }
         } else {
             this.childState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_BUSINESSARTICLES, this.state.newsFeedDictionary.QUERY_POLITICSARTICLES, this.state.newsFeedDictionary.QUERY_SPORTARTICLES, this.state.newsFeedDictionary.QUERY_TECHARTICLES, this.state.newsFeedDictionary.QUERY_SCIENCEARTICLES, this.state.newsFeedDictionary.QUERY_ARTARTICLES, this.state.newsFeedDictionary.QUERY_TRAVELARTICLES,]
+                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
             }
 
         }
