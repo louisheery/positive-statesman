@@ -9,7 +9,7 @@ from articles.models import Article, Category, Publisher
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
 from rest_framework import status
-
+import json
 
 
 def valid_filter(param):
@@ -147,5 +147,8 @@ def user_feedback(request, article_pk, vote):
 
 
 def submit_article(request):
-    url = request.POST.get("url", "")
+    _json = json.loads(request.body)
+    url = _json['url']
+    print(url)
+    
     return article_fetch.save_article(url)
