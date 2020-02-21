@@ -4,9 +4,9 @@ from django import utils
 
 class Article(models.Model):
     creation_date = models.DateTimeField(default=utils.timezone.now)
-    url = models.URLField(max_length=200)
-    image_url = models.URLField(max_length=200, null=True)
-    title = models.CharField(max_length=200)
+    url = models.URLField(max_length=300)
+    image_url = models.URLField(max_length=300, null=True)
+    title = models.CharField(max_length=300)
     publish_date = models.DateTimeField(default=utils.timezone.now)
     publisher = models.ForeignKey(
         'Publisher', on_delete=models.PROTECT, null=True)
