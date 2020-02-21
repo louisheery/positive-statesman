@@ -25,7 +25,7 @@ class NewsFeed extends Component {
                 QUERY_UK: ['', 'Trending in UK', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
                 QUERY_WORLD: ['', 'Trending Worldwide', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
 
-                QUERY_ARTARTICLES: ['art', 'Art, Culture & Entertainment', { category: 'iptc-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iptc-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
                 QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iptc-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
                 QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iptc-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
                 QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iptc-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
