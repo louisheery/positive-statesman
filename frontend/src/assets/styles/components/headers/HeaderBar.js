@@ -3,9 +3,12 @@ import { fade } from '@material-ui/core/styles';
 const styles = {
 
   addStoryPaper: {
-    paddingLeft: '10px',
+    paddingLeft: '15px',
     marginLeft: 'auto',
-    marginRight: '20px',
+    marginRight: '5%',
+    height: '30px',
+    paddingTop: '3px',
+    paddingBottom: '3px',
   },
   logo: {
     marginRight: 'auto',
@@ -20,7 +23,8 @@ const styles = {
 
   addStoryButton: {
     marginLeft: 'auto',
-    marginRight: '20px',
+    marginRight: '5%',
+    width: '120px'
   },
 
   // Louis styles (currently not in use)

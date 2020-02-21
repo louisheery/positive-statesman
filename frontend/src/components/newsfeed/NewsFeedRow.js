@@ -147,7 +147,7 @@ class NewsFeedRow extends Component {
                                                 <div className={classes.otherArticleTileVoteDiv}>
                                                     <span style={{ float: 'left', display: 'inline-block' }}>
 
-                                                        <ArticleVote articleId={article.id}/>
+                                                        <ArticleVote articleId={article.id} />
 
                                                     </span>
                                                     <span style={{ float: 'right', display: 'inline-block' }}>

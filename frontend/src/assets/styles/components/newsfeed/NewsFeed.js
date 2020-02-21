@@ -1,8 +1,8 @@
 const styles = {
 
   grid: {
-    marginLeft: '100px',
-    marginRight: '100px',
+    marginLeft: '10%',
+    marginRight: '10%',
     marginTop: '20px',
     marginBottom: '20px',
     flexGrow: '1',

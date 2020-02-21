@@ -46,8 +46,8 @@ class Root extends Component {
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
-                    <div className={classes.appBarSpacer}/>
-                    
+                    <div className={classes.appBarSpacer} />
+
                     <Switch>
                         {
                             Object.keys(categoryDictionary).map(function (key, i) {
