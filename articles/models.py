@@ -13,7 +13,7 @@ class Article(models.Model):
     categories = models.ManyToManyField('Category', blank=True)
     locations = models.ManyToManyField('Location', blank=True)
     text_snippet = models.CharField(max_length=500, default='')
-    text_full = models.TextField(default='')
+    text_full = models.TextField(max_length=10000, default='')
     sentiment_score = models.FloatField(null=True)
     user_score_positive = models.IntegerField(default=0)
     user_score_neutral = models.IntegerField(default=0)

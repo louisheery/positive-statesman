@@ -63,7 +63,7 @@ def fetch_articles(api_instance):
             published_at_end='NOW',
             per_page=100,
             categories_taxonomy='iab-qag',
-            categories_id=['IAB15-10', 'IAB11', 'IAB3', 'IAB17'],
+            categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20'],
             #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
             language=['en'],
             #next_page_cursor=next_page_cursor
