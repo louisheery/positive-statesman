@@ -17,21 +17,21 @@ class NewsFeed extends Component {
 
         this.state = {
             newsFeedDictionary: {
-                QUERY_TODAY: ['', 'Trending Today', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_THISWEEK: ['', 'Trending This Week', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_THISMONTH: ['', 'Trending This Month', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_ALLTIME: ['', 'Trending All Time', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_USA: ['', 'Trending in USA', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_UK: ['', 'Trending in UK', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_WORLD: ['', 'Trending Worldwide', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_TODAY: ['', 'Trending Today', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_THISWEEK: ['', 'Trending This Week', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_THISMONTH: ['', 'Trending This Month', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_ALLTIME: ['', 'Trending All Time', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_USA: ['', 'Trending in USA', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_UK: ['', 'Trending in UK', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_WORLD: ['', 'Trending Worldwide', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
 
-                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iptc-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iptc-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iptc-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iptc-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_SPORTARTICLES: ['/sport', 'Sport', { category: 'iptc-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_TECHARTICLES: ['/tech', 'Technology', { category: 'iptc-qagIAB19', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
-                QUERY_TRAVELARTICLES: ['/travel', 'Travel', { category: 'iptc-qagIAB20', limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_BUSINESSARTICLES: ['/business', 'Business', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', {limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_SCIENCEARTICLES: ['/science', 'Science', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_SPORTARTICLES: ['/sport', 'Sport', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_TECHARTICLES: ['/tech', 'Technology', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
+                QUERY_TRAVELARTICLES: ['/travel', 'Travel', { limit: 6, offset: 0, sentiment_score_min: 0.8 }],
             },
         }
 
