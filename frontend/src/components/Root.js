@@ -42,7 +42,7 @@ const categoryDictionary = {
 class Root extends Component {
 
     componentDidMount() {
-        ReactGA.initialize('replace-your-trackingID-here');
+        ReactGA.initialize('UA-45297452-1');
     }
 
     render() {
