@@ -29,13 +29,13 @@ const theme = createMuiTheme({
 )
 
 const categoryDictionary = {
-    ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-    BUSINESS: ['/business', 'Business', 'iab-qagIAB3'],
-    POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-    SCIENCE: ['/science', 'Science', 'iab-qagIAB15'],
-    SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['/tech', 'Technology', 'iab-qagIAB19'],
-    TRAVEL: ['/travel', 'Travel', 'iab-qagIAB20'],
+    ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qaglIAB1'],
+    BUSINESS: ['/business', 'Business', 'iab-qagllIAB3'],
+    POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qaglIAB11'],
+    SCIENCE: ['/science', 'Science', 'iab-qaglIAB15'],
+    SPORT: ['/sport', 'Sport', 'iab-qaglIAB17'],
+    TECH: ['/tech', 'Technology', 'iab-qaglIAB19'],
+    TRAVEL: ['/travel', 'Travel', 'iab-qaglIAB20'],
 }
 
 class Root extends Component {
