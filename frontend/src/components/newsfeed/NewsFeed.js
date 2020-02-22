@@ -25,13 +25,13 @@ class NewsFeed extends Component {
                 QUERY_UK: ['', 'Trending in UK', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }],
                 QUERY_WORLD: ['', 'Trending Worldwide', { category: this.props.categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }],
 
-                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qaglIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iab-qaglIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iab-qaglIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iab-qaglIAB15', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_SPORTARTICLES: ['/sport', 'Sport', { category: 'iab-qaglIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_TECHARTICLES: ['/tech', 'Technology', { category: 'iab-qaglIAB19', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_TRAVELARTICLES: ['/travel', 'Travel', { category: 'iab-qaglIAB20', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_SPORTARTICLES: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_TECHARTICLES: ['/tech', 'Technology', { category: 'iab-qagIAB19', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                QUERY_TRAVELARTICLES: ['/travel', 'Travel', { category: 'iab-qagIAB20', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
             },
         }
 
