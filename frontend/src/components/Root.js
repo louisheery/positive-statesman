@@ -1,6 +1,7 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import ReactGA from "react-ga";
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
@@ -39,6 +40,10 @@ const categoryDictionary = {
 }
 
 class Root extends Component {
+
+    componentDidMount() {
+        ReactGA.initialize('UA-45297452-1');
+    }
 
     render() {
         const { classes } = this.props

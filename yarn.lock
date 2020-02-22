@@ -8928,6 +8928,11 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-ga@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.7.0.tgz#24328f157f31e8cffbf4de74a3396536679d8d7c"
+  integrity sha512-AjC7UOZMvygrWTc2hKxTDvlMXEtbmA0IgJjmkhgmQQ3RkXrWR11xEagLGFGaNyaPnmg24oaIiaNPnEoftUhfXA==
+
 react-google-button@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-google-button/-/react-google-button-0.7.0.tgz#3bea75ad0ffcc09f05d91e8348794b4917e7b6e6"
