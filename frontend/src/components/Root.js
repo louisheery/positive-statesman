@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 
 const categoryDictionary = {
     ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qaglIAB1'],
-    BUSINESS: ['/business', 'Business', 'iab-qagllIAB3'],
+    BUSINESS: ['/business', 'Business', 'iab-qaglIAB3'],
     POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qaglIAB11'],
     SCIENCE: ['/science', 'Science', 'iab-qaglIAB15'],
     SPORT: ['/sport', 'Sport', 'iab-qaglIAB17'],
