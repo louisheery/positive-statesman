@@ -42,7 +42,7 @@ const categoryDictionary = {
 class Root extends Component {
 
     componentDidMount() {
-        ReactGA.initialize('UA-45297452-1');
+        ReactGA.initialize('UA-158792560-1');
     }
 
     render() {
