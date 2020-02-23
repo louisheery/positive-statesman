@@ -1,5 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react'
+import ReactGA from "react-ga";
 
 // INTERNAL REACT COMPONENTS
 import NewsFeed from '../newsfeed/NewsFeed'
@@ -14,6 +15,10 @@ import styles from '../../../src/assets/styles/components/pages/Home.js'
 
 
 class Home extends Component {
+
+  componentDidMount() {
+    ReactGA.pageview(`homepage`);
+  }
 
   render() {
     return (

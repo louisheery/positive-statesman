@@ -1,5 +1,6 @@
 // REACT LIBRARIES
 import React from 'react';
+import ReactGA from "react-ga";
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +12,10 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/pages/Login.js';
 
 class Login extends React.Component {
+
+    componentDidMount() {
+        ReactGA.pageview(`loginpage`);
+    }
 
     render() {
 

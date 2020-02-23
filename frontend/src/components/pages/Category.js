@@ -1,5 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
+import ReactGA from "react-ga";
 
 // INTERNAL REACT COMPONENTS
 import NewsFeed from '../newsfeed/NewsFeed';
@@ -13,6 +14,10 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/pages/Category.js';
 
 class Category extends Component {
+  
+  componentDidMount() {
+    ReactGA.pageview(`${this.props.categoryName}`);
+  }
 
   render() {
     const { classes } = this.props;
