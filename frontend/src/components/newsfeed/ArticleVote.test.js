@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { BrowserRouter, Redirect } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { FetchMock, fetchMock } from '@react-mock/fetch'
 import ArticleVote from './ArticleVote'
 

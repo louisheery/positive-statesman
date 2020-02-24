@@ -57,21 +57,30 @@ class NewsFeedHeaderItem extends Component {
             <Grid item xs={itemWidth}>
                 <Paper className={classes.paper} style={{ background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' }} square={true}>
                     <Link href={article.url}>
-                        <Typography variant='subtitle1' className={classes.title}>{article.title}</Typography>
+                        <Typography variant='subtitle1' className={classes.title} >
+                            {article.title}
+                        </Typography>
                     </Link>
 
-                    <span><Typography className={classes.subtitleLeft}>{article.publisher}</Typography><Typography className={classes.subtitleRight}>{moment(`${article.publish_date}`).fromNow()}</Typography></span>
+                    <span>
+                        <Typography className={classes.subtitleLeft}>
+                            {article.publisher}
+                        </Typography>
+                        <Typography className={classes.subtitleRight}>
+                            {moment(`${article.publish_date}`).fromNow()}
+                        </Typography>
+                    </span>
                     <span className={classes.alignLeft} >
                         <ArticleVote articleId={article.id} />
                     </span>
 
-                    <span className={classes.alignLeft}>
-                        <Hidden mdUp>
-                            <p className={classes.positivity} style={positivityTextStyle}>{positivityScorePcnt}%</p>
-                        </Hidden>
-                        <Hidden smDown>
-                            <p className={classes.positivity} style={positivityTextStyle}>{positivityScorePcnt}% Positivity</p>
-                        </Hidden>
+                    <span className={classes.alignLeft} >
+                        <p className={classes.positivity} style={positivityTextStyle}>
+                            {positivityScorePcnt}%
+                            <Hidden smDown>
+                                {" Positive"}
+                            </Hidden>
+                        </p>
                     </span>
                 </Paper>
             </Grid>
