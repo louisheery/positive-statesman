@@ -22,10 +22,7 @@ describe('user can interact with logo', () => {
         fireEvent.click(getByLabelText(/logo/i))
         expect(location.pathname).toBe('/')
     })
-
 })
-
-
 
 describe('User can add story successfully', () => {
     const url = 'https://www.newssite.com/article/1'

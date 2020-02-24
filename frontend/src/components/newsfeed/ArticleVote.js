@@ -20,13 +20,13 @@ class ArticleVote extends Component {
 
         return (
             <div>
-                <IconButton className={classes.voteIcon} onClick={() => userFeedback(this.props.articleId, "positive")}>
+                <IconButton className={classes.voteIcon} aria-label="positiveVote" onClick={() => userFeedback(this.props.articleId, "positive")}>
                     <span role="img" aria-label="happy">😀</span>
                 </IconButton>
-                <IconButton className={classes.voteIcon} onClick={() => userFeedback(this.props.articleId, "neutral")}>
+                <IconButton className={classes.voteIcon} aria-label="neutralVote" onClick={() => userFeedback(this.props.articleId, "neutral")}>
                     <span role="img" aria-label="neural">😐</span>
                 </IconButton>
-                <IconButton className={classes.voteIcon} onClick={() => userFeedback(this.props.articleId, "negative")}>
+                <IconButton className={classes.voteIcon} aria-label="negativeVote" onClick={() => userFeedback(this.props.articleId, "negative")}>
                     <span role="img" aria-label="sad">🙁</span>
                 </IconButton>
             </div>
