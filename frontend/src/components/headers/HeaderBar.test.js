@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import HeaderBar from './HeaderBar'
-import { BrowserRouter, MemoryRouter, Route, Redirect } from 'react-router-dom'
-import { FetchMock, fetchMock } from '@react-mock/fetch';
+import { BrowserRouter, Redirect } from 'react-router-dom'
+import { FetchMock, fetchMock } from '@react-mock/fetch'
 
 
 describe('user can interact with logo', () => {
