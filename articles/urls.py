@@ -6,7 +6,7 @@ urlpatterns = [
     path('articles/', views.ArticleList.as_view()),
     path('articles/<int:pk>/', views.article_detail),
     path('fetch-articles/', views.fetch_articles),
-    path('user-feedback/<int:article_pk>/<str:vote>/', views.user_feedback),
+    path('user-feedback/<int:article_pk>/', views.user_feedback),
     path('submit-article/', views.submit_article),
 ]
 

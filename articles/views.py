@@ -15,6 +15,7 @@ import json
 def valid_filter(param):
     return param != '' and param is not None
 
+
 def article_filter(request):
     '''
     List articles according to a particular filter
@@ -47,7 +48,8 @@ def article_filter(request):
             articles = articles.filter(publisher__name=publisher)
 
         if valid_filter(sentiment_score_min):
-            articles = articles.filter(sentiment_score__gte=sentiment_score_min)
+            articles = articles.filter(
+                sentiment_score__gte=sentiment_score_min)
 
         if valid_filter(sentiment_score_max):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
@@ -64,9 +66,8 @@ def article_filter(request):
 
             #articles = serializers.serialize('json', articles)
             #serializer = ArticleSerializer(articles, many=True)
-            #print(serializer)
-            #return JsonResponse(serializer.data, safe=False)
-
+            # print(serializer)
+            # return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
@@ -76,6 +77,7 @@ def article_filter(request):
             return JsonResponse(serializer.data, status=201)
 
         return JsonResponse(serializer.errors, status=400)
+
 
 class ArticleList(generics.ListAPIView):
 
@@ -90,6 +92,7 @@ class ArticleList(generics.ListAPIView):
         serialiser = self.serialiserClass(articles, many=True)
         return Response(serialiser.data)
 
+
 def article_detail(request, pk):
     """
     Retrieve, update or delete an article.
@@ -98,7 +101,7 @@ def article_detail(request, pk):
         article = Article.objects.get(pk=pk)
     except Article.DoesNotExist:
         return HttpResponse(status=404)
-    
+
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
         return JsonResponse(serializer.data)
@@ -116,23 +119,23 @@ def article_detail(request, pk):
         article.delete()
         return HttpResponse(status=204)
 
+
 def fetch_articles(request):
     if request.method == 'GET':
         print("success")
         article_fetch.generate_articles()
-        return JsonResponse({"response":"success"}, safe=False)
+        return JsonResponse({"response": "success"}, safe=False)
 
-# MaxC: This is not optimal and needs to be changed to a POST method. We
-# shouldn't be writing to the database on a GET request. A POST method does
-# however require csrf token authentication and is therfore put on hold for the 
-# moment  
-def user_feedback(request, article_pk, vote):
+
+def user_feedback(request, article_pk):
     try:
         article = Article.objects.get(pk=article_pk)
     except Article.DoesNotExist:
-        return HttpResponse(status=404)
+        return JsonResponse({"msg": "No article found with specified id"}, status=404)
 
-    if request.method == 'GET':
+    if request.method == 'POST':
+        _json = json.loads(request.body)
+        vote = _json['vote']
         if vote == "positive" or vote == "neutral" or vote == "negative":
             if vote == "positive":
                 article.user_score_positive += 1
@@ -142,13 +145,13 @@ def user_feedback(request, article_pk, vote):
                 article.user_score_negative += 1
             article.user_score_count += 1
             article.save()
-            return HttpResponse(status=200)
-        return HttpResponse(status=404)
+            return JsonResponse({"msg": "Vote added to database"}, status=200)
+        return JsonResponse({"msg": "Vote value in body invalid"}, status=404)
 
 
 def submit_article(request):
     _json = json.loads(request.body)
     url = _json['url']
     print(url)
-    
+
     return article_fetch.save_article(url)

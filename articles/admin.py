@@ -4,10 +4,10 @@ from .models import Article, Publisher, Category, Image, Location
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'publisher', 'publish_date',
+    list_display = ('id', 'title', 'publisher', 'publish_date',
                     'sentiment_score', 'user_score', 'user_score_count')
-    list_filter = ['publish_date']
-    search_fields = ['title']
+    list_filter = ['id']
+    search_fields = ['title', 'id']
 
 
 class PublisherAdmin(admin.ModelAdmin):
