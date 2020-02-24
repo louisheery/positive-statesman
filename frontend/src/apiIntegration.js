@@ -50,14 +50,14 @@ async function userFeedback(pk, vote) {
   console.log("Vote Button pressed: pk=" + String(pk) + " & vote=" + vote)
   var csrftoken = getCookie('csrftoken');
 
-  fetch(`/api/user-feedback/${pk}/`, {
+  fetch(`/api/user-feedback/`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'X-CSRFToken': csrftoken
     },
-    body: JSON.stringify({ "vote": vote })
+    body: JSON.stringify({ "pk": pk, "vote": vote })
   }).then((response) => {
     console.log(response);
     response.json().then((data) => {

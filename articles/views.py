@@ -127,14 +127,15 @@ def fetch_articles(request):
         return JsonResponse({"response": "success"}, safe=False)
 
 
-def user_feedback(request, article_pk):
+def user_feedback(request):
+    _json = json.loads(request.body)
     try:
+        article_pk = _json['pk']
         article = Article.objects.get(pk=article_pk)
     except Article.DoesNotExist:
-        return JsonResponse({"msg": "No article found with specified id"}, status=404)
+        return JsonResponse({"msg": "No article found with specified pk"}, status=404)
 
     if request.method == 'POST':
-        _json = json.loads(request.body)
         vote = _json['vote']
         if vote == "positive" or vote == "neutral" or vote == "negative":
             if vote == "positive":
