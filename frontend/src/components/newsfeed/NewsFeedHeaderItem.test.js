@@ -1,10 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { BrowserRouter, Redirect } from 'react-router-dom'
-import { FetchMock, fetchMock } from '@react-mock/fetch'
+import { render } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import NewsFeedHeaderItem from './NewsFeedHeaderItem'
 
-const sampleArticle = {
+let sampleArticle = {
     "id": 15,
     "title": "bla",
     "url": "https://www.news.com/article/1",
@@ -31,7 +30,7 @@ describe('Article in header displays all important information', () => {
     beforeEach(() => {
         ({ getByText, getByLabelText } = render(
             <BrowserRouter>
-                <NewsFeedHeaderItem article={sampleArticle} width="lg" />
+                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         ))
     })

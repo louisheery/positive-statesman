@@ -22,39 +22,11 @@ import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedHeade
 class NewsFeedHeaderItem extends Component {
 
     render() {
-
-        var itemWidth;
-        switch (this.props.width) {
-            case 'xs':
-                itemWidth = 12;
-                break
-            case 'sm':
-            case 'md':
-                itemWidth = 6;
-                break
-            default:
-                itemWidth = 4;
-                break;
-        }
-
         const { classes, article } = this.props;
-
-        var positivityTextStyle
-
-        var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
-
-        if (positivityScorePcnt > 70) {
-            positivityTextStyle = { color: 'green' };
-        }
-        else if (positivityScorePcnt > 50) {
-            positivityTextStyle = { color: 'orange' };
-        }
-        else {
-            positivityTextStyle = { color: 'red' };
-        }
+        var score = Math.round(((article.sentiment_score + 1) * 100 / 2));
 
         return (
-            <Grid item xs={itemWidth}>
+            <Grid item xs={12} sm={6} md={4}>
                 <Paper className={classes.paper} style={{ background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' }} square={true}>
                     <Link href={article.url}>
                         <Typography variant='subtitle1' className={classes.title} >
@@ -75,8 +47,8 @@ class NewsFeedHeaderItem extends Component {
                     </span>
 
                     <span className={classes.alignLeft} >
-                        <p className={classes.positivity} style={positivityTextStyle}>
-                            {positivityScorePcnt}%
+                        <p className={classes.positivity} style={{ color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
+                            {score}%
                             <Hidden smDown>
                                 {" Positive"}
                             </Hidden>
