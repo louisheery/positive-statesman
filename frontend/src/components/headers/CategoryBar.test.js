@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Redirect } from 'react-router-dom'
 import CategoryBar from './CategoryBar'
 
 describe('user gets redirected to category pages', () => {
@@ -32,5 +32,16 @@ describe('user gets redirected to category pages', () => {
         fireEvent.click(getByText(/science/i))
         expect(location.pathname).toBe('/science')
     })
-
+})
+describe('User gets redirected to home page', () => {
+    test('home link works', () => {
+        const { getByText } = render(
+            <BrowserRouter>
+                <CategoryBar />
+                <Redirect to="/test" />
+            </BrowserRouter>
+        )
+        fireEvent.click(getByText(/home/i))
+        expect(location.pathname).toBe('/')
+    })
 })
