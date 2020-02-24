@@ -66,34 +66,25 @@ class HeaderBar extends Component {
                                 <Hidden xsDown>
                                     <Typography variant="h5">
                                         The Positive Statesman
-                                </Typography>
+                                    </Typography>
                                 </Hidden>
 
                             </Button>
                         )}
                         {/* ADD STORY SECTION */}
-
-
-
                         {(this.state.addArticle) ? (
-
                             <Paper className={classes.addStoryPaper}>
-
                                 <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} />
                                 <Button onClick={this.handleClickSubmit}>
                                     Submit
-                            </Button>
-
-
+                                </Button>
                             </Paper>
-                        )
-
-                            : (
+                        ) : (
                                 <Button className={classes.addStoryButton} display={{ md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.handleClickAdd}>
                                     Add Story
-                            </Button>
-                            )}
-
+                                </Button>
+                            )
+                        }
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
@@ -106,5 +97,3 @@ class HeaderBar extends Component {
 }
 
 export default withStyles(styles)(HeaderBar)
-
-
