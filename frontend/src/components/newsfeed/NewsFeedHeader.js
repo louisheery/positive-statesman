@@ -51,7 +51,7 @@ class NewsFeedHeader extends Component {
                 <Grid container>
                     {
                         sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 4 : 6).map((article, i) => {
-                            return (<NewsFeedHeaderItem key={i} article={article} />)
+                            return (<NewsFeedHeaderItem key={i} article={article} width={this.props.width} />)
                         })
                     }
                 </Grid>
