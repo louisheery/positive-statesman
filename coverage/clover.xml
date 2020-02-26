@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1582713300599" clover="3.2.0">
-  <project timestamp="1582713300600" name="All files">
-    <metrics statements="74" coveredstatements="68" conditionals="25" coveredconditionals="16" methods="27" coveredmethods="27" elements="126" coveredelements="111" complexity="0" loc="74" ncloc="74" packages="5" files="11" classes="11"/>
+<coverage generated="1582717054221" clover="3.2.0">
+  <project timestamp="1582717054221" name="All files">
+    <metrics statements="74" coveredstatements="68" conditionals="25" coveredconditionals="19" methods="27" coveredmethods="27" elements="126" coveredelements="114" complexity="0" loc="74" ncloc="74" packages="5" files="11" classes="11"/>
     <package name="src">
       <metrics statements="32" coveredstatements="26" conditionals="11" coveredconditionals="6" methods="9" coveredmethods="9"/>
       <file name="apiIntegration.js" path="/Users/maxchristl/Documents/University/Master/group_project/positive-statesman/frontend/src/apiIntegration.js">
@@ -96,11 +96,11 @@
       </file>
     </package>
     <package name="src.components.newsfeed">
-      <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="5" methods="9" coveredmethods="9"/>
+      <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="9" coveredmethods="9"/>
       <file name="ArticleVote.js" path="/Users/maxchristl/Documents/University/Master/group_project/positive-statesman/frontend/src/components/newsfeed/ArticleVote.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-        <line num="19" count="39" type="stmt"/>
-        <line num="21" count="39" type="stmt"/>
+        <line num="19" count="45" type="stmt"/>
+        <line num="21" count="45" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
@@ -118,10 +118,10 @@
         <line num="54" count="12" type="stmt"/>
       </file>
       <file name="NewsFeedHeaderItem.js" path="/Users/maxchristl/Documents/University/Master/group_project/positive-statesman/frontend/src/components/newsfeed/NewsFeedHeaderItem.js">
-        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="25" count="36" type="stmt"/>
-        <line num="26" count="36" type="stmt"/>
-        <line num="28" count="36" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="25" count="42" type="stmt"/>
+        <line num="26" count="42" type="stmt"/>
+        <line num="28" count="42" type="stmt"/>
       </file>
     </package>
   </project>

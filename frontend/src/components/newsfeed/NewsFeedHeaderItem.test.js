@@ -32,7 +32,37 @@ describe('Article in header displays all important information', () => {
     })
 })
 
-const sampleArticle = {
+describe('sentiment score is displayed in correct color', () => {
+    test('green if 100% positivity', () => {
+        sampleArticle.sentiment_score = 1
+        const { getByText, getByLabelText } = render(
+            <BrowserRouter>
+                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+            </BrowserRouter>
+        )
+        expect(getByText(/100/i).style.color).toEqual("green")
+    })
+    test('orange if 55% positivity', () => {
+        sampleArticle.sentiment_score = 0.1
+        const { getByText } = render(
+            <BrowserRouter>
+                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+            </BrowserRouter>
+        )
+        expect(getByText(/55/i).style.color).toEqual("orange")
+    })
+    test('red if 0% positivity', () => {
+        sampleArticle.sentiment_score = -1
+        const { getByText } = render(
+            <BrowserRouter>
+                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+            </BrowserRouter>
+        )
+        expect(getByText(/0/i).style.color).toEqual("red")
+    })
+})
+
+let sampleArticle = {
     "id": 15,
     "title": "bla",
     "url": "https://www.news.com/article/1",
