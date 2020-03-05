@@ -4,16 +4,16 @@ from django import utils
 
 class Article(models.Model):
     creation_date = models.DateTimeField(default=utils.timezone.now)
-    url = models.URLField(max_length=200)
-    image_url = models.URLField(max_length=200, null=True)
-    title = models.CharField(max_length=200)
+    url = models.URLField(max_length=300)
+    image_url = models.URLField(max_length=300, null=True)
+    title = models.CharField(max_length=300)
     publish_date = models.DateTimeField(default=utils.timezone.now)
     publisher = models.ForeignKey(
         'Publisher', on_delete=models.PROTECT, null=True)
     categories = models.ManyToManyField('Category', blank=True)
     locations = models.ManyToManyField('Location', blank=True)
     text_snippet = models.CharField(max_length=500, default='')
-    text_full = models.TextField(default='')
+    text_full = models.TextField(max_length=10000, default='')
     sentiment_score = models.FloatField(null=True)
     user_score_positive = models.IntegerField(default=0)
     user_score_neutral = models.IntegerField(default=0)
