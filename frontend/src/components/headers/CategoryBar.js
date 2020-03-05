@@ -1,6 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 // MATERIAL UI
 import Tab from '@material-ui/core/Tab'
@@ -13,28 +13,16 @@ import styles from '../../assets/styles/components/headers/CategoryBar.js';
 
 class CategoryBar extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            tabValue: "top"
-        }
-    }
-
-    handleChangeTabs = (event, newValue) => {
-        this.setState({ tabValue: newValue })
-    }
-
     render() {
         const { classes } = this.props
         return (
             <div>
                 <Tabs
                     className={classes.tabs}
-                    onChange={this.handleChangeTabs}
-                    value={this.state.tabValue}
+                    value={this.props.location.pathname}
                     variant="scrollable"
                 >
-                    <Tab className={classes.tab} component={Link} to="/" value={"top"} label="Home" />
+                    <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
                     <Tab className={classes.tab} component={Link} to={'/business'} value="/business" label="Business" />
                     <Tab className={classes.tab} component={Link} to={'/politics'} value="/politics" label="Politics" />
                     <Tab className={classes.tab} component={Link} to={'/sport'} value="/sport" label="Sport" />
@@ -46,4 +34,4 @@ class CategoryBar extends Component {
     }
 }
 
-export default withStyles(styles)(CategoryBar)
+export default withRouter(withStyles(styles)(CategoryBar))

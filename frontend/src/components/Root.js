@@ -54,7 +54,7 @@ class Root extends Component {
                                 return (
                                     <Route
                                         key={i}
-                                        path={categoryDictionary[key][0]}
+                                        exact path={categoryDictionary[key][0]}
                                         render={props => (
                                             <div>
                                                 <Category
