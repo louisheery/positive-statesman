@@ -20,10 +20,8 @@ class NewsFeedHeader extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             topArticles: [],  // articles to be displayed in row
-
         }
     }
 
@@ -34,13 +32,9 @@ class NewsFeedHeader extends Component {
 
         var topArticles = await fetchArticles({ limit: 6, offset: 1, category: this.props.categoryId, sentiment_score_min: 0.5 })
         this.setState({ topArticles: topArticles })
-
     }
 
-
-
     render() {
-
         const { classes } = this.props;
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -49,40 +43,20 @@ class NewsFeedHeader extends Component {
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.topArticles, 'sentiment_score').reverse();
 
-        var itemNumber;
-        switch (this.props.width) {
-            case 'xs':
-                itemNumber = 2;
-                break
-            case 'sm':
-            case 'md':
-                itemNumber = 4;
-                break
-            default:
-                itemNumber = 6;
-                break;
-        }
-
         return (
             <div className={classes.container}>
-                <Typography variant="h4">{this.props.categoryName}</Typography>
-
+                <Typography variant="h4">
+                    {this.props.categoryName}
+                </Typography>
 
                 <Grid container>
-
                     {
-                        sortedArticles.slice(0, itemNumber).map((article, i) => {
-                            return (
-                                <NewsFeedHeaderItem key={i} article={article} />
-                            )
+                        sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 4 : 6).map((article, i) => {
+                            return (<NewsFeedHeaderItem key={i} article={article} width={this.props.width} />)
                         })
                     }
-
                 </Grid>
             </div>
-
-
-
         )
     }
 }
