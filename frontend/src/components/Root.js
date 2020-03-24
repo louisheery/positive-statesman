@@ -34,7 +34,7 @@ const categoryDictionary = {
     POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
     SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
     SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['tech', 'Technology', 'iab-qagIAB19'],
+    TECH: ['technology', 'Technology', 'iab-qagIAB19'],
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 }
 
