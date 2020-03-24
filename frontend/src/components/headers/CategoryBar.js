@@ -23,11 +23,11 @@ class CategoryBar extends Component {
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
-                    <Tab className={classes.tab} component={Link} to={'/business'} value="/business" label="Business" />
-                    <Tab className={classes.tab} component={Link} to={'/politics'} value="/politics" label="Politics" />
-                    <Tab className={classes.tab} component={Link} to={'/sport'} value="/sport" label="Sport" />
-                    <Tab className={classes.tab} component={Link} to={'/arts'} value="/arts" label="Arts" />
-                    <Tab className={classes.tab} component={Link} to={'/science'} value="/science" label="Science" />
+                    <Tab className={classes.tab} component={Link} to={'/categories/business'} value="/categories/business" label="Business" />
+                    <Tab className={classes.tab} component={Link} to={'/categories/politics'} value="/categories/politics" label="Politics" />
+                    <Tab className={classes.tab} component={Link} to={'/categories/sport'} value="/categories/sport" label="Sport" />
+                    <Tab className={classes.tab} component={Link} to={'/categories/arts'} value="/categories/arts" label="Arts" />
+                    <Tab className={classes.tab} component={Link} to={'/categories/science'} value="/categories/science" label="Science" />
                 </Tabs>
             </div>
         )
