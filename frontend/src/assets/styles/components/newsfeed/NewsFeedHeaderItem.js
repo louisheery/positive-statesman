@@ -17,7 +17,7 @@ const styles = {
 
     title: {
         color: 'white',
-        fontSize: '2vh',
+        fontSize: '1.8vh',
         textAlign: 'left',
         fontWeight: 'bold',
         lineHeight: '1em',
@@ -27,17 +27,18 @@ const styles = {
         minHeight: '3em',
         maxHeight: '3em',
         paddingTop: '10px',
+        paddingBottom: '5px',
         "&:hover": {
             textDecoration: "underline"
         },
     },
 
     subtitleLeft: {
-        color: 'white', float: 'left', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
+        color: 'white', fontSize: '1.6vh', float: 'left', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
     },
 
     subtitleRight: {
-        color: 'white', float: 'right', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
+        color: 'white', fontSize: '1.6vh', float: 'right', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
     },
 
     alignLeft: {
