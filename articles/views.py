@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.db.models import Q, Count
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
@@ -9,6 +10,8 @@ from articles.models import Article, Category, Publisher
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
 from rest_framework import status
+from django.contrib.auth.models import User
+from django.contrib import auth
 import json
 
 
@@ -156,3 +159,63 @@ def submit_article(request):
     print(url)
 
     return article_fetch.save_article(url)
+
+@csrf_exempt
+def signup(request):
+    _json = json.loads(request.body)
+    if request.method == 'GET':
+        usernames = User.objects.values_list('username', flat=True)
+        usernames = [username for username in usernames]
+        return JsonResponse({"msg": usernames}, status=404)
+    if request.method == 'POST':
+        user = User.objects.create_user(_json["username"],_json["email"], _json["password"])
+        user.save()
+        return JsonResponse({"success": "success"}, status=200)
+
+@csrf_exempt
+def login(request):
+    _json = json.loads(request.body)
+    if request.method == 'POST':
+        user = auth.authenticate(request, username=_json["username"], password=_json["password"])
+        if user is not None:
+            auth.login(request, user)
+            return JsonResponse({"success": "success"}, status=200)
+        else:
+            return JsonResponse({"msg": "invalid user credentials"}, status=404)
+
+@csrf_exempt
+def logout(request):
+    _json = json.loads(request.body)
+    if request.method == 'POST':
+        auth.logout(request)
+        return JsonResponse({"success": "success"}, status=200)
+
+def popular_category(request):
+    _json = json.loads(request.body)
+    if not request.user.is_authenticated:
+        return JsonResponse({"msg": "User is not logged in"}, status=500)
+    if request.method == 'POST':
+        request.user.reader.popular_categories.add(_json["id"])
+        return JsonResponse({"success": "success"}, status=200)
+    if request.method == 'DELETE':
+        request.user.reader.popular_categories.remove(_json["id"])
+        return JsonResponse({"success": "success"}, status=200)
+    if request.method == 'GET':
+        categories = request.user.reader.popular_categories.all()
+        information = [{"name": category.name,"id": category.id} for category in categories]
+        return JsonResponse(information, 200) 
+
+def popular_publisher(request):
+    _json = json.loads(request.body)
+    if not request.user.is_authenticated:
+        return JsonResponse({"msg": "User is not logged in"}, status=500)
+    if request.method == 'POST':
+        request.user.reader.popular_publisher.add(_json["id"])
+        return JsonResponse({"success": "success"}, status=200)
+    if request.method == 'DELETE':
+        request.user.reader.popular_publisher.remove(_json["id"])
+        return JsonResponse({"success": "success"}, status=200)
+    if request.method == 'GET':
+        publishers = request.user.reader.popular_publisher.all()
+        information = [{"name": category.name,"id": category.id} for category in publishers]
+        return JsonResponse(information, 200) 
