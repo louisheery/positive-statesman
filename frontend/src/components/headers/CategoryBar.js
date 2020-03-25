@@ -10,6 +10,13 @@ import Tabs from '@material-ui/core/Tabs'
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/headers/CategoryBar.js';
 
+const CATEGORIES = ["business",
+                    "politics",
+                    "sport",
+                    "arts",
+                    "science",
+                    "technology",
+                    "travel"]
 
 class CategoryBar extends Component {
 
@@ -23,11 +30,11 @@ class CategoryBar extends Component {
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
-                    <Tab className={classes.tab} component={Link} to={'/business'} value="/business" label="Business" />
-                    <Tab className={classes.tab} component={Link} to={'/politics'} value="/politics" label="Politics" />
-                    <Tab className={classes.tab} component={Link} to={'/sport'} value="/sport" label="Sport" />
-                    <Tab className={classes.tab} component={Link} to={'/arts'} value="/arts" label="Arts" />
-                    <Tab className={classes.tab} component={Link} to={'/science'} value="/science" label="Science" />
+
+                    {CATEGORIES.map((cat, i) => {
+                        return <Tab className={classes.tab} component={Link} to={`/categories/${cat}`} value={`/categories/${cat}`} label={cat.replace(/^\w/, c => c.toUpperCase())} key={i}/>
+                    })}
+                    
                 </Tabs>
             </div>
         )
