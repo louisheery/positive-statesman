@@ -1,5 +1,7 @@
 from django.db import models
 from django import utils
+from django.contrib.auth.models import User
+
 
 
 class Article(models.Model):
@@ -75,3 +77,12 @@ class Location(models.Model):
 
     class Meta:
         ordering = ['name']
+
+
+class Reader(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    popular_categories = models.ManyToManyField(Category)
+    popular_publishers = models.ManyToManyField(Publisher)
+
+    class Meta:
+        ordering = ['user']
