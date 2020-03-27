@@ -11,7 +11,10 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
-import Popover from '@material-ui/core/Popover';
+import Popover from '@material-ui/core/Popover'
+import AddIcon from '@material-ui/icons/Add'
+import SearchIcon from '@material-ui/icons/Search'
+import IconButton from '@material-ui/core/IconButton'
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -96,9 +99,6 @@ class HeaderBar extends Component {
                         )}
                         {/* ADD STORY SECTION */}
                         {(this.state.addArticle) ? (
-
-
-
                             <Paper className={classes.addStoryPaper}>
                                 <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
                                 <Button onClick={() => { this.handleClickSubmit; this.setState({ open: true, addArticle: false }) }}>
@@ -107,13 +107,9 @@ class HeaderBar extends Component {
                             </Paper>
 
                         ) : (
-
-
-
-                                <Button className={classes.addStoryButton} display={{ md: 'block' }} variant="contained" color="secondary" disableElevation onClick={this.handleClickAdd}>
-                                    Add Story
-                                </Button>
-
+                                <IconButton color="secondary" onClick={this.handleClickAdd}>
+                                    <AddIcon />
+                                </IconButton>
                             )
                         }
                     </Toolbar>
