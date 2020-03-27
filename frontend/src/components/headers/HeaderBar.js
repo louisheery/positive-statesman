@@ -12,9 +12,10 @@ import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
 import Popover from '@material-ui/core/Popover'
-import AddIcon from '@material-ui/icons/Add'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import IconButton from '@material-ui/core/IconButton'
+import Divider from '@material-ui/core/Divider'
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -32,23 +33,32 @@ class HeaderBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: "",
+            input: "",
             addArticle: false,
+            searchArticle: false,
             open: false,
         }
     }
 
     handleChangeInput = (event) => {
-        this.setState({ url: event.target.value })
+        this.setState({ input: event.target.value })
     }
 
     handleClickSubmit = () => {
-        addStory(this.state.url)
-        this.handleClickAdd()
+        if (this.state.addArticle)
+            addStory(this.state.input)
+        if (this.state.searchArticle) {
+            //searchArticle(this.state.input)
+        }
+        this.setState({ input: "", addArticle: false, searchArticle: false, open: true })
     }
 
-    handleClickAdd = (event) => {
-        this.setState({ addArticle: !this.state.addArticle })
+    handleClickAdd = () => {
+        this.setState({ addArticle: true })
+    }
+
+    handleClickSearch = () => {
+        this.setState({ searchArticle: true })
     }
 
     handleKeyDown = (event) => {
@@ -83,35 +93,44 @@ class HeaderBar extends Component {
                     <Toolbar className={classes.toolbar}>
 
                         {/* LOGO */}
-                        {!this.state.addArticle && (
-                            <Button className={classes.logo} component={Link} to={'/'} disableElevation aria-label="logo"
-                                variant="contained"
-                                color="primary"
-                                startIcon={<SvgIcon><path d="M21 7a.78.78 0 0 0 0-.21.64.64 0 0 0-.05-.17 1.1 1.1 0 0 0-.09-.14.75.75 0 0 0-.14-.17l-.12-.07a.69.69 0 0 0-.19-.1h-.2A.7.7 0 0 0 20 6h-5a1 1 0 0 0 0 2h2.83l-4 4.71-4.32-2.57a1 1 0 0 0-1.28.22l-5 6a1 1 0 0 0 .13 1.41A1 1 0 0 0 4 18a1 1 0 0 0 .77-.36l4.45-5.34 4.27 2.56a1 1 0 0 0 1.27-.21L19 9.7V12a1 1 0 0 0 2 0V7z" /></SvgIcon>}
-                            >
-                                <Hidden xsDown>
-                                    <Typography variant="h5">
-                                        The Positive Statesman
-                                    </Typography>
-                                </Hidden>
+                        <Button className={classes.logo} component={Link} to={'/'} disableElevation aria-label="logo"
+                            variant="contained"
+                            color="primary"
+                            startIcon={<SvgIcon><path d="M21 7a.78.78 0 0 0 0-.21.64.64 0 0 0-.05-.17 1.1 1.1 0 0 0-.09-.14.75.75 0 0 0-.14-.17l-.12-.07a.69.69 0 0 0-.19-.1h-.2A.7.7 0 0 0 20 6h-5a1 1 0 0 0 0 2h2.83l-4 4.71-4.32-2.57a1 1 0 0 0-1.28.22l-5 6a1 1 0 0 0 .13 1.41A1 1 0 0 0 4 18a1 1 0 0 0 .77-.36l4.45-5.34 4.27 2.56a1 1 0 0 0 1.27-.21L19 9.7V12a1 1 0 0 0 2 0V7z" /></SvgIcon>}
+                        >
+                            <Hidden xsDown>
+                                <Typography variant="h5">
+                                    The Positive Statesman
+                                </Typography>
+                            </Hidden>
+                        </Button>
 
-                            </Button>
-                        )}
-                        {/* ADD STORY SECTION */}
-                        {(this.state.addArticle) ? (
-                            <Paper className={classes.addStoryPaper}>
-                                <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
-                                <Button onClick={() => { this.handleClickSubmit; this.setState({ open: true, addArticle: false }) }}>
-                                    Submit
-                                </Button>
-                            </Paper>
-
-                        ) : (
-                                <IconButton color="secondary" onClick={this.handleClickAdd}>
-                                    <AddIcon />
+                        {/* SEARCH AND ADD STORY SECTION */}
+                        {this.state.searchArticle ?
+                            <Paper className={classes.addStoryPaper} >
+                                <InputBase placeholder="Search" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
+                                <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                    <SearchIcon />
                                 </IconButton>
-                            )
+                            </Paper>
+                            : this.state.addArticle ?
+                                <Paper className={classes.addStoryPaper} >
+                                    <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
+                                    <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                        <AddCircleOutlineIcon />
+                                    </IconButton>
+                                </Paper>
+                                :
+                                <div>
+                                    <IconButton color="secondary" onClick={this.handleClickSearch}>
+                                        <SearchIcon />
+                                    </IconButton>
+                                    <IconButton color="secondary" onClick={this.handleClickAdd}>
+                                        <AddCircleOutlineIcon />
+                                    </IconButton>
+                                </div>
                         }
+
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
