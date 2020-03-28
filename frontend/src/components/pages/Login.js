@@ -5,6 +5,8 @@ import ReactGA from "react-ga";
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'
 
 // REDUX
 import { connect } from "react-redux";
@@ -65,27 +67,23 @@ class Login extends React.Component {
 
                         <form onSubmit={this.onSubmit}>
                             <div>
-                                <label>Username</label>
-                                <input
-                                    type="text"
-                                    name="username"
+                                <TextField
+                                    placeholder="Username"
                                     onChange={this.onChange}
-                                    value={username}
+                                    margin="normal"
+                                    />
+                            </div>
+
+                            <div>
+                                <TextField
+                                    placeholder="Password"
+                                    onChange={this.onChange}
+                                    margin="normal"
                                 />
                             </div>
 
                             <div>
-                                <label>Password</label>
-                                <input
-                                    type="text"
-                                    name="password"
-                                    onChange={this.onChange}
-                                    value={password}
-                                />
-                            </div>
-
-                            <div>
-                                <button type="submit">Login</button>
+                                <Button color="primary" variant="contained" type="submit">Login</Button>
                             </div>
 
                         </form>
