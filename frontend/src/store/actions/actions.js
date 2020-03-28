@@ -102,7 +102,8 @@ export const getUserData = () => (dispatch, getState) => {
 
     const header = {
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json",
         }
     }
 

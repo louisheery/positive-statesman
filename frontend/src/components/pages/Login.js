@@ -59,7 +59,7 @@ class Login extends React.Component {
             <div>
                 <Container className={classes.container} maxWidth="lg" align="center" >
                     <Link href="/signup" to={"/signup"}>
-                        <Typography>Not Registered? Signup Here</Typography>
+                        <Typography>Signup Here</Typography>
                     </Link>
 
                     <Typography className={classes.header} variant="h5" align="center" component="div">
