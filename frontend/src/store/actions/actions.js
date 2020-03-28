@@ -1,7 +1,7 @@
 import axois from "axios";
 import { ADD_CATEGORY_TRUE, DEL_CATEGORY_TRUE, ADD_PUBLISHER_TRUE, DEL_PUBLISHER_TRUE, ADD_CATEGORY_FALSE, DEL_CATEGORY_FALSE, ADD_PUBLISHER_FALSE, DEL_PUBLISHER_FALSE, LOGIN_TRUE, LOGIN_FALSE, SIGNUP_TRUE, SIGNUP_FALSE, LOGOUT_TRUE, DATA_LOADING, DATA_TRUE, AUTH_PROBLEM } from '../states/states';
-// import getCookie from '../../apiIntegration';
 
+// Cookie Fetcher Function
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -17,6 +17,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// FUNCTION: Log in User with Credentials 'username' and 'password'
 export const logIn = (username, password) => dispatch => {
 
     console.log("User to be logged in -- Username: " + String(username) + " , Password: " + String(password))
@@ -38,6 +39,7 @@ export const logIn = (username, password) => dispatch => {
     
 };
 
+// FUNCTION: Log Out Current User
 export const logOut = () => (dispatch, getState) => {
 
     console.log("User to be logged out")
@@ -70,6 +72,7 @@ export const logOut = () => (dispatch, getState) => {
 };
 
 
+// FUNCTION: Signup in User with Credentials 'username' and 'email' and 'password'
 export const signupUser = (username, email, password) => dispatch => {
 
     var csrftoken = getCookie('csrftoken');
@@ -93,7 +96,7 @@ export const signupUser = (username, email, password) => dispatch => {
 }
 
 
-
+// FUNCTION: Get User Preferences Data for User with Credentials 'username' and 'password'
 export const getUserData = () => (dispatch, getState) => {
 
     console.log("User data being fetched");
@@ -128,6 +131,7 @@ export const getUserData = () => (dispatch, getState) => {
 
 };
 
+// FUNCTION: Add to User Preferences Data for User with Credentials 'username' and 'password'
 export const addUserData = () => (dispatch, getState, type, value) => {
 
     console.log("User data being added for type: ", type);
@@ -168,6 +172,7 @@ export const addUserData = () => (dispatch, getState, type, value) => {
 
 };
 
+// FUNCTION: Delete from User Preferences Data for User with Credentials 'username' and 'password'
 export const delUserData = () => (dispatch, getState, type, value) => {
 
     console.log("User data being added for type: ", type);
