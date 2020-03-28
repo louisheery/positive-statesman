@@ -1,5 +1,5 @@
 import axois from "axios";
-import { LOGIN_TRUE, LOGIN_FALSE, SIGNUP_TRUE, SIGNUP_FALSE, LOGOUT_TRUE, DATA_LOADING, DATA_TRUE, AUTH_PROBLEM } from '../states/states';
+import { ADD_CATEGORY_TRUE, DEL_CATEGORY_TRUE, ADD_PUBLISHER_TRUE, DEL_PUBLISHER_TRUE, ADD_CATEGORY_FALSE, DEL_CATEGORY_FALSE, ADD_PUBLISHER_FALSE, DEL_PUBLISHER_FALSE, LOGIN_TRUE, LOGIN_FALSE, SIGNUP_TRUE, SIGNUP_FALSE, LOGOUT_TRUE, DATA_LOADING, DATA_TRUE, AUTH_PROBLEM } from '../states/states';
 import Axios from "axios";
 // import getCookie from '../../apiIntegration';
 
@@ -122,6 +122,86 @@ export const getUserData = () => (dispatch, getState) => {
     }).catch((error) => {
         dispatch({ type: AUTH_PROBLEM, });
         console.log(error, "ERROR")
+    });
+
+};
+
+export const addUserData = () => (dispatch, getState, type, value) => {
+
+    console.log("User data being added for type: ", type);
+    dispatch({ type: DATA_LOADING });
+
+    const header = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    if (getState().auth != null) {
+        const csrftoken = getState().auth.token;
+
+        if (csrftoken) {
+            header.headers['Authorization'] = `Token ${csrftoken}`;
+        }
+    }
+
+    const url = `/api/account/` + type;
+
+    axois.post(url, JSON.stringify({ 'id': value }), {
+        headers: {
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
+        }
+    }).then((response) => {
+        dispatch({
+            type: (type == 'category') ? ADD_CATEGORY_TRUE : ADD_PUBLISHER_TRUE,
+        });
+        console.log("SUCCESS ADD ", type)
+    }).catch(() => {
+        dispatch({
+            type: (type == 'category') ? ADD_CATEGORY_FALSE : ADD_PUBLISHER_FALSE,
+        });
+        console.log("FAILED ADD", type)
+    });
+
+};
+
+export const delUserData = () => (dispatch, getState, type, value) => {
+
+    console.log("User data being added for type: ", type);
+    dispatch({ type: DATA_LOADING });
+
+    const header = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    if (getState().auth != null) {
+        const csrftoken = getState().auth.token;
+
+        if (csrftoken) {
+            header.headers['Authorization'] = `Token ${csrftoken}`;
+        }
+    }
+
+    const url = `/api/account/` + type;
+
+    axois.delete(url, JSON.stringify({ 'id': value }), {
+        headers: {
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
+        }
+    }).then((response) => {
+        dispatch({
+            type: (type == 'category') ? DEL_CATEGORY_TRUE : DEL_PUBLISHER_TRUE,
+        });
+        console.log("SUCCESS DEL ", type)
+    }).catch(() => {
+        dispatch({
+            type: (type == 'category') ? DEL_CATEGORY_FALSE : DEL_PUBLISHER_FALSE,
+        });
+        console.log("FAILED DEL ", type)
     });
 
 };
