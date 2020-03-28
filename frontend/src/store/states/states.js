@@ -1,0 +1,10 @@
+export const AUTH_WAITING = "AUTH_WAITING";
+export const AUTH_TRUE = "AUTH_TRUE";
+export const AUTH_PROBLEM = "AUTH_PROBLEM";
+export const LOGIN_TRUE = "LOGIN_TRUE";
+export const LOGIN_FALSE = "LOGIN_FALSE";
+export const LOGOUT_TRUE = "LOGOUT_TRUE";
+export const SIGNUP_TRUE = "SIGNUP_TRUE";
+export const SIGNUP_FALSE = "SIGNUP_FALSE";
+export const DATA_LOADING = "DATA_LOADING";
+export const DATA_TRUE = "DATA_TRUE";

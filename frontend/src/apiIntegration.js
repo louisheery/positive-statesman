@@ -90,4 +90,4 @@ async function addStory(url) {
   });
 }
 
-export { fetchArticles, userFeedback, addStory }
+export { getCookie, fetchArticles, userFeedback, addStory }
