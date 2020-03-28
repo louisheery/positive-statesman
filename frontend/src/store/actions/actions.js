@@ -1,6 +1,5 @@
 import axois from "axios";
 import { ADD_CATEGORY_TRUE, DEL_CATEGORY_TRUE, ADD_PUBLISHER_TRUE, DEL_PUBLISHER_TRUE, ADD_CATEGORY_FALSE, DEL_CATEGORY_FALSE, ADD_PUBLISHER_FALSE, DEL_PUBLISHER_FALSE, LOGIN_TRUE, LOGIN_FALSE, SIGNUP_TRUE, SIGNUP_FALSE, LOGOUT_TRUE, DATA_LOADING, DATA_TRUE, AUTH_PROBLEM } from '../states/states';
-import Axios from "axios";
 // import getCookie from '../../apiIntegration';
 
 function getCookie(name) {
@@ -120,6 +119,8 @@ export const getUserData = () => (dispatch, getState) => {
             type: DATA_TRUE,
             payload: response.data,
         });
+
+        console.log("JSONSNSN", response.data)
     }).catch((error) => {
         dispatch({ type: AUTH_PROBLEM, });
         console.log(error, "ERROR")
