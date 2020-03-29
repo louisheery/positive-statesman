@@ -109,7 +109,7 @@ export const getUserData = () => (dispatch, getState) => {
         }
     }
 
-    if (getState().auth != null) {
+    if (getState().auth) {
         const csrftoken = getState().auth.token;
 
         if (csrftoken) {
