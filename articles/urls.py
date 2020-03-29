@@ -12,8 +12,8 @@ urlpatterns = [
     path('signup/', views.signup),
     path('login/', views.login),
     path('logout/', views.logout),
-    path('popular/category', views.popular_category),
-    path('popular/publisher', views.popular_publisher),
+    path('popular/category/', views.popular_category),
+    path('popular/publisher/', views.popular_publisher),
 ]
 
 '''
