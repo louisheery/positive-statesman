@@ -2,6 +2,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
+// REDUX
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import { logOut } from '../../store/actions/actions'; 
+
 // MATERIAL UI
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -35,6 +41,11 @@ class HeaderBar extends Component {
         }
     }
 
+    static propTypes = {
+        logOut: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool,
+    }
+
     handleChangeInput = (event) => {
         this.setState({ url: event.target.value })
     }
@@ -56,6 +67,7 @@ class HeaderBar extends Component {
 
 
     render() {
+
         const { classes } = this.props
         return (
             <div>
@@ -116,9 +128,12 @@ class HeaderBar extends Component {
 
                             )
                         }
+
+                        {this.props.isLoggedIn ? (<Button color="inherit" onClick={this.props.logOut}>Logout</Button>) : (<Button color="inherit" component={Link} to={'/login'}>Login</Button>)}
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
+                    {console.log(this.props.isLoggedIn)}
                     <CategoryBar />
 
                 </AppBar>
@@ -127,4 +142,10 @@ class HeaderBar extends Component {
     }
 }
 
-export default withStyles(styles)(HeaderBar)
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    };
+};
+
+export default connect(mapStateToProps, { logOut })(withStyles(styles)(HeaderBar))

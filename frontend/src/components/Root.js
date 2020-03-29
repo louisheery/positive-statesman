@@ -1,6 +1,17 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { connect } from "react-redux";
+import * as actionCreator from '../store/actions/actions';
+
+// REDUX LIBRARIES
+import reducer from '../store/reducers/reducer';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import store from "../store/store";
+import { getUserData } from '../store/actions/actions';
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
@@ -8,7 +19,10 @@ import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Login from './pages/Login'
+import Logout from './pages/Logout'
+import Signup from './pages/Signup'
 import FeedbackButton from './popups/FeedbackButton';
+
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -40,9 +54,14 @@ const categoryDictionary = {
 
 class Root extends Component {
 
+    componentDidMount() {
+        store.dispatch(getUserData());
+    }
+
     render() {
         const { classes } = this.props
         return (
+            
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
@@ -83,6 +102,8 @@ class Root extends Component {
                         />
 
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/logout" component={Logout} />
                         <Redirect to="/" />
                     </Switch>
                     <FeedbackButton />
@@ -91,5 +112,21 @@ class Root extends Component {
         )
     }
 }
+
+/*
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogIn: () => dispatch(actionCreator.logIn),
+        onLogOut: () => dispatch(actionCreator.logOut)
+    }
+}
+*/
+// export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Root))
 
 export default withStyles(styles)(Root)
