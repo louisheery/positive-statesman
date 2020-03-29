@@ -41,8 +41,10 @@ class Profile extends React.Component {
         super(props)
 
         this.state = {
-            categories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
-            publishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']]
+            categories: [[0, 'Business'], [1, 'Politics']],
+            publishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
+            allCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
+            allPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
         }
     }
 
@@ -90,6 +92,38 @@ class Profile extends React.Component {
 
     render() {
 
+        var popupTable = (
+            <div>
+                <Typography className={classes.title} variant="subtitle1" align="center" component="div">
+                    Select a Category
+                    </Typography>
+
+                <TableContainer component={Paper} style={{ maxWidth: 800 }}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Category</TableCell>
+                                <TableCell align="right" padding="checkbox"></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.allCategories.map((row) => (
+                                <TableRow key={Math.random()}>
+                                    <TableCell align="left">{row[1]}</TableCell>
+                                    <TableCell align="right" padding="checkbox">
+                                        <IconButton onClick={this.onSubmitAdd('category', row[0])} aria-label="delete">
+                                            <AddIcon />
+                                        </IconButton>
+                                    </TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        )
+
 
 
         //const { username, password } = this.state;
@@ -117,7 +151,7 @@ class Profile extends React.Component {
                     </Typography>
 
 
-                        <TableContainer component={Paper}>
+                        <TableContainer component={Paper} style={{ maxWidth: 800 }}>
                             <Table aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
@@ -157,8 +191,8 @@ class Profile extends React.Component {
                     </Typography>
 
 
-                        <TableContainer component={Paper}>
-                            <Table aria-label="simple table">
+                        <TableContainer component={Paper} style={{ maxWidth: 800}}>
+                            <Table aria-label="simple table" >
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Publisher</TableCell>
