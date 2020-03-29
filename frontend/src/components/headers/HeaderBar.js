@@ -1,6 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 // MATERIAL UI
 import AppBar from '@material-ui/core/AppBar'
@@ -15,7 +15,7 @@ import Popover from '@material-ui/core/Popover'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import IconButton from '@material-ui/core/IconButton'
-import Divider from '@material-ui/core/Divider'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -25,7 +25,7 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/headers/HeaderBar.js';
 
 // API
-import { addStory } from '../../apiIntegration.js'
+import { addArticle, searchArticle } from '../../apiIntegration.js'
 
 
 class HeaderBar extends Component {
@@ -45,12 +45,19 @@ class HeaderBar extends Component {
     }
 
     handleClickSubmit = () => {
-        if (this.state.addArticle)
-            addStory(this.state.input)
-        if (this.state.searchArticle) {
-            //searchArticle(this.state.input)
+        if (this.state.addArticle) {
+            addArticle(this.state.input)
+            this.setState({ open: true })
         }
-        this.setState({ input: "", addArticle: false, searchArticle: false, open: true })
+        if (this.state.searchArticle) {
+            /*searchArticle(this.state.input).then((data) => {
+                console.log('Data from searchArticle: ' + data);
+            }).catch((error) => {
+                console.log('Error from searchArticle' + error);
+            })*/
+            this.props.history.push('/search/')
+        }
+        this.setState({ input: "", addArticle: false, searchArticle: false })
     }
 
     handleClickAdd = () => {
@@ -65,6 +72,10 @@ class HeaderBar extends Component {
         if (event.keyCode == 13) {
             this.handleClickSubmit()
         }
+    }
+
+    handleClickAway = () => {
+        this.setState({ input: "", addArticle: false, searchArticle: false })
     }
 
 
@@ -107,19 +118,23 @@ class HeaderBar extends Component {
 
                         {/* SEARCH AND ADD STORY SECTION */}
                         {this.state.searchArticle ?
-                            <Paper className={classes.addStoryPaper} >
-                                <InputBase placeholder="Search" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
-                                <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
-                                    <SearchIcon />
-                                </IconButton>
-                            </Paper>
-                            : this.state.addArticle ?
+                            <ClickAwayListener onClickAway={this.handleClickAway}>
                                 <Paper className={classes.addStoryPaper} >
-                                    <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
+                                    <InputBase placeholder="Search" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
                                     <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
-                                        <AddCircleOutlineIcon />
+                                        <SearchIcon />
                                     </IconButton>
                                 </Paper>
+                            </ClickAwayListener>
+                            : this.state.addArticle ?
+                                <ClickAwayListener onClickAway={this.handleClickAway}>
+                                    <Paper className={classes.addStoryPaper} >
+                                        <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
+                                        <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                            <AddCircleOutlineIcon />
+                                        </IconButton>
+                                    </Paper>
+                                </ClickAwayListener>
                                 :
                                 <div>
                                     <IconButton color="secondary" onClick={this.handleClickSearch}>
@@ -142,4 +157,4 @@ class HeaderBar extends Component {
     }
 }
 
-export default withStyles(styles)(HeaderBar)
+export default withRouter(withStyles(styles)(HeaderBar))
