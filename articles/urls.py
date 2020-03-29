@@ -16,6 +16,7 @@ urlpatterns = [
     path('popular/publisher/', views.popular_publisher),
 ]
 
+
 '''
 urlpatterns = [
     path('articles/', views.article_list),
