@@ -50,12 +50,14 @@ class HeaderBar extends Component {
             this.setState({ open: true })
         }
         if (this.state.searchArticle) {
-            /*searchArticle(this.state.input).then((data) => {
+            searchArticle(this.state.input).then((response) => { console.log(response) })
+
+            /*.then((data) => {
                 console.log('Data from searchArticle: ' + data);
             }).catch((error) => {
                 console.log('Error from searchArticle' + error);
             })*/
-            this.props.history.push('/search/')
+            //this.props.history.push('/search/')
         }
         this.setState({ input: "", addArticle: false, searchArticle: false })
     }

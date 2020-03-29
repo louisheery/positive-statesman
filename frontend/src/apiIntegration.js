@@ -73,30 +73,29 @@ async function addArticle(url) {
 }
 
 async function searchArticle(input) {
-  console.log("User searched for: " + String(input))
-  var csrftoken = getCookie('csrftoken');
-  return "searchResult"
-  fetch(`/api/search/`, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken
-    },
-    body: JSON.stringify({ "input": input })
-  }).then((response) => {
-    console.log(response);
-
-    if (response.status !== 404) {
-      throw new Error("Search request couldn't be resolved from API");
-    } else {
-      //response.json().then((data) => {
-      //  console.log(data);
-      //});
-      return "This will be the search result"
-    }
-  });
+  try {
+    var response = await fetch(`/api/search-articles/?search=` + String(input), {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    return null
+  }
 }
 
 
 export { fetchArticles, userFeedback, addArticle, searchArticle }
+
+/*
+
+    if (response.status === 200) {
+      response.json().then((data) => {
+        return data
+      })
+    } else {
+      throw new Error("Search request couldn't be resolved from API");
+    }*/
