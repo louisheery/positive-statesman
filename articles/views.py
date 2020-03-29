@@ -156,3 +156,38 @@ def submit_article(request):
     print(url)
 
     return article_fetch.save_article(url)
+
+def search_articles(request):
+    
+    """ 
+    Function to return title and snippet search results of a given request 
+    
+    Args:
+        request: as the frontend request
+    
+    Returns:
+        JsonResponse: The matched articles
+    """
+
+    if request.method == 'GET':
+
+        articles = Article.objects.all()
+        search_string = request.GET.get('search')
+
+        al = ArticleList
+
+        if search_string != '':
+
+            articles = articles.filter(title__icontains = search_string) | articles.filter(text_snippet__icontains = search_string)
+
+        serializer = ArticleSerializer(articles.distinct(), many=True)
+
+        if not articles:
+            return HttpResponse(status=200)
+        else:
+            return JsonResponse(serializer.data, safe=False)
+        
+    else:
+        return JsonResponse({"msg": "Only GET requests allowed."}, status=404)
+
+
