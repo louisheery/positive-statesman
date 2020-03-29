@@ -117,7 +117,7 @@ export const getUserData = () => (dispatch, getState) => {
         }
     }
         
-    axois.get(`/api/account/category`, header).then((response) => {
+    axois.get(`/api/account/category/`, header).then((response) => {
         dispatch({
             type: DATA_TRUE,
             payload: response.data,
@@ -132,7 +132,7 @@ export const getUserData = () => (dispatch, getState) => {
 };
 
 // FUNCTION: Add to User Preferences Data for User with Credentials 'username' and 'password'
-export const addUserData = () => (dispatch, getState, type, value) => {
+export const addUserData = (type, value) => (dispatch, getState) => {
 
     console.log("User data being added for type: ", type);
     dispatch({ type: DATA_LOADING });
@@ -173,7 +173,7 @@ export const addUserData = () => (dispatch, getState, type, value) => {
 };
 
 // FUNCTION: Delete from User Preferences Data for User with Credentials 'username' and 'password'
-export const delUserData = () => (dispatch, getState, type, value) => {
+export const delUserData = (type, value) => (dispatch, getState) => {
 
     console.log("User data being added for type: ", type);
     dispatch({ type: DATA_LOADING });

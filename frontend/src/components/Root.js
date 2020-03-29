@@ -21,6 +21,7 @@ import Category from './pages/Category'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
+import Profile from './pages/Profile'
 import FeedbackButton from './popups/FeedbackButton';
 
 
@@ -102,6 +103,7 @@ class Root extends Component {
                         />
 
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/profile" component={Profile} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/logout" component={Logout} />
                         <Redirect to="/" />

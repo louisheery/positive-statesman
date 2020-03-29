@@ -18,6 +18,14 @@ import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
 import Popover from '@material-ui/core/Popover';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -38,6 +46,8 @@ class HeaderBar extends Component {
             url: "",
             addArticle: false,
             open: false,
+            openMenu: false,
+            anchorEl: undefined,
         }
     }
 
@@ -65,6 +75,18 @@ class HeaderBar extends Component {
         }
     }
 
+    ///
+
+
+    handleClick = event => {
+        this.setState({ openMenu: true, anchorEl: event.currentTarget });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ openMenu: false, anchorEl: null });
+    };
+    
+
 
     render() {
 
@@ -73,6 +95,7 @@ class HeaderBar extends Component {
             <div>
                 <Popover
                     id={1}
+                    anchorEl={null}
                     open={this.state.open}
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -86,6 +109,7 @@ class HeaderBar extends Component {
                 >
                     <Typography style={{ padding: '10px' }}>Article Submitted!</Typography>
                 </Popover>
+
                 <AppBar position="fixed">
 
                     {/* MAIN HEADER BAR */}
@@ -129,11 +153,37 @@ class HeaderBar extends Component {
                             )
                         }
 
-                        {this.props.isLoggedIn ? (<Button color="inherit" onClick={this.props.logOut}>Logout</Button>) : (<Button color="inherit" component={Link} to={'/login'}>Login</Button>)}
+                        {this.props.isLoggedIn ? (
+                            <div>
+                                <IconButton
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={this.handleClick}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+
+                                    id="menu-appbar"
+                                    anchorEl={this.state.anchorEl}
+                                    open={this.state.openMenu}
+                                    onClose={this.handleRequestClose}
+                                    
+                                >
+                                    <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
+                                    <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+                                </Menu>
+                            </div>
+                        ) : (
+                            <Button color="inherit" component={Link} to={'/login'}>Login</Button>
+                            )}
+                    
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
-                    {console.log(this.props.isLoggedIn)}
+                    {console.log("LOGGED IN = ", this.props.isLoggedIn)}
                     <CategoryBar />
 
                 </AppBar>
