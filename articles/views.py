@@ -174,8 +174,6 @@ def search_articles(request):
         articles = Article.objects.all()
         search_string = request.GET.get('search')
 
-        al = ArticleList
-
         if search_string != '':
 
             articles = articles.filter(title__icontains = search_string) | articles.filter(text_snippet__icontains = search_string)
