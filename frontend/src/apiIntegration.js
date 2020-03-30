@@ -89,13 +89,3 @@ async function searchArticle(input) {
 
 
 export { fetchArticles, userFeedback, addArticle, searchArticle }
-
-/*
-
-    if (response.status === 200) {
-      response.json().then((data) => {
-        return data
-      })
-    } else {
-      throw new Error("Search request couldn't be resolved from API");
-    }*/

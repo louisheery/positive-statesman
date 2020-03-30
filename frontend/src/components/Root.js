@@ -69,7 +69,7 @@ class Root extends Component {
                                     />
                                 )
                             })}
-                        <Route exact path="/search/" render={props => (<div><Search /></div>)} />
+                        <Route path="/search/" render={props => (<div><Search /></div>)} />
                         <Route
                             exact path="/"
                             render={props => (

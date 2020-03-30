@@ -11,6 +11,9 @@ const styles = {
         flexGrow: '1',
         width: 'auto',
     },
+    loadingIcon: {
+        height: 200
+    }
 }
 
 export default styles;

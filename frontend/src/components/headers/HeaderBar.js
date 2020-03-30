@@ -25,7 +25,7 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/headers/HeaderBar.js';
 
 // API
-import { addArticle, searchArticle } from '../../apiIntegration.js'
+import { addArticle } from '../../apiIntegration.js'
 
 
 class HeaderBar extends Component {
@@ -50,7 +50,7 @@ class HeaderBar extends Component {
             this.setState({ open: true })
         }
         if (this.state.searchArticle) {
-            searchArticle(this.state.input).then((response) => { this.props.history.push({ pathname: "/search/", state: { searchResults: response } }) })
+            this.props.history.push({ pathname: "/search/", search: "?q=" + this.state.input })
         }
         this.setState({ input: "", addArticle: false, searchArticle: false })
     }
