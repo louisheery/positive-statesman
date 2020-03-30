@@ -26,7 +26,7 @@ class CategoryBar extends Component {
             <div>
                 <Tabs
                     className={classes.tabs}
-                    value={this.props.location.pathname.sub(0, 12) === "/categories/" ? this.props.location.pathname : false}
+                    value={this.props.location.pathname.slice(0, 12) === "/categories/" || this.props.location.pathname.length === 1 ? this.props.location.pathname : false}
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
