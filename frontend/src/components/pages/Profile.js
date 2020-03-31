@@ -24,17 +24,27 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Popover from '@material-ui/core/Popover';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 // REDUX LIBRARIES
-import reducer from '../store/reducers/reducer';
+import reducer from '../../store/reducers/reducer';
 import { connect, Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import store from "../store/store";
+import store from "../../store/store";
 import { userData, avaliableData } from '../../store/actions/actions';
+import AutocompleteCustom from './profile/AutocompleteCustom';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -46,12 +56,15 @@ class Profile extends React.Component {
         super(props)
 
         this.state = {
-            //userCategories: [[0, 'Business'], [1, 'Politics']],
-            //userPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
-            //allCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
-            //allPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
-            dialogOpen: false,
-            dialogContent: 'category',
+            AuserCategories: [[0, 'Business'], [1, 'Politics']],
+            AuserPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
+            AallCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
+            AallPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
+            openMenuCategory: false,
+            openMenuPublisher: false,
+            anchorElCategory: undefined,
+            anchorElPublisher: undefined,
+            
         }
     }
 
@@ -62,39 +75,38 @@ class Profile extends React.Component {
 
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
-        store.dispatch(avaliableData());
-    }
-
-    onRequestAdd(type) {
-        // FETCH LIST OF PUBLISHERS OR CATEGORIES
-        // onSubmitGet(type);
-
-        // DISPLAY POPUP
-
-        // id = [what user selects]
-
-        // THEN CALL onSubmitAdd(type, id) of which publisher/category to add
-        // this.props.userData('POST', type, id, null);
-
-        // SHOULD THEN APPEAR IN TABLES
-    }
-
-    onSubmitGet(type) {
-        // this.props.userData('GET', type, null);
+        //store.dispatch(avaliableData());
     }
 
     onSubmitAdd(type, id) {
         // this.props.userData('POST', type, id);
-        userData = (requestType, dataType, dataId = null)
+        store.dispatch(userData());
+
+        // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     onSubmitDelete(type, id) {
         // this.props.userData('DELETE', type, id);
+        store.dispatch(userData());
+
+        // THIS SHOULD THEN REFRESH THE TABLE
     }
 
-    handleClose() {
-        this.setState( { dialogOpen: false })
-    }
+    handleClickCategory = event => {
+        this.setState({ openMenuCategory: true, anchorElCategory: event.currentTarget });
+    };
+
+    handleClickPublisher = event => {
+        this.setState({ openMenuPublisher: true, anchorElPublisher: event.currentTarget });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ openMenuCategory: false, anchorElCategory: null });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ openMenuPublisher: false, anchorElPublisher: null });
+    };
 
 
 
@@ -108,100 +120,8 @@ class Profile extends React.Component {
             return <Redirect to="/" />;
         }
 
-        var popupCategoriesTable = (
-            <div>
-                <Typography className={classes.title} variant="subtitle1" align="center" component="div">
-                    Select a Category
-                    </Typography>
-
-                <TableContainer component={Paper} style={{ maxWidth: 800 }}>
-                    <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Category</TableCell>
-                                <TableCell align="right" padding="checkbox"></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.state.allCategories.map((row) => (
-                                <TableRow key={Math.random()}>
-                                    <TableCell align="left">{row[1]}</TableCell>
-                                    <TableCell align="right" padding="checkbox">
-                                        <IconButton onClick={this.onSubmitAdd('category', row[0])} aria-label="delete">
-                                            <AddIcon />
-                                        </IconButton>
-                                    </TableCell>
-
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        )
-
-        var popupPublishersTable = (
-            <div>
-                <Typography className={classes.title} variant="subtitle1" align="center" component="div">
-                    Select a Publisher
-                    </Typography>
-
-                <TableContainer component={Paper} style={{ maxWidth: 800 }}>
-                    <Table aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Publisher</TableCell>
-                                <TableCell align="right" padding="checkbox"></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.state.allPublishers.map((row) => (
-                                <TableRow key={Math.random()}>
-                                    <TableCell align="left">{row[1]}</TableCell>
-                                    <TableCell align="right" padding="checkbox">
-                                        <IconButton onClick={this.onSubmitAdd('publisher', row[0])} aria-label="delete">
-                                            <AddIcon />
-                                        </IconButton>
-                                    </TableCell>
-
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        )
-
-
-
         return (
             <div>
-
-                <Dialog open={this.state.dialogOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We will send updates
-                            occasionally.
-          </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-          </Button>
-                        <Button onClick={handleClose} color="primary">
-                            Subscribe
-          </Button>
-                    </DialogActions>
-                </Dialog>
 
                 <Container className={classes.container} maxWidth="lg" align="center" >
 
@@ -211,10 +131,8 @@ class Profile extends React.Component {
                     </Typography>
 
                     <div>
-                        <Typography className={classes.title} variant="subtitle1" align="center" component="div">
-                            Categories
-                    </Typography>
 
+                        
 
                         <TableContainer component={Paper} style={{ maxWidth: 800 }}>
                             <Table aria-label="simple table">
@@ -222,14 +140,39 @@ class Profile extends React.Component {
                                     <TableRow>
                                         <TableCell>Category</TableCell>
                                         <TableCell align="right" padding="checkbox">
-                                            <Button onClick={this.onRequestAdd('category')} aria-label="add">
+                                            <Button onClick={this.handleClickCategory} aria-label="add">
                                                 Add <AddIcon />
                                             </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={this.state.anchorElCategory}
+                                                open={this.state.openMenuCategory}
+                                                keepMounted
+                                                onClose={() => this.setState({ openMenuCategory: false })}
+                                            >
+                                                <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
+                                                    <Table aria-label="simple table">
+                                                        <TableBody>
+                                                            {this.state.AallCategories.map((row) => (
+                                                                <TableRow key={Math.random()}>
+                                                                    <TableCell align="left">{row[1]}</TableCell>
+                                                                    <TableCell align="right" padding="checkbox">
+                                                                        <IconButton onClick={() => {this.onSubmitAdd('category', row[0]); this.setState( { openMenuCategory: false })}} aria-label="add">
+                                                                            <AddIcon />
+                                                                        </IconButton>
+                                                                    </TableCell>
+
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </Menu>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.userPublishers.map((row) => (
+                                    {this.state.AuserCategories.map((row) => (
                                         <TableRow key={Math.random()}>
                                             <TableCell align="left">{row[1]}</TableCell>
                                             <TableCell align="right" padding="checkbox">
@@ -251,25 +194,47 @@ class Profile extends React.Component {
 
 
                     <div>
-                        <Typography className={classes.title} variant="subtitle1" align="center" component="div">
-                            Publishers
-                    </Typography>
 
 
-                        <TableContainer component={Paper} style={{ maxWidth: 800 }}>
+                        <TableContainer component={Paper} style={{ marginTop: '50px', maxWidth: 800 }}>
                             <Table aria-label="simple table" >
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Publisher</TableCell>
                                         <TableCell align="right" padding="checkbox">
-                                            <Button onClick={this.onRequestAdd('category')} aria-label="add">
+                                            <Button onClick={this.handleClickPublisher} aria-label="add">
                                                 Add <AddIcon />
                                             </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={this.state.anchorElPublisher}
+                                                open={this.state.openMenuPublisher}
+                                                keepMounted
+                                                onClose={() => this.setState({ openMenuPublisher: false })}
+                                            >
+                                                <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
+                                                    <Table aria-label="simple table">
+                                                        <TableBody>
+                                                            {this.state.AallPublishers.map((row) => (
+                                                                <TableRow key={Math.random()}>
+                                                                    <TableCell align="left">{row[1]}</TableCell>
+                                                                    <TableCell align="right" padding="checkbox">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[0]); this.setState({ openMenuPublisher: false }) }} aria-label="add">
+                                                                            <AddIcon />
+                                                                        </IconButton>
+                                                                    </TableCell>
+
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </Menu>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.publishers.map((row) => (
+                                    {this.state.AuserPublishers.map((row) => (
                                         <TableRow key={Math.random()}>
                                             <TableCell align="left">{row[1]}</TableCell>
                                             <TableCell align="right" padding="checkbox">

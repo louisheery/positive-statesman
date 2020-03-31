@@ -5614,6 +5614,11 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hocify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hocify/-/hocify-1.0.0.tgz#474b062a8fed96c102be3d242036fcfd0b591780"
+  integrity sha512-Y38NhJuIBBOnDtuvR3RT8x0O81PAncj5DaXnSoWNeMJKo8D/sXrKIee0CvopUgAqfRVOqH6yb2yG0E3K7K/cMg==
+
 hoist-non-react-statics@^2.3.1:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"

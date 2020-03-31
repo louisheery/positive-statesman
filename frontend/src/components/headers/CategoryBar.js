@@ -13,13 +13,16 @@ import styles from '../../assets/styles/components/headers/CategoryBar.js';
 
 class CategoryBar extends Component {
 
+    otherTabs = ['/login', '/signup', '/profile']
+
     render() {
         const { classes } = this.props
         return (
             <div>
                 <Tabs
                     className={classes.tabs}
-                    value={this.props.location.pathname}
+                    value={this.otherTabs.includes(this.props.location.pathname) ? '/' : this.props.location.pathname}
+                    defaultValue={"/"}
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />

@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { checkLoggedIn } from '../store/actions/actions';
-import history from './history'
 
 // REDUX LIBRARIES
 import reducer from '../store/reducers/reducer';
@@ -11,7 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import store from "../store/store";
-import { getUserData } from '../store/actions/actions';
+import { userData } from '../store/actions/actions';
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
@@ -60,7 +59,7 @@ class Root extends Component {
         this.props.checkLoggedIn();
 
         if (this.props.isLoggedIn) {
-            store.dispatch(getUserData());
+            store.dispatch(userData());
         }
 
     }
@@ -69,7 +68,7 @@ class Root extends Component {
         const { classes } = this.props
         return (
             
-            <Router history={history}>
+            <Router>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
                     <div className={classes.appBarSpacer} />
