@@ -4,8 +4,6 @@ import ReactGA from "react-ga";
 import axois from "axios";
 import { withRouter, Redirect } from "react-router-dom";
 
-import history from '../../components/history';
-
 import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
 
 // Cookie Fetcher Function
@@ -47,7 +45,6 @@ export const logIn = (username, password) => dispatch => {
                 localStorage.setItem("expirationDate", new Date(new Date().getTime() + 3600 * 1000));
                 dispatch({ type: LOGIN_TRUE });
                 console.log("LOGGED11_a IN", response);
-                //history.push("/"); // CHANGE THIS
         } else {
             dispatch({ type: LOGIN_FALSE });
             console.log("NOT-aLOGGEDIN");
@@ -75,7 +72,6 @@ export const logOut = () => (dispatch, getState) => {
                 localStorage.removeItem("expirationDate");
                 dispatch({ type: LOGIN_FALSE });
                 console.log("LOGGED OUT");
-                history.push("/"); // CHANGE THIS
             }
         }).catch(() => {
             dispatch({ type: LOGIN_TRUE });
@@ -105,11 +101,9 @@ export const signupUser = (username, email, password) => dispatch => {
                 localStorage.setItem("expirationDate", new Date(new Date().getTime() + 3600 * 1000));
                 dispatch({ type: LOGIN_TRUE });
                 console.log("SIGNUP TRUE; LOGIN TRUE", response);
-                history.push("/"); // CHANGE THIS
             } else if (response.status == 404) {
                 dispatch( { type: LOGIN_FALSE })
                 console.log("SIGNUP ERROR", response);
-                history.push("/signup"); // CHANGE THIS
             }}
         ).catch(() => {
             dispatch({ type: LOGIN_FALSE });
