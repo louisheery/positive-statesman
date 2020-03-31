@@ -1,6 +1,7 @@
 // REACT LIBRARIES
 import React from 'react';
 import ReactGA from "react-ga";
+import { Redirect } from "react-router-dom";
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +11,6 @@ import Button from '@material-ui/core/Button'
 
 // REDUX
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logIn } from '../../store/actions/actions'; 
 
@@ -37,8 +37,10 @@ class Login extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        // VALIDATE EMAIL ADDRESS FORMAT HERE??
         console.log('login clicked');
         this.props.logIn( this.state.username, this.state.password );
+
     }
 
     onChange = (e) => {
@@ -47,13 +49,15 @@ class Login extends React.Component {
 
     render() {
 
+        if (this.props.isLoggedIn) {
+            return (<Redirect to="/" />);
+        }
+
         const { username, password } = this.state;
 
         const { classes } = this.props;
 
-        if (this.props.isLoggedIn == true) {
-            return <Redirect to="/" />;
-        }
+        
 
         return (
             <div>
@@ -68,6 +72,7 @@ class Login extends React.Component {
                         <form onSubmit={this.onSubmit}>
                             <div>
                                 <TextField
+                                    name="username"
                                     placeholder="Username"
                                     onChange={this.onChange}
                                     margin="normal"
@@ -76,6 +81,7 @@ class Login extends React.Component {
 
                             <div>
                                 <TextField
+                                    name="password"
                                     placeholder="Password"
                                     onChange={this.onChange}
                                     margin="normal"
@@ -96,7 +102,7 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.reducer.isLoggedIn
     };
 };
 

@@ -92,6 +92,18 @@ class Profile extends React.Component {
 
     render() {
 
+        
+
+
+
+        //const { username, password } = this.state;
+
+        const { classes } = this.props;
+
+        if (this.props.isLoggedIn == false) {
+            return <Redirect to="/" />;
+        }
+
         var popupTable = (
             <div>
                 <Typography className={classes.title} variant="subtitle1" align="center" component="div">
@@ -123,16 +135,6 @@ class Profile extends React.Component {
                 </TableContainer>
             </div>
         )
-
-
-
-        //const { username, password } = this.state;
-
-        const { classes } = this.props;
-
-        if (this.props.isLoggedIn == false) {
-            return <Redirect to="/" />;
-        }
 
 
 
@@ -230,7 +232,7 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.reducer.isLoggedIn
     };
 };
 

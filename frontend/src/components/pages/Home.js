@@ -6,6 +6,15 @@ import ReactGA from "react-ga";
 import NewsFeed from '../newsfeed/NewsFeed'
 // import NewsTickerBar from '../headers/NewsTickerBar'
 
+// REDUX LIBRARIES
+import reducer from '../../store/reducers/reducer';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import store from "../../store/store";
+import { getUserData } from '../../store/actions/actions';
+
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 // import Hidden from '@material-ui/core/Hidden';
 
@@ -18,6 +27,7 @@ class Home extends Component {
 
   componentDidMount() {
     ReactGA.pageview(`homepage`);
+    //store.dispatch(getUserData());
   }
 
   render() {

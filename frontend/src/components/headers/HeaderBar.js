@@ -1,10 +1,9 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Route, Redirect, Link } from 'react-router-dom'
 
 // REDUX
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logOut } from '../../store/actions/actions'; 
 
@@ -90,7 +89,9 @@ class HeaderBar extends Component {
 
     render() {
 
-        const { classes } = this.props
+        console.log(this.props.isLoggedIn, "AJSLDASDJSA")
+
+        const { classes } = this.props;
         return (
             <div>
                 <Popover
@@ -183,7 +184,7 @@ class HeaderBar extends Component {
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
-                    {console.log("LOGGED IN = ", this.props.isLoggedIn)}
+                    {console.log("LOGGED IN111 = ", this.props.isLoggedIn)}
                     <CategoryBar />
 
                 </AppBar>
@@ -192,10 +193,8 @@ class HeaderBar extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.isLoggedIn
-    };
-};
+const mapStateToProps = state => ({
+    isLoggedIn: state.reducer.isLoggedIn
+});
 
 export default connect(mapStateToProps, { logOut })(withStyles(styles)(HeaderBar))

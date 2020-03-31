@@ -10,7 +10,6 @@ const styles = {
         marginTop: '40px',
         marginBottom: '100px'
     },
-
     title: {
         marginTop: '40px',
         marginBottom: '20px'

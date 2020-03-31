@@ -51,7 +51,7 @@ class Signup extends React.Component {
 
         const { classes } = this.props;
 
-        if (this.props.isLoggedIn == true) {
+        if (this.props.isLoggedIn) {
             return <Redirect to="/" />;
         }
 
@@ -110,7 +110,7 @@ class Signup extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.reducer.isLoggedIn
     };
 };
 

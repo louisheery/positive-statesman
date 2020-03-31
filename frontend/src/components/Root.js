@@ -1,12 +1,12 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { connect } from "react-redux";
-import * as actionCreator from '../store/actions/actions';
+import { checkLoggedIn } from '../store/actions/actions';
+import history from './history'
 
 // REDUX LIBRARIES
 import reducer from '../store/reducers/reducer';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -56,14 +56,20 @@ const categoryDictionary = {
 class Root extends Component {
 
     componentDidMount() {
-        store.dispatch(getUserData());
+
+        this.props.checkLoggedIn();
+
+        if (this.props.isLoggedIn) {
+            store.dispatch(getUserData());
+        }
+
     }
 
     render() {
         const { classes } = this.props
         return (
             
-            <Router>
+            <Router history={history}>
                 <MuiThemeProvider theme={theme}>
                     <HeaderBar location={this.props.location} />
                     <div className={classes.appBarSpacer} />
@@ -115,20 +121,18 @@ class Root extends Component {
     }
 }
 
-/*
+
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.reducer.isLoggedIn
     };
 };
 
+
 const mapDispatchToProps = dispatch => {
     return {
-        onLogIn: () => dispatch(actionCreator.logIn),
-        onLogOut: () => dispatch(actionCreator.logOut)
+        checkLoggedIn: () => dispatch(checkLoggedIn()),
     }
 }
-*/
-// export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Root))
 
-export default withStyles(styles)(Root)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Root))
