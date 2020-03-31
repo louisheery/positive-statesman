@@ -6,7 +6,7 @@ import { withRouter, Redirect } from "react-router-dom";
 
 import history from '../../components/history';
 
-import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE } from '../states/states';
+import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
 
 // Cookie Fetcher Function
 function getCookie(name) {
@@ -106,10 +106,7 @@ export const signupUser = (username, email, password) => dispatch => {
                 dispatch({ type: LOGIN_TRUE });
                 console.log("SIGNUP TRUE; LOGIN TRUE", response);
                 history.push("/"); // CHANGE THIS
-            } else if (response.status == 401) {
-                localStorage.removeItem("token");
-                localStorage.removeItem("expirationDate");
-                //dispatch({ type: SIGNUP_FALSE });
+            } else if (response.status == 404) {
                 dispatch( { type: LOGIN_FALSE })
                 console.log("SIGNUP ERROR", response);
                 history.push("/signup"); // CHANGE THIS
@@ -142,141 +139,67 @@ export const checkLoggedIn = () => dispatch => {
 
 
 
-// FUNCTION: Get User Preferences Data for User with Credentials 'username' and 'password'
-export const getUserData = () => (dispatch, getState) => {
+// FUNCTION: Get User Preferences Data for User
 
-    console.log("User data being fetched");
-    //dispatch({ type: DATA_LOADING });
-/*
-    const header = {
+export const userData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
+
+    console.log("User data being fetched/edited");
+
+    fetch(`/api/popular/category/`, {
+        method: requestType,
         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        }
-    }
-
-    if (getState().auth) {
-        const csrftoken = getState().auth.token;
-
-        if (csrftoken) {
-            header.headers['Authorization'] = `Token ${csrftoken}`;
-        }
-    }
-        */
-    axois.get(`/api/popular/category/`, getCSRF(getState)).then((response) => {
-        //dispatch({type: DATA_TRUE,payload: response.data,});
-
-        //console.log("JSONSNSN", response.data)
-    }).catch(() => {
-        // dispatch({ type: AUTH_PROBLEM, });
-        //console.log(error, "ERROR")
-    });
-
-};
-
-export const getCSRF = getState => {
-    
-    var token;
-
-    if (getState().auth == null) {
-        token = null;
-    } else {
-        token = getState().auth.token;
-    }
-
-    const config = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-
-    if (token) {
-        config.headers["Authorization"] = `Token ${token}`;
-    }
-
-    return config;
-};
-
-// FUNCTION: Add to User Preferences Data for User with Credentials 'username' and 'password'
-export const addUserData = (type, value) => (dispatch, getState) => {
-/*
-    console.log("User data being added for type: ", type);
-    dispatch({ type: DATA_LOADING });
-
-    const header = {
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-    }
-
-    if (getState().auth != null) {
-        const csrftoken = getState().auth.token;
-
-        if (csrftoken) {
-            header.headers['Authorization'] = `Token ${csrftoken}`;
-        }
-    }
-
-    const url = `/api/popular/` + type + `/`;
-
-    axois.post(url, JSON.stringify({ 'id': value }), {
-        headers: {
-            "Content-Type": "application/json",
-            'X-CSRFToken': csrftoken
-        }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: requestType == 'GET' ? {} : {"id": dataId}
     }).then((response) => {
-        dispatch({
-            type: (type == 'category') ? ADD_CATEGORY_TRUE : ADD_PUBLISHER_TRUE,
-        });
-        console.log("SUCCESS ADD ", type)
-    }).catch(() => {
-        dispatch({
-            type: (type == 'category') ? ADD_CATEGORY_FALSE : ADD_PUBLISHER_FALSE,
-        });
-        console.log("FAILED ADD", type)
+        if (response.status == 200) {
+            console.log("DATA SUCCESS", response);
+
+            if (requestType == 'GET') {
+                dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: response.data, });
+            } else {
+                // ELSE: If was an ADD/DELETE Request
+                // then GET Updated Dataset; and save to Redux Store.
+                userData('GET', dataType, null);
+            }
+
+        } else if (response.status == 500) {
+            //dispatch({ type: LOGIN_FALSE })
+            console.log("AUTHENTICATION ERROR for DATA", response);
+        }
+    }
+    ).catch(() => {
+        console.log("DATA ERROR");
     });
-*/
-};
 
-// FUNCTION: Delete from User Preferences Data for User with Credentials 'username' and 'password'
-export const delUserData = (type, value) => (dispatch, getState) => {
-/*
-    console.log("User data being added for type: ", type);
-    dispatch({ type: DATA_LOADING });
+}
 
-    const header = {
+// FUNCTION: Get All Possible Data for Categories/Publishers
+
+export const avaliableData = (dataType) => (dispatch, getState) => {
+
+    console.log("User data being fetched/edited");
+
+    fetch(`/api/all/` + dataType, {
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-    }
-
-    if (getState().auth != null) {
-        const csrftoken = getState().auth.token;
-
-        if (csrftoken) {
-            header.headers['Authorization'] = `Token ${csrftoken}`;
-        }
-    }
-
-    const url = `/api/popular/` + type + `/`;
-
-    axois.delete(url, JSON.stringify({ 'id': value }), {
-        headers: {
-            "Content-Type": "application/json",
-            'X-CSRFToken': csrftoken
-        }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: {}
     }).then((response) => {
-        dispatch({
-            type: (type == 'category') ? DEL_CATEGORY_TRUE : DEL_PUBLISHER_TRUE,
-        });
-        console.log("SUCCESS DEL ", type)
-    }).catch(() => {
-        dispatch({
-            type: (type == 'category') ? DEL_CATEGORY_FALSE : DEL_PUBLISHER_FALSE,
-        });
-        console.log("FAILED DEL ", type)
+        if (response.status == 200) {
+            console.log("DATA SUCCESS", response);
+            dispatch({ type: dataType == 'category' ? DATA_ALL_CATEGORY : DATA_ALL_PUBLISHER, payload: response.data, });
+
+        } else if (response.status == 500) {
+            //dispatch({ type: LOGIN_FALSE })
+            console.log("AUTHENTICATION ERROR for DATA", response);
+        }
+    }
+    ).catch(() => {
+        console.log("AUTHENTICATION ERROR for DATA");
     });
-*/
-};
+
+}

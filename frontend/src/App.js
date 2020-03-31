@@ -16,7 +16,7 @@ class App extends React.Component {
 
   componentDidMount() {
     ReactGA.initialize('UA-158792560-1');
-    store.dispatch(getUserData());
+    //store.dispatch(getUserData());
   }
 
   render() {

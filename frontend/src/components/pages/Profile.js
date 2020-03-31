@@ -25,11 +25,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-// REDUX
-import { connect } from "react-redux";
+// REDUX LIBRARIES
+import reducer from '../store/reducers/reducer';
+import { connect, Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { getUserData, addUserData, delUserData } from '../../store/actions/actions';
+import store from "../store/store";
+import { userData, avaliableData } from '../../store/actions/actions';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -41,60 +46,59 @@ class Profile extends React.Component {
         super(props)
 
         this.state = {
-            categories: [[0, 'Business'], [1, 'Politics']],
-            publishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
-            allCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
-            allPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
+            //userCategories: [[0, 'Business'], [1, 'Politics']],
+            //userPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
+            //allCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
+            //allPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
+            dialogOpen: false,
+            dialogContent: 'category',
         }
     }
 
     static propTypes = {
-        getUserData: PropTypes.func.isRequired,
-        addUserData: PropTypes.func.isRequired,
-        delUserData: PropTypes.func.isRequired,
+        userData: PropTypes.func.isRequired,
+        avaliableData: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
+        store.dispatch(avaliableData());
     }
-    /*
-        onSubmit = (e) => {
-            e.preventDefault();
-            console.log('login clicked');
-            this.props.logIn(this.state.username, this.state.password);
-        }
-    
-        onChange = (e) => {
-            this.setState({ [e.target.name]: e.target.value })
-        }
-    */
 
     onRequestAdd(type) {
         // FETCH LIST OF PUBLISHERS OR CATEGORIES
-        //this.props.getExternalData(type);
+        // onSubmitGet(type);
 
         // DISPLAY POPUP
 
+        // id = [what user selects]
+
         // THEN CALL onSubmitAdd(type, id) of which publisher/category to add
+        // this.props.userData('POST', type, id, null);
 
         // SHOULD THEN APPEAR IN TABLES
     }
 
+    onSubmitGet(type) {
+        // this.props.userData('GET', type, null);
+    }
+
     onSubmitAdd(type, id) {
-        //this.props.addUserData(type, id);
+        // this.props.userData('POST', type, id);
+        userData = (requestType, dataType, dataId = null)
     }
 
     onSubmitDelete(type, id) {
-        //this.props.delUserData(type, id);
+        // this.props.userData('DELETE', type, id);
+    }
+
+    handleClose() {
+        this.setState( { dialogOpen: false })
     }
 
 
 
     render() {
-
-        
-
-
 
         //const { username, password } = this.state;
 
@@ -104,7 +108,7 @@ class Profile extends React.Component {
             return <Redirect to="/" />;
         }
 
-        var popupTable = (
+        var popupCategoriesTable = (
             <div>
                 <Typography className={classes.title} variant="subtitle1" align="center" component="div">
                     Select a Category
@@ -136,10 +140,69 @@ class Profile extends React.Component {
             </div>
         )
 
+        var popupPublishersTable = (
+            <div>
+                <Typography className={classes.title} variant="subtitle1" align="center" component="div">
+                    Select a Publisher
+                    </Typography>
+
+                <TableContainer component={Paper} style={{ maxWidth: 800 }}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Publisher</TableCell>
+                                <TableCell align="right" padding="checkbox"></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.allPublishers.map((row) => (
+                                <TableRow key={Math.random()}>
+                                    <TableCell align="left">{row[1]}</TableCell>
+                                    <TableCell align="right" padding="checkbox">
+                                        <IconButton onClick={this.onSubmitAdd('publisher', row[0])} aria-label="delete">
+                                            <AddIcon />
+                                        </IconButton>
+                                    </TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        )
+
 
 
         return (
             <div>
+
+                <Dialog open={this.state.dialogOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            To subscribe to this website, please enter your email address here. We will send updates
+                            occasionally.
+          </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Email Address"
+                            type="email"
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+          </Button>
+                        <Button onClick={handleClose} color="primary">
+                            Subscribe
+          </Button>
+                    </DialogActions>
+                </Dialog>
+
                 <Container className={classes.container} maxWidth="lg" align="center" >
 
 
@@ -166,7 +229,7 @@ class Profile extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.categories.map((row) => (
+                                    {this.state.userPublishers.map((row) => (
                                         <TableRow key={Math.random()}>
                                             <TableCell align="left">{row[1]}</TableCell>
                                             <TableCell align="right" padding="checkbox">
@@ -193,7 +256,7 @@ class Profile extends React.Component {
                     </Typography>
 
 
-                        <TableContainer component={Paper} style={{ maxWidth: 800}}>
+                        <TableContainer component={Paper} style={{ maxWidth: 800 }}>
                             <Table aria-label="simple table" >
                                 <TableHead>
                                     <TableRow>
@@ -236,4 +299,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { getUserData, addUserData, delUserData })(withStyles(styles)(Profile))
+export default connect(mapStateToProps, { userData, avaliableData })(withStyles(styles)(Profile))
