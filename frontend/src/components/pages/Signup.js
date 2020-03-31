@@ -5,7 +5,6 @@ import ReactGA from "react-ga";
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import GoogleButton from 'react-google-button';
 
 // REDUX
 import { connect } from "react-redux";

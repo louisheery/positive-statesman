@@ -9,7 +9,6 @@ import NewsFeedHeader from './NewsFeedHeader';
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeed.js';
 
-// QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
 class NewsFeed extends Component {
 
     constructor(props) {
@@ -28,7 +27,7 @@ class NewsFeed extends Component {
                 QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
 
                 QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_BUSINESSARTICLES: ['/business', 'Business', { limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
+                QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
                 QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
                 QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
                 QUERY_SPORTARTICLES: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],

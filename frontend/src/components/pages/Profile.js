@@ -5,9 +5,7 @@ import ReactGA from "react-ga";
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,41 +13,23 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Toolbar from '@material-ui/core/Toolbar';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Popover from '@material-ui/core/Popover';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 
 // REDUX LIBRARIES
 import reducer from '../../store/reducers/reducer';
 import { connect, Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import store from "../../store/store";
 import { userData, avaliableData } from '../../store/actions/actions';
-import AutocompleteCustom from './profile/AutocompleteCustom';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/pages/Profile.js';
-import { Link } from '@material-ui/core';
 
 class Profile extends React.Component {
     constructor(props) {

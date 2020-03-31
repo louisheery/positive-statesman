@@ -9,10 +9,6 @@ import NewsFeed from '../newsfeed/NewsFeed'
 // REDUX LIBRARIES
 import reducer from '../../store/reducers/reducer';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import store from "../../store/store";
 import { getUserData } from '../../store/actions/actions';
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
