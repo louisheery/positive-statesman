@@ -67,15 +67,15 @@ export const logOut = () => (dispatch, getState) => {
         },
         body: {}
     }).then((response) => {
-            if (response.data.status == 200) {
+            if (response.status == 200) {
                 localStorage.removeItem("token");
                 localStorage.removeItem("expirationDate");
                 dispatch({ type: LOGIN_FALSE });
                 console.log("LOGGED OUT");
             }
-        }).catch(() => {
+        }).catch((response) => {
             dispatch({ type: LOGIN_TRUE });
-            console.log("LOGOUT OUT FALSE");
+            console.log("LOGOUT OUT FALSE", response);
         });
 };
 
