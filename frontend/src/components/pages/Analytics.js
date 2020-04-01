@@ -26,8 +26,7 @@ class Analytics extends Component {
                 </Typography>
                 <Grid container justify="center">
                     <TimeSeries param="categories" />
-                    {/*<TimeSeries type="Publisher" />
-                    <TimeSeries type="Location" />*/}
+                    <TimeSeries param="locations" />
                 </Grid>
 
             </div>

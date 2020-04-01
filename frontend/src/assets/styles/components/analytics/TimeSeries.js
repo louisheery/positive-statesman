@@ -7,9 +7,6 @@ const styles = {
         textAnchor: "middle",
         fontSize: 12
     },
-    axis: {
-        fontSize: 12
-    },
     cardOutside: {
         paddingTop: 12,
         paddingBottom: 12
