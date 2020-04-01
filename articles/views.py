@@ -210,7 +210,7 @@ def popular_category(request):
         request.user.reader.categories.remove(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
-        categories = request.user.reader.categories.all()
+        categories = request.user.reader.categories.get()
         information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
         return JsonResponse(information, 200)
 
