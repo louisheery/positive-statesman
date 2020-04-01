@@ -185,8 +185,9 @@ def login(request):
 
 @csrf_exempt
 def logout(request):
-    _json = json.loads(request.body)
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({"err": "not logged in"}, status=500)
         auth.logout(request)
         return JsonResponse({"success": "success"}, status=200)
 
