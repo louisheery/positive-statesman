@@ -21,6 +21,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "react-ticker": "^1.2.2",
+    "recharts": "^1.8.5",
     "sort-json-array": "^0.1.7",
     "style-loader": "^1.1.3"
   },
