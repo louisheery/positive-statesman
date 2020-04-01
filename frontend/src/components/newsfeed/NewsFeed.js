@@ -35,60 +35,83 @@ class NewsFeed extends Component {
                 QUERY_UK: ['', 'Trending in UK', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
                 QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
 
-                QUERY_ARTARTICLES: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_BUSINESSARTICLES: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                QUERY_POLITICSARTICLES: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                QUERY_SCIENCEARTICLES: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
-                QUERY_SPORTARTICLES: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                QUERY_TECHARTICLES: ['/tech', 'Technology', { category: 'iab-qagIAB19', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                QUERY_TRAVELARTICLES: ['/travel', 'Travel', { category: 'iab-qagIAB20', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
+                x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
+                x219: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
+                x212: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
+                x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
+                x84: ['/tech', 'Technology', { category: 'iab-qagIAB19', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
+                x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
             },
         }
 
-        if (categoryId === '') {
-            this.childState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_BUSINESSARTICLES, this.state.newsFeedDictionary.QUERY_POLITICSARTICLES, this.state.newsFeedDictionary.QUERY_SPORTARTICLES, this.state.newsFeedDictionary.QUERY_TECHARTICLES, this.state.newsFeedDictionary.QUERY_SCIENCEARTICLES, this.state.newsFeedDictionary.QUERY_ARTARTICLES, this.state.newsFeedDictionary.QUERY_TRAVELARTICLES,]
-            }
-        } else {
-            this.childState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
-            }
+        //var data = [['a', 'b', 'c'], ['d', 'e', 'f'], ['h', 'i', 'j']]
 
-        }
+        //var iabvalues = this.props.userCategories.map(x => { 'this.state.newsFeedDictionary.' + x[2] })
+
     }
 
     static propTypes = {
-        userCategories: PropTypes.string,
-        userPublishers: PropTypes.string,
+        userCategories: PropTypes.array,
+        userPublishers: PropTypes.array,
     }
 
     render() {
 
-        const { classes } = this.props;
+        const { classes, categoryId } = this.props;
 
-        return (
-            <div className={classes.grid}>
+        var newsFeedState;
 
-                <NewsFeedHeader categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
-                
-                
-                {
-                    this.childState.newsFeedRow.map((newsFeedRow, i) => {
-                        return (
-                            <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} itemColor={newsFeedRow[3]} />
-                        );
-                    })
+        if (this.props.categoryId === '') {
+
+            if (this.props.userCategories == null) {
+
+                newsFeedState = {
+
+                    newsFeedRow: [this.state.newsFeedDictionary.x219, this.state.newsFeedDictionary.x237, this.state.newsFeedDictionary.x128, this.state.newsFeedDictionary.x84, this.state.newsFeedDictionary.x212, this.state.newsFeedDictionary.x180, this.state.newsFeedDictionary.x181,]
+
+
                 }
-            </div>
-        )
+            } else {
+                newsFeedState = {
+
+                    newsFeedRow: this.props.userCategories.map(x => { 'this.state.newsFeedDictionary.x' + x[0] })
+                }
+            }
+        } else {
+            newsFeedState = {
+                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
+            }
+        }
+
+      
+
+        
+
+
+            return (
+                <div className={classes.grid}>
+
+                    <NewsFeedHeader categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+
+
+                    {
+                        newsFeedState.newsFeedRow.map((newsFeedRow, i) => {
+                            return (
+                                <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} itemColor={newsFeedRow[3]} />
+                            );
+                        })
+                    }
+                </div>
+            )
+        }
     }
-}
 
-const mapStateToProps = state => {
-    return {
-        userCategories: state.reducer.userCategories,
-        userPublishers: state.reducer.userPublishers
+    const mapStateToProps = state => {
+        return {
+            userCategories: state.reducer.userCategories,
+            userPublishers: state.reducer.userPublishers
+        };
     };
-};
 
-export default connect(mapStateToProps, { })(withStyles(styles)(NewsFeed))
+    export default connect(mapStateToProps, { })(withStyles(styles)(NewsFeed))

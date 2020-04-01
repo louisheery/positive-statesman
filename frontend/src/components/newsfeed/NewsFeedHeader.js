@@ -30,7 +30,7 @@ class NewsFeedHeader extends Component {
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
 
-        var topArticles = await fetchArticles({ limit: 6, offset: 1, category: this.props.categoryId, sentiment_score_min: 0.5 })
+        var topArticles = await fetchArticles({ limit: 6, offset: 1, sentiment_score_min: 0.5 })
         this.setState({ topArticles: topArticles })
     }
 

@@ -121,19 +121,18 @@ class Profile extends React.Component {
     }
 
     handleClickCategory = event => {
-        this.setState({ openMenuCategory: true, anchorElCategory: event.currentTarget }, this.handleSubmit);
+        this.setState({ openMenuCategory: !this.state.openMenuCategory, anchorElCategory: event.currentTarget });
     };
 
     handleClickPublisher = event => {
-        this.setState({ openMenuPublisher: true, anchorElPublisher: event.currentTarget }, this.handleSubmit);
+        this.setState({ openMenuPublisher: !this.state.openMenuPublisher, anchorElPublisher: event.currentTarget })};
+
+    handleRequestClose = () => {
+        this.setState({ openMenuCategory: !this.state.openMenuCategory, anchorElCategory: null });
     };
 
     handleRequestClose = () => {
-        this.setState({ openMenuCategory: false, anchorElCategory: null }, this.handleSubmit);
-    };
-
-    handleRequestClose = () => {
-        this.setState({ openMenuPublisher: false, anchorElPublisher: null }, this.handleSubmit);
+        this.setState({ openMenuPublisher: !this.state.openMenuPublisher, anchorElPublisher: null });
     };
 
 
@@ -180,7 +179,7 @@ class Profile extends React.Component {
                                                 anchorEl={this.state.anchorElCategory}
                                                 open={this.state.openMenuCategory}
                                                 keepMounted
-                                                onClose={() => this.setState({ openMenuCategory: false })}
+                                                onClose={(e) => this.setState({ openMenuCategory: !this.state.openMenuCategory })}
                                             >
                                                 <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
                                                     <Table aria-label="simple table">
@@ -245,7 +244,7 @@ class Profile extends React.Component {
                                                 anchorEl={this.state.anchorElPublisher}
                                                 open={this.state.openMenuPublisher}
                                                 keepMounted
-                                                onClose={() => this.setState({ openMenuPublisher: false })}
+                                                onClose={() => this.setState({ openMenuPublisher: !this.state.openMenuPublisher })}
                                             >
                                                 <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
                                                     <Table aria-label="simple table">
@@ -254,7 +253,7 @@ class Profile extends React.Component {
                                                                 <TableRow key={Math.random()}>
                                                                     <TableCell align="left">{row[1]}</TableCell>
                                                                     <TableCell align="right" padding="checkbox">
-                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[2]); this.setState({ openMenuPublisher: false }) }} aria-label="add">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[2]); this.setState({ openMenuPublisher: !this.state.openMenuPublisher }) }} aria-label="add">
                                                                             <AddIcon />
                                                                         </IconButton>
                                                                     </TableCell>
