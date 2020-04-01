@@ -214,6 +214,8 @@ def popular_category(request):
         # information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
         information = "test"
         return JsonResponse({"info": information}, status=200)
+    else:
+        return JsonResponse({"info": "no method found"}, status=404)
 
 def popular_publisher(request):
     _json = json.loads(request.body)
