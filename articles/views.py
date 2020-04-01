@@ -199,10 +199,12 @@ def popular_category(request):
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
         category = Category.objects.filter(taxonomy_id=_json["id"]).get()
-        request.user.reader.categories.add(category.id)
+        reader = request.user
+        reader = reader.reader
+        reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
-        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
+        category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
         request.user.reader.categories.remove(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':

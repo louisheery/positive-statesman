@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
 
-def index(request):
-    return render(request, 'frontend/index.html')
-
-def category(request, path=None):
+def index(request, path=None):
+    print(path)
     return render(request, 'frontend/index.html')
