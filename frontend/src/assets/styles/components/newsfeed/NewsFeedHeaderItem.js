@@ -46,7 +46,11 @@ const styles = {
     },
 
     positivity: {
-        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', marginLeft: '10%', marginRight: '10%', margin: '5px'
+        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px'
+    },
+
+    shareButton: {
+        borderRadius: '5px', backgroundColor: '#3b5998', margin: '5px'
     }
 
 
