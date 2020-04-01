@@ -211,8 +211,9 @@ def popular_category(request):
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
         categories = request.user.reader.categories.get()
-        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
-        return JsonResponse(json.dumps({"info": information}), 200)
+        # information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
+        information = "test"
+        return JsonResponse({"info": information}, 200)
 
 def popular_publisher(request):
     _json = json.loads(request.body)
