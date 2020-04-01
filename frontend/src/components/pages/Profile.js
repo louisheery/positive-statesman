@@ -36,17 +36,59 @@ class Profile extends React.Component {
         super(props)
 
         this.state = {
-            AuserCategories: [[0, 'Business'], [1, 'Politics']],
+            userCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1']],
             AuserPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
-            AallCategories: [['iab-qagIAB1', 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
-            AallPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
+            //AallCategories: [['iab-qagIAB1', 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
+            allCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3'], ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'], ['/science', 'Science', 'iab-qagIAB15'], ['/sport', 'Sport', 'iab-qagIAB17'], ['/tech', 'Technology', 'iab-qagIAB19'], ['/travel', 'Travel', 'iab-qagIAB20'],],
+            //AallPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
+            allPublishers: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3']],
             openMenuCategory: false,
             openMenuPublisher: false,
             anchorElCategory: undefined,
             anchorElPublisher: undefined,
-            
+
         }
     }
+
+    /*
+    const categoryDictionary = {
+        ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
+        BUSINESS: ['/business', 'Business', 'iab-qagIAB3'],
+        POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
+        SCIENCE: ['/science', 'Science', 'iab-qagIAB15'],
+        SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
+        TECH: ['/tech', 'Technology', 'iab-qagIAB19'],
+        TRAVEL: ['/travel', 'Travel', 'iab-qagIAB20'],
+        }
+    */
+    /*
+    [['iab-qagIAB1','Arts & Entertainment'],
+    ['iab-qagIAB2','Automotive'],
+    ['iab-qagIAB3','Business'],
+    ['iab-qagIAB4','Careers'],
+    ['iab-qagIAB5','Education'],
+    ['iab-qagIAB6','Family & Parenting'],
+    ['iab-qagIAB7','Health & Fitness'],
+    ['iab-qagIAB8','Food & Drink'],
+    ['iab-qagIAB9','Hobbies & Interests'],
+    ['iab-qagIAB10','Home & Garden'],
+    ['iab-qagIAB11','Law, Gov’t & Politics'],
+    ['iab-qagIAB12','News'],
+    ['iab-qagIAB13','Personal Finance'],
+    ['iab-qagIAB14','Society'],
+    ['iab-qagIAB15','Science'],
+    ['iab-qagIAB16','Pets'],
+    ['iab-qagIAB17','Sports'],
+    ['iab-qagIAB18','Style & Fashion'],
+    ['iab-qagIAB19','Technology & Computing'],
+    ['iab-qagIAB20','Travel'],
+    ['iab-qagIAB21','Real Estate'],
+    ['iab-qagIAB22','Shopping'],
+    ['iab-qagIAB23','Religion & Spirituality'],
+    ['iab-qagIAB24','Uncategorized'],
+    ['iab-qagIAB25','Non,Standard Content'],
+    ['iab-qagIAB26','Illegal Content']]
+    */
 
     static propTypes = {
         userData: PropTypes.func.isRequired,
@@ -66,7 +108,7 @@ class Profile extends React.Component {
     }
 
     onSubmitDelete(type, id) {
-        // this.props.userData('DELETE', type, id);
+        this.props.userData('DELETE', type, id);
         store.dispatch(userData());
 
         // THIS SHOULD THEN REFRESH THE TABLE
@@ -112,7 +154,7 @@ class Profile extends React.Component {
 
                     <div>
 
-                        
+
 
                         <TableContainer component={Paper} style={{ maxWidth: 800 }}>
                             <Table aria-label="simple table">
@@ -133,11 +175,11 @@ class Profile extends React.Component {
                                                 <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
                                                     <Table aria-label="simple table">
                                                         <TableBody>
-                                                            {this.state.AallCategories.map((row) => (
+                                                            {this.state.allCategories.map((row) => (
                                                                 <TableRow key={Math.random()}>
                                                                     <TableCell align="left">{row[1]}</TableCell>
                                                                     <TableCell align="right" padding="checkbox">
-                                                                        <IconButton onClick={() => {this.onSubmitAdd('category', row[0]); this.setState( { openMenuCategory: false })}} aria-label="add">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('category', row[2]); this.setState({ openMenuCategory: false }) }} aria-label="add">
                                                                             <AddIcon />
                                                                         </IconButton>
                                                                     </TableCell>
@@ -152,11 +194,11 @@ class Profile extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.AuserCategories.map((row) => (
+                                    {this.state.userCategories.map((row) => (
                                         <TableRow key={Math.random()}>
                                             <TableCell align="left">{row[1]}</TableCell>
                                             <TableCell align="right" padding="checkbox">
-                                                <IconButton onClick={this.onSubmitDelete('category', row[0])} aria-label="delete">
+                                                <IconButton onClick={() => {this.onSubmitDelete('category', row[2])}} aria-label="delete">
                                                     <DeleteIcon />
                                                 </IconButton>
                                             </TableCell>
@@ -171,7 +213,7 @@ class Profile extends React.Component {
 
 
 
-
+                    {/*
 
                     <div>
 
@@ -195,11 +237,11 @@ class Profile extends React.Component {
                                                 <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
                                                     <Table aria-label="simple table">
                                                         <TableBody>
-                                                            {this.state.AallPublishers.map((row) => (
+                                                            {this.state.allPublishers.map((row) => (
                                                                 <TableRow key={Math.random()}>
                                                                     <TableCell align="left">{row[1]}</TableCell>
                                                                     <TableCell align="right" padding="checkbox">
-                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[0]); this.setState({ openMenuPublisher: false }) }} aria-label="add">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[2]); this.setState({ openMenuPublisher: false }) }} aria-label="add">
                                                                             <AddIcon />
                                                                         </IconButton>
                                                                     </TableCell>
@@ -229,11 +271,13 @@ class Profile extends React.Component {
                             </Table>
                         </TableContainer>
                     </div>
-
+*/}
 
 
                 </Container>
             </div>
+
+
         )
     }
 }
