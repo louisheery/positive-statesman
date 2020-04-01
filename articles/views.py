@@ -204,7 +204,7 @@ def popular_category(request):
     if request.method == 'GET':
         categories = request.user.reader.popular_categories.all()
         information = [{"name": category.name,"id": category.id} for category in categories]
-        return JsonResponse(information, 200) 
+        return JsonResponse(information, 200)
 
 def popular_publisher(request):
     _json = json.loads(request.body)
@@ -219,4 +219,4 @@ def popular_publisher(request):
     if request.method == 'GET':
         publishers = request.user.reader.popular_publisher.all()
         information = [{"name": category.name,"id": category.id} for category in publishers]
-        return JsonResponse(information, 200) 
+        return JsonResponse(information, 200)

@@ -14,9 +14,10 @@ import withWidth from '@material-ui/core/withWidth';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import { FacebookShareButton, FacebookIcon } from "react-share";
+import { FacebookShareButton, FacebookShareCount } from "react-share";
 import ShareIcon from '@material-ui/icons/Share';
 import Button from '@material-ui/core/Button'
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -49,19 +50,27 @@ class NewsFeedHeaderItem extends Component {
                         <ArticleVote articleId={article.id} />
                     </span>
 
-                    <span className={classes.alignLeft} >
-                        <p className={classes.positivity} style={{ width: '80%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
+                    
+                        <p className={classes.positivity} style={{ display: 'inline-block', width: '40%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
                             {score}%
                             <Hidden smDown>
                                 {" Positive"}
                             </Hidden>
                         </p>
+
+                    <p className={classes.positivity} style={{ display: 'inline-block', width: '30%'}}>
+                        Share <FacebookIcon />
+                    </p>
+
+
+                    <p style={{ display: 'inline-block', width: '30%'}}>
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
-                            <Button style={{ color: 'white', padding: '-4px'}}>
-                                Share <ShareIcon />
+                            <Button>
+                            <FacebookIcon style={{height: '10px'}}/><FacebookShareCount url={article.url} />
                             </Button>
                         </FacebookShareButton>
-                    </span>
+                        </p>
+             
 
                     
                     
