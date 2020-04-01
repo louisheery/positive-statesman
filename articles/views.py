@@ -196,11 +196,11 @@ def popular_category(request):
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
-        category = Category.objects.all().filter(taxonomy_id=_json["id"])
+        category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
         request.user.reader.popular_categories.add(category.ID)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
-        category = Category.objects.all().filter(taxonomy_id=_json["id"])
+        category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
         request.user.reader.popular_categories.remove(category.ID)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
