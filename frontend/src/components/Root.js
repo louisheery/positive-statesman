@@ -29,13 +29,13 @@ const theme = createMuiTheme({
 )
 
 const categoryDictionary = {
-    ART: ['/arts', 'Art, Culture & Entertainment', 'iptc-qagIAB1'],
-    BUSINESS: ['/business', 'Business', 'iptc-qagIAB3'],
-    POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-    SCIENCE: ['/science', 'Science', 'iptc-qagIAB15'],
-    SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['/tech', 'Technology', 'iptc-qagIAB19'],
-    TRAVEL: ['/travel', 'Travel', 'iptc-qagIAB20'],
+    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
+    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
+    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
+    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
+    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
+    TECH: ['technology', 'Technology', 'iab-qagIAB19'],
+    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 }
 
 class Root extends Component {
@@ -54,7 +54,7 @@ class Root extends Component {
                                 return (
                                     <Route
                                         key={i}
-                                        path={categoryDictionary[key][0]}
+                                        exact path={`/categories/${categoryDictionary[key][0]}`}
                                         render={props => (
                                             <div>
                                                 <Category

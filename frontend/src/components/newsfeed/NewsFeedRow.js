@@ -8,13 +8,15 @@ import moment from 'moment';
 
 // INTERNAL REACT COMPONENTS
 import ArticleVote from './ArticleVote';
+import NewsFeedRowItem from './NewsFeedRowItem';
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
+import Grid from '@material-ui/core/Grid';
+import withWidth from '@material-ui/core/withWidth';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
-import withWidth from '@material-ui/core/withWidth';
 import Link from '@material-ui/core/Link';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
@@ -23,6 +25,8 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeedRow.js';
 
 class NewsFeedRow extends Component {
+
+    _isMounted = false;
 
     constructor(props) {
         super(props)
@@ -34,6 +38,9 @@ class NewsFeedRow extends Component {
     }
 
     async componentDidMount() {
+
+        this._isMounted = true;
+
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
@@ -45,8 +52,14 @@ class NewsFeedRow extends Component {
         */
 
         var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
-        this.setState({ articles: fetchedArticles })
+        if (this._isMounted) {
+            this.setState({ articles: fetchedArticles })
+        }
 
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
 
@@ -64,25 +77,6 @@ class NewsFeedRow extends Component {
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.articles, 'sentiment_score').reverse();
 
-        var numberRowColumns;
-
-        switch (this.props.width) {
-            case 'xs':
-                numberRowColumns = 1;
-                break;
-            case 'sm':
-                numberRowColumns = 2;
-                break;
-            case 'md':
-                numberRowColumns = 3;
-                break;
-            case 'lg':
-                numberRowColumns = 4;
-                break;
-            default:
-                numberRowColumns = 5;
-                break;
-        }
 
         return (
             <div className={classes.container}>
@@ -90,82 +84,14 @@ class NewsFeedRow extends Component {
                 <NavLink to={`/${this.props.newsFeedRow}`} className={classes.rowTitle}>
                     <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
                 </NavLink>
-                <div>
-                    <GridList className={classes.gridList} cellHeight={150} rows={2} cols={numberRowColumns} spacing={20}>
-
+                <div className={classes.subContainer}>
+                    <Grid container className={classes.gridList}>
                         {
-                            sortedArticles.map((article, i) => {
-
-                                var positivityTextStyle
-
-                                var positivityScorePcnt = Math.round(((article.sentiment_score + 1) * 100 / 2));
-
-                                if (positivityScorePcnt > 70) {
-                                    positivityTextStyle = { color: 'green' };
-                                }
-                                else if (positivityScorePcnt > 50) {
-                                    positivityTextStyle = { color: 'orange' };
-                                }
-                                else {
-                                    positivityTextStyle = { color: 'red' };
-                                }
-
-                                return (
-
-
-                                    <GridListTile key={Math.random() + i} cols={1} rows={1}>
-                                        <Link href={article.url}>
-                                            <GridListTileBar
-                                                style={{ backgroundColor: 'white' }}
-
-                                                title={<span>{article.title}</span>}
-                                                titlePosition='top'
-                                                rows={3}
-                                                classes={{
-                                                    root: classes.otherTopArticleRoot,
-                                                    title: classes.otherTopArticleTitle,
-                                                }}
-                                            />
-                                        </Link>
-
-                                        <GridListTileBar
-                                            style={{ backgroundColor: 'white' }}
-                                            subtitle={<span><span style={{ float: 'left', display: 'inline-block', marginTop: '10px' }}>{article.publisher}</span><span style={{ float: 'right', marginTop: '10px' }}>{moment(`${article.publish_date}`).fromNow()}</span></span>}
-                                            rows={3}
-                                            classes={{
-                                                root: classes.otherTopArticleSecondaryRoot,
-                                                subtitle: classes.otherTopArticleSecondarySubtitle,
-                                            }}
-                                        />
-
-
-                                        <GridListTileBar
-                                            style={{ backgroundColor: 'white' }}
-                                            className={classes.voteBar}
-                                            titlePosition="bottom"
-                                            title={
-                                                <div className={classes.otherArticleTileVoteDiv}>
-                                                    <span style={{ float: 'left', display: 'inline-block' }}>
-
-                                                        <ArticleVote articleId={article.id} />
-
-                                                    </span>
-                                                    <span style={{ float: 'right', display: 'inline-block' }}>
-
-                                                        <Button className={classes.positivityScore} variant="outlined" color="primary" disableElevation disabled>
-                                                            <span role="img" style={positivityTextStyle}>{positivityScorePcnt}%</span>
-                                                        </Button>
-
-                                                    </span>
-                                                </div>
-                                            }
-                                        />
-                                    </GridListTile>
-
-                                )
+                            sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
+                                return (<NewsFeedRowItem key={i} article={article} itemColor={this.props.itemColor} />)
                             })
                         }
-                    </GridList>
+                    </Grid>
                 </div>
             </div>
 

@@ -114,6 +114,12 @@ python3 manage.py createsuperuser
 
 8. Please don't delete anything!!!
 
+## How to seed database with categories
+Navigate to the root directory and run the following command 
+```
+python manage.py seed_categories
+```
+
 ## How to print an ER-Diagram
 
 1. Install: brew install graphviz
