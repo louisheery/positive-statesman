@@ -172,6 +172,7 @@ def signup(request):
         user.save()
         reader = Reader(user=user)
         reader.save()
+        user = auth.authenticate(request, username=_json["username"], password=_json["password"])
         return JsonResponse({"success": "success"}, status=200)
 
 @csrf_exempt
@@ -204,7 +205,7 @@ def popular_category(request):
         reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
-        category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
+        category = Category.objects.all().filter(taxonomy_id=_json["id"]).get()
         request.user.reader.categories.remove(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
