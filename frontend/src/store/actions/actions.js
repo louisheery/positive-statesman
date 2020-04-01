@@ -162,7 +162,7 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
             } else {
                 // ELSE: If was an ADD/DELETE Request
                 // then GET Updated Dataset; and save to Redux Store.
-                userData('GET', dataType, null);
+                userData(requestType, dataType, null);
             }
 
         } else if (response.status == 500) {
