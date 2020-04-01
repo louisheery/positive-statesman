@@ -150,6 +150,10 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
         },
         body: requestType == 'GET' ? JSON.stringify({}) : JSON.stringify({"id": dataId})
     }).then((response) => {
+
+        console.log("DATA SUCCESS", response);
+
+
         if (response.status == 200) {
             console.log("DATA SUCCESS", response);
 
@@ -165,6 +169,7 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
             //dispatch({ type: LOGIN_FALSE })
             console.log("AUTHENTICATION ERROR for DATA", response);
         }
+
     }
     ).catch(() => {
         console.log("DATA ERROR");
