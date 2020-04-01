@@ -216,7 +216,6 @@ def article_average(request):
         try:
             begin_date = tz.localize(datetime.strptime(begin_date, '%Y-%m-%d'))
             end_date = tz.localize(datetime.strptime(end_date, '%Y-%m-%d'))
-            print('Begin: ', begin_date)
         except:
             return JsonResponse({"msg": "Incorrect date representation."}, status=405)
 
@@ -267,6 +266,41 @@ def article_average(request):
                 cur_date += timedelta(days=1)
 
             return JsonResponse(count_list, status=200, safe=False)
+
+        elif param == 'locations':
+            score_matrix = np.zeros(7)
+            cur_date = begin_date
+            cat = ['North America', 'South America', 'Africa', 'Europe', 'Asia', 'Oceania', 'Antarctica']
+            count_list = []
+
+            while cur_date <= end_date:
+
+                timed_articles = articles.filter(publish_date__gte=cur_date, publish_date__lte = cur_date+timedelta(days=1))
+                
+                for i in range(0,7):
+                    cat_articles = timed_articles.filter(locations__name=cat[i])
+                    
+                    if not cat_articles:
+                        score_matrix[i] = 0
+                    else:
+                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))['sentiment_score__avg']
+
+                count_dict={"date": cur_date.strftime("%Y-%m-%d"),
+                            "north america": score_matrix[0],
+                            "south america": score_matrix[1],
+                            "europe": score_matrix[2],
+                            "asia": score_matrix[3],
+                            "africa": score_matrix[4],
+                            "oceania": score_matrix[5],
+                            "antarctica": score_matrix[6]
+                }
+
+                count_list.append(count_dict)
+
+                cur_date += timedelta(days=1)
+
+            return JsonResponse(count_list, status=200, safe=False)
+
 
         else:
             return JsonResponse({"msg": "Not yet implemented"}, status=405)
