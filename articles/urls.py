@@ -8,6 +8,7 @@ urlpatterns = [
     path('fetch-articles/', views.fetch_articles),
     path('user-feedback/', views.user_feedback),
     path('submit-article/', views.submit_article),
+    path('analytics/', views.article_average),
 ]
 
 '''
