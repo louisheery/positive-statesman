@@ -38,7 +38,7 @@ class Profile extends React.Component {
         this.state = {
             AuserCategories: [[0, 'Business'], [1, 'Politics']],
             AuserPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
-            AallCategories: [[0, 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
+            AallCategories: [['iab-qagIAB1', 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
             AallPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
             openMenuCategory: false,
             openMenuPublisher: false,
@@ -59,7 +59,7 @@ class Profile extends React.Component {
     }
 
     onSubmitAdd(type, id) {
-        // this.props.userData('POST', type, id);
+        this.props.userData('POST', type, id);
         store.dispatch(userData());
 
         // THIS SHOULD THEN REFRESH THE TABLE

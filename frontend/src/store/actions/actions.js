@@ -139,13 +139,16 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
 
     console.log("User data being fetched/edited");
 
+    var csrftoken = getCookie('csrftoken');
+
     fetch(`/api/popular/category/`, {
         method: requestType,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         },
-        body: requestType == 'GET' ? {} : {"id": dataId}
+        body: requestType == 'GET' ? JSON.stringify({}) : JSON.stringify({"id": dataId})
     }).then((response) => {
         if (response.status == 200) {
             console.log("DATA SUCCESS", response);
