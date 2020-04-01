@@ -14,6 +14,9 @@ import withWidth from '@material-ui/core/withWidth';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import { FacebookShareButton, FacebookIcon } from "react-share";
+import ShareIcon from '@material-ui/icons/Share';
+import Button from '@material-ui/core/Button'
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -53,7 +56,14 @@ class NewsFeedRowItem extends Component {
                                 {" Positive"}
                             </Hidden>
                         </p>
+
+                        <FacebookShareButton url={article.url} quote={article.title} className="share">
+                            <Button style={{ color: 'white', padding: '-4px' }}>
+                                Share <ShareIcon />
+                            </Button>
+                        </FacebookShareButton>
                     </span>
+                    
                 </Paper>
             </Grid>
 

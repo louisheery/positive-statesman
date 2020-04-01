@@ -42,7 +42,7 @@ const styles = {
     },
 
     alignLeft: {
-        float: 'left', display: 'inline', width: '100%'
+        float: 'left', display: 'inline-block', width: '100%'
     },
 
     positivity: {
