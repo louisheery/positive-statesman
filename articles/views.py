@@ -195,22 +195,23 @@ def logout(request):
         return JsonResponse({"success": "success"}, status=200)
 
 def popular_category(request):
-    _json = json.loads(request.body)
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
+        _json = json.loads(request.body)
         category = Category.objects.filter(taxonomy_id=_json["id"]).get()
         reader = request.user
         reader = reader.reader
         reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
+        _json = json.loads(request.body)
         category = Category.objects.filter(taxonomy_id=_json["id"]).get()
         request.user.reader.categories.remove(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
         categories = request.user.reader.categories.all()
-        information = [{"name": category.name,"id": category.id} for category in categories]
+        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
         return JsonResponse(information, 200)
 
 def popular_publisher(request):
