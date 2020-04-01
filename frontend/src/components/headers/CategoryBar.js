@@ -11,12 +11,12 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/headers/CategoryBar.js';
 
 const CATEGORIES = ["business",
-                    "politics",
-                    "sport",
-                    "arts",
-                    "science",
-                    "technology",
-                    "travel"]
+    "politics",
+    "sport",
+    "arts",
+    "science",
+    "technology",
+    "travel"]
 
 class CategoryBar extends Component {
 
@@ -26,15 +26,15 @@ class CategoryBar extends Component {
             <div>
                 <Tabs
                     className={classes.tabs}
-                    value={this.props.location.pathname}
+                    value={this.props.location.pathname.slice(0, 12) === "/categories/" || this.props.location.pathname.length === 1 ? this.props.location.pathname : false}
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
 
                     {CATEGORIES.map((cat, i) => {
-                        return <Tab className={classes.tab} component={Link} to={`/categories/${cat}`} value={`/categories/${cat}`} label={cat.replace(/^\w/, c => c.toUpperCase())} key={i}/>
+                        return <Tab className={classes.tab} component={Link} to={`/categories/${cat}`} value={`/categories/${cat}`} label={cat.replace(/^\w/, c => c.toUpperCase())} key={i} />
                     })}
-                    
+
                 </Tabs>
             </div>
         )
