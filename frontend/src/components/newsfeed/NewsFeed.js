@@ -1,6 +1,14 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
 
+// REDUX LIBRARIES
+import reducer from '../../store/reducers/reducer';
+import { connect, Provider } from 'react-redux';
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import store from "../../store/store";
+import { userData, avaliableData } from '../../store/actions/actions';
+
 // INTERNAL REACT COMPONENTS
 import NewsFeedRow from './NewsFeedRow';
 import NewsFeedHeader from './NewsFeedHeader';
@@ -8,6 +16,7 @@ import NewsFeedHeader from './NewsFeedHeader';
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeed.js';
+import Typography from 'material-ui/styles/typography';
 
 class NewsFeed extends Component {
 
@@ -48,6 +57,10 @@ class NewsFeed extends Component {
         }
     }
 
+    static propTypes = {
+        userCategories: PropTypes.string,
+        userPublishers: PropTypes.string,
+    }
 
     render() {
 
@@ -57,6 +70,8 @@ class NewsFeed extends Component {
             <div className={classes.grid}>
 
                 <NewsFeedHeader categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+                
+                
                 {
                     this.childState.newsFeedRow.map((newsFeedRow, i) => {
                         return (
@@ -69,4 +84,11 @@ class NewsFeed extends Component {
     }
 }
 
-export default withStyles(styles)(NewsFeed)
+const mapStateToProps = state => {
+    return {
+        userCategories: state.reducer.userCategories,
+        userPublishers: state.reducer.userPublishers
+    };
+};
+
+export default connect(mapStateToProps, { })(withStyles(styles)(NewsFeed))
