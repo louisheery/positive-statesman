@@ -98,18 +98,19 @@ class Profile extends React.Component {
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
         //store.dispatch(avaliableData());
+        store.dispatch(userData('GET', 'category'))
     }
 
     onSubmitAdd(type, id) {
         this.props.userData('POST', type, id);
-        store.dispatch(userData());
+        store.dispatch(userData('GET', type));
 
         // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     onSubmitDelete(type, id) {
         this.props.userData('DELETE', type, id);
-        store.dispatch(userData());
+        store.dispatch(userData('GET', type));
 
         // THIS SHOULD THEN REFRESH THE TABLE
     }
@@ -144,6 +145,7 @@ class Profile extends React.Component {
 
         return (
             <div>
+                {console.log('APPLE', userData('GET', 'category'))}
 
                 <Container className={classes.container} maxWidth="lg" align="center" >
 
