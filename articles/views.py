@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from articles.models import Article, Category, Publisher
+from articles.models import Article, Category, Publisher, Reader
 from articles.serializers import ArticleSerializer
 from articles import article_fetch
 from rest_framework import status
@@ -170,6 +170,8 @@ def signup(request):
     if request.method == 'POST':
         user = User.objects.create_user(_json["username"],_json["email"], _json["password"])
         user.save()
+        reader = Reader(user=user)
+        reader.save()
         return JsonResponse({"success": "success"}, status=200)
 
 @csrf_exempt
@@ -196,15 +198,17 @@ def popular_category(request):
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
-        category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
-        request.user.reader.popular_categories.add(category.ID)
+        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
+        reader = request.user
+        reader = reader.reader
+        reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
         category = Category.objects.all().filter(taxonomy_id=_json["id"])[0]
-        request.user.reader.popular_categories.remove(category.ID)
+        request.user.reader.categories.remove(category.id)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
-        categories = request.user.reader.popular_categories.all()
+        categories = request.user.reader.categories.all()
         information = [{"name": category.name,"id": category.id} for category in categories]
         return JsonResponse(information, 200)
 
