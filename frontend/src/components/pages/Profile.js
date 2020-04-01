@@ -25,7 +25,7 @@ import { connect, Provider } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import store from "../../store/store";
-import { userData, avaliableData } from '../../store/actions/actions';
+import { userData, userGETData, avaliableData } from '../../store/actions/actions';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -92,25 +92,26 @@ class Profile extends React.Component {
 
     static propTypes = {
         userData: PropTypes.func.isRequired,
+        userGETData: PropTypes.func.isRequired,
         avaliableData: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
         //store.dispatch(avaliableData());
-        store.dispatch(userData('GET', 'category'))
+        this.props.userData('GET', 'category');
     }
 
     onSubmitAdd(type, id) {
         this.props.userData('POST', type, id);
-        store.dispatch(userData('GET', type));
-
+        //this.props.userData('GET', type, null);
+        this.props.userGETData('GET', type);
         // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     onSubmitDelete(type, id) {
         this.props.userData('DELETE', type, id);
-        store.dispatch(userData('GET', type));
+        //store.dispatch(userData('GET', type));
 
         // THIS SHOULD THEN REFRESH THE TABLE
     }
@@ -290,4 +291,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { userData, avaliableData })(withStyles(styles)(Profile))
+export default connect(mapStateToProps, { userData, userGETData, avaliableData })(withStyles(styles)(Profile))

@@ -139,6 +139,8 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
 
     console.log("User data being fetched/edited");
 
+    console.log("8888888", requestType, dataType, dataId, "888");
+
     var csrftoken = getCookie('csrftoken');
 
     fetch(`/api/popular/category/`, {
@@ -151,18 +153,24 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
         body: requestType == 'GET' ? JSON.stringify({}) : JSON.stringify({"id": dataId})
     }).then((response) => {
 
-        console.log("DATA SUCCESS", response);
+        console.log("DATA SUCCESS9990909", response);
 
-
+        
         if (response.status == 200) {
             console.log("DATA SUCCESS", response);
+            console.log("JASDHSAKDHSAKDJ", response.status);
+            console.log("000", response.data)
 
+            console.log("APPLE", requestType)
             if (requestType == 'GET') {
+                
+                console.log("66666666666");
                 dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: response.data, });
             } else {
                 // ELSE: If was an ADD/DELETE Request
                 // then GET Updated Dataset; and save to Redux Store.
-                userData(requestType, dataType, null);
+                console.log("@@@");
+                //this.userData('GET', dataType, null);
             }
 
         } else if (response.status == 500) {
@@ -173,6 +181,56 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
     }
     ).catch(() => {
         console.log("DATA ERROR");
+    });
+
+}
+
+
+export const userGETData = (requestType, dataType) => (dispatch, getState) => {
+
+    console.log("User data being fetched/editedwq890123901283");
+
+    console.log("8888888", requestType, dataType, "888");
+
+    var csrftoken = getCookie('csrftoken');
+
+    fetch(`/api/popular/category/`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+    }).then((response) => {
+
+        console.log("DATA123128039 SUCCESS9990909", response);
+
+
+        if (response.status == 200) {
+            console.log("DATA SUCCESS", response);
+            console.log("JASDHSAKDHSAKDJ", response.status);
+            console.log("000", response.data)
+
+            console.log("APPLE", requestType)
+            if (requestType == 'GET') {
+
+                console.log("66666666666");
+                dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: response.data, });
+            } else {
+                // ELSE: If was an ADD/DELETE Request
+                // then GET Updated Dataset; and save to Redux Store.
+                console.log("@@@");
+                //this.userData('GET', dataType, null);
+            }
+
+        } else if (response.status == 500) {
+            //dispatch({ type: LOGIN_FALSE })
+            console.log("AUTHENTICATION ERROR for DATA", response);
+        }
+
+    }
+    ).catch((response) => {
+        console.log("111DATA ERROR", response);
     });
 
 }
