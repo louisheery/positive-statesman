@@ -1,7 +1,7 @@
 // REACT LIBRARIES
 import React, { Component } from 'react'
 import ReactGA from "react-ga";
-import axois from "axios";
+import axios from 'axios';
 import { withRouter, Redirect } from "react-router-dom";
 
 import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
@@ -150,7 +150,7 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-        body: requestType == 'GET' ? JSON.stringify({}) : JSON.stringify({"id": dataId})
+        body: requestType == 'GET' ? null : JSON.stringify({"id": dataId})
     }).then((response) => {
 
         console.log("DATA SUCCESS9990909", response);
@@ -187,54 +187,94 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
 
 
 export const userGETData = (requestType, dataType) => (dispatch, getState) => {
+    console.log("AA")
+    getAsyncData(dispatch, getState, requestType, dataType)
+}
+
+
+
+async function getAsyncData(dispatch, getState, requestType, dataType) {
+    try {
+        var csrftoken = getCookie('csrftoken');
+
+        const response = await fetch(`/api/popular/category/`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+        })
+        
+        
+        let data = await response.json();
+        var obj = data.info
+        var result = Object.keys(obj).map(function (key) {
+            return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
+        });
+        
+        //.then((response) => response)
+        //console.log("101", data.json(), "101")
+        dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: result });
+        
+    } catch (err) {
+        console.log(err, "101")
+    }
+};
+/*
+
+export function userGETData (dispatch, requestType, dataType) {
+    return async dispatch => {
 
     console.log("User data being fetched/editedwq890123901283");
 
     console.log("8888888", requestType, dataType, "888");
 
+
+    try {
+
     var csrftoken = getCookie('csrftoken');
 
-    fetch(`/api/popular/category/`, {
+    const data = await fetch(`/api/popular/category/`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-    }).then((response) => {
+    }).then((response) => response.data)
 
-        console.log("DATA123128039 SUCCESS9990909", response);
+    console.log("ZZ", data)
+    
 
+        if (data.status == 200) {
+            //console.log("11111DATA SUCCESS", data.json());
+            console.log("11111JASDHSA123KDHSAKDJ", data.status);
+            console.log("000", data.info)
 
-        if (response.status == 200) {
-            console.log("DATA SUCCESS", response);
-            console.log("JASDHSAKDHSAKDJ", response.status);
-            console.log("000", response.data)
+                console.log("APPLE", requestType)
+                if (requestType == 'GET') {
 
-            console.log("APPLE", requestType)
-            if (requestType == 'GET') {
+                    console.log("66666666666");
+                    dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: data.data, });
+                } else {
+                    // ELSE: If was an ADD/DELETE Request
+                    // then GET Updated Dataset; and save to Redux Store.
+                    console.log("@@@");
+                    //this.userData('GET', dataType, null);
+                }
 
-                console.log("66666666666");
-                dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: response.data, });
-            } else {
-                // ELSE: If was an ADD/DELETE Request
-                // then GET Updated Dataset; and save to Redux Store.
-                console.log("@@@");
-                //this.userData('GET', dataType, null);
+        } else if (data.status == 500) {
+                //dispatch({ type: LOGIN_FALSE })
+            console.log("AUTHENTICATION ERROR for DATA", data);
             }
 
-        } else if (response.status == 500) {
-            //dispatch({ type: LOGIN_FALSE })
-            console.log("AUTHENTICATION ERROR for DATA", response);
-        }
-
+    } catch (error) {
+        console.log("111DATA ERROR", error);
     }
-    ).catch((response) => {
-        console.log("111DATA ERROR", response);
-    });
-
 }
-
+}
+*/
 // FUNCTION: Get All Possible Data for Categories/Publishers
 
 export const avaliableData = (dataType) => (dispatch, getState) => {

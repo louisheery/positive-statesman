@@ -99,37 +99,41 @@ class Profile extends React.Component {
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
         //store.dispatch(avaliableData());
-        this.props.userData('GET', 'category');
+        this.props.userGETData('GET', 'category');
     }
 
     onSubmitAdd(type, id) {
         this.props.userData('POST', type, id);
         //this.props.userData('GET', type, null);
+        console.log("777");
         this.props.userGETData('GET', type);
+        this.handleSubmit;
+        
         // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     onSubmitDelete(type, id) {
         this.props.userData('DELETE', type, id);
-        //store.dispatch(userData('GET', type));
+        this.props.userGETData('GET', type);
+        this.handleSubmit;
 
         // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     handleClickCategory = event => {
-        this.setState({ openMenuCategory: true, anchorElCategory: event.currentTarget });
+        this.setState({ openMenuCategory: true, anchorElCategory: event.currentTarget }, this.handleSubmit);
     };
 
     handleClickPublisher = event => {
-        this.setState({ openMenuPublisher: true, anchorElPublisher: event.currentTarget });
+        this.setState({ openMenuPublisher: true, anchorElPublisher: event.currentTarget }, this.handleSubmit);
     };
 
     handleRequestClose = () => {
-        this.setState({ openMenuCategory: false, anchorElCategory: null });
+        this.setState({ openMenuCategory: false, anchorElCategory: null }, this.handleSubmit);
     };
 
     handleRequestClose = () => {
-        this.setState({ openMenuPublisher: false, anchorElPublisher: null });
+        this.setState({ openMenuPublisher: false, anchorElPublisher: null }, this.handleSubmit);
     };
 
 
@@ -144,9 +148,12 @@ class Profile extends React.Component {
             return <Redirect to="/" />;
         }
 
+        
+
         return (
             <div>
-                {console.log('APPLE', userData('GET', 'category'))}
+                {console.log("R", this.props.userCategories)}
+                {console.log('APPLE', userGETData('GET', 'category'))}
 
                 <Container className={classes.container} maxWidth="lg" align="center" >
 
@@ -182,7 +189,7 @@ class Profile extends React.Component {
                                                                 <TableRow key={Math.random()}>
                                                                     <TableCell align="left">{row[1]}</TableCell>
                                                                     <TableCell align="right" padding="checkbox">
-                                                                        <IconButton onClick={() => { this.onSubmitAdd('category', row[2]); this.setState({ openMenuCategory: false }) }} aria-label="add">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('category', row[2]) }} aria-label="add">
                                                                             <AddIcon />
                                                                         </IconButton>
                                                                     </TableCell>
@@ -197,17 +204,20 @@ class Profile extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.userCategories.map((row) => (
+
+                                    {(this.props.userCategories != undefined) &&
+                                    this.props.userCategories.map((row) => (
                                         <TableRow key={Math.random()}>
                                             <TableCell align="left">{row[1]}</TableCell>
                                             <TableCell align="right" padding="checkbox">
-                                                <IconButton onClick={() => {this.onSubmitDelete('category', row[2])}} aria-label="delete">
+                                                <IconButton onClick={() => { this.onSubmitDelete('category', row[2]); this.forceUpdate();}} aria-label="delete">
                                                     <DeleteIcon />
                                                 </IconButton>
                                             </TableCell>
 
                                         </TableRow>
-                                    ))}
+                                    ))
+                                        }
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -287,7 +297,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.reducer.isLoggedIn
+        isLoggedIn: state.reducer.isLoggedIn,
+        userCategories: state.reducer.userCategories,
     };
 };
 
