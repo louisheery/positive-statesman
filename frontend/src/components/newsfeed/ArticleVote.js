@@ -3,14 +3,8 @@ import React, { Component } from 'react';
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import CloseIcon from '@material-ui/icons/Close';
-import Alert from '@material-ui/lab';
-import MuiAlert from '@material-ui/lab/Alert';
 import Typography from '@material-ui/core/Typography';
 import Popover from '@material-ui/core/Popover';
-import moment from 'moment';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';

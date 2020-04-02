@@ -8,7 +8,9 @@ import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Login from './pages/Login'
-import FeedbackButton from './popups/FeedbackButton';
+import FeedbackButton from './popups/FeedbackButton'
+import Search from './pages/Search'
+import Analytics from './pages/Analytics'
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -68,6 +70,8 @@ class Root extends Component {
                                     />
                                 )
                             })}
+                        <Route path="/search/" render={props => <div><Search /></div>} />
+                        <Route path="/analytics/" render={props => <div><Analytics /></div>} />
                         <Route
                             exact path="/"
                             render={props => (
