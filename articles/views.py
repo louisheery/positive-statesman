@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Avg
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
@@ -10,6 +10,9 @@ from articles.serializers import ArticleSerializer
 from articles import article_fetch
 from rest_framework import status
 import json
+from datetime import datetime, timedelta
+import numpy as np
+import pytz
 
 
 def valid_filter(param):
@@ -64,8 +67,8 @@ def article_filter(request):
         else:
             return articles
 
-            #articles = serializers.serialize('json', articles)
-            #serializer = ArticleSerializer(articles, many=True)
+            # articles = serializers.serialize('json', articles)
+            # serializer = ArticleSerializer(articles, many=True)
             # print(serializer)
             # return JsonResponse(serializer.data, safe=False)
 
@@ -157,14 +160,14 @@ def submit_article(request):
 
     return article_fetch.save_article(url)
 
+
 def search_articles(request):
-    
-    """ 
-    Function to return title and snippet search results of a given request 
-    
+    """
+    Function to return title and snippet search results of a given request
+
     Args:
         request: as the frontend request
-    
+
     Returns:
         JsonResponse: The matched articles
     """
@@ -176,7 +179,8 @@ def search_articles(request):
 
         if search_string != '':
 
-            articles = articles.filter(title__icontains = search_string) | articles.filter(text_snippet__icontains = search_string)
+            articles = articles.filter(title__icontains=search_string) | articles.filter(
+                text_snippet__icontains=search_string)
 
         serializer = ArticleSerializer(articles.distinct(), many=True)
 
@@ -184,8 +188,122 @@ def search_articles(request):
             return HttpResponse(status=200)
         else:
             return JsonResponse(serializer.data, safe=False)
-        
+
     else:
         return JsonResponse({"msg": "Only GET requests allowed."}, status=404)
 
 
+def article_average(request):
+    """ 
+    Function to calculate the average sentiment score for an Article model parameter over a given timeframe
+
+    Args:
+        request: as the frontend request
+
+    Returns:
+        JsonResponse: The averaged scores
+    """
+
+    if request.method == 'GET':
+
+        tz = pytz.timezone('Europe/London')
+
+        begin_date = request.GET.get('begin')
+        end_date = request.GET.get('end')
+        param = request.GET.get('param')
+
+        # 1. Date Checking
+        try:
+            begin_date = tz.localize(datetime.strptime(begin_date, '%Y-%m-%d'))
+            end_date = tz.localize(datetime.strptime(end_date, '%Y-%m-%d'))
+        except:
+            return JsonResponse({"msg": "Incorrect date representation."}, status=405)
+
+        if end_date < begin_date:
+            return JsonResponse({"msg": "Begin date is smaller than end date."}, status=405)
+
+        # 2. Param Checking
+        articles = Article.objects.all()
+
+        if not valid_filter(param):
+            return JsonResponse({"msg": "Incorrect param representation."}, status=405)
+
+        # 3. Average calculation
+
+        if param == 'categories':
+            score_matrix = np.zeros(7)
+            cur_date = begin_date
+            cat = ['iab-qagIAB3', 'iab-qagIAB11', 'iab-qagIAB17',
+                   'iab-qagIAB1', 'iab-qagIAB15', 'iab-qagIAB19', 'iab-qagIAB20']
+            count_list = []
+
+            while cur_date <= end_date:
+
+                timed_articles = articles.filter(
+                    publish_date__gte=cur_date, publish_date__lte=cur_date+timedelta(days=1))
+
+                for i in range(0, 7):
+                    cat_articles = timed_articles.filter(
+                        categories__taxonomy_id=cat[i])
+                    if not cat_articles:
+                        score_matrix[i] = 0
+                    else:
+                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))[
+                            'sentiment_score__avg']
+
+                count_dict = {"date": cur_date.strftime("%Y-%m-%d"),
+                              "business": score_matrix[0],
+                              "politics": score_matrix[1],
+                              "sport": score_matrix[2],
+                              "arts": score_matrix[3],
+                              "science": score_matrix[4],
+                              "technology": score_matrix[5],
+                              "travel": score_matrix[6]
+                              }
+
+                count_list.append(count_dict)
+
+                cur_date += timedelta(days=1)
+
+            return JsonResponse(count_list, status=200, safe=False)
+
+        elif param == 'locations':
+            score_matrix = np.zeros(7)
+            cur_date = begin_date
+            cat = ['North America', 'South America', 'Africa', 'Europe', 'Asia', 'Oceania', 'Antarctica']
+            count_list = []
+
+            while cur_date <= end_date:
+
+                timed_articles = articles.filter(publish_date__gte=cur_date, publish_date__lte = cur_date+timedelta(days=1))
+                
+                for i in range(0,7):
+                    cat_articles = timed_articles.filter(locations__name=cat[i])
+                    
+                    if not cat_articles:
+                        score_matrix[i] = 0
+                    else:
+                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))['sentiment_score__avg']
+
+                count_dict={"date": cur_date.strftime("%Y-%m-%d"),
+                            "north america": score_matrix[0],
+                            "south america": score_matrix[1],
+                            "europe": score_matrix[2],
+                            "asia": score_matrix[3],
+                            "africa": score_matrix[4],
+                            "oceania": score_matrix[5],
+                            "antarctica": score_matrix[6]
+                }
+
+                count_list.append(count_dict)
+
+                cur_date += timedelta(days=1)
+
+            return JsonResponse(count_list, status=200, safe=False)
+
+
+        else:
+            return JsonResponse({"msg": "Not yet implemented"}, status=405)
+
+    else:
+        return JsonResponse({"msg": "Only GET requests allowed."}, status=405)

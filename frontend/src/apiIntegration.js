@@ -87,5 +87,22 @@ async function searchArticle(input) {
   }
 }
 
+async function getTimeSeriesData(param, begin, end) {
+  try {
+    var response = await fetch(`/api/analytics/?param=` + String(param) + "&begin=" + String(begin) + "&end=" + String(end), {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    return null
+  }
+}
 
-export { fetchArticles, userFeedback, addArticle, searchArticle }
+
+
+
+export { fetchArticles, userFeedback, addArticle, searchArticle, getTimeSeriesData }
