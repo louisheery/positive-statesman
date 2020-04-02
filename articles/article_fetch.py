@@ -21,26 +21,11 @@ from articles.models import Article, Publisher, Location, Category
 from articles.serializers import ArticleSerializer
 from django.http import HttpResponse, JsonResponse
 
-#For tokenization
-import nltk
-nltk.download('punkt')
-from nltk.tokenize import sent_tokenize, word_tokenize
-
-#Tensorflow
-import tensorflow as tf
-tf.get_logger().setLevel('INFO')
-import tensorflow_hub as hub
-import numpy as np
-from tensorflow.contrib import predictor
-
-#BERT
-import bert
-from bert import run_classifier
-from bert import tokenization
-import os
 
 ############################# FUNCTION DEFINITION #############################
+
 def generate_articles():
+    
     """
     Function to generate article models to put into the database.
     Args:
@@ -57,11 +42,7 @@ def generate_articles():
 
     client = aylien_news_api.ApiClient(configuration)
     api_instance = aylien_news_api.DefaultApi(client)
-
-    #Load sentiment model
-    #vader_analyser = SentimentIntensityAnalyzer()
-    bert_predictor = load_bert_predictor(os.getcwd() + '/articles/bert_model')
-
+    
     # 1.    Fetch articles
 
     api_response = fetch_articles(api_instance)
@@ -71,14 +52,16 @@ def generate_articles():
     # 2.    Get the full text for every article
     # 2.1       Analyse sentiment
     for story in stories:
-        save_from_story(story, bert_predictor)
+        save_from_story(story)
         
+
+
 def fetch_articles(api_instance):
     try:
         api_response = api_instance.list_stories(
             published_at_start='NOW-1DAYS',
             published_at_end='NOW',
-            per_page=1,
+            per_page=100,
             categories_taxonomy='iab-qag',
             categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20'],
             #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
@@ -130,12 +113,10 @@ def sentiment_score(analyser, text):
         scores['compound'](int): compound sentiment score of the article
     """
 
-    # scores = analyser.polarity_scores(text)
-    # return scores['compound']
-    return split_and_predict(text, analyser)
+    scores = analyser.polarity_scores(text)
+    return scores['compound']
 
-
-def save_from_story(story, predictor):
+def save_from_story(story):
     title = story.title
     publish_date = story.published_at
     url = story.links.permalink
@@ -145,8 +126,8 @@ def save_from_story(story, predictor):
         if (media.type == 'image'):
             image_url = media.url
     full_text = story.body
-
-    s_score = sentiment_score(predictor, full_text)
+    vader_analyser = SentimentIntensityAnalyzer()
+    s_score = sentiment_score(vader_analyser, full_text)
 
 # 2.2       Create Article Model Instances
 
@@ -191,76 +172,6 @@ def save_from_story(story, predictor):
 
     return
 
-
-###BERT FUNCTIONS###
-def create_tokenizer_from_hub_module():
-    # This is a path to an uncased (all lowercase) version of BERT
-    BERT_MODEL_HUB = "https://tfhub.dev/google/bert_uncased_L-12_H-768_A-12/1"
-
-    """Get the vocab file and casing info from the Hub module."""
-    with tf.Graph().as_default():
-        bert_module = hub.Module(BERT_MODEL_HUB)
-        tokenization_info = bert_module(signature="tokenization_info", as_dict=True)
-        with tf.Session() as sess:
-            vocab_file, do_lower_case = sess.run([tokenization_info["vocab_file"],
-                                                tokenization_info["do_lower_case"]])
-        
-    return bert.tokenization.FullTokenizer(
-        vocab_file=vocab_file, do_lower_case=do_lower_case)
-
-def convert_for_bert(sentence):
-    
-    label_list = [0, 1]
-    tokenizer = create_tokenizer_from_hub_module()
-
-    # Transformation into BERT input features
-    input_examples = [run_classifier.InputExample(guid="", text_a=sentence, text_b=None,label=0)]
-    input_features = run_classifier.convert_examples_to_features(input_examples, label_list, 128, tokenizer)
-
-    input_ids = np.array(input_features[0].input_ids)
-    segment_ids = np.array(input_features[0].segment_ids)
-    input_masks = np.array(input_features[0].input_mask)
-    label_ids = np.array(input_features[0].label_id)
-
-    # Needs to be in dictionary format for prediction function
-    tensor_dict = {"label_ids": [label_ids.tolist()], "segment_ids": [segment_ids.tolist()],"input_mask":[input_masks.tolist()],"input_ids": [input_ids.tolist()]}
-
-    # Only required for serving
-    # import json
-    # data_dict = {"inputs": tensor_dict}
-    # data = json.dumps(data_dict) 
-
-    return tensor_dict
-
-def load_bert_predictor(directory):
-    predict_fn = tf.contrib.predictor.from_saved_model(directory)
-    return predict_fn
-
-def positivity_score(probability):
-    return probability[0][0] / np.sum(probability[0])
-
-def convert_probabilities_to_labels(probability):
-  threshold = 0.5
-  
-  if probability > threshold:
-    return 1
-  else:
-    return 0
-
-def split_and_predict(text, predict_fn):
-    #Split into sentences
-    sentences = sent_tokenize(text)
-
-    #for each sentence, put the positivity score into an array
-    predictions = [positivity_score(predict_fn(convert_for_bert(sentence))['probabilities']) for sentence in sentences]
-    
-    #Calculate average sentiment score  
-    average_sentiment_score = sum(predictions) / len(predictions)
-    print(text)
-    print(f'AVERAGE SENTIMENT SCORE: {average_sentiment_score}')
-    return average_sentiment_score
-####################
-
 ############################## FUNCTION TESTING ###############################
 
 # TEST: fetch_metadata(...)
@@ -269,23 +180,23 @@ def split_and_predict(text, predict_fn):
 
 # TEST: sentiment_score(...)
 
-# sentiment_analyser = SentimentIntensityAnalyzer()
-# sample_text = "Hospitals in the Chinese city of Wuhan have been \
-#  thrown into chaos and the movement of about 33 million people has been \
-#     restricted by an unprecedented and indefinite lockdown imposed to halt the \
-#         spread of the deadly new coronavirus. At least 10 cities in central \
-#             Hubei province have been shut down in an effort to stop the virus, \
-#                 which by Friday had killed 26 people across China and affected \
-#                     more than 800. The World Health Organisation described the \
-#                         outbreak as an emergency for China, but stopped short \
-#                             of declaring it to be a public health emergency of \
-#                                 international concern."
+sentiment_analyser = SentimentIntensityAnalyzer()
+sample_text = "Hospitals in the Chinese city of Wuhan have been \
+ thrown into chaos and the movement of about 33 million people has been \
+    restricted by an unprecedented and indefinite lockdown imposed to halt the \
+        spread of the deadly new coronavirus. At least 10 cities in central \
+            Hubei province have been shut down in an effort to stop the virus, \
+                which by Friday had killed 26 people across China and affected \
+                    more than 800. The World Health Organisation described the \
+                        outbreak as an emergency for China, but stopped short \
+                            of declaring it to be a public health emergency of \
+                                international concern."
 
-# print("Compound Sentiment Score: ", sentiment_score(sentiment_analyser, sample_text))
+print("Compound Sentiment Score: ", sentiment_score(sentiment_analyser, sample_text))
 
 # TEST: generate_articles(...)
 
 ################################# DRIVER CODE #################################
-
+"""
 generate_articles()
-
+"""
