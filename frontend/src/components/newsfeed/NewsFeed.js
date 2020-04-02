@@ -7,7 +7,7 @@ import { connect, Provider } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import store from "../../store/store";
-import { userData, avaliableData } from '../../store/actions/actions';
+import { userGETData, avaliableData } from '../../store/actions/actions';
 
 // INTERNAL REACT COMPONENTS
 import NewsFeedRow from './NewsFeedRow';
@@ -54,13 +54,26 @@ class NewsFeed extends Component {
     static propTypes = {
         userCategories: PropTypes.array,
         userPublishers: PropTypes.array,
+        userGETData: PropTypes.func.isRequired,
+    }
+
+    componentDidMount() {
+        this.props.userGETData('GET', 'category');
     }
 
     render() {
 
+        {console.log("OO", this.props.userCategories)}
+        //[[219, 'Business', 'iab-qagIAB3']]
+        //const _ = require('lodash')
+        //{ console.log(this.props.userCategories.map(function (x) { return x[0] }))}
+
         const { classes, categoryId } = this.props;
 
         var newsFeedState;
+
+
+        
 
         if (this.props.categoryId === '') {
 
@@ -73,9 +86,28 @@ class NewsFeed extends Component {
 
                 }
             } else {
+
+                var userCategoriesCodes = this.props.userCategories.map(function (x) { return 'x' + x[0] })
+
+                let allCategoriesCodes = ['x180', 'x219', 'x237', 'x212', 'x128', 'x84', 'x181']
+                let remainingCategoriesCodes = allCategoriesCodes.filter(x => !userCategoriesCodes.includes(x));
+
+                console.log("AA!", remainingCategoriesCodes)
+
+                userCategoriesCodes = userCategoriesCodes.concat(remainingCategoriesCodes)
+
+                var userCategoriesData = [];
+                for (var i = 0; i < userCategoriesCodes.length; i = i + 1) {
+                    var code = userCategoriesCodes[i]
+                    console.log("£", code)
+                    userCategoriesData.push(this.state.newsFeedDictionary[code])
+                }
+
+                console.log("^", userCategoriesData)
+
                 newsFeedState = {
 
-                    newsFeedRow: this.props.userCategories.map(x => { 'this.state.newsFeedDictionary.x' + x[0] })
+                    newsFeedRow: userCategoriesData
                 }
             }
         } else {
@@ -84,7 +116,8 @@ class NewsFeed extends Component {
             }
         }
 
-      
+        { console.log("O--O", newsFeedState.newsFeedRow) }
+        
 
         
 
@@ -110,8 +143,8 @@ class NewsFeed extends Component {
     const mapStateToProps = state => {
         return {
             userCategories: state.reducer.userCategories,
-            userPublishers: state.reducer.userPublishers
+            userPublishers: state.reducer.userPublishers,
         };
     };
 
-    export default connect(mapStateToProps, { })(withStyles(styles)(NewsFeed))
+export default connect(mapStateToProps, { userGETData })(withStyles(styles)(NewsFeed))
