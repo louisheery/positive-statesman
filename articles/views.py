@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.db.models import Q, Count
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
@@ -160,7 +159,6 @@ def submit_article(request):
 
     return article_fetch.save_article(url)
 
-@csrf_exempt
 def signup(request):
     _json = json.loads(request.body)
     if request.method == 'GET':
@@ -175,7 +173,6 @@ def signup(request):
         user = auth.authenticate(request, username=_json["username"], password=_json["password"])
         return JsonResponse({"success": "success"}, status=200)
 
-@csrf_exempt
 def login(request):
     _json = json.loads(request.body)
     if request.method == 'POST':
@@ -186,7 +183,6 @@ def login(request):
         else:
             return JsonResponse({"msg": "invalid user credentials"}, status=404)
 
-@csrf_exempt
 def logout(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
