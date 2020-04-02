@@ -104,20 +104,13 @@ class Profile extends React.Component {
 
     onSubmitAdd(type, id) {
         this.props.userData('POST', type, id);
-        //this.props.userData('GET', type, null);
-        console.log("777");
         this.props.userGETData('GET', type);
         this.handleSubmit;
-        
-        // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     onSubmitDelete(type, id) {
         this.props.userData('DELETE', type, id);
         this.props.userGETData('GET', type);
-        this.handleSubmit;
-
-        // THIS SHOULD THEN REFRESH THE TABLE
     }
 
     handleClickCategory = event => {
@@ -151,8 +144,6 @@ class Profile extends React.Component {
 
         return (
             <div>
-                {console.log("R", this.props.userCategories)}
-                {console.log('APPLE', userGETData('GET', 'category'))}
 
                 <Container className={classes.container} maxWidth="lg" align="center" >
 

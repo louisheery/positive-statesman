@@ -45,10 +45,6 @@ class NewsFeed extends Component {
             },
         }
 
-        //var data = [['a', 'b', 'c'], ['d', 'e', 'f'], ['h', 'i', 'j']]
-
-        //var iabvalues = this.props.userCategories.map(x => { 'this.state.newsFeedDictionary.' + x[2] })
-
     }
 
     static propTypes = {
@@ -62,11 +58,6 @@ class NewsFeed extends Component {
     }
 
     render() {
-
-        {console.log("OO", this.props.userCategories)}
-        //[[219, 'Business', 'iab-qagIAB3']]
-        //const _ = require('lodash')
-        //{ console.log(this.props.userCategories.map(function (x) { return x[0] }))}
 
         const { classes, categoryId } = this.props;
 
@@ -92,18 +83,13 @@ class NewsFeed extends Component {
                 let allCategoriesCodes = ['x180', 'x219', 'x237', 'x212', 'x128', 'x84', 'x181']
                 let remainingCategoriesCodes = allCategoriesCodes.filter(x => !userCategoriesCodes.includes(x));
 
-                console.log("AA!", remainingCategoriesCodes)
-
                 userCategoriesCodes = userCategoriesCodes.concat(remainingCategoriesCodes)
 
                 var userCategoriesData = [];
                 for (var i = 0; i < userCategoriesCodes.length; i = i + 1) {
                     var code = userCategoriesCodes[i]
-                    console.log("£", code)
                     userCategoriesData.push(this.state.newsFeedDictionary[code])
                 }
-
-                console.log("^", userCategoriesData)
 
                 newsFeedState = {
 
@@ -115,12 +101,6 @@ class NewsFeed extends Component {
                 newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
             }
         }
-
-        { console.log("O--O", newsFeedState.newsFeedRow) }
-        
-
-        
-
 
             return (
                 <div className={classes.grid}>

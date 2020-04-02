@@ -25,8 +25,6 @@ function getCookie(name) {
 // FUNCTION: Log in User with Credentials 'username' and 'password'
 export const logIn = (username, password) => dispatch => {
 
-    console.log("User to be logged in -- Username: " + String(username) + " , Password: " + String(password))
-
     //var csrftoken = getCookie('csrftoken');
 
     dispatch({ type: LOGIN_PENDING});
@@ -44,18 +42,14 @@ export const logIn = (username, password) => dispatch => {
                 localStorage.setItem("token", JSON.stringify("LOGGEDIN"));
                 localStorage.setItem("expirationDate", new Date(new Date().getTime() + 3600 * 1000));
                 dispatch({ type: LOGIN_TRUE });
-                console.log("LOGGED11_a IN", response);
         } else {
             dispatch({ type: LOGIN_FALSE });
-            console.log("NOT-aLOGGEDIN");
         }}
         )
 };
 
 // FUNCTION: Log Out Current User
 export const logOut = () => (dispatch, getState) => {
-
-    console.log("User to be logged out")
 
     dispatch({type: LOGIN_PENDING})
 
@@ -71,11 +65,9 @@ export const logOut = () => (dispatch, getState) => {
                 localStorage.removeItem("token");
                 localStorage.removeItem("expirationDate");
                 dispatch({ type: LOGIN_FALSE });
-                console.log("LOGGED OUT");
             }
         }).catch((response) => {
             dispatch({ type: LOGIN_TRUE });
-            console.log("LOGOUT OUT FALSE", response);
         });
 };
 
@@ -100,14 +92,11 @@ export const signupUser = (username, email, password) => dispatch => {
                 localStorage.setItem("token", "LOGGEDIN");
                 localStorage.setItem("expirationDate", new Date(new Date().getTime() + 3600 * 1000));
                 dispatch({ type: LOGIN_TRUE });
-                console.log("SIGNUP TRUE; LOGIN TRUE", response);
             } else if (response.status == 404) {
                 dispatch( { type: LOGIN_FALSE })
-                console.log("SIGNUP ERROR", response);
             }}
         ).catch(() => {
             dispatch({ type: LOGIN_FALSE });
-            console.log("SIGNUP FALSE; LOGIN FALSE");
         });
 
 }
@@ -117,14 +106,11 @@ export const checkLoggedIn = () => dispatch => {
 
     if (localStorage.getItem("token") === undefined) {
         dispatch({ type: LOGIN_FALSE });
-        console.log("DISPATCH: LOGIN_FALSE1")
     } else {
         if (new Date(localStorage.getItem('expirationDate')) <= new Date() ) {
             dispatch( { type: LOGIN_FALSE });
-            console.log("DISPATCH: LOGIN_FALSE2", localStorage.getItem('expirationDate'))
         } else {
             dispatch ( {type: LOGIN_TRUE });
-            console.log("DISPATCH: LOGIN_TRUE999")
 
         }
     }
@@ -137,10 +123,6 @@ export const checkLoggedIn = () => dispatch => {
 
 export const userData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
 
-    console.log("User data being fetched/edited");
-
-    console.log("8888888", requestType, dataType, dataId, "888");
-
     var csrftoken = getCookie('csrftoken');
 
     fetch(`/api/popular/category/`, {
@@ -152,42 +134,28 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
         },
         body: requestType == 'GET' ? null : JSON.stringify({"id": dataId})
     }).then((response) => {
-
-        console.log("DATA SUCCESS9990909", response);
-
         
         if (response.status == 200) {
-            console.log("DATA SUCCESS", response);
-            console.log("JASDHSAKDHSAKDJ", response.status);
-            console.log("000", response.data)
 
-            console.log("APPLE", requestType)
             if (requestType == 'GET') {
-                
-                console.log("66666666666");
+
                 dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: response.data, });
             } else {
                 // ELSE: If was an ADD/DELETE Request
-                // then GET Updated Dataset; and save to Redux Store.
-                console.log("@@@");
-                //this.userData('GET', dataType, null);
             }
 
         } else if (response.status == 500) {
             //dispatch({ type: LOGIN_FALSE })
-            console.log("AUTHENTICATION ERROR for DATA", response);
         }
 
     }
     ).catch(() => {
-        console.log("DATA ERROR");
     });
 
 }
 
 
 export const userGETData = (requestType, dataType) => (dispatch, getState) => {
-    console.log("AA")
     getAsyncData(dispatch, getState, requestType, dataType)
 }
 
@@ -213,73 +181,16 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
             return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
         });
         
-        //.then((response) => response)
-        //console.log("101", data.json(), "101")
         dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: result });
         
     } catch (err) {
-        console.log(err, "101")
-    }
-};
-/*
-
-export function userGETData (dispatch, requestType, dataType) {
-    return async dispatch => {
-
-    console.log("User data being fetched/editedwq890123901283");
-
-    console.log("8888888", requestType, dataType, "888");
-
-
-    try {
-
-    var csrftoken = getCookie('csrftoken');
-
-    const data = await fetch(`/api/popular/category/`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-    }).then((response) => response.data)
-
-    console.log("ZZ", data)
-    
-
-        if (data.status == 200) {
-            //console.log("11111DATA SUCCESS", data.json());
-            console.log("11111JASDHSA123KDHSAKDJ", data.status);
-            console.log("000", data.info)
-
-                console.log("APPLE", requestType)
-                if (requestType == 'GET') {
-
-                    console.log("66666666666");
-                    dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: data.data, });
-                } else {
-                    // ELSE: If was an ADD/DELETE Request
-                    // then GET Updated Dataset; and save to Redux Store.
-                    console.log("@@@");
-                    //this.userData('GET', dataType, null);
-                }
-
-        } else if (data.status == 500) {
-                //dispatch({ type: LOGIN_FALSE })
-            console.log("AUTHENTICATION ERROR for DATA", data);
-            }
-
-    } catch (error) {
-        console.log("111DATA ERROR", error);
+        console.log(err)
     }
 }
-}
-*/
+
 // FUNCTION: Get All Possible Data for Categories/Publishers
 
 export const avaliableData = (dataType) => (dispatch, getState) => {
-
-    console.log("User data being fetched/edited");
 
     fetch(`/api/all/` + dataType, {
         method: 'GET',
@@ -290,12 +201,10 @@ export const avaliableData = (dataType) => (dispatch, getState) => {
         body: {}
     }).then((response) => {
         if (response.status == 200) {
-            console.log("DATA SUCCESS", response);
             dispatch({ type: dataType == 'category' ? DATA_ALL_CATEGORY : DATA_ALL_PUBLISHER, payload: response.data, });
 
         } else if (response.status == 500) {
             //dispatch({ type: LOGIN_FALSE })
-            console.log("AUTHENTICATION ERROR for DATA", response);
         }
     }
     ).catch(() => {

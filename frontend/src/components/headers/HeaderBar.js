@@ -85,8 +85,6 @@ class HeaderBar extends Component {
 
     render() {
 
-        console.log(this.props.isLoggedIn, "AJSLDASDJSA")
-
         const { classes } = this.props;
         return (
             <div>
@@ -180,7 +178,6 @@ class HeaderBar extends Component {
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
-                    {console.log("LOGGED IN111 = ", this.props.isLoggedIn)}
                     <CategoryBar />
 
                 </AppBar>

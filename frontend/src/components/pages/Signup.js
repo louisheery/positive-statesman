@@ -36,7 +36,6 @@ class Signup extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('submit clicked');
         this.props.signupUser(this.state.username, this.state.email, this.state.password);
     }
 

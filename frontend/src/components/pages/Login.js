@@ -38,7 +38,6 @@ class Login extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
         // VALIDATE EMAIL ADDRESS FORMAT HERE??
-        console.log('login clicked');
         this.props.logIn( this.state.username, this.state.password );
 
     }
