@@ -20,12 +20,12 @@ const styles = {
         fontSize: '1.8vh',
         textAlign: 'left',
         fontWeight: 'bold',
-        lineHeight: '1em',
+        lineHeight: '1.8vh',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'normal',
-        minHeight: '3em',
-        maxHeight: '3em',
+        minHeight: '4.7vh',
+        maxHeight: '4.7vh',
         paddingTop: '10px',
         paddingBottom: '5px',
         "&:hover": {
@@ -46,11 +46,11 @@ const styles = {
     },
 
     positivity: {
-        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px'
+        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px', marginTop: '5px', paddingTop: '7px', paddingBottom: '8px', marginLeft: '0px'
     },
 
     shareButton: {
-        borderRadius: '5px', backgroundColor: '#3b5998', margin: '5px'
+        borderRadius: '5px', border: '1px solid blue', backgroundColor: '#3b5998', margin: '5px', marginTop: '-5px'
     }
 
 

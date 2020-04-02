@@ -58,21 +58,25 @@ class NewsFeedHeaderItem extends Component {
                             </Hidden>
                         </p>
 
-                    <p className={classes.positivity} style={{ display: 'inline-block', width: '30%'}}>
-                        Share <FacebookIcon />
-                    </p>
+                    <div  style={{ display: 'inline-block', width: '30%', 'height': '8px'}}>
+                        <FacebookShareButton url={article.url} quote={article.title} className="share">
+                            <Button style={{ border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'}}>
+                        Share <FacebookIcon style={{height: '20px'}} />
+                        </Button>
+                        </FacebookShareButton>
+                    </div>
 
-
-                    <p style={{ display: 'inline-block', width: '30%'}}>
+{/*
+                    <div style={{ display: 'inline-block', width: '30%'}}>
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
                             <Button>
                             <FacebookIcon style={{height: '10px'}}/><FacebookShareCount url={article.url} />
                             </Button>
                         </FacebookShareButton>
-                        </p>
+                        </div>
              
 
-                    
+                  */}   
                     
                     
 
