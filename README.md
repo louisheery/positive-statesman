@@ -120,6 +120,15 @@ Navigate to the root directory and run the following command
 python manage.py seed_categories
 ```
 
+## How to reset database
+*Step 1*: go into the articles/migrations folders and delete all migrations (not the __init__.py and the other special file)
+*Step 2*: delete db.sqlite
+*Step 3*: run the following commands
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py seed_categories
+*Step 4*: go to endpoint /api/fetch-articles
+
 ## How to print an ER-Diagram
 
 1. Install: brew install graphviz
@@ -130,7 +139,7 @@ python manage.py seed_categories
 ## Repo Contents
 
 ### Libraries and Technologies to research
-- NLP: NLP Toolkit, Bert, Vadar, Google BERT
+- NLP: NLP Toolkit, Bert, Vader, Google BERT
 - NLP Datasets [Google Dataset Search](https://toolbox.google.com/datasetsearch/search?query=positive%20sentiment)
 - Backend Hosting:
 - Backend Libraries: Django

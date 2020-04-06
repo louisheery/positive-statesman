@@ -18,7 +18,9 @@ import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
-import FeedbackButton from './popups/FeedbackButton';
+import FeedbackButton from './popups/FeedbackButton'
+import Search from './pages/Search'
+import Analytics from './pages/Analytics'
 
 
 // STYLES
@@ -40,13 +42,13 @@ const theme = createMuiTheme({
 )
 
 const categoryDictionary = {
-    ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-    BUSINESS: ['/business', 'Business', 'iab-qagIAB3'],
-    POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-    SCIENCE: ['/science', 'Science', 'iab-qagIAB15'],
-    SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['/tech', 'Technology', 'iab-qagIAB19'],
-    TRAVEL: ['/travel', 'Travel', 'iab-qagIAB20'],
+    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
+    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
+    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
+    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
+    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
+    TECH: ['tech', 'Technology', 'iab-qagIAB19'],
+    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 }
 
 class Root extends Component {
@@ -76,7 +78,7 @@ class Root extends Component {
                                 return (
                                     <Route
                                         key={i}
-                                        exact path={categoryDictionary[key][0]}
+                                        exact path={`/categories/${categoryDictionary[key][0]}`}
                                         render={props => (
                                             <div>
                                                 <Category
@@ -90,6 +92,8 @@ class Root extends Component {
                                     />
                                 )
                             })}
+                        <Route path="/search/" render={props => <div><Search /></div>} />
+                        <Route path="/analytics/" render={props => <div><Analytics /></div>} />
                         <Route
                             exact path="/"
                             render={props => (

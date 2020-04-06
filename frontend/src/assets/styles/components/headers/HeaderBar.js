@@ -23,8 +23,14 @@ const styles = {
 
   addStoryButton: {
     marginLeft: 'auto',
-    marginRight: '5%',
-    width: '120px'
+    //marginRight: '5%',
+    //width: '120px',
+    alignItems: "center"
+  },
+  iconButton: {
+    padding: 2,
+    paddingRight: 8,
+    color: "#347da3"
   },
 
   // Louis styles (currently not in use)
@@ -98,7 +104,7 @@ const styles = {
     marginRight: '65px',
   },
 
-  
+
 
 }
 

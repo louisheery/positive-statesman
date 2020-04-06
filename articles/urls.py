@@ -14,4 +14,6 @@ urlpatterns = [
     path('logout/', views.logout),
     path('popular/category/', views.popular_category),
     path('popular/publisher/', views.popular_publisher),
+    path('search-articles/', views.search_articles),
+    path('analytics/', views.article_average),
 ]

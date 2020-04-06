@@ -8,3 +8,4 @@ node_modules/
 db.sqlite3
 articles/migrations
 coverage/
+frontend/static/frontend/main.js
