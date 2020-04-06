@@ -84,6 +84,7 @@ class Login extends React.Component {
                                     placeholder="Password"
                                     onChange={this.onChange}
                                     margin="normal"
+                                    type="password"
                                 />
                             </div>
 

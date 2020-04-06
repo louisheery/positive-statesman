@@ -5,6 +5,8 @@ import ReactGA from "react-ga";
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // REDUX
 import { connect } from "react-redux";
@@ -65,37 +67,36 @@ class Signup extends React.Component {
 
                         <form onSubmit={this.onSubmit}>
                             <div>
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                name="username"
-                                onChange={this.onChange}
-                                value={username}
-                            />
+                                <TextField
+                                    name="username"
+                                    placeholder="Username"
+                                    onChange={this.onChange}
+                                    margin="normal"
+                                    />
                             </div>
 
                             <div>
-                                <label>Email</label>
-                                <input
-                                    type="text"
+                                <TextField
                                     name="email"
+                                    placeholder="Email"
                                     onChange={this.onChange}
-                                    value={email}
-                                />
+                                    margin="normal"
+                                    type="email"
+                                    />
                             </div>
 
                             <div>
-                                <label>Password</label>
-                                <input
-                                    type="text"
+                                <TextField
                                     name="password"
+                                    placeholder="Password"
                                     onChange={this.onChange}
-                                    value={password}
+                                    margin="normal"
+                                    type="password"
                                 />
                             </div>
 
                             <div>
-                                <button type="submit">Signup</button>
+                                <Button color="primary" variant="contained" type="submit">Sign Up</Button>
                             </div>
                             
                         </form>
