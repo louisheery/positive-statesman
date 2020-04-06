@@ -171,32 +171,3 @@ def save_from_story(story):
         article.categories.add(category)
 
     return
-
-############################## FUNCTION TESTING ###############################
-
-# TEST: fetch_metadata(...)
-
-# TEST: get_full_text(...)
-
-# TEST: sentiment_score(...)
-
-# sentiment_analyser = SentimentIntensityAnalyzer()
-# sample_text = "Hospitals in the Chinese city of Wuhan have been \
-#  thrown into chaos and the movement of about 33 million people has been \
-#     restricted by an unprecedented and indefinite lockdown imposed to halt the \
-#         spread of the deadly new coronavirus. At least 10 cities in central \
-#             Hubei province have been shut down in an effort to stop the virus, \
-#                 which by Friday had killed 26 people across China and affected \
-#                     more than 800. The World Health Organisation described the \
-#                         outbreak as an emergency for China, but stopped short \
-#                             of declaring it to be a public health emergency of \
-#                                 international concern."
-
-# print("Compound Sentiment Score: ", sentiment_score(sentiment_analyser, sample_text))
-
-# TEST: generate_articles(...)
-
-################################# DRIVER CODE #################################
-"""
-generate_articles()
-"""
