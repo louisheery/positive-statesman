@@ -1,11 +1,11 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { Route, Redirect, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 // REDUX
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logOut } from '../../store/actions/actions'; 
+import { logOut } from '../../store/actions/actions';
 
 // MATERIAL UI
 import AppBar from '@material-ui/core/AppBar'
@@ -93,7 +93,7 @@ class HeaderBar extends Component {
     handleRequestClose = () => {
         this.setState({ openMenu: false, anchorEl: null });
     };
-    
+
     handleClickAway = () => {
         this.setState({ input: "", addArticle: false, searchArticle: false })
     }
@@ -193,16 +193,16 @@ class HeaderBar extends Component {
                                     anchorEl={this.state.anchorEl}
                                     open={this.state.openMenu}
                                     onClose={this.handleRequestClose}
-                                    
+
                                 >
                                     <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
                                     <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
                                 </Menu>
                             </div>
                         ) : (
-                            <Button color="inherit" component={Link} to={'/login'}>Login</Button>
+                                <Button color="inherit" component={Link} to={'/login'}>Login</Button>
                             )}
-                    
+
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
@@ -218,4 +218,4 @@ const mapStateToProps = state => ({
     isLoggedIn: state.reducer.isLoggedIn
 });
 
-export default connect(mapStateToProps, { logOut })(withStyles(styles)(HeaderBar))
+export default withRouter(connect(mapStateToProps, { logOut })(withStyles(styles)(HeaderBar)))

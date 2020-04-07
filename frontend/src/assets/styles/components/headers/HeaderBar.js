@@ -7,8 +7,8 @@ const styles = {
     marginLeft: 'auto',
     marginRight: '5%',
     height: '30px',
-    paddingTop: '0px',
-    paddingBottom: '6px',
+    paddingTop: '3px',
+    paddingBottom: '3px',
   },
   logo: {
     marginRight: 'auto',
