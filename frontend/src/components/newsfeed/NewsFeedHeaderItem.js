@@ -14,6 +14,10 @@ import withWidth from '@material-ui/core/withWidth';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import { FacebookShareButton, FacebookShareCount } from "react-share";
+import ShareIcon from '@material-ui/icons/Share';
+import Button from '@material-ui/core/Button'
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -46,14 +50,36 @@ class NewsFeedHeaderItem extends Component {
                         <ArticleVote articleId={article.id} />
                     </span>
 
-                    <span className={classes.alignLeft} >
-                        <p className={classes.positivity} style={{ color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
+                    
+                        <p className={classes.positivity} style={{ display: 'inline-block', width: '40%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
                             {score}%
                             <Hidden smDown>
                                 {" Positive"}
                             </Hidden>
                         </p>
-                    </span>
+
+                    <div  style={{ display: 'inline-block', width: '30%', 'height': '8px'}}>
+                        <FacebookShareButton url={article.url} quote={article.title} className="share">
+                            <Button style={{ border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'}}>
+                        Share <FacebookIcon style={{height: '20px'}} />
+                        </Button>
+                        </FacebookShareButton>
+                    </div>
+
+{/*
+                    <div style={{ display: 'inline-block', width: '30%'}}>
+                        <FacebookShareButton url={article.url} quote={article.title} className="share">
+                            <Button>
+                            <FacebookIcon style={{height: '10px'}}/><FacebookShareCount url={article.url} />
+                            </Button>
+                        </FacebookShareButton>
+                        </div>
+             
+
+                  */}   
+                    
+                    
+
                 </Paper>
             </Grid>
 

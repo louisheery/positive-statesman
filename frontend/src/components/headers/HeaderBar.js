@@ -1,6 +1,11 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+
+// REDUX
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logOut } from '../../store/actions/actions';
 
 // MATERIAL UI
 import AppBar from '@material-ui/core/AppBar'
@@ -11,10 +16,13 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
-import Popover from '@material-ui/core/Popover'
+import Popover from '@material-ui/core/Popover';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
-import IconButton from '@material-ui/core/IconButton'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import AssessmentIcon from '@material-ui/icons/Assessment'
 
@@ -38,7 +46,14 @@ class HeaderBar extends Component {
             addArticle: false,
             searchArticle: false,
             open: false,
+            openMenu: false,
+            anchorEl: undefined,
         }
+    }
+
+    static propTypes = {
+        logOut: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool,
     }
 
     handleChangeInput = (event) => {
@@ -70,6 +85,15 @@ class HeaderBar extends Component {
         }
     }
 
+
+    handleClick = event => {
+        this.setState({ openMenu: true, anchorEl: event.currentTarget });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ openMenu: false, anchorEl: null });
+    };
+
     handleClickAway = () => {
         this.setState({ input: "", addArticle: false, searchArticle: false })
     }
@@ -80,11 +104,13 @@ class HeaderBar extends Component {
 
 
     render() {
-        const { classes } = this.props
+
+        const { classes } = this.props;
         return (
             <div>
                 <Popover
                     id={1}
+                    anchorEl={null}
                     open={this.state.open}
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -98,6 +124,7 @@ class HeaderBar extends Component {
                 >
                     <Typography style={{ padding: '10px' }}>Article Submitted!</Typography>
                 </Popover>
+
                 <AppBar position="fixed">
 
                     {/* MAIN HEADER BAR */}
@@ -149,6 +176,33 @@ class HeaderBar extends Component {
                                 </div>
                         }
 
+                        {this.props.isLoggedIn ? (
+                            <div>
+                                <IconButton
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={this.handleClick}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+
+                                    id="menu-appbar"
+                                    anchorEl={this.state.anchorEl}
+                                    open={this.state.openMenu}
+                                    onClose={this.handleRequestClose}
+
+                                >
+                                    <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
+                                    <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+                                </Menu>
+                            </div>
+                        ) : (
+                                <Button color="inherit" component={Link} to={'/login'}>Login</Button>
+                            )}
+
                     </Toolbar>
 
                     {/* CATEGORY HEADER BAR */}
@@ -160,4 +214,8 @@ class HeaderBar extends Component {
     }
 }
 
-export default withRouter(withStyles(styles)(HeaderBar))
+const mapStateToProps = state => ({
+    isLoggedIn: state.reducer.isLoggedIn
+});
+
+export default withRouter(connect(mapStateToProps, { logOut })(withStyles(styles)(HeaderBar)))

@@ -20,6 +20,8 @@ const CATEGORIES = ["business",
 
 class CategoryBar extends Component {
 
+    otherTabs = ['/login', '/signup', '/profile']
+
     render() {
         const { classes } = this.props
         return (

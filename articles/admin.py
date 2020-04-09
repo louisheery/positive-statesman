@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Publisher, Category, Image, Location
+from .models import Article, Publisher, Category, Image, Location, Reader
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -32,9 +32,13 @@ class LocationAdmin(admin.ModelAdmin):
     list_filter = ['name']
     search_fields = ['name']
 
+class ReaderAdmin(admin.ModelAdmin):
+    list_display = ['user']
+
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Location, LocationAdmin)
+admin.site.register(Reader, ReaderAdmin)
