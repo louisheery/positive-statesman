@@ -35,6 +35,8 @@ class NewsFeed extends Component {
                 QUERY_UK: ['', 'Trending in UK', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
                 QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
 
+                xRECOMMEND: ['/', 'Recommended Stories', { category: 'recommended', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 0, 0, 0.4)'],
+                x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
                 x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
                 x219: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
                 x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
@@ -48,6 +50,7 @@ class NewsFeed extends Component {
     }
 
     static propTypes = {
+        isLoggedIn: PropTypes.bool,
         userCategories: PropTypes.array,
         userPublishers: PropTypes.array,
         userGETData: PropTypes.func.isRequired,
@@ -78,11 +81,16 @@ class NewsFeed extends Component {
                 }
             } else {
 
+                var recommendationCode = ['xRECOMMEND']
+
                 var userCategoriesCodes = this.props.userCategories.map(function (x) { return 'x' + x[0] })
 
                 let allCategoriesCodes = ['x180', 'x219', 'x237', 'x212', 'x128', 'x84', 'x181']
                 let remainingCategoriesCodes = allCategoriesCodes.filter(x => !userCategoriesCodes.includes(x));
 
+                if (this.props.isLoggedIn) {
+                    userCategoriesCodes = recommendationCode.concat(userCategoriesCodes);
+                }
                 userCategoriesCodes = userCategoriesCodes.concat(remainingCategoriesCodes)
 
                 var userCategoriesData = [];
@@ -122,6 +130,7 @@ class NewsFeed extends Component {
 
     const mapStateToProps = state => {
         return {
+            isLoggedIn: state.reducer.isLoggedIn,
             userCategories: state.reducer.userCategories,
             userPublishers: state.reducer.userPublishers,
         };
