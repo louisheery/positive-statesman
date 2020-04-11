@@ -387,12 +387,12 @@ def score_api(request):
     if request.method == 'POST':
         _json = json.loads(request.body)
         if not "text" in _json:
-            return JsonResponse({"msg": "'text' field is required"}, status=405)
+            return JsonResponse({"msg": "'text' field is required"}, status=406)
         text = _json["text"]
         if not isinstance(text, str):
-            return JsonResponse({"msg": "'text' field must be a string"}, status=405)
+            return JsonResponse({"msg": "'text' field must be a string"}, status=406)
         if len(text) < 100:
-            return JsonResponse({"msg": "'text' string must be at least 100 characters"}, status=405)
+            return JsonResponse({"msg": "'text' string must be at least 100 characters"}, status=406)
 
         anaylser = SentimentIntensityAnalyzer()
         score = article_fetch.sentiment_score(anaylser, text)
