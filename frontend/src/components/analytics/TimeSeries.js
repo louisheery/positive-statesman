@@ -26,7 +26,7 @@ class TimeSeries extends Component {
         this.state = {
             data: [{}],
             begin: this.getDate(-6),
-            end: this.getDate(1)
+            end: this.getDate(0)
         }
     }
 

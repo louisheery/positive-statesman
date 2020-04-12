@@ -12,10 +12,13 @@ import styles from '../../../src/assets/styles/components/pages/Analytics.js'
 
 // COMPONENTS
 import TimeSeries from '../analytics/TimeSeries'
+import Map from '../analytics/Map'
+
+// API
+import { getTimeSeriesData } from "../../apiIntegration"
 
 
 class Analytics extends Component {
-
 
     render() {
         const { classes } = this.props;
@@ -25,10 +28,13 @@ class Analytics extends Component {
                     Analytics
                 </Typography>
                 <Grid container justify="center">
+                    <Map />
+                </Grid>
+                <Grid container justify="center">
                     <TimeSeries param="categories" />
                     <TimeSeries param="locations" />
                 </Grid>
-
+                */}
             </div>
         )
     }
