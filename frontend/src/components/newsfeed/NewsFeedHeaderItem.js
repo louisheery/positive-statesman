@@ -53,7 +53,7 @@ class NewsFeedHeaderItem extends Component {
                     
                         <p className={classes.positivity} style={{ display: 'inline-block', width: '40%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
                             {score}%
-                            <Hidden smDown>
+                            <Hidden mdDown>
                                 {" Positive"}
                             </Hidden>
                         </p>
