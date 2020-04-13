@@ -21,6 +21,18 @@ import pytz
 def valid_filter(param):
     return param != '' and param is not None
 
+def sortByRecommended(user, articles):
+    user_favourite_publishers = user.reader.popular_publisher.all()
+    user_favourite_categories = user.reader.categories.all()
+    # algorithm, one point for publisher, one point for category, score * 10 points for sentiment
+    for article in articles:
+        pub_score = len(set([article.publisher]) & set(user_favourite_publishers))
+        cat_score = len(set(article.categories) & set(user_favourite_categories))
+        sent_score = article.sentiment_score * 2
+        article["sort_score"] = pub_score + cat_score + sent_score
+
+    sorted(articles, key=lambda x: x['sort_score'])
+    return articles
 
 def article_filter(request):
     '''
@@ -48,7 +60,8 @@ def article_filter(request):
 
         # Filter by Category, Publisher, Sentiment Score Range
         if valid_filter(category):
-            articles = articles.filter(categories__taxonomy_id=category)
+            if not category=="recommendation":
+                articles = articles.filter(categories__taxonomy_id=category)
 
         if valid_filter(publisher):
             articles = articles.filter(publisher__name=publisher)
@@ -61,6 +74,11 @@ def article_filter(request):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
 
         # Article Limit and Offset
+        if valid_filter(category):
+            if category=="recommendation" and request.user.is_authenticated:
+                user = request.user
+                articles = sortByRecommended(user, articles)
+
         if valid_filter(articleOffset) and valid_filter(articleLimit):
             return articles[int(articleOffset): int(articleOffset) + int(articleLimit)]
 
