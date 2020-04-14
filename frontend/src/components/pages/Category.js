@@ -16,7 +16,7 @@ import styles from '../../../src/assets/styles/components/pages/Category.js';
 class Category extends Component {
   
   componentDidMount() {
-    ReactGA.pageview(`${this.props.categoryName}`);
+    ReactGA.pageview(`${this.props.pageName}`);
   }
 
   render() {
@@ -33,7 +33,7 @@ class Category extends Component {
         </Hidden>
         */}
         <div className={classes.mainPadding}></div>
-        <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+        <NewsFeed pageName={this.props.pageName} categoryId={this.props.categoryId} publisherId={this.props.publisherId} />
       </div>
     )
   }

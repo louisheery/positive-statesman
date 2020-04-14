@@ -7,7 +7,7 @@ import { checkLoggedIn } from '../store/actions/actions';
 import reducer from '../store/reducers/reducer';
 import { connect, Provider } from 'react-redux';
 import store from "../store/store";
-import { userData } from '../store/actions/actions';
+import { userFetchData } from '../store/actions/actions';
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
@@ -51,6 +51,23 @@ const categoryDictionary = {
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 }
 
+const publisherDictionary = {
+    GUARDIAN: ['theguardian', 'The Guardian', ''],
+    NYTIMES: ['nytimes', 'New York Times', ''],
+    FTIMES: ['ft', 'Financial Times', ''],
+    BLOOMBERG: ['bloomberg', 'Bloomberg', ''],
+    REUTERS: ['reuters', 'Reuters', ''],
+    AP: ['ap', 'Associated Press', ''],
+    TIMES: ['thetimes', 'The Times', ''],
+    WAPOST: ['washingtonpost', 'Washington Post', ''],
+    TIMEMAG: ['time', 'Time', ''],
+    WSJ: ['wsj', 'Wall Street Journal', ''],
+    BBCNEWS: ['bbcnews', 'BBC News', ''],
+    HUFFPOST: ['huffingtonpost', 'Huffington Post', ''],
+    ATLANTIC: ['theatlantic', 'The Atlantic', ''],
+    VOX: ['vox', 'Vox', ''],
+}
+
 class Root extends Component {
 
     componentDidMount() {
@@ -58,7 +75,7 @@ class Root extends Component {
         this.props.checkLoggedIn();
 
         if (this.props.isLoggedIn) {
-            store.dispatch(userData());
+            store.dispatch(userFetchData());
         }
 
     }
@@ -83,8 +100,28 @@ class Root extends Component {
                                             <div>
                                                 <Category
                                                     key={Math.random() + i}
-                                                    categoryName={categoryDictionary[key][1]}
+                                                    pageName={categoryDictionary[key][1]}
                                                     categoryId={categoryDictionary[key][2]}
+                                                    {...props}
+                                                />
+                                            </div>
+                                        )}
+                                    />
+                                )
+                            })}
+                         
+                        {
+                            Object.keys(publisherDictionary).map(function (key, i) {
+                                return (
+                                    <Route
+                                        key={i}
+                                        exact path={`/publishers/${publisherDictionary[key][0]}`}
+                                        render={props => (
+                                            <div>
+                                                <Category
+                                                    key={Math.random() + i}
+                                                    pageName={publisherDictionary[key][1]}
+                                                    publisherId={publisherDictionary[key][2]}
                                                     {...props}
                                                 />
                                             </div>
@@ -100,7 +137,7 @@ class Root extends Component {
                                 <div>
                                     <Home
                                         key={Math.random()}
-                                        categoryName={"Top Stories"}
+                                        pageName={"Top Stories"}
                                         categoryId={""}
                                         {...props}
                                     />

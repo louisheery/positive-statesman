@@ -46,7 +46,7 @@ class NewsFeedHeader extends Component {
         return (
             <div className={classes.container}>
                 <Typography variant="h4">
-                    {this.props.categoryName}
+                    {this.props.pageName}
                 </Typography>
 
                 <Grid container>

@@ -180,7 +180,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
 
         if (dataType == 'category') {
             result = Object.keys(obj).map(function (key) {
-                return [obj[key]['name'], obj[key]['tax_id']];
+                return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
             });
         } else {
             result = Object.keys(obj).map(function (key) {

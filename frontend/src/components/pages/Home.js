@@ -38,7 +38,7 @@ class Home extends Component {
           <div className={classes.mainDiv}></div>
         </Hidden>
         */}
-        <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+        <NewsFeed pageName={this.props.pageName} categoryId={this.props.categoryId} />
       </div>
     )
   }

@@ -7,7 +7,7 @@ import { connect, Provider } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import store from "../../store/store";
-import { userGETData, avaliableData } from '../../store/actions/actions';
+import { userFetchData, avaliableData } from '../../store/actions/actions';
 
 // INTERNAL REACT COMPONENTS
 import NewsFeedRow from './NewsFeedRow';
@@ -23,22 +23,21 @@ class NewsFeed extends Component {
     constructor(props) {
         super(props)
 
-        const { categoryId } = this.props;
+        const { categoryId, publisherId } = this.props;
 
         this.state = {
             newsFeedDictionary: {
-                QUERY_TODAY: ['', 'Trending Today', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_THISWEEK: ['', 'Trending This Week', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
-                QUERY_THISMONTH: ['', 'Trending This Month', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                QUERY_ALLTIME: ['', 'Trending All Time', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
-                QUERY_USA: ['', 'Trending in USA', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                QUERY_UK: ['', 'Trending in UK', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
+                QUERY_TODAY: ['', 'Trending Today', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
+                QUERY_THISWEEK: ['', 'Trending This Week', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
+                QUERY_THISMONTH: ['', 'Trending This Month', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
+                QUERY_ALLTIME: ['', 'Trending All Time', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
+                QUERY_USA: ['', 'Trending in USA', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
+                QUERY_UK: ['', 'Trending in UK', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
+                QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
 
                 xRECOMMEND: ['/', 'Recommended Stories', { category: 'recommended', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 0, 0, 0.4)'],
                 x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                x219: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
+                x219: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
                 x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
                 x212: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
                 x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
@@ -53,23 +52,23 @@ class NewsFeed extends Component {
         isLoggedIn: PropTypes.bool,
         userCategories: PropTypes.array,
         userPublishers: PropTypes.array,
-        userGETData: PropTypes.func.isRequired,
+        userFetchData: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
-        this.props.userGETData('GET', 'category');
+        this.props.userFetchData('GET', 'category');
     }
 
     render() {
 
-        const { classes, categoryId } = this.props;
+        const { classes, categoryId, publisherId } = this.props;
 
         var newsFeedState;
 
 
         
 
-        if (this.props.categoryId === '') {
+        if (this.props.categoryId === '' && this.props.publisherId === '') {
 
             if (this.props.userCategories == null) {
 
@@ -79,6 +78,7 @@ class NewsFeed extends Component {
 
 
                 }
+
             } else {
 
                 var recommendationCode = ['xRECOMMEND']
@@ -110,10 +110,11 @@ class NewsFeed extends Component {
             }
         }
 
+        console.log(newsFeedState)
             return (
                 <div className={classes.grid}>
 
-                    <NewsFeedHeader categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+                    <NewsFeedHeader pageName={this.props.pageName} categoryId={this.props.categoryId} />
 
 
                     {
@@ -136,4 +137,4 @@ class NewsFeed extends Component {
         };
     };
 
-export default connect(mapStateToProps, { userGETData })(withStyles(styles)(NewsFeed))
+export default connect(mapStateToProps, { userFetchData })(withStyles(styles)(NewsFeed))
