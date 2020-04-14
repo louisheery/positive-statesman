@@ -2,11 +2,8 @@
 import React, { Component } from 'react';
 
 // REDUX LIBRARIES
-import reducer from '../../store/reducers/reducer';
-import { connect, Provider } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import store from "../../store/store";
 import { userFetchData, avaliableData } from '../../store/actions/actions';
 
 // INTERNAL REACT COMPONENTS
@@ -16,7 +13,6 @@ import NewsFeedHeader from './NewsFeedHeader';
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeed.js';
-import Typography from 'material-ui/styles/typography';
 
 class NewsFeed extends Component {
 

@@ -20,11 +20,9 @@ import Menu from '@material-ui/core/Menu';
 
 
 // REDUX LIBRARIES
-import reducer from '../../store/reducers/reducer';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import store from "../../store/store";
 import { userEditData, userFetchData, avaliableData } from '../../store/actions/actions';
 
 // STYLES

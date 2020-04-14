@@ -31,7 +31,7 @@ class ArticlePage extends Component {
         <Hidden only={['md', 'lg', 'xl']}>
           <div className={classes.mainDiv}></div>
         </Hidden>
-        */}
+        */}        
         <div className={classes.mainPadding}></div>
         <NewsFeed pageName={this.props.pageName} categoryId={this.props.categoryId} publisherId={this.props.publisherId} />
       </div>

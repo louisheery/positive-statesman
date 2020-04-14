@@ -1,24 +1,17 @@
 // REACT LIBRARIES
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 
 // OTHER LIBRARIES
 import { fetchArticles } from '../../apiIntegration';
-import moment from 'moment';
 
 // INTERNAL REACT COMPONENTS
-import ArticleVote from './ArticleVote';
-import NewsFeedRowItem from './NewsFeedRowItem';
+import NewsFeedItem from './NewsFeedItem';
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Grid from '@material-ui/core/Grid';
 import withWidth from '@material-ui/core/withWidth';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -95,7 +88,7 @@ class NewsFeedRow extends Component {
                     <Grid container className={classes.gridList}>
                         {
                             sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
-                                return (<NewsFeedRowItem key={i} article={article} itemColor={this.props.itemColor} />)
+                                return (<NewsFeedItem key={i} article={article} itemColor={this.props.itemColor} isHeaderItem={false} />)
                             })
                         }
                     </Grid>

@@ -6,14 +6,6 @@ import ReactGA from "react-ga";
 import NewsFeed from '../newsfeed/NewsFeed'
 // import NewsTickerBar from '../headers/NewsTickerBar'
 
-// REDUX LIBRARIES
-import reducer from '../../store/reducers/reducer';
-import { Provider } from 'react-redux';
-import { getUserData } from '../../store/actions/actions';
-
-// EXTERNAL REACT LIBRARIES & COMPONENTS
-// import Hidden from '@material-ui/core/Hidden';
-
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/Home.js'

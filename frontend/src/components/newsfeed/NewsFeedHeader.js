@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { fetchArticles } from '../../apiIntegration';
 
 // INTERNAL REACT COMPONENTS
-import NewsFeedHeaderItem from './NewsFeedHeaderItem';
+import NewsFeedItem from './NewsFeedItem';
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
@@ -52,7 +52,7 @@ class NewsFeedHeader extends Component {
                 <Grid container>
                     {
                         sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 4 : 6).map((article, i) => {
-                            return (<NewsFeedHeaderItem key={i} article={article} width={this.props.width} />)
+                            return (<NewsFeedItem key={i} article={article} width={this.props.width} isHeaderItem={true} />)
                         })
                     }
                 </Grid>
