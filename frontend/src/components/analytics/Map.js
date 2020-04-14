@@ -15,8 +15,8 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 // API
 import { getTimeSeriesData } from "../../apiIntegration"
 
-const geoUrl =
-    "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+// Retrieved from https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json
+import geoUrl from "./Map.json"
 
 const DEFAULT_COLOR = "grey"
 
@@ -79,7 +79,7 @@ class Map extends Component {
                     <Grid container justify="center">
                         <Grid className={classes.typo} item xs={12}>
                             <Typography variant="caption">
-                                This map shows the average news coverage positivity for each country on the {String(this.state.date)}.
+                                This map shows the average news coverage positivity for each country on {String(this.state.date)}.
                             </Typography>
                         </Grid>
                     </Grid>
@@ -87,7 +87,7 @@ class Map extends Component {
                         projectionConfig={{ center: [18, 7] }}
                         height={420}
                     >
-                        <Geographies geography={geoUrl}>
+                        <Geographies geography={geoUrl} >
                             {({ geographies }) =>
                                 geographies.map(geo => {
                                     let value = this.state.data[0][geo.properties.NAME];

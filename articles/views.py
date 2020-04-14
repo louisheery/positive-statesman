@@ -561,7 +561,7 @@ def article_average(request):
                 "Uganda",
                 "Ukraine",
                 "Uruguay",
-                "United States of America",
+                "United States",
                 "Uzbekistan",
                 "Venezuela",
                 "Vietnam",
