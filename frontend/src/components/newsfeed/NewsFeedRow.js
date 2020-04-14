@@ -11,7 +11,8 @@ import NewsFeedItem from './NewsFeedItem';
 import Grid from '@material-ui/core/Grid';
 import withWidth from '@material-ui/core/withWidth';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import { Link } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -37,13 +38,6 @@ class NewsFeedRow extends Component {
         // 1. Call API
         // 2. Receive JSON from API of article list
         // 3. Update State to reflect JSON data
-        /*
-                fetch(PROXYURL + API + "/" + this.props.newsFeedRow, { mode: 'cors' })
-                    .then(response => response.json())
-                    .then(articles => this.setState({ articles }));
-        
-        */
-
         var fetchedArticles = await fetchArticles(this.props.newsFeedRowFetchData)
         if (this._isMounted) {
             this.setState({ articles: fetchedArticles })
@@ -77,11 +71,12 @@ class NewsFeedRow extends Component {
             <div className={classes.container}>
 
                 {categoryNames.includes(this.props.newsFeedRowTitle) ? (
-                    <Link href={`/${this.props.newsFeedRow}`} className={classes.rowTitle}>
-                        <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                    </Link>
+                    
+                    <NavLink to={`/categories${this.props.newsFeedRow}`} className={classes.hyperlinkTitle}>
+                        <Typography className={classes.hyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                    </NavLink>
                 ) : (
-                        <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                        <Typography className={classes.nonHyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
                 )}
                 
                 <div className={classes.subContainer}>
