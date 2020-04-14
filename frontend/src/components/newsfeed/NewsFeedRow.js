@@ -71,6 +71,8 @@ class NewsFeedRow extends Component {
         // this.state.articles
         // this.props.Articles
 
+        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology','Travel']
+
 
         // NOTE: STILL NEED TO FIX THIS SORTING
         // CURRENTLY IT CAN'T DEAL WITH NEGATIVE SENTIMENT_SCORES
@@ -81,9 +83,14 @@ class NewsFeedRow extends Component {
         return (
             <div className={classes.container}>
 
-                <NavLink to={`/${this.props.newsFeedRow}`} className={classes.rowTitle}>
-                    <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                </NavLink>
+                {categoryNames.includes(this.props.newsFeedRowTitle) ? (
+                    <Link href={`/${this.props.newsFeedRow}`} className={classes.rowTitle}>
+                        <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                    </Link>
+                ) : (
+                        <Typography className={classes.sectionTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                )}
+                
                 <div className={classes.subContainer}>
                     <Grid container className={classes.gridList}>
                         {

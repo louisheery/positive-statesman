@@ -40,7 +40,7 @@ class NewsFeedHeaderItem extends Component {
 
                     <span>
                         <Typography className={classes.subtitleLeft}>
-                            {article.publisher}
+                            {(article.publisher).substring(0, 20)}
                         </Typography>
                         <Typography className={classes.subtitleRight}>
                             {moment(`${article.publish_date}`).fromNow()}

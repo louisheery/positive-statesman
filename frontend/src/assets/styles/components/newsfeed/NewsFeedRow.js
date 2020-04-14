@@ -24,9 +24,6 @@ const styles = {
       },
 
       sectionTitle: {
-            "&:hover": {
-                  fontWeight: "bold"
-            },
       },
 
       rowTitle: {

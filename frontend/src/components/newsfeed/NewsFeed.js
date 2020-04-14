@@ -65,10 +65,9 @@ class NewsFeed extends Component {
 
         var newsFeedState;
 
+        if (this.props.categoryId === '' && this.props.publisherId === undefined) {
 
-        
-
-        if (this.props.categoryId === '' && this.props.publisherId === '') {
+            
 
             if (this.props.userCategories == null) {
 
@@ -105,6 +104,8 @@ class NewsFeed extends Component {
                 }
             }
         } else {
+            console.log("@@@", this.props.publisherId)
+
             newsFeedState = {
                 newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
             }
