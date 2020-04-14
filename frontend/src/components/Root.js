@@ -13,7 +13,7 @@ import { userFetchData } from '../store/actions/actions';
 //import HeaderBar from './headers/backup/HeaderBar'
 import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
-import Category from './pages/Category'
+import ArticlePage from './pages/ArticlePage'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
@@ -98,7 +98,7 @@ class Root extends Component {
                                         exact path={`/categories/${categoryDictionary[key][0]}`}
                                         render={props => (
                                             <div>
-                                                <Category
+                                                <ArticlePage
                                                     key={Math.random() + i}
                                                     pageName={categoryDictionary[key][1]}
                                                     categoryId={categoryDictionary[key][2]}
@@ -118,7 +118,7 @@ class Root extends Component {
                                         exact path={`/publishers/${publisherDictionary[key][0]}`}
                                         render={props => (
                                             <div>
-                                                <Category
+                                                <ArticlePage
                                                     key={Math.random() + i}
                                                     pageName={publisherDictionary[key][1]}
                                                     publisherId={publisherDictionary[key][2]}

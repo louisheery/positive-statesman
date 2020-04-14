@@ -11,9 +11,9 @@ import NewsFeed from '../newsfeed/NewsFeed';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../../src/assets/styles/components/pages/Category.js';
+import styles from '../../assets/styles/components/pages/Category.js';
 
-class Category extends Component {
+class ArticlePage extends Component {
   
   componentDidMount() {
     ReactGA.pageview(`${this.props.pageName}`);
@@ -39,4 +39,4 @@ class Category extends Component {
   }
 }
 
-export default withStyles(styles)(Category)
+export default withStyles(styles)(ArticlePage)
