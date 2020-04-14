@@ -176,7 +176,6 @@ class HeaderBar extends Component {
                                 </div>
                         }
 
-                        {this.props.isLoggedIn ? (
                             <div>
                                 <IconButton
                                     aria-label="account of current user"
@@ -195,13 +194,16 @@ class HeaderBar extends Component {
                                     onClose={this.handleRequestClose}
 
                                 >
+                                {this.props.isLoggedIn ? (
+                                    <div>
                                     <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
                                     <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+                                    </div>
+                                ) : (
+                                    <MenuItem component={Link} to={'/login'}>Login</MenuItem>
+                                )}
                                 </Menu>
                             </div>
-                        ) : (
-                                <Button color="inherit" component={Link} to={'/login'}>Login</Button>
-                            )}
 
                     </Toolbar>
 
