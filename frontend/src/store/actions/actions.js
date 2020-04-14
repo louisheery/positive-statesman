@@ -119,13 +119,13 @@ export const checkLoggedIn = () => dispatch => {
 
 
 
-// FUNCTION: Get User Preferences Data for User
+// FUNCTION: Edit User Preferences Data for User
 
-export const userData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
+export const userEditData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
 
     var csrftoken = getCookie('csrftoken');
 
-    fetch(`/api/popular/category/`, {
+    fetch(`/api/popular/${dataType}/`, {
         method: requestType,
         headers: {
             'Accept': 'application/json',
@@ -155,7 +155,7 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
 }
 
 
-export const userGETData = (requestType, dataType) => (dispatch, getState) => {
+export const userFetchData = (requestType, dataType) => (dispatch, getState) => {
     getAsyncData(dispatch, getState, requestType, dataType)
 }
 
@@ -165,7 +165,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
     try {
         var csrftoken = getCookie('csrftoken');
 
-        const response = await fetch(`/api/popular/category/`, {
+        const response = await fetch(`/api/popular/${dataType}/`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -174,13 +174,19 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
             },
         })
         
-        
         let data = await response.json();
         var obj = data.info
-        var result = Object.keys(obj).map(function (key) {
-            return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
-        });
-        
+        var result
+
+        if (dataType == 'category') {
+            result = Object.keys(obj).map(function (key) {
+                return [obj[key]['name'], obj[key]['tax_id']];
+            });
+        } else {
+            result = Object.keys(obj).map(function (key) {
+                return [obj[key]['name'], obj[key]['tax_id']];
+            });
+        }
         dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: result });
         
     } catch (err) {
@@ -192,7 +198,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
 
 export const avaliableData = (dataType) => (dispatch, getState) => {
 
-    fetch(`/api/all/` + dataType, {
+    fetch(`/api/all/${dataType}/`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

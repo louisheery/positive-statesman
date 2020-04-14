@@ -25,7 +25,7 @@ import { connect, Provider } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import store from "../../store/store";
-import { userData, userGETData, avaliableData } from '../../store/actions/actions';
+import { userEditData, userFetchData, avaliableData } from '../../store/actions/actions';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -36,12 +36,8 @@ class Profile extends React.Component {
         super(props)
 
         this.state = {
-            userCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1']],
-            AuserPublishers: [[0, 'BBC'], [1, 'NYT'], [10, 'Bloomberg']],
-            //AallCategories: [['iab-qagIAB1', 'Business'], [1, 'Politics'], [4, 'Art'], [7, 'Sport']],
             allCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3'], ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'], ['/science', 'Science', 'iab-qagIAB15'], ['/sport', 'Sport', 'iab-qagIAB17'], ['/tech', 'Technology', 'iab-qagIAB19'], ['/travel', 'Travel', 'iab-qagIAB20'],],
-            //AallPublishers: [[0, 'BBC'], [1, 'NYT'], [4, 'Guardian'], [7, 'FT'], [10, 'Bloomberg']],
-            allPublishers: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3']],
+            allPublishers: [['/theguardian', 'The Guardian', ''], ['/nytimes', 'New York Times', ''], ['/ft', 'Financial Times', ''], ['/bloomberg', 'Bloomberg', ''], ['/reuters', 'Reuters', ''], ['/ap', 'Associated Press', ''], ['/thetimes', 'The Times', ''], ['/washingtonpost', 'Washington Post', ''], ['/time', 'Time', ''], ['/wsj', 'Wall Street Journal', ''], ['/bbcnews', 'BBC News', ''], ['/huffingtonpost', 'Huffington Post', ''], ['/theatlantic', 'The Atlantic', ''], ['/vox', 'Vox', '']],
             openMenuCategory: false,
             openMenuPublisher: false,
             anchorElCategory: undefined,
@@ -49,18 +45,6 @@ class Profile extends React.Component {
 
         }
     }
-
-    /*
-    const categoryDictionary = {
-        ART: ['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-        BUSINESS: ['/business', 'Business', 'iab-qagIAB3'],
-        POLITICS: ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-        SCIENCE: ['/science', 'Science', 'iab-qagIAB15'],
-        SPORT: ['/sport', 'Sport', 'iab-qagIAB17'],
-        TECH: ['/tech', 'Technology', 'iab-qagIAB19'],
-        TRAVEL: ['/travel', 'Travel', 'iab-qagIAB20'],
-        }
-    */
     /*
     [['iab-qagIAB1','Arts & Entertainment'],
     ['iab-qagIAB2','Automotive'],
@@ -91,26 +75,27 @@ class Profile extends React.Component {
     */
 
     static propTypes = {
-        userData: PropTypes.func.isRequired,
-        userGETData: PropTypes.func.isRequired,
+        userEditData: PropTypes.func.isRequired,
+        userFetchData: PropTypes.func.isRequired,
         avaliableData: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
         ReactGA.pageview(`profilepage`);
         //store.dispatch(avaliableData());
-        this.props.userGETData('GET', 'category');
+        this.props.userFetchData('GET', 'category');
+        this.props.userFetchData('GET', 'publisher');
     }
 
     onSubmitAdd(type, id) {
-        this.props.userData('POST', type, id);
-        this.props.userGETData('GET', type);
+        this.props.userEditData('POST', type, id);
+        this.props.userFetchData('GET', type);
         this.handleSubmit;
     }
 
     onSubmitDelete(type, id) {
-        this.props.userData('DELETE', type, id);
-        this.props.userGETData('GET', type);
+        this.props.userEditData('DELETE', type, id);
+        this.props.userFetchData('GET', type);
     }
 
     handleClickCategory = event => {
@@ -156,7 +141,7 @@ class Profile extends React.Component {
 
 
 
-                        <TableContainer component={Paper} style={{ maxWidth: 800 }}>
+                        <TableContainer component={Paper} style={{ maxWidth: 800, marginBottom: '30px' }}>
                             <Table aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
@@ -215,14 +200,12 @@ class Profile extends React.Component {
                     </div>
 
 
-
-                    {/*
-
                     <div>
 
 
-                        <TableContainer component={Paper} style={{ marginTop: '50px', maxWidth: 800 }}>
-                            <Table aria-label="simple table" >
+
+                        <TableContainer component={Paper} style={{ maxWidth: 800 }}>
+                            <Table aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Publisher</TableCell>
@@ -235,7 +218,7 @@ class Profile extends React.Component {
                                                 anchorEl={this.state.anchorElPublisher}
                                                 open={this.state.openMenuPublisher}
                                                 keepMounted
-                                                onClose={() => this.setState({ openMenuPublisher: !this.state.openMenuPublisher })}
+                                                onClose={(e) => this.setState({ openMenuPublisher: !this.state.openMenuPublisher })}
                                             >
                                                 <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
                                                     <Table aria-label="simple table">
@@ -244,7 +227,7 @@ class Profile extends React.Component {
                                                                 <TableRow key={Math.random()}>
                                                                     <TableCell align="left">{row[1]}</TableCell>
                                                                     <TableCell align="right" padding="checkbox">
-                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[2]); this.setState({ openMenuPublisher: !this.state.openMenuPublisher }) }} aria-label="add">
+                                                                        <IconButton onClick={() => { this.onSubmitAdd('publisher', row[2]) }} aria-label="add">
                                                                             <AddIcon />
                                                                         </IconButton>
                                                                     </TableCell>
@@ -259,22 +242,25 @@ class Profile extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.AuserPublishers.map((row) => (
-                                        <TableRow key={Math.random()}>
-                                            <TableCell align="left">{row[1]}</TableCell>
-                                            <TableCell align="right" padding="checkbox">
-                                                <IconButton onClick={this.onSubmitDelete('category', row[0])} aria-label="delete">
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
 
-                                        </TableRow>
-                                    ))}
+                                    {(this.props.userPublisers != undefined) &&
+                                        this.props.userPublisers.map((row) => (
+                                            <TableRow key={Math.random()}>
+                                                <TableCell align="left">{row[0]}</TableCell>
+                                                <TableCell align="right" padding="checkbox">
+                                                    <IconButton onClick={() => { this.onSubmitDelete('publisher', row[1]); this.forceUpdate(); }} aria-label="delete">
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </TableCell>
+
+                                            </TableRow>
+                                        ))
+                                    }
                                 </TableBody>
                             </Table>
                         </TableContainer>
+
                     </div>
-*/}
 
 
                 </Container>
@@ -289,7 +275,8 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.reducer.isLoggedIn,
         userCategories: state.reducer.userCategories,
+        userPublisers: state.reducer.userPublishers,
     };
 };
 
-export default connect(mapStateToProps, { userData, userGETData, avaliableData })(withStyles(styles)(Profile))
+export default connect(mapStateToProps, { userEditData, userFetchData, avaliableData })(withStyles(styles)(Profile))
