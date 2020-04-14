@@ -22,16 +22,28 @@ def valid_filter(param):
     return param != '' and param is not None
 
 def sortByRecommended(user, articles):
-    user_favourite_publishers = user.reader.popular_publisher.all()
+    # user_favourite_publishers = user.reader.popular_publisher.all()
     user_favourite_categories = user.reader.categories.all()
+    user_favourite_category_names = [category.name for category in user_favourite_categories]
+    scored_articles = []
     # algorithm, one point for publisher, one point for category, score * 10 points for sentiment
     for article in articles:
-        pub_score = len(set([article.publisher]) & set(user_favourite_publishers))
-        cat_score = len(set(article.categories) & set(user_favourite_categories))
+        article_categories = article.categories.all()
+        articles_category_names = [category.name for category in article_categories]
+        # pub_score = len(set([article.publisher]) & set(user_favourite_publishers))
+        cat_score = len(set(articles_category_names) & set(user_favourite_category_names))
         sent_score = article.sentiment_score * 2
-        article["sort_score"] = pub_score + cat_score + sent_score
+        sort_score = cat_score + sent_score
+        scored_articles.append({"score": sort_score,"article": article})
+        print("score ", sort_score)
 
-    sorted(articles, key=lambda x: x['sort_score'])
+    scored_articles = sorted(scored_articles, key=lambda x: x['score'])
+    scored_articles.reverse()
+    print("first: ", scored_articles[0]["score"])
+    print("last: ", scored_articles[len(scored_articles)-1]["score"])
+    for x in scored_articles:
+        print(x["score"])
+    articles = [x["article"] for x in scored_articles]
     return articles
 
 def article_filter(request):
@@ -60,7 +72,7 @@ def article_filter(request):
 
         # Filter by Category, Publisher, Sentiment Score Range
         if valid_filter(category):
-            if not category=="recommendation":
+            if not category=="recommended":
                 articles = articles.filter(categories__taxonomy_id=category)
 
         if valid_filter(publisher):
@@ -75,7 +87,7 @@ def article_filter(request):
 
         # Article Limit and Offset
         if valid_filter(category):
-            if category=="recommendation" and request.user.is_authenticated:
+            if category=="recommended" and request.user.is_authenticated:
                 user = request.user
                 articles = sortByRecommended(user, articles)
 
