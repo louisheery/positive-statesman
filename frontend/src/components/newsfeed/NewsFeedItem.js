@@ -20,7 +20,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedHeaderItem.js';
+import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedItem.js';
 
 class NewsFeedItem extends Component {
 

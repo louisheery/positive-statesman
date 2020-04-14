@@ -87,7 +87,7 @@ class NewsFeedRow extends Component {
                 <div className={classes.subContainer}>
                     <Grid container className={classes.gridList}>
                         {
-                            sortedArticles.slice(0, this.props.width == 'xs' ? 2 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
+                            sortedArticles.slice(0, this.props.width == 'xs' ? 1 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
                                 return (<NewsFeedItem key={i} article={article} itemColor={this.props.itemColor} isHeaderItem={false} />)
                             })
                         }
