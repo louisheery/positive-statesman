@@ -19,11 +19,11 @@ import Menu from '@material-ui/core/Menu';
 // REDUX LIBRARIES
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { userEditData, userFetchData, avaliableData } from '../../../store/actions/actions';
+import { userEditData, userFetchData, avaliableData } from '../../store/actions/actions';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
-import styles from '../../../../src/assets/styles/components/pages/profilepage/ProfileTable.js'
+import styles from '../../assets/styles/components/profile/ProfileTable.js'
 
 
 class ProfileTable extends React.Component {
