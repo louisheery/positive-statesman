@@ -11,7 +11,7 @@ import NewsFeed from '../newsfeed/NewsFeed';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../assets/styles/components/pages/Category.js';
+import styles from '../../assets/styles/components/pages/Articles.js';
 
 class ArticlePage extends Component {
   
@@ -31,8 +31,9 @@ class ArticlePage extends Component {
         <Hidden only={['md', 'lg', 'xl']}>
           <div className={classes.mainDiv}></div>
         </Hidden>
+                <div className={classes.mainPadding}></div>
         */}        
-        <div className={classes.mainPadding}></div>
+
         <NewsFeed pageName={this.props.pageName} categoryId={this.props.categoryId} publisherId={this.props.publisherId} />
       </div>
     )

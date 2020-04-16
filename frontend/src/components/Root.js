@@ -9,8 +9,7 @@ import { connect } from 'react-redux';
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
 import HeaderBar from './headers/HeaderBar'
-import Home from './pages/Home'
-import ArticlePage from './pages/ArticlePage'
+import Articles from './pages/Articles'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
@@ -89,7 +88,7 @@ class Root extends Component {
                                         exact path={`/categories/${categoryDictionary[key][0]}`}
                                         render={props => (
                                             <div>
-                                                <ArticlePage
+                                                <Articles
                                                     key={Math.random() + i}
                                                     pageName={categoryDictionary[key][1]}
                                                     categoryId={categoryDictionary[key][2]}
@@ -109,7 +108,7 @@ class Root extends Component {
                                         exact path={`/publishers/${publisherDictionary[key][0]}`}
                                         render={props => (
                                             <div>
-                                                <ArticlePage
+                                                <Articles
                                                     key={Math.random() + i}
                                                     pageName={publisherDictionary[key][1]}
                                                     publisherId={publisherDictionary[key][2]}
@@ -126,7 +125,7 @@ class Root extends Component {
                             exact path="/"
                             render={props => (
                                 <div>
-                                    <Home
+                                    <Articles
                                         key={Math.random()}
                                         pageName={"Top Stories"}
                                         categoryId={""}

@@ -58,7 +58,7 @@ class NewsFeedRow extends Component {
         // this.state.articles
         // this.props.Articles
 
-        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology','Travel']
+        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel']
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -66,28 +66,49 @@ class NewsFeedRow extends Component {
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.articles, 'sentiment_score').reverse();
 
+        Object.size = function (obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        };
 
         return (
-            <div className={classes.container}>
 
-                {categoryNames.includes(this.props.newsFeedRowTitle) ? (
-                    
-                    <NavLink to={`/categories${this.props.newsFeedRow}`} className={classes.hyperlinkTitle}>
-                        <Typography className={classes.hyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                    </NavLink>
+            <div>
+
+                {(Object.size(sortedArticles) > 4) ? (
+
+                    <div className={classes.container}>
+
+                        {categoryNames.includes(this.props.newsFeedRowTitle) ? (
+
+                            <NavLink to={`/categories${this.props.newsFeedRow}`} className={classes.hyperlinkTitle}>
+                                <Typography className={classes.hyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                            </NavLink>
+                        ) : (
+                                <Typography className={classes.nonHyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                            )}
+
+                        <div className={classes.subContainer}>
+                            <Grid container className={classes.gridList}>
+                                {
+                                    sortedArticles.slice(0, this.props.width == 'xs' ? 1 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
+                                        return (<NewsFeedItem key={i} article={article} itemColor={this.props.itemColor} isHeaderItem={false} />)
+                                    })
+                                }
+                            </Grid>
+                        </div>
+                    </div>
+
+
                 ) : (
-                        <Typography className={classes.nonHyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                )}
-                
-                <div className={classes.subContainer}>
-                    <Grid container className={classes.gridList}>
-                        {
-                            sortedArticles.slice(0, this.props.width == 'xs' ? 1 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
-                                return (<NewsFeedItem key={i} article={article} itemColor={this.props.itemColor} isHeaderItem={false} />)
-                            })
-                        }
-                    </Grid>
-                </div>
+                        <div>
+                        </div>
+                    )
+                }
+
             </div>
 
 

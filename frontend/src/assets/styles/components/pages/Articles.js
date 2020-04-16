@@ -1,6 +1,6 @@
 const styles = {
     mainPadding: {
-       height: '160px',
+        height: '160px',
     }
 }
 
