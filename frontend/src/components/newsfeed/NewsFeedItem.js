@@ -108,6 +108,25 @@ const publisherDictionary = {
 }
 
 class NewsFeedItem extends Component {
+
+    //state = { src: null };
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            src: null
+        }
+    }
+
+    componentDidMount() {
+
+        const imageLoader = new Image();
+        imageLoader.src = this.props.article.image_url;
+
+        imageLoader.onload = () => {
+            this.setState({ src: imageLoader.src });
+        };
+    }
     
     
     vlookup(matrix, origin, destination, publisher) {
@@ -123,12 +142,13 @@ class NewsFeedItem extends Component {
         const { classes, article } = this.props;
         var score = Math.round(((article.sentiment_score + 1) * 100 / 2));
 
-        var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' };
+        var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${this.state.src || ''}")`, backgroundSize: '100% 100%' };
+        //var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' };
         var rowItemStyle = { background: `-webkit-linear-gradient(${this.props.itemColor}, rgba(0, 0, 0, 0.3))`, backgroundSize: '100% 100%' }
 
         return (
             <Grid item xs={12} sm={6} md={4}>
-                <Paper className={classes.paper} style={this.props.isHeaderItem ? headerItemStyle : rowItemStyle} square={true}>
+                <Paper {...this.props} className={classes.paper} style={this.props.isHeaderItem ? headerItemStyle : rowItemStyle} square={true}>
                     <Link href={article.url}>
                         <Typography variant='subtitle1' className={classes.title} >
                             {article.title}

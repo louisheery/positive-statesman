@@ -69,7 +69,7 @@ class Search extends Component {
                         <Grid className={classes.loadingIcon} container item justify="center" alignItems="center" xs={12}>
                             <Typography>{"Sorry, we couldn't find articles in our database relating to \"" + this.state.searchQuery + "\"."} </Typography></Grid> :
                         this.state.searchResults.map((article, i) => {
-                            return <NewsFeedItem key={i} article={article} isHeaderItem={false} />
+                            return <NewsFeedItem key={i} article={article} isHeaderItem={true} />
                         })
 
                         :

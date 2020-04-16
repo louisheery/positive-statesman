@@ -283,7 +283,9 @@ def search_articles(request):
         if search_string != '':
 
             articles = articles.filter(title__icontains=search_string) | articles.filter(
-                text_snippet__icontains=search_string)
+                text_snippet__icontains=search_string) | articles.filter(
+                publisher__name__icontains=search_string) | articles.filter(
+                categories__name__icontains=search_string)
 
         serializer = ArticleSerializer(articles.distinct(), many=True)
 
