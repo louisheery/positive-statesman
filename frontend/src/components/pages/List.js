@@ -44,12 +44,6 @@ class ListPage extends Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {publisherDictionary[key][1]}
                                 </Typography>
-                                {/*}
-                                <Typography style={{ textDecoration: 'none', "&:hover": { textDecoration: "none" } }} variant="body2" color="textSecondary" component="p" >
-                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
-                                </Typography>
-                                */}
                             </CardContent>
                         </CardActionArea>
                     </Card>
