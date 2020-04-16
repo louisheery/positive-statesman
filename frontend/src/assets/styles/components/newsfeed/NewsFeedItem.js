@@ -56,15 +56,13 @@ const styles = {
         border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'
     },
 
-    shareButtonDiv: {
-        display: 'inline-block', width: '30%', 'height': '8px'
+    fbShareIcon: {
+        height: '20px'
     },
 
-    shareButtonFBIcon: {
-        height: '20px'
-
+    fbShareDiv: {
+        display: 'inline-block', width: '30%', 'height': '8px'
     }
-
     
 
 
