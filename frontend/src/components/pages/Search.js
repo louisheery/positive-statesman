@@ -1,5 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react'
+import ReactGA from "react-ga";
 import { withRouter } from 'react-router-dom'
 
 // MATERIAL UI
@@ -38,6 +39,7 @@ class Search extends Component {
 
     componentDidMount = () => {
         this.executeSearch()
+        ReactGA.pageview(`searchpage/${this.state.searchQuery}`);
     }
 
     componentDidUpdate = (prevProps) => {

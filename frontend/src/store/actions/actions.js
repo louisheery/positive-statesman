@@ -1,10 +1,4 @@
-// REACT LIBRARIES
-import React, { Component } from 'react'
-import ReactGA from "react-ga";
-import axios from 'axios';
-import { withRouter, Redirect } from "react-router-dom";
-
-import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
+import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
 
 // Cookie Fetcher Function
 function getCookie(name) {

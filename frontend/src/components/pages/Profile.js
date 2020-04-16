@@ -18,6 +18,10 @@ import styles from '../../../src/assets/styles/components/pages/Profile.js';
 
 class Profile extends React.Component {
 
+    componentDidMount() {
+        ReactGA.pageview(`profilepage`);
+    }
+
     render() {
 
         const { classes } = this.props;

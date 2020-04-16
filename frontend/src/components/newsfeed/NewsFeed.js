@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // REDUX LIBRARIES
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { userFetchData, avaliableData } from '../../store/actions/actions';
+import { userFetchData } from '../../store/actions/actions';
 
 // INTERNAL REACT COMPONENTS
 import NewsFeedRow from './NewsFeedRow';

@@ -15,7 +15,6 @@ class Home extends Component {
 
   componentDidMount() {
     ReactGA.pageview(`homepage`);
-    //store.dispatch(getUserData());
   }
 
   render() {
