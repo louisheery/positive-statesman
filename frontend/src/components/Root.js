@@ -17,6 +17,7 @@ import Profile from './pages/Profile'
 import FeedbackButton from './popups/FeedbackButton'
 import Search from './pages/Search'
 import Analytics from './pages/Analytics'
+import List from './pages/List'
 
 
 // STYLES
@@ -205,6 +206,7 @@ class Root extends Component {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/logout" component={Logout} />
+                        <Route exact path="/publishers" component={List} />
                         <Redirect to="/" />
                     </Switch>
                     <FeedbackButton />
