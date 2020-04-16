@@ -30,7 +30,7 @@ class Profile extends React.Component {
             return <Redirect to="/" />;
         }
 
-    
+
         return (
             <div>
 
@@ -67,4 +67,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { })(withStyles(styles)(Profile))
+export default connect(mapStateToProps, {})(withStyles(styles)(Profile))
