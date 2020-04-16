@@ -82,7 +82,7 @@ class ProfileTable extends React.Component {
 
         return (
             <div>
-                <TableContainer component={Paper} style={{ maxWidth: 800, marginBottom: '30px' }}>
+                <TableContainer component={Paper} className={classes.tableContainerOuter}>
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -98,7 +98,7 @@ class ProfileTable extends React.Component {
                                         keepMounted
                                         onClose={(e) => this.setState({ openMenu: !this.state.openMenu })}
                                     >
-                                        <TableContainer component={Paper} style={{ minWidth: 200, maxWidth: 800 }}>
+                                        <TableContainer component={Paper} className={classes.tableContainer}>
                                             <Table aria-label="simple table">
                                                 <TableBody>
                                                     {allData.map((row) => (

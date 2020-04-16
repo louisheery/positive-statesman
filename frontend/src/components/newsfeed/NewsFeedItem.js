@@ -160,10 +160,10 @@ class NewsFeedItem extends Component {
                             </Hidden>
                         </p>
 
-                    <div  style={{ display: 'inline-block', width: '30%', 'height': '8px'}}>
+                    <div className={classes.shareButtonDiv}>
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
-                            <Button style={{ border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'}}>
-                        Share <FacebookIcon style={{height: '20px'}} />
+                            <Button className={classes.shareButton}>
+                                Share <FacebookIcon className={classes.shareButtonFBIcon} />
                         </Button>
                         </FacebookShareButton>
                     </div>

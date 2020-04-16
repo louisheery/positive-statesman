@@ -53,8 +53,19 @@ const styles = {
     },
 
     shareButton: {
-        borderRadius: '5px', border: '1px solid blue', backgroundColor: '#3b5998', margin: '5px', marginTop: '-5px'
+        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'
+    },
+
+    shareButtonDiv: {
+        display: 'inline-block', width: '30%', 'height': '8px'
+    },
+
+    shareButtonFBIcon: {
+        height: '20px'
+
     }
+
+    
 
 
 
