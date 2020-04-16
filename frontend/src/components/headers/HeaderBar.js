@@ -169,14 +169,15 @@ class HeaderBar extends Component {
                                 </ClickAwayListener>
                                 :
                                 <div>
-                                    <IconButton color="secondary" onClick={this.handleClickPublishers}>
-                                        <MenuBookIcon />
-                                    </IconButton>
+                                    
                                     <IconButton color="secondary" onClick={this.handleClickSearch}>
                                         <SearchIcon />
                                     </IconButton>
                                     <IconButton color="secondary" onClick={this.handleClickAdd}>
                                         <AddCircleOutlineIcon />
+                                    </IconButton>
+                                    <IconButton color="secondary" onClick={this.handleClickPublishers}>
+                                        <MenuBookIcon />
                                     </IconButton>
                                     <IconButton color="secondary" onClick={this.handleClickAnalytics}>
                                         <AssessmentIcon />
