@@ -25,6 +25,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import AssessmentIcon from '@material-ui/icons/Assessment'
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -102,6 +103,10 @@ class HeaderBar extends Component {
         this.props.history.push({ pathname: "/analytics/" })
     }
 
+    handleClickPublishers = () => {
+        this.props.history.push({ pathname: "/publishers/" })
+    }
+
 
     render() {
 
@@ -164,6 +169,9 @@ class HeaderBar extends Component {
                                 </ClickAwayListener>
                                 :
                                 <div>
+                                    <IconButton color="secondary" onClick={this.handleClickPublishers}>
+                                        <MenuBookIcon />
+                                    </IconButton>
                                     <IconButton color="secondary" onClick={this.handleClickSearch}>
                                         <SearchIcon />
                                     </IconButton>

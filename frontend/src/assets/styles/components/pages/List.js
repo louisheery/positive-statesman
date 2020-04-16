@@ -16,7 +16,12 @@ const styles = {
         width: '100%',
         maxWidth: 360,
         backgroundColor: 'theme.palette.background.paper'
-    }
+    },
+
+    cardRoot: {
+        maxWidth: 345,
+        margin: '10px'
+    },
 }
 
 export default styles;
