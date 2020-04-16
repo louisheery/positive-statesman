@@ -10,7 +10,7 @@ import Container from '@material-ui/core/Container';
 // REDUX LIBRARIES
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
-import ProfileTable from './profilepage/ProfileTable';
+import ProfileTable from '../profile/ProfileTable';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';

@@ -4,10 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { checkLoggedIn } from '../store/actions/actions';
 
 // REDUX LIBRARIES
-import reducer from '../store/reducers/reducer';
-import { connect, Provider } from 'react-redux';
-import store from "../store/store";
-import { userFetchData } from '../store/actions/actions';
+import { connect } from 'react-redux';
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
@@ -15,6 +12,7 @@ import HeaderBar from './headers/HeaderBar'
 import Home from './pages/Home'
 import ArticlePage from './pages/ArticlePage'
 import Login from './pages/Login'
+import Logout from './pages/Logout'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import FeedbackButton from './popups/FeedbackButton'
@@ -51,32 +49,26 @@ const categoryDictionary = {
 }
 
 const publisherDictionary = {
-    GUARDIAN: ['theguardian', 'The Guardian', ''],
-    NYTIMES: ['nytimes', 'New York Times', ''],
-    FTIMES: ['ft', 'Financial Times', ''],
-    BLOOMBERG: ['bloomberg', 'Bloomberg', ''],
-    REUTERS: ['reuters', 'Reuters', ''],
-    AP: ['ap', 'Associated Press', ''],
-    TIMES: ['thetimes', 'The Times', ''],
-    WAPOST: ['washingtonpost', 'Washington Post', ''],
-    TIMEMAG: ['time', 'Time', ''],
-    WSJ: ['wsj', 'Wall Street Journal', ''],
-    BBCNEWS: ['bbcnews', 'BBC News', ''],
-    HUFFPOST: ['huffingtonpost', 'Huffington Post', ''],
-    ATLANTIC: ['theatlantic', 'The Atlantic', ''],
-    VOX: ['vox', 'Vox', ''],
+    GUARDIAN: ['theguardian', 'The Guardian', 'The%20Guardian'],
+    NYTIMES: ['nytimes', 'New York Times', 'New%20York%20Times'],
+    FTIMES: ['ft', 'Financial Times', 'Financial%20Times'],
+    BLOOMBERG: ['bloomberg', 'Bloomberg', 'Bloomberg'],
+    REUTERS: ['reuters', 'Reuters', 'Reuters'],
+    AP: ['ap', 'Associated Press', 'Associated%20Press'],
+    TIMES: ['thetimes', 'The Times', 'The%20Times'],
+    WAPOST: ['washingtonpost', 'Washington Post', 'Washington%20Post'],
+    TIMEMAG: ['time', 'Time', 'Time'],
+    WSJ: ['wsj', 'Wall Street Journal', 'Wall%20Street%20Journal'],
+    BBCNEWS: ['bbcnews', 'BBC News', 'BBC'],
+    HUFFPOST: ['huffingtonpost', 'Huffington Post', 'Huffington%20Post'],
+    ATLANTIC: ['theatlantic', 'The Atlantic', 'The%20Atlantic'],
+    VOX: ['vox', 'Vox', 'Vox'],
 }
 
 class Root extends Component {
 
     componentDidMount() {
-
         this.props.checkLoggedIn();
-
-        if (this.props.isLoggedIn) {
-            store.dispatch(userFetchData());
-        }
-
     }
 
     render() {

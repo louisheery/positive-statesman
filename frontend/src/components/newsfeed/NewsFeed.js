@@ -52,7 +52,10 @@ class NewsFeed extends Component {
     }
 
     componentDidMount() {
-        this.props.userFetchData('GET', 'category');
+        if (this.props.isLoggedIn) {
+            this.props.userFetchData('GET', 'category');
+            this.props.userFetchData('GET', 'publisher');
+        }
     }
 
     render() {
@@ -100,14 +103,12 @@ class NewsFeed extends Component {
                 }
             }
         } else {
-            console.log("@@@", this.props.publisherId)
 
             newsFeedState = {
                 newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
             }
         }
 
-        console.log(newsFeedState)
             return (
                 <div className={classes.grid}>
 
