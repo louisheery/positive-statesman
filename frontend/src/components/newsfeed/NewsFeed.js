@@ -64,19 +64,24 @@ class NewsFeed extends Component {
 
         var newsFeedState;
 
-        if (this.props.categoryId === '' && this.props.publisherId === undefined) {
+        // A: Publisher Page
+        if (this.props.publisherId !== undefined) {
+            newsFeedState = {
+                newsFeedRow: [this.state.newsFeedDictionary.x219, this.state.newsFeedDictionary.x237, this.state.newsFeedDictionary.x128, this.state.newsFeedDictionary.x84, this.state.newsFeedDictionary.x212, this.state.newsFeedDictionary.x180, this.state.newsFeedDictionary.x181,]
+            }
 
-            
+        // B: Home Page
+        } else if (this.props.categoryId === '') {
 
+            // B1: Home Page with User Not Logged in OR Home Page with User Logged in and No preferences Setup
             if (this.props.userCategories == null) {
 
                 newsFeedState = {
 
                     newsFeedRow: [this.state.newsFeedDictionary.x219, this.state.newsFeedDictionary.x237, this.state.newsFeedDictionary.x128, this.state.newsFeedDictionary.x84, this.state.newsFeedDictionary.x212, this.state.newsFeedDictionary.x180, this.state.newsFeedDictionary.x181,]
-
-
                 }
 
+            // B2: Home Page with User Logged In and Preferences Setup
             } else {
 
                 var recommendationCode = ['xRECOMMEND']
@@ -102,6 +107,8 @@ class NewsFeed extends Component {
                     newsFeedRow: userCategoriesData
                 }
             }
+
+        // C: Category Page
         } else {
 
             newsFeedState = {
