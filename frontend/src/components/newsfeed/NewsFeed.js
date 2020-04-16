@@ -37,7 +37,7 @@ class NewsFeed extends Component {
                 x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
                 x212: ['/science', 'Science', { category: 'iab-qagIAB15', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
                 x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                x84: ['/tech', 'Technology', { category: 'iab-qagIAB19', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
+                x84: ['/technology', 'Technology', { category: 'iab-qagIAB19', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
                 x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
             },
         }

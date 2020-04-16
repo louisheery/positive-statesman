@@ -32,7 +32,7 @@ class ProfileTable extends React.Component {
         super(props)
 
         this.state = {
-            allCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3'], ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'], ['/science', 'Science', 'iab-qagIAB15'], ['/sport', 'Sport', 'iab-qagIAB17'], ['/tech', 'Technology', 'iab-qagIAB19'], ['/travel', 'Travel', 'iab-qagIAB20'],],
+            allCategories: [['/arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'], ['/business', 'Business', 'iab-qagIAB3'], ['/politics', 'Law, Government & Politics', 'iab-qagIAB11'], ['/science', 'Science', 'iab-qagIAB15'], ['/sport', 'Sport', 'iab-qagIAB17'], ['/technology', 'Technology', 'iab-qagIAB19'], ['/travel', 'Travel', 'iab-qagIAB20'],],
             allPublishers: [['/theguardian', 'The Guardian', ''], ['/nytimes', 'New York Times', ''], ['/ft', 'Financial Times', ''], ['/bloomberg', 'Bloomberg', ''], ['/reuters', 'Reuters', ''], ['/ap', 'Associated Press', ''], ['/thetimes', 'The Times', ''], ['/washingtonpost', 'Washington Post', ''], ['/time', 'Time', ''], ['/wsj', 'Wall Street Journal', ''], ['/bbcnews', 'BBC News', ''], ['/huffingtonpost', 'Huffington Post', ''], ['/theatlantic', 'The Atlantic', ''], ['/vox', 'Vox', '']],
             openMenu: false,
             anchorEl: undefined,

@@ -35,6 +35,9 @@ const styles = {
 
     subtitleLeft: {
         color: 'white', fontSize: '1.6vh', float: 'left', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
+        "&:hover": {
+            textDecoration: "underline"
+        },
     },
 
     subtitleRight: {
