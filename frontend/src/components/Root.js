@@ -50,7 +50,7 @@ const categoryDictionary = {
 const publisherDictionary = {
     GUARDIAN: ['theguardian', 'The Guardian', 'The%20Guardian'],
     NYTIMES: ['nytimes', 'New York Times', 'New%20York%20Times'],
-    FTIMES: ['ft', 'Financial Times', 'Financial%20Times'],
+    FTIMES: ['ft', 'Financial Times', 'Financial%20News'],
     BLOOMBERG: ['bloomberg', 'Bloomberg', 'Bloomberg'],
     REUTERS: ['reuters', 'Reuters', 'Reuters'],
     AP: ['ap', 'Associated Press', 'Associated%20Press'],
