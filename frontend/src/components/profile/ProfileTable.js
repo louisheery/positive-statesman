@@ -21,6 +21,9 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { userEditData, userFetchData, avaliableData } from '../../store/actions/actions';
 
+import { categoryDictionary } from '../Settings';
+import { publisherDictionary } from '../Settings';
+
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/profile/ProfileTable.js'
@@ -73,13 +76,16 @@ class ProfileTable extends React.Component {
         
     };
 
+    
+
 
     render() {
+        
         const { classes, tableType } = this.props;
 
         var userData = tableType == 'category' ? this.props.userCategories : this.props.userPublishers
-        var allData = tableType == 'category' ? this.state.allCategories : this.state.allPublishers
-
+        var allData = tableType == 'category' ? categoryDictionary : publisherDictionary
+        //{ console.log(Object.keys(allData), (allData["GUARDIAN"])[0]) }
         return (
             <div>
                 <TableContainer component={Paper} className={classes.tableContainerOuter}>
@@ -96,22 +102,25 @@ class ProfileTable extends React.Component {
                                         anchorEl={this.state.anchorEl}
                                         open={this.state.openMenu}
                                         keepMounted
-                                        onClose={(e) => this.setState({ openMenu: !this.state.openMenu })}
+                                        onClose={() => this.setState({ openMenu: !this.state.openMenu })}
                                     >
                                         <TableContainer component={Paper} className={classes.tableContainer}>
                                             <Table aria-label="simple table">
                                                 <TableBody>
-                                                    {allData.map((row) => (
+                                                    
+                                                    {Object.keys(allData).map(function (key) {
+                                                        return (
                                                         <TableRow key={Math.random()}>
-                                                            <TableCell align="left">{row[1]}</TableCell>
+                                                            <TableCell align="left">{allData[key][1]}</TableCell>
                                                             <TableCell align="right" padding="checkbox">
-                                                                <IconButton onClick={() => { this.onSubmitAdd(row[2]) }} aria-label="add">
+                                                                <IconButton onClick={() => { this.onSubmitAdd(allData[key][2]) }} aria-label="add">
                                                                     <AddIcon />
                                                                 </IconButton>
                                                             </TableCell>
 
                                                         </TableRow>
-                                                    ))}
+                                                        );
+                                                    }.bind(this))}
                                                 </TableBody>
                                             </Table>
                                         </TableContainer>
