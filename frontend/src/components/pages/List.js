@@ -11,18 +11,20 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 
-import publisherDictionary from '../Settings';
+import { publisherDictionary } from '../Settings';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/List.js'
 
+console.log(publisherDictionary)
 
 class ListPage extends Component {
 
     componentDidMount() {
         ReactGA.pageview(`publisherspage`);
     }
+
 
 
     render() {
