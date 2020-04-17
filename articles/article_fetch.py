@@ -65,6 +65,12 @@ def fetch_articles(api_instance):
             categories_taxonomy='iab-qag',
             categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20'],
             #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
+            source_domain=["theguardian.com","nytimes.com","ft.com","bloomberg.com","reuters.com","apnews.com","thetimes.co.uk","washingtonpost.com","afp.com","abcnews.go.com","time.com","wsj.com","economist.com","politico.com",
+            "bbc.com","pbs.com","thehill.com","usatoday.com","npr.org","cbsnews.com","axios.com","huffpost.com","newyorker.com","nationalreview.com","slate.com","theatlantic.com","theweek.com","vanityfair.com","msnbc.com","cnn.com",
+            "theamericanconservative.com","vox.com","mic.com","independent.co.uk","thesun.co.uk","metro.co.uk","dailymail.co.uk","telegraph.co.uk","latimes.com","cnet.com","engadget.com","theverge.com","vice.com","hollywoodreporter.com",
+            "newsweek.com","forbes.com","sciencemag.org","rte.com","natgeo.com","wanderlust.co.uk","skysports.com","espn.com","theathletic.co.uk","phys.org","physicsworld.com","sky.com","techradar.com","entertainmentdaily.co.uk",
+            "digitalspy.com","inews.co.uk","ign.com","france24.com","dw.com","euronews.com","thelocal.it","elpais.com","cbc.ca","globalnews.ca","nationalpost.com","msn.com","nbcnews.com","abc.net.au","scmp.com","seattletimes.com",
+            "independent.ie","standard.co.uk","wired.co.uk","fortune.com","techcrunch.com","usnews.com"],
             language=['en'],
             #next_page_cursor=next_page_cursor
         )
