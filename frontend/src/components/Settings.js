@@ -5,7 +5,7 @@ var categoryBarTabs = ["business",
     "science",
     "technology",
     "travel"]
-/*
+
 var categoryDictionary = {
     ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
     BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
@@ -15,8 +15,8 @@ var categoryDictionary = {
     TECH: ['technology', 'Technology', 'iab-qagIAB19'],
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 };
-*/
 
+/*
 var categoryDictionary = {
     ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
     AUTO: ['automotive', 'Automotives', 'iab-qagIAB2'],
@@ -43,7 +43,7 @@ var categoryDictionary = {
     RELIGION: ['religion', 'Religion', 'iab-qagIAB23'],
     OTHER: ['other', 'Other News', 'iab-qagIAB24'],
 };
-
+*/
 var publisherDictionary = {
     GUARDIAN: ['guardian', 'The Guardian', 'The%20Guardian'],
     NYTIMES: ['nytimes', 'NYTimes', 'The%20New%20York%20Times'],

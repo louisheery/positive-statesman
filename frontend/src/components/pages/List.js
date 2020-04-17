@@ -18,7 +18,6 @@ import { categoryDictionary } from '../Settings';
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/List.js'
 
-console.log(publisherDictionary)
 
 class ListPage extends Component {
 

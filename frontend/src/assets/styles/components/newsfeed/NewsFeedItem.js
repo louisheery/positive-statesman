@@ -3,6 +3,7 @@ const styles = {
     paper: {
         padding: '10px',
         margin: '10px',
+        paddingBottom: '20px',
         textAlign: 'center',
         backgroundColor: 'grey',
         height: '160px',
@@ -17,17 +18,17 @@ const styles = {
 
     title: {
         color: 'white',
-        fontSize: '1.8vh',
+        fontSize: '10pt + 1.8vw',
         textAlign: 'left',
         fontWeight: 'bold',
-        lineHeight: '1.8vh',
+        lineHeight: '14pt',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'normal',
-        minHeight: '4.7vh',
-        maxHeight: '4.7vh',
+        minHeight: '41pt',
+        maxHeight: '41pt',
         paddingTop: '10px',
-        paddingBottom: '5px',
+        paddingBottom: '1s5px',
         "&:hover": {
             textDecoration: "underline"
         },
@@ -35,9 +36,6 @@ const styles = {
 
     subtitleLeft: {
         color: 'white', fontSize: '1.6vh', float: 'left', display: 'inline-block', lineHeight: '1em', maxHeight: '1em',
-        "&:hover": {
-            textDecoration: "underline"
-        },
     },
 
     subtitleRight: {
@@ -49,18 +47,26 @@ const styles = {
     },
 
     positivity: {
-        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px', marginTop: '5px', paddingTop: '7px', paddingBottom: '8px', marginLeft: '0px'
+        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px', marginTop: '5px', paddingTop: '7px', paddingBottom: '8px'
+    },
+
+    positivityButton: {
+        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
+        
     },
 
     shareButton: {
-        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)'
+        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
+    "&:hover": {
+            backgroundColor: 'lightgrey'
+        },
     },
 
     fbShareIcon: {
         height: '20px'
     },
 
-    fbShareDiv: {
+    buttonDiv: {
         display: 'inline-block', width: '30%', 'height': '8px'
     }
     
