@@ -34,9 +34,6 @@ const styles = {
       nonHyperlinkTitle: {
             textDecoration: 'none',
             color: 'unset',
-            '&:hover': {
-                  fontWeight: 'bold',
-            },
       },
 
       

@@ -9,6 +9,7 @@ const styles = {
 
     fabButton: {
         margin: '5px',
+        backgroundColor: 'white'
     },
     fabIcon: {
         marginRight: '5px' 
