@@ -19,10 +19,4 @@ six==1.14.0
 sqlparse==0.3.0
 urllib3==1.25.8
 vaderSentiment==3.2.1
-tensorflow==1.15.2
-nltk==3.4.5
 numpy==1.18.2
-bert==2.2.0
-bert-tensorflow==1.0.1
-tensorflow-hub==0.7.0
-

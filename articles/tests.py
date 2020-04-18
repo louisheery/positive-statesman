@@ -180,6 +180,10 @@ class ViewTest(TestCase):
             self.fail("Unexpected exception %s" % e) 
 
 """ class RequestTest(TestCase):
+from django.utils import unittest
+from django.test.client import RequestFactory
+
+from .views import article_average
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()

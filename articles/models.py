@@ -1,5 +1,7 @@
 from django.db import models
 from django import utils
+from django.contrib.auth.models import User
+
 
 
 class Article(models.Model):
@@ -33,7 +35,7 @@ class Article(models.Model):
 
 
 class Publisher(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     url = models.CharField(max_length=400, default='')
 
     def __str__(self):
@@ -75,3 +77,12 @@ class Location(models.Model):
 
     class Meta:
         ordering = ['name']
+
+
+class Reader(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    categories = models.ManyToManyField('Category', blank=True)
+    locations = models.ManyToManyField('Location', blank=True)
+
+    class Meta:
+        ordering = ['user']
