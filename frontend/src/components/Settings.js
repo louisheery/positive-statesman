@@ -5,7 +5,7 @@ var categoryBarTabs = ["business",
     "science",
     "technology",
     "travel"]
-
+/*
 var categoryDictionary = {
     ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
     BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
@@ -15,9 +15,16 @@ var categoryDictionary = {
     TECH: ['technology', 'Technology', 'iab-qagIAB19'],
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
 };
+*/
 
-/*
 var categoryDictionary = {
+    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
+    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
+    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
+    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
+    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
+    TECH: ['technology', 'Technology', 'iab-qagIAB19'],
+    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
     CAREER: ['careers', 'Careers', 'iab-qagIAB4'],
     EDU: ['education', 'Education', 'iab-qagIAB5'],
     FAMILY: ['familyparenting', 'Family', 'iab-qagIAB6'],
@@ -29,13 +36,13 @@ var categoryDictionary = {
     PFINANCE: ['personalfinance', 'Personal Finance', 'iab-qagIAB13'],
     SOCIETY: ['society', 'Society', 'iab-qagIAB14'],
     PETS: ['pets', 'Pets', 'iab-qagIAB16'],
-    STYLEFASHION: ['stylefashion', 'Art, Style & Fashion', 'iab-qagIAB18'],
+    STYLEFASHION: ['stylefashion', 'Style & Fashion', 'iab-qagIAB18'],
     REALESTATE: ['realestate', 'Real Estate', 'iab-qagIAB21'],
     SHOPPING: ['shopping', 'Shopping', 'iab-qagIAB22'],
     RELIGION: ['religion', 'Religion', 'iab-qagIAB23'],
     OTHER: ['other', 'Other News', 'iab-qagIAB24'],
 };
-*/
+
 var publisherDictionary = {
     GUARDIAN: ['guardian', 'The Guardian', 'The%20Guardian'],
     NYTIMES: ['nytimes', 'NYTimes', 'The%20New%20York%20Times'],

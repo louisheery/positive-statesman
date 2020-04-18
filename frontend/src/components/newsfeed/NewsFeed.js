@@ -39,6 +39,19 @@ class NewsFeed extends Component {
                 x84: ['/technology', 'Technology', { category: 'iab-qagIAB19', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(139, 0, 194, 1)'],
                 x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
                 x183: ['/autos', 'Automotive', { category: 'iab-qagIAB2', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
+
+                x112: ['/careers', 'Careers', { category: 'iab-qagIAB4', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(227, 216, 0, 1)'],
+                x154: ['/education', 'Education', { category: 'iab-qagIAB5', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 50, 73, 1)'],
+                x340: ['/healthfitness', 'Health & Fitness', { category: 'iab-qagIAB7', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(112, 0, 27, 1)'],
+                x131: ['/food', 'Food', { category: 'iab-qagIAB8', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
+                x40: ['/hobbies', 'Hobbies & Interests', { category: 'iab-qagIAB9', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(43, 128, 255, 1)'],
+                x326: ['/homegarden', 'Home & Garden', { category: 'iab-qagIAB10', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(139, 0, 194, 1)'],
+                x162: ['/news', 'General News', { category: 'iab-qagIAB12', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
+                x96: ['/personalfinance', 'Personal Finance', { category: 'iab-qagIAB13', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
+                x298: ['/society', 'Society', { category: 'iab-qagIAB14', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(227, 216, 0, 1)'],
+                x192: ['/pets', 'Pets', { category: 'iab-qagIAB16', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 50, 73, 1)'],
+                x376: ['/stylefashion', 'Style & Fashion', { category: 'iab-qagIAB18', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(112, 0, 27, 1)'],
+                x308: ['/realestate', 'Real Estate', { category: 'iab-qagIAB21', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
             },
         }
 
@@ -83,6 +96,7 @@ class NewsFeed extends Component {
 
             // B2: Home Page with User Logged In and Preferences Setup
             } else {
+                console.log(this.props.userCategories)
 
                 var recommendationCode = ['xRECOMMEND']
 
