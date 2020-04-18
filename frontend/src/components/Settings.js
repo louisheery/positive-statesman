@@ -5,22 +5,14 @@ var categoryBarTabs = ["business",
     "science",
     "technology",
     "travel"]
-/*
-var categoryDictionary = {
-    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
-    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
-    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['technology', 'Technology', 'iab-qagIAB19'],
-    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
-};
-*/
+
+var defaultCategoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel']
 
 var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel', 'Careers', 'Education', 'Family & Parenting', 'Health & Fitness', 'Food', 'Hobbies & Interests', 'Home & Garden', 'General News', 'Personal Finance', 'Society', 'Pets', 'Style & Fashion', 'Real Estate',]
 
 var publisherNames = ['The Guardian', 'NYTimes', 'FT', 'Reuters', 'The Times', 'Washington Post', 'AFP', 'Time', 'Wall Street Journal', 'Economist', 'Politico', 'BBC News', 'The Hill', 'USA Today', 'NPR', 'CBS News', 'Axios', 'The New Yorker', 'National Review', 'Slate', 'The Atlantic', 'The Week', 'Vanity Fair', 'MSNBC', 'CNN', 'CNN Money', 'Vox', 'Mic', 'Independent', 'The Sun', 'Metro', 'Daily Mail', 'The Telegraph', 'LA Times', 'CNET', 'Engadget', 'The Verge', 'Vice', 'Newsweek', 'Forbes', 'Science Magazine', 'Sky Sports News', 'ESPN', 'Phys.org', 'Sky News', 'TechRadar', 'Digital Spy', 'i News', 'IGN', 'France24', 'Deutsche Welle', 'Euro News', 'CBC', 'Global News', 'National Post', 'MSN', 'NBC News', 'ABC News', 'SCMP', 'Seattle Times', 'Independent IE', 'Evening Standard', 'Wired', 'Fortune', 'Techcrunch', 'US News']
 
+var remainingCategories = ['careers', 'education', 'familyparenting', 'healthfitness', 'food', 'hobbies', 'homegarden', 'personalfinance', 'society', 'pets', 'stylefashion', 'Style & Fashion', 'realestate']
 
 var categoryDictionary = {
     ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
@@ -37,7 +29,6 @@ var categoryDictionary = {
     FOOD: ['food', 'Food', 'iab-qagIAB8'],
     HOBBIES: ['hobbies', 'Hobbies & Interests', 'iab-qagIAB9'],
     HOMEGARDEN: ['homegarden', 'Home & Garden', 'iab-qagIAB10'],
-    NEWS: ['news', 'General News', 'iab-qagIAB12'],
     PFINANCE: ['personalfinance', 'Personal Finance', 'iab-qagIAB13'],
     SOCIETY: ['society', 'Society', 'iab-qagIAB14'],
     PETS: ['pets', 'Pets', 'iab-qagIAB16'],
@@ -114,4 +105,4 @@ var publisherDictionary = {
     USNEWS: ['usnews', 'US News', 'U.S.%20News'],
 };
 
-export { categoryBarTabs, categoryNames, publisherNames, categoryDictionary, publisherDictionary }
+export { categoryBarTabs, defaultCategoryNames, remainingCategories, categoryNames, publisherNames, categoryDictionary, publisherDictionary }

@@ -178,7 +178,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
             });
         } else {
             result = Object.keys(obj).map(function (key) {
-                return [obj[key]['name'], obj[key]['tax_id']];
+                return [obj[key]['id'], obj[key]['name'], obj[key]['name']];
             });
         }
         dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: result });

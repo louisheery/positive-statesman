@@ -22,7 +22,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedItem.js';
 
-import {publisherDictionary} from '../Settings'
+import { publisherDictionary } from '../Settings'
 
 class NewsFeedItem extends Component {
 
@@ -44,16 +44,16 @@ class NewsFeedItem extends Component {
             this.setState({ src: imageLoader.src });
         };
     }
-    
-    
+
+
     vlookup(matrix, origin, destination, publisher) {
         for (var key in matrix) {
             if (matrix[key][origin] == publisher) {
                 return matrix[key][destination];
-                }
             }
-    return '';
-}
+        }
+        return '';
+    }
 
 
     render() {
@@ -89,14 +89,14 @@ class NewsFeedItem extends Component {
                     <span className={classes.alignLeft} >
                         <ArticleVote articleId={article.id} />
                     </span>
-                    
-                        
+
+
                     <div className={classes.buttonDiv}>
                         <Button disabled={true} className={classes.shareButton} style={{ backgroundColor: 'white', borderColor: score > 70 ? 'green' : score > 50 ? 'orange' : 'red', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
-                        {score}%
+                            {score}%
                             <Hidden lgDown>
-                            {" Positive"}
-                        </Hidden>
+                                {" Positive"}
+                            </Hidden>
                         </Button>
                     </div>
 
@@ -104,10 +104,10 @@ class NewsFeedItem extends Component {
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
                             <Button className={classes.shareButton}>
                                 Share <FacebookIcon className={classes.fbShareIcon} />
-                        </Button>
+                            </Button>
                         </FacebookShareButton>
                     </div>
-            
+
 
                 </Paper>
             </Grid>

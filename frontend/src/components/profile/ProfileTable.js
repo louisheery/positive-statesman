@@ -53,6 +53,7 @@ class ProfileTable extends React.Component {
         ReactGA.pageview(`profilepage`);
         //store.dispatch(avaliableData());
         this.props.userFetchData('GET', this.props.tableType);
+        this.props.userFetchData('GET', this.props.tableType);
     }
 
     onSubmitAdd(id) {
@@ -80,11 +81,14 @@ class ProfileTable extends React.Component {
 
 
     render() {
+
+        
         
         const { classes, tableType } = this.props;
 
         var userData = tableType == 'category' ? this.props.userCategories : this.props.userPublishers
         var allData = tableType == 'category' ? categoryDictionary : publisherDictionary
+        console.log(tableType, "@@", userData)
         return (
             <div>
                 <TableContainer component={Paper} className={classes.tableContainerOuter}>
@@ -156,7 +160,7 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.reducer.isLoggedIn,
         userCategories: state.reducer.userCategories,
-        userPublisers: state.reducer.userPublishers,
+        userPublishers: state.reducer.userPublishers,
     };
 };
 

@@ -260,8 +260,8 @@ def popular_publisher(request):
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
         _json = json.loads(request.body)
-        ublisher = Publisher.objects.filter(name=_json["name"]).get()
-        request.user.reader.publishers.remove(publsiher)
+        publisher = Publisher.objects.filter(name=_json["name"]).get()
+        request.user.reader.publishers.remove(publisher)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
         publishers = request.user.reader.publishers.all()
