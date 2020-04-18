@@ -78,7 +78,7 @@ class NewsFeedRow extends Component {
 
             <div>
 
-                {(Object.size(sortedArticles) > 4) ? (
+                {(Object.size(sortedArticles) > 1) ? (
 
                     <div className={classes.container}>
                         {(() => {

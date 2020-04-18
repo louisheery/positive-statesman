@@ -23,21 +23,22 @@ class NewsFeed extends Component {
 
         this.state = {
             newsFeedDictionary: {
-                QUERY_A: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_B: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 6, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
-                QUERY_C: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 12, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                QUERY_D: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 18, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
-                QUERY_E: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 24, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                QUERY_F: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 30, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
+                QUERY_A: ['', '', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
+                QUERY_B: ['', '', { category: categoryId, limit: 6, offset: 6, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
+                QUERY_C: ['', '', { category: categoryId,  limit: 6, offset: 12, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
+                QUERY_D: ['', '', { category: categoryId,  limit: 6, offset: 18, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
+                QUERY_E: ['', '', { category: categoryId, limit: 6, offset: 24, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
+                QUERY_F: ['', '', { category: categoryId, limit: 6, offset: 30, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
 
-                xRECOMMEND: ['/', 'Recommended Stories', { category: 'recommended', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 0, 0, 0.4)'],
-                x180: ['/arts', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                x219: ['/business', 'Business', { category: 'iab-qagIAB3', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
-                x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
+                xRECOMMEND: ['/', 'Recommended Stories', { category: 'recommended', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 0, 0, 0.4)'],
+                x180: ['/arts', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(227, 216, 0, 1)'],
+                x219: ['/business', 'Business', { category: 'iab-qagIAB3', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 50, 73, 1)'],
+                x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(112, 0, 27, 1)'],
                 x212: ['/science', 'Science', { category: 'iab-qagIAB15', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
-                x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                x84: ['/technology', 'Technology', { category: 'iab-qagIAB19', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
+                x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(43, 128, 255, 1)'],
+                x84: ['/technology', 'Technology', { category: 'iab-qagIAB19', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(139, 0, 194, 1)'],
+                x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
+                x183: ['/autos', 'Automotive', { category: 'iab-qagIAB2', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
             },
         }
 

@@ -104,7 +104,7 @@ class HeaderBar extends Component {
     }
 
     handleClickPublishers = () => {
-        this.props.history.push({ pathname: "/publishers/" })
+        this.props.history.push({ pathname: "/overview/" })
     }
 
 

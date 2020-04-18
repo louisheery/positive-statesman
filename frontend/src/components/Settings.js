@@ -18,9 +18,6 @@ var categoryDictionary = {
 
 /*
 var categoryDictionary = {
-    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-    AUTO: ['automotive', 'Automotives', 'iab-qagIAB2'],
-    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
     CAREER: ['careers', 'Careers', 'iab-qagIAB4'],
     EDU: ['education', 'Education', 'iab-qagIAB5'],
     FAMILY: ['familyparenting', 'Family', 'iab-qagIAB6'],
@@ -28,16 +25,11 @@ var categoryDictionary = {
     FOOD: ['food', 'Food', 'iab-qagIAB8'],
     HOBBIES: ['hobbies', 'Hobbies & Interests', 'iab-qagIAB9'],
     HOMEGARDEN: ['homegarden', 'Home & Garden', 'iab-qagIAB10'],
-    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
     NEWS: ['news', 'General News', 'iab-qagIAB12'],
     PFINANCE: ['personalfinance', 'Personal Finance', 'iab-qagIAB13'],
     SOCIETY: ['society', 'Society', 'iab-qagIAB14'],
-    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
     PETS: ['pets', 'Pets', 'iab-qagIAB16'],
-    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
     STYLEFASHION: ['stylefashion', 'Art, Style & Fashion', 'iab-qagIAB18'],
-    TECH: ['technology', 'Technology', 'iab-qagIAB19'],
-    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
     REALESTATE: ['realestate', 'Real Estate', 'iab-qagIAB21'],
     SHOPPING: ['shopping', 'Shopping', 'iab-qagIAB22'],
     RELIGION: ['religion', 'Religion', 'iab-qagIAB23'],
@@ -70,7 +62,7 @@ var publisherDictionary = {
     VANITYFAIR: ['vanityfair', 'Vanity Fair', 'Vanity%20Fair'],
     MSNBC: ['msnbc', 'MSNBC', 'MSNBC'],
     CNN: ['cnn', 'CNN', 'CNN'],
-    CNNMONEY: ['cnnmoney', 'CNN Money', 'MONEY'],
+    CNNMONEY: ['cnnmoney', 'CNN Money', 'Money'],
     VOX: ['vox', 'Vox', 'Vox'],
     MIC: ['mic', 'Mic', 'Mic'],
     INDEPENDENT: ['independent', 'Independent', 'The%20Independent%20-%20UK'],
@@ -88,12 +80,11 @@ var publisherDictionary = {
     SCIENCEMAG: ['sciencemag', 'Science Magazine', 'Science'],
     SKYSPORTSNEWS: ['skysportsnews', 'Sky Sports News', 'Sky%20Sports'],
     ESPN: ['espn', 'ESPN', 'ESPN%20US'],
-    THEATHLETIC: ['theathletic', 'The Athletic', 'The%20Athletic'],
     PHYSORG: ['phys.org', 'Phys.org', 'Phys.org'],
     SKYNEWS: ['skynews', 'Sky News', 'Sky%20News'],
     TECHRADAR: ['techradar', 'TechRadar', 'TechRadar'],
     DIGITALSPY: ['digitalspy', 'Digital Spy', 'Digital%20Spy%20(UK)'],
-    INEWS: ['inews', 'i News', 'i%20News;%20The%20Essential%20Daily%20Briefing%20(UK)'],
+    INEWS: ['inews', 'i News', 'i%20News'],
     IGN: ['ign', 'IGN', 'IGN'],
     FRANCE24: ['france24', 'France24', 'France%2024%20-%20English'],
     DW: ['dw', 'Deutsche Welle', 'Deutsche%20Welle'],
@@ -111,7 +102,7 @@ var publisherDictionary = {
     WIRED: ['wired', 'Wired', 'Wired%20UK'],
     FORTUNE: ['fortune', 'Fortune', 'Fortune'],
     TECHCRUNCH: ['techcrunch', 'Techcrunch', 'TechCrunch'],
-    USNEWS: ['usnews', 'US News', 'U.S.%20News%20&%20World%20Report%20Online'],
+    USNEWS: ['usnews', 'US News', 'U.S.%20News'],
 };
 
 export { categoryBarTabs, categoryDictionary, publisherDictionary }

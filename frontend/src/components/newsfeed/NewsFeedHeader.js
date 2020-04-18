@@ -11,6 +11,7 @@ import NewsFeedItem from './NewsFeedItem';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
@@ -43,11 +44,21 @@ class NewsFeedHeader extends Component {
         var sorter = require('sort-json-array');
         var sortedArticles = sorter(this.state.topArticles, 'sentiment_score').reverse();
 
+        Object.size = function (obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        };
+
         return (
             <div className={classes.container}>
                 <Typography variant="h4">
                     {this.props.pageName}
                 </Typography>
+
+                {(Object.size(sortedArticles) > 1) ? (
 
                 <Grid container>
                     {
@@ -56,6 +67,18 @@ class NewsFeedHeader extends Component {
                         })
                     }
                 </Grid>
+                ) : (
+                    <div>
+                        <Typography variant="subtitle1">
+                                No articles found for this {this.props.categoryId == '' ? 'category' : 'publisher'} <span role="img" aria-label="sad">🙁</span>
+                        </Typography>
+                        <Link href={"/overview"}>
+                        <Typography variant="subtitle2">
+                            Click here to view other categories and publishers.
+                        </Typography>
+                            </Link>
+                        </div>
+                )}
             </div>
         )
     }

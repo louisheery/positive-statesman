@@ -117,7 +117,7 @@ class Root extends Component {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/logout" component={Logout} />
-                        <Route exact path="/publishers" component={List} />
+                        <Route exact path="/overview" component={List} />
                         <Redirect to="/" />
                     </Switch>
                     <FeedbackButton />
