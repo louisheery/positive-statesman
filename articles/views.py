@@ -254,11 +254,13 @@ def popular_publisher(request):
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
         _json = json.loads(request.body)
-        request.user.reader.publishers.add(name=_json["name"])
+        publisher = Publisher.objects.filter(name=_json["name"]).get()
+        request.user.reader.publishers.add(publisher)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
         _json = json.loads(request.body)
-        request.user.reader.publishers.remove(name=_json["name"])
+        ublisher = Publisher.objects.filter(name=_json["name"]).get()
+        request.user.reader.publishers.remove(publsiher)
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
         publishers = request.user.reader.publishers.all()
