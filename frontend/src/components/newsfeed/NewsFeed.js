@@ -140,7 +140,7 @@ class NewsFeed extends Component {
                         newsFeedState.newsFeedRow.map((newsFeedRow, i) => {
                             return (
                                 
-                                <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} itemColor={newsFeedRow[3]} />
+                                <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} newFeedRowNumber={i} />
                             );
                         })
                     }

@@ -18,6 +18,35 @@ import { NavLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeedRow.js';
 
+function rowNumberToColour(rowNumber) {
+
+    while (rowNumber > 8) {
+        rowNumber = rowNumber - 8;
+    }
+
+    switch (rowNumber) {
+        case 1:
+            return 'rgba(0, 50, 73, 1)'
+        case 2:
+            return 'rgba(112, 0, 27, 1)'
+        case 3:
+            return 'rgba(0, 209, 56, 1)'
+        case 4:
+            return 'rgba(43, 128, 255, 1)'
+        case 5:
+            return 'rgba(139, 0, 194, 1)'
+        case 6:
+            return 'rgba(0, 186, 93, 1)'
+        case 7:
+            return 'rgba(32, 32, 222, 0.4)'
+        case 8:
+            return 'rgba(227, 216, 0, 1)'
+        
+        default:
+            return 'rgba(0, 0, 0, 0.4)'
+    }
+};
+
 class NewsFeedRow extends Component {
 
     _isMounted = false;
@@ -58,7 +87,7 @@ class NewsFeedRow extends Component {
         // this.state.articles
         // this.props.Articles
 
-        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel', 'Careers', 'Education', 'Family & Parenting', 'Health & Fitness', 'Hobbies & Interests','Home & Garden','General News', 'Personal Finance', 'Society', 'Pets', 'Style & Fashion', 'Real Estate',]
+        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel', 'Careers', 'Education', 'Family & Parenting', 'Health & Fitness','Food', 'Hobbies & Interests','Home & Garden','General News', 'Personal Finance', 'Society', 'Pets', 'Style & Fashion', 'Real Estate',]
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING
@@ -73,6 +102,8 @@ class NewsFeedRow extends Component {
             }
             return size;
         };
+
+        
 
         return (
 
@@ -103,7 +134,7 @@ class NewsFeedRow extends Component {
                             <Grid container className={classes.gridList}>
                                 {
                                     sortedArticles.slice(0, this.props.width == 'xs' ? 1 : this.props.width == 'sm' ? 2 : this.props.width == 'md' ? 3 : 4).map((article, i) => {
-                                        return (<NewsFeedItem key={i} article={article} itemColor={this.props.itemColor} isHeaderItem={false} />)
+                                        return (<NewsFeedItem key={i} article={article} itemColor={rowNumberToColour(this.props.newFeedRowNumber)} isHeaderItem={false} />)
                                     })
                                 }
                             </Grid>
