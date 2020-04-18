@@ -105,4 +105,4 @@ async function getTimeSeriesData(param, begin, end) {
 
 
 
-export { fetchArticles, userFeedback, addArticle, searchArticle, getTimeSeriesData }
+export { fetchArticles, userFeedback, addArticle, searchArticle, getTimeSeriesData, getCookie }

@@ -1,72 +1,69 @@
 // REACT LIBRARIES
 import React from 'react';
 import ReactGA from "react-ga";
-import { Redirect } from "react-router-dom";
 
 // EXTERNAL REACT LIBRARIES & COMPONENTS
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 
 // REDUX
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { logIn } from '../../store/actions/actions'; 
+import { signupUser } from '../../store/actions/actions'; 
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../../src/assets/styles/components/pages/Login.js';
+import styles from '../../assets/styles/components/pages/Signup.js';
 import { Link } from '@material-ui/core';
 
-class Login extends React.Component {
+class Signup extends React.Component {
 
     state = {
         username: '',
+        email: '',
         password: '',
     }
 
     static propTypes = {
-        logIn: PropTypes.func.isRequired,
+        signupUser: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool,
     }
 
     componentDidMount() {
-        ReactGA.pageview(`loginpage`);
+        ReactGA.pageview(`signuppage`);
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        // VALIDATE EMAIL ADDRESS FORMAT HERE??
-        this.props.logIn( this.state.username, this.state.password );
-
+        this.props.signupUser(this.state.username, this.state.email, this.state.password);
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState( { [e.target.name]: e.target.value })
     }
 
     render() {
 
-        if (this.props.isLoggedIn) {
-            return (<Redirect to="/" />);
-        }
-
-        const { username, password } = this.state;
+        const { username, email, password } = this.state;
 
         const { classes } = this.props;
 
-        
+        if (this.props.isLoggedIn) {
+            return <Redirect to="/" />;
+        }
 
         return (
             <div>
                 <Container className={classes.container} maxWidth="lg" align="center" >
-                    <Link href="/signup" to={"/signup"}>
-                        <Typography>Signup Here</Typography>
+                    <Link href="/login" to={"/login"}>
+                        <Typography>Login?</Typography>
                     </Link>
 
                     <Typography className={classes.header} variant="h5" align="center" component="div">
-                        Login to The Positive Statesman
+                        Signup to The Positive Statesman
 
                         <form onSubmit={this.onSubmit}>
                             <div>
@@ -75,6 +72,16 @@ class Login extends React.Component {
                                     placeholder="Username"
                                     onChange={this.onChange}
                                     margin="normal"
+                                    />
+                            </div>
+
+                            <div>
+                                <TextField
+                                    name="email"
+                                    placeholder="Email"
+                                    onChange={this.onChange}
+                                    margin="normal"
+                                    type="email"
                                     />
                             </div>
 
@@ -89,9 +96,9 @@ class Login extends React.Component {
                             </div>
 
                             <div>
-                                <Button color="primary" variant="contained" type="submit">Login</Button>
+                                <Button color="primary" variant="contained" type="submit">Sign Up</Button>
                             </div>
-
+                            
                         </form>
                     </Typography>
                 </Container>
@@ -106,4 +113,5 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { logIn })(withStyles(styles)(Login))
+export default connect(mapStateToProps, { signupUser })(withStyles(styles)(Signup))
+

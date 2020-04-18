@@ -139,7 +139,7 @@ python3 manage.py seed_categories
 ## Repo Contents
 
 ### Libraries and Technologies to research
-- NLP: NLP Toolkit, Bert, Vadar, Google BERT
+- NLP: NLP Toolkit, Bert, Vader, Google BERT
 - NLP Datasets [Google Dataset Search](https://toolbox.google.com/datasetsearch/search?query=positive%20sentiment)
 - Backend Hosting:
 - Backend Libraries: Django
