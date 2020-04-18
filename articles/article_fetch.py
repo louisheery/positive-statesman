@@ -287,5 +287,5 @@ def split_and_predict(text, predict_fn):
 
 ################################# DRIVER CODE #################################
 
-#generate_articles()
+generate_articles()
 
