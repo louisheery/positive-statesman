@@ -206,6 +206,7 @@ def signup(request):
         reader = Reader(user=user)
         reader.save()
         user = auth.authenticate(request, username=_json["username"], password=_json["password"])
+        auth.login(request, user)
         return JsonResponse({"success": "success"}, status=200)
 
 @csrf_exempt
