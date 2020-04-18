@@ -17,6 +17,11 @@ var categoryDictionary = {
 };
 */
 
+var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel', 'Careers', 'Education', 'Family & Parenting', 'Health & Fitness', 'Food', 'Hobbies & Interests', 'Home & Garden', 'General News', 'Personal Finance', 'Society', 'Pets', 'Style & Fashion', 'Real Estate',]
+
+var publisherNames = ['The Guardian', 'NYTimes', 'FT', 'Reuters', 'The Times', 'Washington Post', 'AFP', 'Time', 'Wall Street Journal', 'Economist', 'Politico', 'BBC News', 'The Hill', 'USA Today', 'NPR', 'CBS News', 'Axios', 'The New Yorker', 'National Review', 'Slate', 'The Atlantic', 'The Week', 'Vanity Fair', 'MSNBC', 'CNN', 'CNN Money', 'Vox', 'Mic', 'Independent', 'The Sun', 'Metro', 'Daily Mail', 'The Telegraph', 'LA Times', 'CNET', 'Engadget', 'The Verge', 'Vice', 'Newsweek', 'Forbes', 'Science Magazine', 'Sky Sports News', 'ESPN', 'Phys.org', 'Sky News', 'TechRadar', 'Digital Spy', 'i News', 'IGN', 'France24', 'Deutsche Welle', 'Euro News', 'CBC', 'Global News', 'National Post', 'MSN', 'NBC News', 'ABC News', 'SCMP', 'Seattle Times', 'Independent IE', 'Evening Standard', 'Wired', 'Fortune', 'Techcrunch', 'US News']
+
+
 var categoryDictionary = {
     ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
     BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
@@ -27,8 +32,8 @@ var categoryDictionary = {
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
     CAREER: ['careers', 'Careers', 'iab-qagIAB4'],
     EDU: ['education', 'Education', 'iab-qagIAB5'],
-    FAMILY: ['familyparenting', 'Family', 'iab-qagIAB6'],
-    HEALTH: ['healthfitness', 'Health', 'iab-qagIAB7'],
+    FAMILY: ['familyparenting', 'Family & Parenting', 'iab-qagIAB6'],
+    HEALTH: ['healthfitness', 'Health & Fitness', 'iab-qagIAB7'],
     FOOD: ['food', 'Food', 'iab-qagIAB8'],
     HOBBIES: ['hobbies', 'Hobbies & Interests', 'iab-qagIAB9'],
     HOMEGARDEN: ['homegarden', 'Home & Garden', 'iab-qagIAB10'],
@@ -38,9 +43,6 @@ var categoryDictionary = {
     PETS: ['pets', 'Pets', 'iab-qagIAB16'],
     STYLEFASHION: ['stylefashion', 'Style & Fashion', 'iab-qagIAB18'],
     REALESTATE: ['realestate', 'Real Estate', 'iab-qagIAB21'],
-    SHOPPING: ['shopping', 'Shopping', 'iab-qagIAB22'],
-    RELIGION: ['religion', 'Religion', 'iab-qagIAB23'],
-    OTHER: ['other', 'Other News', 'iab-qagIAB24'],
 };
 
 var publisherDictionary = {
@@ -112,4 +114,4 @@ var publisherDictionary = {
     USNEWS: ['usnews', 'US News', 'U.S.%20News'],
 };
 
-export { categoryBarTabs, categoryDictionary, publisherDictionary }
+export { categoryBarTabs, categoryNames, publisherNames, categoryDictionary, publisherDictionary }

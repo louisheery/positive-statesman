@@ -55,6 +55,7 @@ class NewsFeedItem extends Component {
     return '';
 }
 
+
     render() {
         const { classes, article } = this.props;
         var score = Math.round(((article.sentiment_score + 1) * 100 / 2));
