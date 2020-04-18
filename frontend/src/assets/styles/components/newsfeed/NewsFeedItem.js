@@ -28,7 +28,7 @@ const styles = {
         minHeight: '41pt',
         maxHeight: '41pt',
         paddingTop: '10px',
-        paddingBottom: '1s5px',
+        paddingBottom: '5px',
         "&:hover": {
             textDecoration: "underline"
         },
@@ -55,7 +55,7 @@ const styles = {
 
     positivityButton: {
         border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
-        
+
     },
 
     shareButton: {
@@ -72,7 +72,7 @@ const styles = {
     buttonDiv: {
         display: 'inline-block', width: '30%', 'height': '8px'
     }
-    
+
 
 
 
