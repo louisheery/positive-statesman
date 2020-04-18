@@ -81,15 +81,23 @@ class NewsFeedRow extends Component {
                 {(Object.size(sortedArticles) > 4) ? (
 
                     <div className={classes.container}>
-
-                        {categoryNames.includes(this.props.newsFeedRowTitle) ? (
-
-                            <NavLink to={`/categories${this.props.newsFeedRow}`} className={classes.hyperlinkTitle}>
-                                <Typography className={classes.hyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                            </NavLink>
-                        ) : (
-                                <Typography className={classes.nonHyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
-                            )}
+                        {(() => {
+                            if (categoryNames.includes(this.props.newsFeedRowTitle)) {
+                                return (
+                                    <NavLink to={`/categories${this.props.newsFeedRow}`} className={classes.hyperlinkTitle}>
+                                        <Typography className={classes.hyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                                    </NavLink>
+                                )
+                            } else if (this.props.newsFeedRowTitle == '') {
+                                return (
+                                    <div></div>
+                                )
+                            } else {
+                                return (
+                                    <Typography className={classes.nonHyperlinkTitle} variant="h5">{this.props.newsFeedRowTitle}</Typography>
+                                )
+                            }
+                        })()}
 
                         <div className={classes.subContainer}>
                             <Grid container className={classes.gridList}>

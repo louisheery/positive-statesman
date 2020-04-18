@@ -22,7 +22,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../../src/assets/styles/components/newsfeed/NewsFeedItem.js';
 
-import publisherDictionary from '../Settings'
+import {publisherDictionary} from '../Settings'
 
 class NewsFeedItem extends Component {
 
@@ -59,9 +59,9 @@ class NewsFeedItem extends Component {
         const { classes, article } = this.props;
         var score = Math.round(((article.sentiment_score + 1) * 100 / 2));
 
-        var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${this.state.src || ''}")`, backgroundSize: 'cover' };
+        var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0,50,73, 0.3), rgba(0,50,73, 0.3)), url("${this.state.src || ''}")`, backgroundSize: 'cover' };
         //var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' };
-        var rowItemStyle = { background: `-webkit-linear-gradient(${this.props.itemColor}, rgba(0, 0, 0, 0.3))`, backgroundSize: 'cover' }
+        var rowItemStyle = { background: `-webkit-linear-gradient(${this.props.itemColor}, rgba(0, 0, 0, 0.7))`, backgroundSize: 'cover' }
 
         return (
             <Grid item xs={12} sm={6} md={4}>
@@ -74,36 +74,39 @@ class NewsFeedItem extends Component {
 
                     <span>
                         <Link href={`/publishers/${this.vlookup(publisherDictionary, 1, 0, article.publisher)}`}>
-                        <Typography className={classes.subtitleLeft}>
-                            {(article.publisher).substring(0, 20)}
-                        </Typography>
+                            <Typography className={classes.subtitleLeft}>
+                                {(article.publisher).substring(0, 18)}
+                            </Typography>
                         </Link>
 
 
 
                         <Typography className={classes.subtitleRight}>
-                            {moment(`${article.publish_date}`).fromNow()}
+                            {moment(`${article.publish_date}`).format('DD/MM/YY')}
                         </Typography>
                     </span>
                     <span className={classes.alignLeft} >
                         <ArticleVote articleId={article.id} />
                     </span>
-
                     
-                        <p className={classes.positivity} style={{ display: 'inline-block', width: '40%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
-                            {score}%
+                        
+                    <div className={classes.buttonDiv}>
+                        <Button disabled={true} className={classes.shareButton} style={{ backgroundColor: 'white', borderColor: score > 70 ? 'green' : score > 50 ? 'orange' : 'red', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
+                        {score}%
                             <Hidden lgDown>
-                                {" Positive"}
-                            </Hidden>
-                        </p>
+                            {" Positive"}
+                        </Hidden>
+                        </Button>
+                    </div>
 
-                    <div className={classes.fbShareDiv}>
+                    <div className={classes.buttonDiv}>
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
                             <Button className={classes.shareButton}>
                                 Share <FacebookIcon className={classes.fbShareIcon} />
                         </Button>
                         </FacebookShareButton>
                     </div>
+            
 
                 </Paper>
             </Grid>

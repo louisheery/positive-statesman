@@ -126,7 +126,7 @@ export const userEditData = (requestType, dataType, dataId = null) => (dispatch,
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-        body: requestType == 'GET' ? null : JSON.stringify({"id": dataId})
+        body: requestType == 'GET' ? null : (dataType == 'category' ? JSON.stringify({ "id": dataId }) : JSON.stringify({ "name": dataId }))
     }).then((response) => {
         
         if (response.status == 200) {

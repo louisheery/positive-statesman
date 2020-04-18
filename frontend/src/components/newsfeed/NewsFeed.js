@@ -23,13 +23,12 @@ class NewsFeed extends Component {
 
         this.state = {
             newsFeedDictionary: {
-                QUERY_TODAY: ['', 'Trending Today', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_THISWEEK: ['', 'Trending This Week', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
-                QUERY_THISMONTH: ['', 'Trending This Month', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                QUERY_ALLTIME: ['', 'Trending All Time', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
-                QUERY_USA: ['', 'Trending in USA', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                QUERY_UK: ['', 'Trending in UK', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
+                QUERY_A: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
+                QUERY_B: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 6, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
+                QUERY_C: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 12, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
+                QUERY_D: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 18, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
+                QUERY_E: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 24, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
+                QUERY_F: ['', '', { category: categoryId, publisher: publisherId, limit: 6, offset: 30, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
 
                 xRECOMMEND: ['/', 'Recommended Stories', { category: 'recommended', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 0, 0, 0.4)'],
                 x180: ['/arts', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', publisher: publisherId,limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
@@ -112,10 +111,9 @@ class NewsFeed extends Component {
         } else {
 
             newsFeedState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
+                newsFeedRow: [this.state.newsFeedDictionary.QUERY_A, this.state.newsFeedDictionary.QUERY_B, this.state.newsFeedDictionary.QUERY_C, this.state.newsFeedDictionary.QUERY_D, this.state.newsFeedDictionary.QUERY_E, this.state.newsFeedDictionary.QUERY_F],
             }
         }
-
             return (
                 <div className={classes.grid}>
 
@@ -125,6 +123,7 @@ class NewsFeed extends Component {
                     {
                         newsFeedState.newsFeedRow.map((newsFeedRow, i) => {
                             return (
+                                
                                 <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} itemColor={newsFeedRow[3]} />
                             );
                         })

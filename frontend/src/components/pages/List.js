@@ -12,12 +12,12 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 
 import { publisherDictionary } from '../Settings';
+import { categoryDictionary } from '../Settings';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/List.js'
 
-console.log(publisherDictionary)
 
 class ListPage extends Component {
 
@@ -32,19 +32,19 @@ class ListPage extends Component {
         return (
             <div className={classes.container}>
                 <Typography variant="h4">
-                    Publishers
+                    Categories
                 </Typography>
-                <Grid container justify="center">
+                <Grid container justify="center" className={classes.grid}>
                     {
-                        Object.keys(publisherDictionary).map(function (key, i) {
+                        Object.keys(categoryDictionary).map(function (key, i) {
                             return (
                                 <div key={i}>
-                    <Link href={`/publishers/${publisherDictionary[key][0]}`}>
+                                    <Link href={`/categories/${categoryDictionary[key][0]}`}>
                     <Card className={classes.cardRoot}>
                         <CardActionArea>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    {publisherDictionary[key][1]}
+                                {categoryDictionary[key][1]}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -55,6 +55,32 @@ class ListPage extends Component {
                             )
                         })}
       
+                </Grid>
+
+                <Typography variant="h4">
+                    Publishers
+                </Typography>
+                <Grid container justify="center">
+                    {
+                        Object.keys(publisherDictionary).map(function (key, i) {
+                            return (
+                                <div key={i}>
+                                    <Link href={`/publishers/${publisherDictionary[key][0]}`}>
+                                        <Card className={classes.cardRoot}>
+                                            <CardActionArea>
+                                                <CardContent>
+                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                        {publisherDictionary[key][1]}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+
+                                    </Link>
+                                </div>
+                            )
+                        })}
+
                 </Grid>
 
             </div>
