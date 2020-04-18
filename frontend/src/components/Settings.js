@@ -27,8 +27,8 @@ var categoryDictionary = {
     TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
     CAREER: ['careers', 'Careers', 'iab-qagIAB4'],
     EDU: ['education', 'Education', 'iab-qagIAB5'],
-    FAMILY: ['familyparenting', 'Family', 'iab-qagIAB6'],
-    HEALTH: ['healthfitness', 'Health', 'iab-qagIAB7'],
+    FAMILY: ['familyparenting', 'Family & Parenting', 'iab-qagIAB6'],
+    HEALTH: ['healthfitness', 'Health & Fitness', 'iab-qagIAB7'],
     FOOD: ['food', 'Food', 'iab-qagIAB8'],
     HOBBIES: ['hobbies', 'Hobbies & Interests', 'iab-qagIAB9'],
     HOMEGARDEN: ['homegarden', 'Home & Garden', 'iab-qagIAB10'],
@@ -38,9 +38,6 @@ var categoryDictionary = {
     PETS: ['pets', 'Pets', 'iab-qagIAB16'],
     STYLEFASHION: ['stylefashion', 'Style & Fashion', 'iab-qagIAB18'],
     REALESTATE: ['realestate', 'Real Estate', 'iab-qagIAB21'],
-    SHOPPING: ['shopping', 'Shopping', 'iab-qagIAB22'],
-    RELIGION: ['religion', 'Religion', 'iab-qagIAB23'],
-    OTHER: ['other', 'Other News', 'iab-qagIAB24'],
 };
 
 var publisherDictionary = {

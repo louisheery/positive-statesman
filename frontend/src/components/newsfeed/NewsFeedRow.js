@@ -58,7 +58,7 @@ class NewsFeedRow extends Component {
         // this.state.articles
         // this.props.Articles
 
-        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel']
+        var categoryNames = ['Art, Culture & Entertainment', 'Business', 'Law, Government & Politics', 'Science', 'Sport', 'Technology', 'Travel', 'Careers', 'Education', 'Family & Parenting', 'Health & Fitness', 'Hobbies & Interests','Home & Garden','General News', 'Personal Finance', 'Society', 'Pets', 'Style & Fashion', 'Real Estate',]
 
 
         // NOTE: STILL NEED TO FIX THIS SORTING

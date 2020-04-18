@@ -41,6 +41,7 @@ class NewsFeed extends Component {
                 x183: ['/autos', 'Automotive', { category: 'iab-qagIAB2', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 186, 93, 1)'],
 
                 x112: ['/careers', 'Careers', { category: 'iab-qagIAB4', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(227, 216, 0, 1)'],
+                x69: ['/familyparenting', 'Family & Parenting', { category: 'iab-qagIAB6', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 50, 73, 1)'],
                 x154: ['/education', 'Education', { category: 'iab-qagIAB5', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(0, 50, 73, 1)'],
                 x340: ['/healthfitness', 'Health & Fitness', { category: 'iab-qagIAB7', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: categoryId == '' ? 0.5 : 0 }, 'rgba(112, 0, 27, 1)'],
                 x131: ['/food', 'Food', { category: 'iab-qagIAB8', publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
