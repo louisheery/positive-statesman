@@ -8,10 +8,10 @@ import django.http as http
 from django.test import Client
 import requests
 import json
-from django.utils import unittest
+#from django.utils import unittest
 from django.test.client import RequestFactory
 
-from .views import article_average
+#from .views import article_average
 
 # Model Tests
 class ModelTest(TestCase):
@@ -179,7 +179,7 @@ class ViewTest(TestCase):
         except Exception as e:
             self.fail("Unexpected exception %s" % e) 
 
-class RequestTest(TestCase):
+""" class RequestTest(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
@@ -192,4 +192,4 @@ class RequestTest(TestCase):
 
         print(response)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) """
