@@ -223,7 +223,7 @@ def login(request):
 def logout(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            return JsonResponse({"err": "not logged in"}, status=500)
+            return JsonResponse({"err": "not logged in"}, status=200)
         auth.logout(request)
         return JsonResponse({"success": "success"}, status=200)
 
@@ -250,19 +250,20 @@ def popular_category(request):
         return JsonResponse({"info": "no method found"}, status=404)
 
 def popular_publisher(request):
-    _json = json.loads(request.body)
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'POST':
-        request.user.reader.popular_publisher.add(_json["id"])
+        _json = json.loads(request.body)
+        request.user.reader.publishers.add(name=_json["name"])
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
-        request.user.reader.popular_publisher.remove(_json["id"])
+        _json = json.loads(request.body)
+        request.user.reader.publishers.remove(name=_json["name"])
         return JsonResponse({"success": "success"}, status=200)
     if request.method == 'GET':
-        publishers = request.user.reader.popular_publisher.all()
-        information = [{"name": category.name,"id": category.id} for category in publishers]
-        return JsonResponse(information, 200)
+        publishers = request.user.reader.publishers.all()
+        information = [{"name": publisher.name,"id": publisher.id} for publisher in publishers]
+        return JsonResponse({"info":information}, status=200)
 
 def search_articles(request):
     """
