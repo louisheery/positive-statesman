@@ -231,42 +231,45 @@ def logout(request):
 def popular_category(request):
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
-    if request.method == 'POST':
+    if request.method == 'DELETE':
+        _json = json.loads(request.body)
+        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
+        request.user.reader.categories.remove(category.id)
+        return JsonResponse({"success": "success"}, status=200)
+    elif request.method == 'GET':
+        categories = request.user.reader.categories.all()
+        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
+        return JsonResponse({"info": information}, status=200)
+    elif request.method == 'POST':
         _json = json.loads(request.body)
         category = Category.objects.filter(taxonomy_id=_json["id"]).get()
         reader = request.user
         reader = reader.reader
         reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'DELETE':
-        _json = json.loads(request.body)
-        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
-        request.user.reader.categories.remove(category.id)
-        return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'GET':
-        categories = request.user.reader.categories.all()
-        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
-        return JsonResponse({"info": information}, status=200)
     else:
         return JsonResponse({"info": "no method found"}, status=404)
 
 def popular_publisher(request):
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
-    if request.method == 'POST':
-        _json = json.loads(request.body)
-        publisher = Publisher.objects.filter(name=_json["name"]).get()
-        request.user.reader.publishers.add(publisher)
-        return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
         _json = json.loads(request.body)
-        publisher = Publisher.objects.filter(name=_json["name"]).get()
+        name = _json["name"].replace("%20", " ")
+        publisher = Publisher.objects.filter(name=name).get()
         request.user.reader.publishers.remove(publisher)
         return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'GET':
+    elif request.method == 'GET':
         publishers = request.user.reader.publishers.all()
         information = [{"name": publisher.name,"id": publisher.id} for publisher in publishers]
         return JsonResponse({"info":information}, status=200)
+    elif request.method == 'POST':
+        _json = json.loads(request.body)
+        name = _json["name"].replace("%20", " ")
+        publisher = Publisher.objects.filter(name=name).get()
+        print(publisher)
+        request.user.reader.publishers.add(publisher)
+        return JsonResponse({"success": "success"}, status=200)
 
 def search_articles(request):
     """
