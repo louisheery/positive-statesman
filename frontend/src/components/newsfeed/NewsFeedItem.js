@@ -60,9 +60,10 @@ class NewsFeedItem extends Component {
         const { classes, article } = this.props;
         var score = Math.round(((article.sentiment_score + 1) * 100 / 2));
 
-        var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0,50,73, 0.3), rgba(0,50,73, 0.3)), url("${this.state.src || ''}")`, backgroundSize: 'cover' };
+        var headerItemStyle = { backgroundImage: `-webkit-linear-gradient(rgba(50,50,50, 0.5), rgba(0,0,0,0.5)), url("${this.state.src || ''}")`, backgroundSize: '100% 100%'};
         //var headerItemStyle = { background: `-webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("${article.image_url}")`, backgroundSize: '100% 100%' };
-        var rowItemStyle = { background: `-webkit-linear-gradient(${this.props.itemColor}, rgba(0, 0, 0, 0.7))`, backgroundSize: 'cover' }
+        var rowItemStyle = { backgroundImage: `-webkit-linear-gradient(${this.props.itemColor}, rgba(0, 0, 0, 0.3)), url("${this.state.src || ''}")`, backgroundSize: '100% 100%' };
+
 
         return (
             <Grid item xs={12} sm={6} md={4}>

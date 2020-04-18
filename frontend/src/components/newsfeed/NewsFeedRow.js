@@ -59,22 +59,24 @@ class NewsFeedRow extends Component {
         }
 
         switch (rowNumber) {
+            case 0:
+                return 'rgba(83, 167, 177, 1)'
             case 1:
-                return 'rgba(0, 50, 73, 1)'
-            case 2:
                 return 'rgba(112, 0, 27, 1)'
-            case 3:
+            case 2:
                 return 'rgba(0, 209, 56, 1)'
-            case 4:
+            case 3:
                 return 'rgba(43, 128, 255, 1)'
-            case 5:
+            case 4:
                 return 'rgba(139, 0, 194, 1)'
-            case 6:
+            case 5:
                 return 'rgba(3, 232, 252, 1)'
+            case 6:
+                return 'rgba(32, 32, 222, 1)'
             case 7:
-                return 'rgba(32, 32, 222, 0.4)'
-            case 8:
                 return 'rgba(227, 216, 0, 1)'
+            case 8:
+                return 'rgba(0, 150, 173, 1)'
 
             default:
                 return 'rgba(0, 0, 0, 0.4)'
