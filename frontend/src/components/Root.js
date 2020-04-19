@@ -4,16 +4,12 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { checkLoggedIn } from '../store/actions/actions';
 
 // REDUX LIBRARIES
-import reducer from '../store/reducers/reducer';
-import { connect, Provider } from 'react-redux';
-import store from "../store/store";
-import { userData } from '../store/actions/actions';
+import { connect } from 'react-redux';
 
 // REACT COMPONENTS
 //import HeaderBar from './headers/backup/HeaderBar'
 import HeaderBar from './headers/HeaderBar'
-import Home from './pages/Home'
-import Category from './pages/Category'
+import Articles from './pages/Articles'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
 import Signup from './pages/Signup'
@@ -21,6 +17,9 @@ import Profile from './pages/Profile'
 import FeedbackButton from './popups/FeedbackButton'
 import Search from './pages/Search'
 import Analytics from './pages/Analytics'
+import List from './pages/List'
+import { categoryDictionary } from './Settings';
+import { publisherDictionary } from './Settings';
 
 
 // STYLES
@@ -41,26 +40,12 @@ const theme = createMuiTheme({
 },
 )
 
-const categoryDictionary = {
-    ART: ['arts', 'Art, Culture & Entertainment', 'iab-qagIAB1'],
-    BUSINESS: ['business', 'Business', 'iab-qagIAB3'],
-    POLITICS: ['politics', 'Law, Government & Politics', 'iab-qagIAB11'],
-    SCIENCE: ['science', 'Science', 'iab-qagIAB15'],
-    SPORT: ['sport', 'Sport', 'iab-qagIAB17'],
-    TECH: ['tech', 'Technology', 'iab-qagIAB19'],
-    TRAVEL: ['travel', 'Travel', 'iab-qagIAB20'],
-}
+
 
 class Root extends Component {
 
     componentDidMount() {
-
         this.props.checkLoggedIn();
-
-        if (this.props.isLoggedIn) {
-            store.dispatch(userData());
-        }
-
     }
 
     render() {
@@ -81,10 +66,30 @@ class Root extends Component {
                                         exact path={`/categories/${categoryDictionary[key][0]}`}
                                         render={props => (
                                             <div>
-                                                <Category
+                                                <Articles
                                                     key={Math.random() + i}
-                                                    categoryName={categoryDictionary[key][1]}
+                                                    pageName={categoryDictionary[key][1]}
                                                     categoryId={categoryDictionary[key][2]}
+                                                    {...props}
+                                                />
+                                            </div>
+                                        )}
+                                    />
+                                )
+                            })}
+                         
+                        {
+                            Object.keys(publisherDictionary).map(function (key, i) {
+                                return (
+                                    <Route
+                                        key={i}
+                                        exact path={`/publishers/${publisherDictionary[key][0]}`}
+                                        render={props => (
+                                            <div>
+                                                <Articles
+                                                    key={Math.random() + i}
+                                                    pageName={publisherDictionary[key][1]}
+                                                    publisherId={publisherDictionary[key][2]}
                                                     {...props}
                                                 />
                                             </div>
@@ -98,9 +103,9 @@ class Root extends Component {
                             exact path="/"
                             render={props => (
                                 <div>
-                                    <Home
+                                    <Articles
                                         key={Math.random()}
-                                        categoryName={"Top Stories"}
+                                        pageName={"Top Stories"}
                                         categoryId={""}
                                         {...props}
                                     />
@@ -112,6 +117,7 @@ class Root extends Component {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/logout" component={Logout} />
+                        <Route exact path="/overview" component={List} />
                         <Redirect to="/" />
                     </Switch>
                     <FeedbackButton />

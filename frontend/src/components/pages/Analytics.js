@@ -1,6 +1,7 @@
 // REACT LIBRARIES
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import ReactGA from 'react-ga'
 
 // MATERIAL UI
 import Typography from '@material-ui/core/Typography'
@@ -17,6 +18,11 @@ import Map from '../analytics/Map'
 
 
 class Analytics extends Component {
+
+    componentDidMount() {
+        ReactGA.pageview(`analyticspage`);
+    }
+
 
     render() {
         const { classes } = this.props;

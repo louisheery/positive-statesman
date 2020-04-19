@@ -1,14 +1,14 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import NewsFeedHeaderItem from './NewsFeedHeaderItem'
+import NewsFeedItem from './NewsFeedItem'
 
 describe('Article in header displays all important information', () => {
     let getByText, getByLabelText
     beforeEach(() => {
         ({ getByText, getByLabelText } = render(
             <BrowserRouter>
-                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+                <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         ))
     })
@@ -37,7 +37,7 @@ describe('sentiment score is displayed in correct color', () => {
         sampleArticle.sentiment_score = 1
         const { getByText, getByLabelText } = render(
             <BrowserRouter>
-                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+                <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         )
         expect(getByText(/100/i).style.color).toEqual("green")
@@ -46,7 +46,7 @@ describe('sentiment score is displayed in correct color', () => {
         sampleArticle.sentiment_score = 0.1
         const { getByText } = render(
             <BrowserRouter>
-                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+                <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         )
         expect(getByText(/55/i).style.color).toEqual("orange")
@@ -55,7 +55,7 @@ describe('sentiment score is displayed in correct color', () => {
         sampleArticle.sentiment_score = -1
         const { getByText } = render(
             <BrowserRouter>
-                <NewsFeedHeaderItem article={sampleArticle} width='lg' />
+                <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         )
         expect(getByText(/0/i).style.color).toEqual("red")

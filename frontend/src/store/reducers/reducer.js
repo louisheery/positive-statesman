@@ -36,19 +36,19 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 userPublishers: action.payload
-            }
+            };
 
         case DATA_ALL_CATEGORY:
             return {
                 ...state,
                 allCategories: action.payload
-            }
+            };
 
         case DATA_ALL_PUBLISHER:
             return {
                 ...state,
                 allPublishers: action.payload
-            }
+            };
 
         default:
             return state;

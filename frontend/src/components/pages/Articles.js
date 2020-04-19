@@ -11,12 +11,12 @@ import NewsFeed from '../newsfeed/NewsFeed';
 
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
-import styles from '../../../src/assets/styles/components/pages/Category.js';
+import styles from '../../assets/styles/components/pages/Articles.js';
 
-class Category extends Component {
+class ArticlePage extends Component {
   
   componentDidMount() {
-    ReactGA.pageview(`${this.props.categoryName}`);
+    ReactGA.pageview(`${this.props.pageName}`);
   }
 
   render() {
@@ -31,12 +31,13 @@ class Category extends Component {
         <Hidden only={['md', 'lg', 'xl']}>
           <div className={classes.mainDiv}></div>
         </Hidden>
-        */}
-        <div className={classes.mainPadding}></div>
-        <NewsFeed categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
+                <div className={classes.mainPadding}></div>
+        */}        
+
+        <NewsFeed pageName={this.props.pageName} categoryId={this.props.categoryId} publisherId={this.props.publisherId} />
       </div>
     )
   }
 }
 
-export default withStyles(styles)(Category)
+export default withStyles(styles)(ArticlePage)
