@@ -1,5 +1,6 @@
 // REACT LIBRARIES
 import React, { Component } from 'react'
+import ReactGA from "react-ga";
 import { withRouter } from 'react-router-dom'
 
 // MATERIAL UI
@@ -12,7 +13,7 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/Search.js'
 
 // INTERNAL REACT COMPONENTS
-import NewsFeedRowItem from '../newsfeed/NewsFeedRowItem'
+import NewsFeedItem from '../newsfeed/NewsFeedItem'
 
 // API
 import { searchArticle } from '../../apiIntegration.js'
@@ -38,6 +39,7 @@ class Search extends Component {
 
     componentDidMount = () => {
         this.executeSearch()
+        ReactGA.pageview(`searchpage/${this.state.searchQuery}`);
     }
 
     componentDidUpdate = (prevProps) => {
@@ -67,7 +69,7 @@ class Search extends Component {
                         <Grid className={classes.loadingIcon} container item justify="center" alignItems="center" xs={12}>
                             <Typography>{"Sorry, we couldn't find articles in our database relating to \"" + this.state.searchQuery + "\"."} </Typography></Grid> :
                         this.state.searchResults.map((article, i) => {
-                            return <NewsFeedRowItem key={i} article={article} />
+                            return <NewsFeedItem key={i} article={article} isHeaderItem={true} />
                         })
 
                         :

@@ -25,6 +25,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import AssessmentIcon from '@material-ui/icons/Assessment'
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -102,6 +103,10 @@ class HeaderBar extends Component {
         this.props.history.push({ pathname: "/analytics/" })
     }
 
+    handleClickPublishers = () => {
+        this.props.history.push({ pathname: "/overview/" })
+    }
+
 
     render() {
 
@@ -164,11 +169,15 @@ class HeaderBar extends Component {
                                 </ClickAwayListener>
                                 :
                                 <div>
+                                    
                                     <IconButton color="secondary" onClick={this.handleClickSearch}>
                                         <SearchIcon />
                                     </IconButton>
                                     <IconButton color="secondary" onClick={this.handleClickAdd}>
                                         <AddCircleOutlineIcon />
+                                    </IconButton>
+                                    <IconButton color="secondary" onClick={this.handleClickPublishers}>
+                                        <MenuBookIcon />
                                     </IconButton>
                                     <IconButton color="secondary" onClick={this.handleClickAnalytics}>
                                         <AssessmentIcon />
@@ -176,7 +185,6 @@ class HeaderBar extends Component {
                                 </div>
                         }
 
-                        {this.props.isLoggedIn ? (
                             <div>
                                 <IconButton
                                     aria-label="account of current user"
@@ -195,13 +203,16 @@ class HeaderBar extends Component {
                                     onClose={this.handleRequestClose}
 
                                 >
+                                {this.props.isLoggedIn ? (
+                                    <div>
                                     <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
                                     <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+                                    </div>
+                                ) : (
+                                    <MenuItem component={Link} to={'/login'}>Login</MenuItem>
+                                )}
                                 </Menu>
                             </div>
-                        ) : (
-                                <Button color="inherit" component={Link} to={'/login'}>Login</Button>
-                            )}
 
                     </Toolbar>
 
