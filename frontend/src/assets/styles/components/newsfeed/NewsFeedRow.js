@@ -23,15 +23,17 @@ const styles = {
             
       },
 
-      sectionTitle: {
-            "&:hover": {
-                  fontWeight: "bold"
+      hyperlinkTitle: {
+            textDecoration: 'none',
+            color: 'unset',
+            '&:hover': {
+                  fontWeight: 'bold',
             },
       },
 
-      rowTitle: {
+      nonHyperlinkTitle: {
             textDecoration: 'none',
-            color: 'unset'
+            color: 'unset',
       },
 
       

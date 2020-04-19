@@ -82,7 +82,7 @@ class Location(models.Model):
 class Reader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField('Category', blank=True)
-    locations = models.ManyToManyField('Location', blank=True)
+    publishers = models.ManyToManyField('Publisher', blank=True)
 
     class Meta:
         ordering = ['user']

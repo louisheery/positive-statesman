@@ -21,6 +21,30 @@ import pytz
 def valid_filter(param):
     return param != '' and param is not None
 
+def sortByRecommended(user, articles):
+    # user_favourite_publishers = user.reader.popular_publisher.all()
+    user_favourite_categories = user.reader.categories.all()
+    user_favourite_category_names = [category.name for category in user_favourite_categories]
+    scored_articles = []
+    # algorithm, one point for publisher, one point for category, score * 10 points for sentiment
+    for article in articles:
+        article_categories = article.categories.all()
+        articles_category_names = [category.name for category in article_categories]
+        # pub_score = len(set([article.publisher]) & set(user_favourite_publishers))
+        cat_score = len(set(articles_category_names) & set(user_favourite_category_names))
+        sent_score = article.sentiment_score * 2
+        sort_score = cat_score + sent_score
+        scored_articles.append({"score": sort_score,"article": article})
+        print("score ", sort_score)
+
+    scored_articles = sorted(scored_articles, key=lambda x: x['score'])
+    scored_articles.reverse()
+    print("first: ", scored_articles[0]["score"])
+    print("last: ", scored_articles[len(scored_articles)-1]["score"])
+    for x in scored_articles:
+        print(x["score"])
+    articles = [x["article"] for x in scored_articles]
+    return articles
 
 def article_filter(request):
     '''
@@ -48,7 +72,8 @@ def article_filter(request):
 
         # Filter by Category, Publisher, Sentiment Score Range
         if valid_filter(category):
-            articles = articles.filter(categories__taxonomy_id=category)
+            if not category=="recommended":
+                articles = articles.filter(categories__taxonomy_id=category)
 
         if valid_filter(publisher):
             articles = articles.filter(publisher__name=publisher)
@@ -61,6 +86,11 @@ def article_filter(request):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
 
         # Article Limit and Offset
+        if valid_filter(category):
+            if category=="recommended" and request.user.is_authenticated:
+                user = request.user
+                articles = sortByRecommended(user, articles)
+
         if valid_filter(articleOffset) and valid_filter(articleLimit):
             return articles[int(articleOffset): int(articleOffset) + int(articleLimit)]
 
@@ -176,6 +206,7 @@ def signup(request):
         reader = Reader(user=user)
         reader.save()
         user = auth.authenticate(request, username=_json["username"], password=_json["password"])
+        auth.login(request, user)
         return JsonResponse({"success": "success"}, status=200)
 
 @csrf_exempt
@@ -193,46 +224,52 @@ def login(request):
 def logout(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            return JsonResponse({"err": "not logged in"}, status=500)
+            return JsonResponse({"err": "not logged in"}, status=200)
         auth.logout(request)
         return JsonResponse({"success": "success"}, status=200)
 
 def popular_category(request):
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
-    if request.method == 'POST':
+    if request.method == 'DELETE':
+        _json = json.loads(request.body)
+        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
+        request.user.reader.categories.remove(category.id)
+        return JsonResponse({"success": "success"}, status=200)
+    elif request.method == 'GET':
+        categories = request.user.reader.categories.all()
+        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
+        return JsonResponse({"info": information}, status=200)
+    elif request.method == 'POST':
         _json = json.loads(request.body)
         category = Category.objects.filter(taxonomy_id=_json["id"]).get()
         reader = request.user
         reader = reader.reader
         reader.categories.add(category.id)
         return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'DELETE':
-        _json = json.loads(request.body)
-        category = Category.objects.filter(taxonomy_id=_json["id"]).get()
-        request.user.reader.categories.remove(category.id)
-        return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'GET':
-        categories = request.user.reader.categories.all()
-        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
-        return JsonResponse({"info": information}, status=200)
     else:
         return JsonResponse({"info": "no method found"}, status=404)
 
 def popular_publisher(request):
-    _json = json.loads(request.body)
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
-    if request.method == 'POST':
-        request.user.reader.popular_publisher.add(_json["id"])
-        return JsonResponse({"success": "success"}, status=200)
     if request.method == 'DELETE':
-        request.user.reader.popular_publisher.remove(_json["id"])
+        _json = json.loads(request.body)
+        name = _json["name"].replace("%20", " ")
+        publisher = Publisher.objects.filter(name=name).get()
+        request.user.reader.publishers.remove(publisher)
         return JsonResponse({"success": "success"}, status=200)
-    if request.method == 'GET':
-        publishers = request.user.reader.popular_publisher.all()
-        information = [{"name": category.name,"id": category.id} for category in publishers]
-        return JsonResponse(information, 200)
+    elif request.method == 'GET':
+        publishers = request.user.reader.publishers.all()
+        information = [{"name": publisher.name,"id": publisher.id} for publisher in publishers]
+        return JsonResponse({"info":information}, status=200)
+    elif request.method == 'POST':
+        _json = json.loads(request.body)
+        name = _json["name"].replace("%20", " ")
+        publisher = Publisher.objects.filter(name=name).get()
+        print(publisher)
+        request.user.reader.publishers.add(publisher)
+        return JsonResponse({"success": "success"}, status=200)
 
 def search_articles(request):
     """
@@ -253,7 +290,9 @@ def search_articles(request):
         if search_string != '':
 
             articles = articles.filter(title__icontains=search_string) | articles.filter(
-                text_snippet__icontains=search_string)
+                text_snippet__icontains=search_string) | articles.filter(
+                publisher__name__icontains=search_string) | articles.filter(
+                categories__name__icontains=search_string)
 
         serializer = ArticleSerializer(articles.distinct(), many=True)
 

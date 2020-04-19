@@ -3,11 +3,11 @@ const styles = {
     voteIcon: {
         color: 'white',
         "&:hover": {
-            backgroundColor: '#007ea7',
+            backgroundColor: '#FFF',
             borderRadius: '50%'
         },
         "&:active": {
-            backgroundColor: '#e3f3f4',
+            backgroundColor: '#FFF',
             borderRadius: '50%'
         },
         

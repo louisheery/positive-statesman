@@ -30,6 +30,7 @@ const styles = {
   iconButton: {
     padding: 2,
     paddingRight: 8,
+    marginBottom: '4px',
     color: "#347da3"
   },
 

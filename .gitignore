@@ -5,7 +5,8 @@ yarn-error.log*
 node_modules/
 .vscode/
 .DS_Store
-db.sqlite3
+*.sqlite3
+db.*
 articles/migrations
 coverage/
 frontend/static/frontend/main.js

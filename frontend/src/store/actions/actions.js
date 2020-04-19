@@ -1,10 +1,4 @@
-// REACT LIBRARIES
-import React, { Component } from 'react'
-import ReactGA from "react-ga";
-import axios from 'axios';
-import { withRouter, Redirect } from "react-router-dom";
-
-import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, LOGIN_DONE, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
+import { LOGIN_TRUE, LOGIN_FALSE, LOGIN_PENDING, DATA_USER_CATEGORY, DATA_USER_PUBLISHER, DATA_ALL_CATEGORY, DATA_ALL_PUBLISHER } from '../states/states';
 
 // Cookie Fetcher Function
 function getCookie(name) {
@@ -119,20 +113,20 @@ export const checkLoggedIn = () => dispatch => {
 
 
 
-// FUNCTION: Get User Preferences Data for User
+// FUNCTION: Edit User Preferences Data for User
 
-export const userData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
+export const userEditData = (requestType, dataType, dataId = null) => (dispatch, getState) => {
 
     var csrftoken = getCookie('csrftoken');
 
-    fetch(`/api/popular/category/`, {
+    fetch(`/api/popular/${dataType}/`, {
         method: requestType,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-        body: requestType == 'GET' ? null : JSON.stringify({"id": dataId})
+        body: requestType == 'GET' ? null : (dataType == 'category' ? JSON.stringify({ "id": dataId }) : JSON.stringify({ "name": dataId }))
     }).then((response) => {
         
         if (response.status == 200) {
@@ -155,7 +149,7 @@ export const userData = (requestType, dataType, dataId = null) => (dispatch, get
 }
 
 
-export const userGETData = (requestType, dataType) => (dispatch, getState) => {
+export const userFetchData = (requestType, dataType) => (dispatch, getState) => {
     getAsyncData(dispatch, getState, requestType, dataType)
 }
 
@@ -165,7 +159,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
     try {
         var csrftoken = getCookie('csrftoken');
 
-        const response = await fetch(`/api/popular/category/`, {
+        const response = await fetch(`/api/popular/${dataType}/`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -174,13 +168,19 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
             },
         })
         
-        
         let data = await response.json();
         var obj = data.info
-        var result = Object.keys(obj).map(function (key) {
-            return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
-        });
-        
+        var result
+
+        if (dataType == 'category') {
+            result = Object.keys(obj).map(function (key) {
+                return [obj[key]['id'], obj[key]['name'], obj[key]['tax_id']];
+            });
+        } else {
+            result = Object.keys(obj).map(function (key) {
+                return [obj[key]['id'], obj[key]['name'], obj[key]['name']];
+            });
+        }
         dispatch({ type: dataType == 'category' ? DATA_USER_CATEGORY : DATA_USER_PUBLISHER, payload: result });
         
     } catch (err) {
@@ -192,7 +192,7 @@ async function getAsyncData(dispatch, getState, requestType, dataType) {
 
 export const avaliableData = (dataType) => (dispatch, getState) => {
 
-    fetch(`/api/all/` + dataType, {
+    fetch(`/api/all/${dataType}/`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

@@ -6,34 +6,29 @@ import { Link, withRouter } from 'react-router-dom'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 
+import { categoryBarTabs } from '../Settings'
+import { remainingCategories } from '../Settings'
+
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../assets/styles/components/headers/CategoryBar.js';
 
-const CATEGORIES = ["business",
-    "politics",
-    "sport",
-    "arts",
-    "science",
-    "technology",
-    "travel"]
 
 class CategoryBar extends Component {
 
-    otherTabs = ['/login', '/signup', '/profile']
-
     render() {
+
         const { classes } = this.props
         return (
             <div>
                 <Tabs
                     className={classes.tabs}
-                    value={this.props.location.pathname.slice(0, 12) === "/categories/" || this.props.location.pathname.length === 1 ? this.props.location.pathname : false}
+                    value={remainingCategories.includes(this.props.location.pathname) && (this.props.location.pathname.slice(0, 12) === "/categories/" || this.props.location.pathname.length === 1) ? this.props.location.pathname : false}
                     variant="scrollable"
                 >
                     <Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" />
 
-                    {CATEGORIES.map((cat, i) => {
+                    {categoryBarTabs.map((cat, i) => {
                         return <Tab className={classes.tab} component={Link} to={`/categories/${cat}`} value={`/categories/${cat}`} label={cat.replace(/^\w/, c => c.toUpperCase())} key={i} />
                     })}
 
