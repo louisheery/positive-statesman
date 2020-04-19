@@ -193,6 +193,7 @@ def submit_article(request):
 
     return article_fetch.save_article(url)
 
+
 @csrf_exempt
 def signup(request):
     _json = json.loads(request.body)
@@ -201,7 +202,8 @@ def signup(request):
         usernames = [username for username in usernames]
         return JsonResponse({"msg": usernames}, status=404)
     if request.method == 'POST':
-        user = User.objects.create_user(_json["username"],_json["email"], _json["password"])
+        user = User.objects.create_user(
+            _json["username"], _json["email"], _json["password"])
         user.save()
         reader = Reader(user=user)
         reader.save()
@@ -209,16 +211,19 @@ def signup(request):
         auth.login(request, user)
         return JsonResponse({"success": "success"}, status=200)
 
+
 @csrf_exempt
 def login(request):
     _json = json.loads(request.body)
     if request.method == 'POST':
-        user = auth.authenticate(request, username=_json["username"], password=_json["password"])
+        user = auth.authenticate(
+            request, username=_json["username"], password=_json["password"])
         if user is not None:
             auth.login(request, user)
             return JsonResponse({"success": "success"}, status=200)
         else:
             return JsonResponse({"msg": "invalid user credentials"}, status=404)
+
 
 @csrf_exempt
 def logout(request):
@@ -227,6 +232,7 @@ def logout(request):
             return JsonResponse({"err": "not logged in"}, status=200)
         auth.logout(request)
         return JsonResponse({"success": "success"}, status=200)
+
 
 def popular_category(request):
     if not request.user.is_authenticated:
@@ -238,7 +244,8 @@ def popular_category(request):
         return JsonResponse({"success": "success"}, status=200)
     elif request.method == 'GET':
         categories = request.user.reader.categories.all()
-        information = [{"name": category.name,"id": category.id,"tax_id":category.taxonomy_id} for category in categories]
+        information = [{"name": category.name, "id": category.id,
+                        "tax_id": category.taxonomy_id} for category in categories]
         return JsonResponse({"info": information}, status=200)
     elif request.method == 'POST':
         _json = json.loads(request.body)
@@ -249,6 +256,7 @@ def popular_category(request):
         return JsonResponse({"success": "success"}, status=200)
     else:
         return JsonResponse({"info": "no method found"}, status=404)
+
 
 def popular_publisher(request):
     if not request.user.is_authenticated:
@@ -270,6 +278,7 @@ def popular_publisher(request):
         print(publisher)
         request.user.reader.publishers.add(publisher)
         return JsonResponse({"success": "success"}, status=200)
+
 
 def search_articles(request):
     """
@@ -306,7 +315,7 @@ def search_articles(request):
 
 
 def article_average(request):
-    """ 
+    """
     Function to calculate the average sentiment score for an Article model parameter over a given timeframe
 
     Args:
@@ -382,30 +391,34 @@ def article_average(request):
         elif param == 'locations':
             score_matrix = np.zeros(7)
             cur_date = begin_date
-            cat = ['North America', 'South America', 'Africa', 'Europe', 'Asia', 'Oceania', 'Antarctica']
+            cat = ['North America', 'South America', 'Africa',
+                   'Europe', 'Asia', 'Oceania', 'Antarctica']
             count_list = []
 
             while cur_date <= end_date:
 
-                timed_articles = articles.filter(publish_date__gte=cur_date, publish_date__lte = cur_date+timedelta(days=1))
-                
-                for i in range(0,7):
-                    cat_articles = timed_articles.filter(locations__name=cat[i])
-                    
+                timed_articles = articles.filter(
+                    publish_date__gte=cur_date, publish_date__lte=cur_date+timedelta(days=1))
+
+                for i in range(0, 7):
+                    cat_articles = timed_articles.filter(
+                        locations__name=cat[i])
+
                     if not cat_articles:
                         score_matrix[i] = 0
                     else:
-                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))['sentiment_score__avg']
+                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))[
+                            'sentiment_score__avg']
 
-                count_dict={"date": cur_date.strftime("%Y-%m-%d"),
-                            "north america": score_matrix[0],
-                            "south america": score_matrix[1],
-                            "europe": score_matrix[2],
-                            "asia": score_matrix[3],
-                            "africa": score_matrix[4],
-                            "oceania": score_matrix[5],
-                            "antarctica": score_matrix[6]
-                }
+                count_dict = {"date": cur_date.strftime("%Y-%m-%d"),
+                              "north america": score_matrix[0],
+                              "south america": score_matrix[1],
+                              "europe": score_matrix[2],
+                              "asia": score_matrix[3],
+                              "africa": score_matrix[4],
+                              "oceania": score_matrix[5],
+                              "antarctica": score_matrix[6]
+                              }
 
                 count_list.append(count_dict)
 
@@ -413,6 +426,216 @@ def article_average(request):
 
             return JsonResponse(count_list, status=200, safe=False)
 
+        elif param == 'countries':
+
+            cur_date = begin_date
+            cat = [
+                "Afghanistan",
+                "Angola",
+                "Albania",
+                "United Arab Emirates",
+                "Argentina",
+                "Armenia",
+                "Antarctica",
+                "Fr. S. Antarctic Lands",
+                "Australia",
+                "Austria",
+                "Azerbaijan",
+                "Burundi",
+                "Belgium",
+                "Benin",
+                "Burkina Faso",
+                "Bangladesh",
+                "Bulgaria",
+                "Bahamas",
+                "Bosnia and Herz.",
+                "Belarus",
+                "Belize",
+                "Bolivia",
+                "Brazil",
+                "Brunei",
+                "Bhutan",
+                "Botswana",
+                "Central African Rep.",
+                "Canada",
+                "Switzerland",
+                "Chile",
+                "China",
+                "Côte d'Ivoire",
+                "Cameroon",
+                "Dem. Rep. Congo",
+                "Congo",
+                "Colombia",
+                "Costa Rica",
+                "Cuba",
+                "N. Cyprus",
+                "Cyprus",
+                "Czechia",
+                "Germany",
+                "Djibouti",
+                "Denmark",
+                "Dominican Rep.",
+                "Algeria",
+                "Ecuador",
+                "Egypt",
+                "Eritrea",
+                "Spain",
+                "Estonia",
+                "Ethiopia",
+                "Finland",
+                "Fiji",
+                "Falkland Is.",
+                "France",
+                "Gabon",
+                "United Kingdom",
+                "Georgia",
+                "Ghana",
+                "Guinea",
+                "Gambia",
+                "Guinea-Bissau",
+                "Eq. Guinea",
+                "Greece",
+                "Greenland",
+                "Guatemala",
+                "Guyana",
+                "Honduras",
+                "Croatia",
+                "Haiti",
+                "Hungary",
+                "Indonesia",
+                "India",
+                "Ireland",
+                "Iran",
+                "Iraq",
+                "Iceland",
+                "Israel",
+                "Italy",
+                "Jamaica",
+                "Jordan",
+                "Japan",
+                "Kazakhstan",
+                "Kenya",
+                "Kyrgyzstan",
+                "Cambodia",
+                "South Korea",
+                "Kosovo",
+                "Kuwait",
+                "Laos",
+                "Lebanon",
+                "Liberia",
+                "Libya",
+                "Sri Lanka",
+                "Lesotho",
+                "Lithuania",
+                "Luxembourg",
+                "Latvia",
+                "Morocco",
+                "Moldova",
+                "Madagascar",
+                "Mexico",
+                "Macedonia",
+                "Mali",
+                "Myanmar",
+                "Montenegro",
+                "Mongolia",
+                "Mozambique",
+                "Mauritania",
+                "Malawi",
+                "Malaysia",
+                "Namibia",
+                "New Caledonia",
+                "Niger",
+                "Nigeria",
+                "Nicaragua",
+                "Netherlands",
+                "Norway",
+                "Nepal",
+                "New Zealand",
+                "Oman",
+                "Pakistan",
+                "Panama",
+                "Peru",
+                "Philippines",
+                "Papua New Guinea",
+                "Poland",
+                "Puerto Rico",
+                "North Korea",
+                "Portugal",
+                "Paraguay",
+                "Palestine",
+                "Qatar",
+                "Romania",
+                "Russia",
+                "Rwanda",
+                "W. Sahara",
+                "Saudi Arabia",
+                "Sudan",
+                "S. Sudan",
+                "Senegal",
+                "Solomon Is.",
+                "Sierra Leone",
+                "El Salvador",
+                "Somaliland",
+                "Somalia",
+                "Serbia",
+                "Suriname",
+                "Slovakia",
+                "Slovenia",
+                "Sweden",
+                "Swaziland",
+                "Syria",
+                "Chad",
+                "Togo",
+                "Thailand",
+                "Tajikistan",
+                "Turkmenistan",
+                "Timor-Leste",
+                "Trinidad and Tobago",
+                "Tunisia",
+                "Turkey",
+                "Taiwan",
+                "Tanzania",
+                "Uganda",
+                "Ukraine",
+                "Uruguay",
+                "United States",
+                "Uzbekistan",
+                "Venezuela",
+                "Vietnam",
+                "Vanuatu",
+                "Yemen",
+                "South Africa",
+                "Zambia",
+                "Zimbabwe"
+            ]
+            score_matrix = np.zeros(len(cat))
+            count_list = []
+
+            while cur_date <= end_date:
+
+                timed_articles = articles.filter(
+                    publish_date__gte=cur_date, publish_date__lte=cur_date+timedelta(days=1))
+
+                for i in range(0, len(cat)):
+                    cat_articles = timed_articles.filter(
+                        locations__name=cat[i])
+
+                    if not cat_articles:
+                        score_matrix[i] = 0
+                    else:
+                        score_matrix[i] = cat_articles.aggregate(Avg('sentiment_score'))[
+                            'sentiment_score__avg']
+
+                count_dict = {"date": cur_date.strftime("%Y-%m-%d")}
+
+                for i in range(0, len(cat)):
+                    count_dict[cat[i]] = score_matrix[i]
+
+                count_list.append(count_dict)
+
+                cur_date += timedelta(days=1)
+
+            return JsonResponse(count_list, status=200, safe=False)
 
         else:
             return JsonResponse({"msg": "Not yet implemented"}, status=405)

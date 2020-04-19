@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
+import Typography from '@material-ui/core/Typography'
 
 // CHARTS
 import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line, Label } from "recharts"
@@ -26,7 +27,7 @@ class TimeSeries extends Component {
         this.state = {
             data: [{}],
             begin: this.getDate(-6),
-            end: this.getDate(1)
+            end: this.getDate(0)
         }
     }
 
@@ -62,8 +63,15 @@ class TimeSeries extends Component {
         return (
             <Grid className={classes.cardOutside} container item xs={12} lg={8} justify="center">
                 <Card className={classes.card} >
-                    <CardHeader className={classes.cardHeader} title={this.props.param} align="center" titleTypographyProps={{ variant: "subtitle1" }} />
-                    <ResponsiveContainer width="100%" height={300}>
+                    <CardHeader className={classes.cardHeader} title={this.props.title} align="center" titleTypographyProps={{ variant: "subtitle1" }} />
+                    <Grid container justify="center">
+                        <Grid className={classes.typo} item xs={12}>
+                            <Typography variant="caption">
+                                {this.props.description}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <ResponsiveContainer width="99%" height={300}>
                         <LineChart data={this.state.data} margin={{ top: 20, right: 40, left: 10, bottom: 20 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="date" style={{ fontSize: 12 }}>

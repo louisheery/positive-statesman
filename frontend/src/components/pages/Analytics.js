@@ -10,9 +10,11 @@ import Grid from '@material-ui/core/Grid'
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../../../src/assets/styles/components/pages/Analytics.js'
+import Hidden from '@material-ui/core/Hidden'
 
 // COMPONENTS
 import TimeSeries from '../analytics/TimeSeries'
+import Map from '../analytics/Map'
 
 
 class Analytics extends Component {
@@ -30,10 +32,14 @@ class Analytics extends Component {
                     Analytics
                 </Typography>
                 <Grid container justify="center">
-                    <TimeSeries param="categories" />
-                    <TimeSeries param="locations" />
+                    <Map />
                 </Grid>
-
+                <Hidden xsDown>
+                    <Grid container justify="center">
+                        <TimeSeries param="categories" title="Category Positivity" description="This graph shows the development of the average news coverage positivity per category over the past 7 days." />
+                        <TimeSeries param="locations" title="Region Positivity" description="This graph shows the development of the average news coverage positivity per continent over the past 7 days." />
+                    </Grid>
+                </Hidden>
             </div>
         )
     }

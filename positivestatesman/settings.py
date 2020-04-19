@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
