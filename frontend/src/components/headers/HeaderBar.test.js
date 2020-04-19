@@ -10,7 +10,7 @@ describe('user can interact with logo', () => {
     beforeEach(() => {
         ({ getByLabelText } = render(
             <BrowserRouter>
-                <Redirect to="/business/" />
+                <Redirect to="/categories/business/" />
                 <HeaderBar />
             </BrowserRouter>
         ))

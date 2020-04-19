@@ -50,17 +50,17 @@ const styles = {
     },
 
     positivity: {
-        fontFamily: 'helvetica', borderRadius: '5px', border: '1px solid green', backgroundColor: 'white', margin: '5px', marginTop: '5px', paddingTop: '7px', paddingBottom: '8px'
+        fontFamily: 'helvetica', fontSize: '12px', paddingTop: '10px', paddingBottom: '10px', borderRadius: '5px', border: '2px solid green', backgroundColor: 'white', margin: '5px', marginTop: '5px',
     },
 
     positivityButton: {
-        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
+        border: '1px solid blue',  height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
 
     },
 
     shareButton: {
-        border: '1px solid blue', height: '35px', marginTop: '0px', backgroundColor: 'rgba(255,255,255,1)', margin: '5px',
-    "&:hover": {
+        fontFamily: 'helvetica', fontSize: '12px', borderRadius: '5px', border: '2px solid blue', backgroundColor: 'white', margin: '5px', marginTop: '5px', paddingTop: '6px', paddingBottom: '8px',
+        "&:hover": {
             backgroundColor: 'lightgrey'
         },
     },
