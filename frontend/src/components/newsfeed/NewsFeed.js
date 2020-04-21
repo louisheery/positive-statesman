@@ -20,17 +20,6 @@ import styles from '../../assets/styles/components/newsfeed/NewsFeed.js';
 
 class NewsFeed extends Component {
 
-    constructor(props) {
-        super(props)
-
-        const { categoryId, publisherId } = this.props;
-
-        this.state = {
-            newsFeedRow: [],
-        }
-
-    }
-
     static propTypes = {
         isLoggedIn: PropTypes.bool,
         userCategories: PropTypes.array,
@@ -39,12 +28,25 @@ class NewsFeed extends Component {
     }
 
     componentDidMount() {
-        const { isLoggedIn, userCategories, userPublishers, categoryId, publisherId } = this.props;
+        const { isLoggedIn } = this.props;
 
         if (isLoggedIn) {
             this.props.userFetchData('GET', 'category');
             this.props.userFetchData('GET', 'publisher');
         }
+    }
+
+    vlookup(matrix, origin, destination, publisher) {
+        for (var key in matrix) {
+            if (matrix[key][origin] == publisher) {
+                return matrix[key][destination];
+            }
+        }
+        return '';
+    }
+
+    render() {
+        const { classes, pageName, categoryId, publisherId, userCategories, userPublishers } = this.props;
 
         var userCodes;
         var userNewsFeedData = [];
@@ -121,21 +123,7 @@ class NewsFeed extends Component {
         }
 
 
-        this.setState({ newsFeedRow: userNewsFeedData });
-    }
 
-    vlookup(matrix, origin, destination, publisher) {
-        for (var key in matrix) {
-            if (matrix[key][origin] == publisher) {
-                return matrix[key][destination];
-            }
-        }
-        return '';
-    }
-
-    render() {
-
-        const { classes, pageName, categoryId, publisherId } = this.props;
 
         return (
             <div className={classes.grid}>
@@ -144,7 +132,7 @@ class NewsFeed extends Component {
 
 
                 {
-                    this.state.newsFeedRow.map((newsFeedRow, i) => {
+                    userNewsFeedData.map((newsFeedRow, i) => {
                         return (
 
                             <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} newFeedRowNumber={i} />
