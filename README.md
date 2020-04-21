@@ -3,6 +3,9 @@
 
 ![Positive Statesman](https://raw.githubusercontent.com/louisheery/positive-statesman/master/file_dump/Positive%20Statesman%20Banner%20Logo.png?token=ADUEJK6FUP3XRTBJZ7DZKC26VAJMG)
 
+
+![Positive Statesman](https://github.com/louisheery/positive-statesman/raw/master/file_dump/ps-homepage.png)
+
 ## Git Tutorial
 ## How to Push Code to Github
 1. Update your 'Local' version of 'Master' Branch
