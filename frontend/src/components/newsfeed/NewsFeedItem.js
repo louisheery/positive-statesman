@@ -92,22 +92,20 @@ class NewsFeedItem extends Component {
                     </span>
 
 
-                    <div className={classes.buttonDiv}>
-                        <Button disabled={true} className={classes.shareButton} style={{ backgroundColor: 'white', borderColor: score > 70 ? 'green' : score > 50 ? 'orange' : 'red', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
-                            {score}%
-                            <Hidden lgDown>
-                                {" Positive"}
-                            </Hidden>
-                        </Button>
-                    </div>
+                    <p className={classes.positivity} style={{ display: 'inline-block', width: '40%', color: score > 70 ? 'green' : score > 50 ? 'orange' : 'red' }}>
+                        {score}%
+                            <Hidden smDown>
+                            {" Positive"}
+                        </Hidden>
+                    </p>
 
-                    <div className={classes.buttonDiv}>
+                    <p className={classes.shareButton} style={{ display: 'inline-block', width: '40%' }}>
                         <FacebookShareButton url={article.url} quote={article.title} className="share">
-                            <Button className={classes.shareButton}>
-                                Share <FacebookIcon className={classes.fbShareIcon} />
-                            </Button>
+                        
+                            Share 🔗
+                             
                         </FacebookShareButton>
-                    </div>
+                    </p>
 
 
                 </Paper>

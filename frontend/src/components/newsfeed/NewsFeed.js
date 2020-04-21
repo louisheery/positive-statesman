@@ -83,7 +83,6 @@ class NewsFeed extends Component {
 
                 // B2: Home Page with User Logged In and Preferences Setup
             } else {
-                console.log(userCategories)
 
                 userNewsFeedData.push(['/', 'Recommended Stories', { category: 'recommended', limit: 6, offset: 0, sentiment_score_min: 0 }])
 

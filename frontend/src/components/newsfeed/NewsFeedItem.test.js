@@ -2,6 +2,11 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import NewsFeedItem from './NewsFeedItem'
+import toJson from 'enzyme-to-json'
+import styled from 'styled-components'
+import renderer from 'react-test-renderer'
+import 'jest-styled-components'
+import { shallow } from 'enzyme';
 
 describe('Article in header displays all important information', () => {
     let getByText, getByLabelText
@@ -33,9 +38,10 @@ describe('Article in header displays all important information', () => {
 })
 
 describe('sentiment score is displayed in correct color', () => {
+
     test('green if 100% positivity', () => {
         sampleArticle.sentiment_score = 1
-        const { getByText, getByLabelText } = render(
+        const { getByText } = render(
             <BrowserRouter>
                 <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
@@ -58,7 +64,7 @@ describe('sentiment score is displayed in correct color', () => {
                 <NewsFeedItem article={sampleArticle} width='lg' />
             </BrowserRouter>
         )
-        expect(getByText(/0/i).style.color).toEqual("red")
+        expect(getByText(/0%/i).style.color).toEqual("red")
     })
 })
 

@@ -14,23 +14,23 @@ describe('user gets redirected to category pages', () => {
     })
     test('business link works', () => {
         fireEvent.click(getByText(/business/i))
-        expect(location.pathname).toBe('/business')
+        expect(location.pathname).toBe('/categories/business')
     })
     test('politics link works', () => {
         fireEvent.click(getByText(/politics/i))
-        expect(location.pathname).toBe('/politics')
+        expect(location.pathname).toBe('/categories/politics')
     })
     test('sport link works', () => {
         fireEvent.click(getByText(/sport/i))
-        expect(location.pathname).toBe('/sport')
+        expect(location.pathname).toBe('/categories/sport')
     })
     test('arts link works', () => {
         fireEvent.click(getByText(/arts/i))
-        expect(location.pathname).toBe('/arts')
+        expect(location.pathname).toBe('/categories/arts')
     })
     test('science link works', () => {
         fireEvent.click(getByText(/science/i))
-        expect(location.pathname).toBe('/science')
+        expect(location.pathname).toBe('/categories/science')
     })
 })
 describe('User gets redirected to home page', () => {
