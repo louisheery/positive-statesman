@@ -25,8 +25,8 @@ const styles = {
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'normal',
-        minHeight: '41pt',
-        maxHeight: '41pt',
+        minHeight: '38pt',
+        maxHeight: '38pt',
         paddingTop: '10px',
         paddingBottom: '5px',
         "&:hover": {
