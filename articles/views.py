@@ -196,11 +196,10 @@ def submit_article(request):
 
 @csrf_exempt
 def signup(request):
+    '''
+    Let user create account
+    '''
     _json = json.loads(request.body)
-    if request.method == 'GET':
-        usernames = User.objects.values_list('username', flat=True)
-        usernames = [username for username in usernames]
-        return JsonResponse({"msg": usernames}, status=404)
     if request.method == 'POST':
         user = User.objects.create_user(
             _json["username"], _json["email"], _json["password"])
@@ -214,6 +213,9 @@ def signup(request):
 
 @csrf_exempt
 def login(request):
+    '''
+    Let user login to account
+    '''
     _json = json.loads(request.body)
     if request.method == 'POST':
         user = auth.authenticate(
@@ -227,6 +229,9 @@ def login(request):
 
 @csrf_exempt
 def logout(request):
+    '''
+    Let user logout of account
+    '''
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({"err": "not logged in"}, status=200)
@@ -235,6 +240,9 @@ def logout(request):
 
 
 def popular_category(request):
+    '''
+    Get, add and delete category preferences for authenticated users
+    '''
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'DELETE':
@@ -259,6 +267,9 @@ def popular_category(request):
 
 
 def popular_publisher(request):
+    '''
+    Get, add and delete publisher preferences for authenticated users
+    '''
     if not request.user.is_authenticated:
         return JsonResponse({"msg": "User is not logged in"}, status=500)
     if request.method == 'DELETE':
