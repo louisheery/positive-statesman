@@ -1,5 +1,7 @@
 # The Positive Statesman
-GitHub Repo for MSc Group Project: "Sharing 'Positive' Stories using sentiment analysis"
+"Sharing 'Positive' Stories using sentiment analysis"
+
+![Positive Statesman](https://raw.githubusercontent.com/louisheery/positive-statesman/master/file_dump/Positive%20Statesman%20Banner%20Logo.png)
 
 ## Git Tutorial
 ## How to Push Code to Github
