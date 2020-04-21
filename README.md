@@ -1,7 +1,7 @@
 # The Positive Statesman
 "Sharing 'Positive' Stories using sentiment analysis"
 
-![Positive Statesman](https://raw.githubusercontent.com/louisheery/positive-statesman/master/file_dump/Positive%20Statesman%20Banner%20Logo.png)
+![Positive Statesman](https://raw.githubusercontent.com/louisheery/positive-statesman/master/file_dump/Positive%20Statesman%20Banner%20Logo.png?token=ADUEJK6FUP3XRTBJZ7DZKC26VAJMG)
 
 ## Git Tutorial
 ## How to Push Code to Github
