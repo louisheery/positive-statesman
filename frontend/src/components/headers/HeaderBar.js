@@ -1,11 +1,11 @@
 // REACT LIBRARIES
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
 // REDUX
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { logOut } from '../../store/actions/actions';
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import { logOut } from '../../store/actions/actions'
 
 // MATERIAL UI
 import AppBar from '@material-ui/core/AppBar'
@@ -16,16 +16,17 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
-import Popover from '@material-ui/core/Popover';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import Popover from '@material-ui/core/Popover'
+import IconButton from '@material-ui/core/IconButton'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import AssessmentIcon from '@material-ui/icons/Assessment'
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+import MenuBookIcon from '@material-ui/icons/MenuBook'
+import Tooltip from '@material-ui/core/Tooltip'
 
 // COMPONENTS
 import CategoryBar from './CategoryBar'
@@ -148,71 +149,74 @@ class HeaderBar extends Component {
                             </Hidden>
                         </Button>
 
-                        {/* SEARCH AND ADD STORY SECTION */}
+                        {/* ICONS */}
                         {this.state.searchArticle ?
                             <ClickAwayListener onClickAway={this.handleClickAway}>
                                 <Paper className={classes.addStoryPaper} >
                                     <InputBase placeholder="Search" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
-                                    <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
-                                        <SearchIcon />
-                                    </IconButton>
+                                    <Tooltip title="Submit" placement="bottom">
+                                        <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                            <SearchIcon />
+                                        </IconButton>
+                                    </Tooltip>
                                 </Paper>
                             </ClickAwayListener>
                             : this.state.addArticle ?
                                 <ClickAwayListener onClickAway={this.handleClickAway}>
                                     <Paper className={classes.addStoryPaper} >
                                         <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
-                                        <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
-                                            <AddCircleOutlineIcon />
-                                        </IconButton>
+                                        <Tooltip title="Submit" placement="bottom">
+                                            <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                                <AddCircleOutlineIcon />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Paper>
                                 </ClickAwayListener>
                                 :
                                 <div>
-                                    
-                                    <IconButton color="secondary" onClick={this.handleClickSearch}>
-                                        <SearchIcon />
-                                    </IconButton>
-                                    <IconButton color="secondary" onClick={this.handleClickAdd}>
-                                        <AddCircleOutlineIcon />
-                                    </IconButton>
-                                    <IconButton color="secondary" onClick={this.handleClickPublishers}>
-                                        <MenuBookIcon />
-                                    </IconButton>
-                                    <IconButton color="secondary" onClick={this.handleClickAnalytics}>
-                                        <AssessmentIcon />
-                                    </IconButton>
+                                    <Tooltip title="Search" placement="bottom">
+                                        <IconButton color="secondary" onClick={this.handleClickSearch}>
+                                            <SearchIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Add Article" placement="bottom">
+                                        <IconButton color="secondary" onClick={this.handleClickAdd}>
+                                            <AddCircleOutlineIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Categories & Publishers" placement="bottom">
+                                        <IconButton color="secondary" onClick={this.handleClickPublishers}>
+                                            <MenuBookIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Analytics" placement="bottom">
+                                        <IconButton color="secondary" onClick={this.handleClickAnalytics}>
+                                            <AssessmentIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Profile" placement="bottom">
+                                        <IconButton color="secondary" onClick={this.handleClick}>
+                                            <AccountCircle />
+                                        </IconButton>
+                                    </Tooltip>
                                 </div>
                         }
 
-                            <div>
-                                <IconButton
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={this.handleClick}
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                                <Menu
-
-                                    id="menu-appbar"
-                                    anchorEl={this.state.anchorEl}
-                                    open={this.state.openMenu}
-                                    onClose={this.handleRequestClose}
-
-                                >
-                                {this.props.isLoggedIn ? (
-                                    <div>
+                        {/* LOGIN MENU */}
+                        <Menu
+                            anchorEl={this.state.anchorEl}
+                            open={this.state.openMenu}
+                            onClose={this.handleRequestClose}
+                        >
+                            {this.props.isLoggedIn ? (
+                                <div>
                                     <MenuItem component={Link} to={'/profile'}>Profile</MenuItem>
                                     <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
-                                    </div>
-                                ) : (
+                                </div>
+                            ) : (
                                     <MenuItem component={Link} to={'/login'}>Login</MenuItem>
                                 )}
-                                </Menu>
-                            </div>
+                        </Menu>
 
                     </Toolbar>
 
