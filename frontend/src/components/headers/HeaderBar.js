@@ -50,6 +50,7 @@ class HeaderBar extends Component {
             open: false,
             openMenu: false,
             anchorEl: undefined,
+            popupText: "",
         }
     }
 
@@ -62,10 +63,17 @@ class HeaderBar extends Component {
         this.setState({ input: event.target.value })
     }
 
-    handleClickSubmit = () => {
+    handleClickSubmit = (event) => {
         if (this.state.addArticle) {
-            addArticle(this.state.input)
-            this.setState({ open: true })
+            console.log(event.target)
+            addArticle(this.state.input).then((response) =>
+                this.setState({
+                    popupText: response ? "Your article has successfully been added to our database. \
+                    Thank you for your contribution!" : "Sorry, your article couldn't be added to our database because \
+                    we cannot fetch its content with our API.",
+                    open: true,
+                    anchorEl: event.target
+                }))
         }
         if (this.state.searchArticle) {
             this.props.history.push({ pathname: "/search/", search: "?q=" + this.state.input })
@@ -115,8 +123,9 @@ class HeaderBar extends Component {
         return (
             <div>
                 <Popover
+                    className={classes.popover}
                     id={1}
-                    anchorEl={null}
+                    anchorEl={this.state.anchorEl}
                     open={this.state.open}
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -128,7 +137,7 @@ class HeaderBar extends Component {
                     }}
                     onClose={() => this.setState({ open: false })}
                 >
-                    <Typography style={{ padding: '10px' }}>Article Submitted!</Typography>
+                    <Typography style={{ padding: '10px' }}>{this.state.popupText}</Typography>
                 </Popover>
 
                 <AppBar position="fixed">
