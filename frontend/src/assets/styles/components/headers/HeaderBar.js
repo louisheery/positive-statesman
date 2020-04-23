@@ -105,8 +105,9 @@ const styles = {
     marginRight: '65px',
   },
 
-
-
+  popover: {
+    maxWidth: 800
+  }
 }
 
 export default styles;

@@ -22,8 +22,6 @@ import { searchArticle } from '../../apiIntegration.js'
 import queryString from "query-string"
 import { wait } from '@testing-library/react'
 
-// searchArticle(this.state.input).then((response) => { this.props.history.push({ pathname: "/search/", state: { searchResults: response } }) })
-
 
 class Search extends Component {
 
@@ -71,7 +69,6 @@ class Search extends Component {
                         this.state.searchResults.map((article, i) => {
                             return <NewsFeedItem key={i} article={article} isHeaderItem={true} />
                         })
-
                         :
                         <Grid className={classes.loadingIcon} container item justify="center" alignItems="center" xs={12}>
                             <CircularProgress />
