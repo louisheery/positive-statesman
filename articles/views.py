@@ -88,7 +88,6 @@ def article_filter(request):
         if valid_filter(sentiment_score_max):
             articles = articles.filter(sentiment_score__lt=sentiment_score_max)
 
-
         # Article Limit and Offset
         if valid_filter(category):
             if category=="recommended" and request.user.is_authenticated:
