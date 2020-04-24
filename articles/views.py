@@ -34,7 +34,7 @@ def sortByRecommended(user, articles):
         time_score = -((datetime.now(timezone.utc) - article.publish_date).days ** 2)
         cat_score = len(set(articles_category_names) & set(user_favourite_category_names))
         sent_score = article.sentiment_score * 2
-        sort_score = cat_score + sent_score
+        sort_score = cat_score + sent_score + time_score
         scored_articles.append({"score": sort_score,"article": article})
         print("score ", sort_score)
 
