@@ -49,7 +49,7 @@ class TimeSeries extends Component {
             for (let i = 0; i < data.length; i++) {
                 for (let key in data[i]) {
                     if (key !== "date") {
-                        data[i][key] = (data[i][key] * 100).toFixed(0)
+                        data[i][key] = (((data[i][key] + 1) * 0.5 * 100).toFixed(0))
                     }
                 }
             }
@@ -71,7 +71,7 @@ class TimeSeries extends Component {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <ResponsiveContainer width="99%" height={300}>
+                    <ResponsiveContainer width="99%" height={300} aria-label="graph">
                         <LineChart data={this.state.data} margin={{ top: 20, right: 40, left: 10, bottom: 20 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="date" style={{ fontSize: 12 }}>

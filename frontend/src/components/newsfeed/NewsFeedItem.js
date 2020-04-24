@@ -67,7 +67,7 @@ class NewsFeedItem extends Component {
 
         return (
             <Grid item xs={12} sm={6} md={4}>
-                <Paper className={classes.paper} style={this.props.isHeaderItem ? headerItemStyle : rowItemStyle} square={true}>
+                <Paper className={classes.paper} style={this.props.isHeaderItem ? headerItemStyle : rowItemStyle} square={true} aria-label="newsFeedItem">
                     <Link href={article.url}>
                         <Typography variant='subtitle1' className={classes.title} >
                             {article.title}
