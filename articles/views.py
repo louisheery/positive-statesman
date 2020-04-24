@@ -66,6 +66,9 @@ def article_filter(request):
         articleLimit = request.GET.get('limit')
         articleOffset = request.GET.get('offset')
 
+        # Only articles from last 24 hours
+        articles = articles.filter(publish_date__gte=(datetime.now() - timedelta(days=1)))
+
         # Only 1 Article of particular ID
         if valid_filter(id_only):
             articles = articles.filter(id=id_only)
