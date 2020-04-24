@@ -13,7 +13,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from django.contrib import auth
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import numpy as np
 import pytz
 
@@ -31,6 +31,7 @@ def sortByRecommended(user, articles):
         article_categories = article.categories.all()
         articles_category_names = [category.name for category in article_categories]
         # pub_score = len(set([article.publisher]) & set(user_favourite_publishers))
+        time_score = -((datetime.now(timezone.utc) - article.publish_date).days ** 2)
         cat_score = len(set(articles_category_names) & set(user_favourite_category_names))
         sent_score = article.sentiment_score * 2
         sort_score = cat_score + sent_score
@@ -67,7 +68,10 @@ def article_filter(request):
         articleOffset = request.GET.get('offset')
 
         # Only articles from last 24 hours
-        articles = articles.filter(publish_date__gte=(datetime.now() - timedelta(days=1)))
+        # articles = articles.filter(publish_date__gte=(datetime.now() - timedelta(days=1)))
+
+        # Order articles by publish date descending order
+        articles = articles.order_by('-publish_date')
 
         # Only 1 Article of particular ID
         if valid_filter(id_only):
