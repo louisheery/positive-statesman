@@ -33,7 +33,6 @@ async function fetchArticles(params = {}) {
 }
 
 async function userFeedback(pk, vote) {
-  console.log("Vote Button pressed: pk=" + String(pk) + " & vote=" + vote)
   var csrftoken = getCookie('csrftoken');
 
   fetch(`/api/user-feedback/`, {
@@ -45,9 +44,7 @@ async function userFeedback(pk, vote) {
     },
     body: JSON.stringify({ "pk": pk, "vote": vote })
   }).then((response) => {
-    console.log(response);
     response.json().then((data) => {
-      console.log(data);
     });
   });
 }

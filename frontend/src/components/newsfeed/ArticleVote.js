@@ -23,6 +23,7 @@ class ArticleVote extends Component {
 
         this.state = {
             open: false,
+            AnchorEl: null
         }
     }
 
@@ -34,6 +35,7 @@ class ArticleVote extends Component {
             <div>
                 <Popover
                     id={1}
+                    anchorEl={this.state.anchorEl}
                     open={this.state.open}
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -49,13 +51,13 @@ class ArticleVote extends Component {
                 </Popover>
 
 
-                <IconButton className={classes.voteIcon} aria-label="positiveVote" onClick={() => { userFeedback(this.props.articleId, "positive"); this.setState({ open: true }); }}>
+                <IconButton className={classes.voteIcon} aria-label="positiveVote" onClick={(event) => { userFeedback(this.props.articleId, "positive"); this.setState({ anchorEl: event.currentTarget, open: true }); }}>
                     <span role="img" aria-label="happy">😀</span>
                 </IconButton>
-                <IconButton className={classes.voteIcon} aria-label="neutralVote" onClick={() => { userFeedback(this.props.articleId, "neutral"); this.setState({ open: true }); }}>
+                <IconButton className={classes.voteIcon} aria-label="neutralVote" onClick={(event) => { userFeedback(this.props.articleId, "neutral"); this.setState({ anchorEl: event.currentTarget, open: true }); }}>
                     <span role="img" aria-label="neural">😐</span>
                 </IconButton>
-                <IconButton className={classes.voteIcon} aria-label="negativeVote" onClick={() => { userFeedback(this.props.articleId, "negative"); this.setState({ open: true }); }}>
+                <IconButton className={classes.voteIcon} aria-label="negativeVote" onClick={(event) => { userFeedback(this.props.articleId, "negative"); this.setState({ anchorEl: event.currentTarget, open: true }); }}>
                     <span role="img" aria-label="sad">🙁</span>
                 </IconButton>
             </div>

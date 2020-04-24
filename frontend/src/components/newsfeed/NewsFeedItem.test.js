@@ -2,11 +2,6 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import NewsFeedItem from './NewsFeedItem'
-import toJson from 'enzyme-to-json'
-import styled from 'styled-components'
-import renderer from 'react-test-renderer'
-import 'jest-styled-components'
-import { shallow } from 'enzyme';
 
 describe('Article in header displays all important information', () => {
     let getByText, getByLabelText

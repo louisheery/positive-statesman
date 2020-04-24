@@ -57,10 +57,9 @@ class NewsFeed extends Component {
             userCodes = defaultCategoryNames
 
             for (i = 0; i < userCodes.length; i = i + 1) {
-                var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i]);
+                var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i])
                 var categoryName = userCodes[i];
-                var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i]);
-                console.log(categoryURL, categoryName, categoryCode)
+                var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i])
                 userNewsFeedData.push([categoryURL, categoryName, { category: categoryCode, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0 }, 'rgba(227, 216, 0, 1)'])
             }
 
@@ -77,7 +76,6 @@ class NewsFeed extends Component {
                     var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i]);
                     var categoryName = userCodes[i];
                     var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i]);
-                    console.log(categoryURL, categoryName, categoryCode)
                     userNewsFeedData.push([categoryURL, categoryName, { category: categoryCode, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0 }, 'rgba(227, 216, 0, 1)'])
                 }
 

@@ -88,7 +88,6 @@ class ProfileTable extends React.Component {
 
         var userData = tableType == 'category' ? this.props.userCategories : this.props.userPublishers
         var allData = tableType == 'category' ? categoryDictionary : publisherDictionary
-        console.log(tableType, "@@", userData)
         return (
             <div>
                 <TableContainer component={Paper} className={classes.tableContainerOuter}>

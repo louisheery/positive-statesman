@@ -32,6 +32,7 @@
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "sort-json-array": "^0.1.7",
     "style-loader": "^1.1.3"

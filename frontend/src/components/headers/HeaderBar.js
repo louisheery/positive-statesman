@@ -65,14 +65,13 @@ class HeaderBar extends Component {
 
     handleClickSubmit = (event) => {
         if (this.state.addArticle) {
-            console.log(event.target)
             addArticle(this.state.input).then((response) =>
                 this.setState({
                     popupText: response ? "Your article has successfully been added to our database. \
                     Thank you for your contribution!" : "Sorry, your article couldn't be added to our database because \
                     we cannot fetch its content with our API.",
                     open: true,
-                    anchorEl: event.target
+                    anchorEl: event.currentTarget
                 }))
         }
         if (this.state.searchArticle) {
@@ -91,12 +90,12 @@ class HeaderBar extends Component {
 
     handleKeyDown = (event) => {
         if (event.keyCode == 13) {
-            this.handleClickSubmit()
+            this.handleClickSubmit(event)
         }
     }
 
 
-    handleClick = event => {
+    handleClick = (event) => {
         this.setState({ openMenu: true, anchorEl: event.currentTarget });
     };
 
@@ -175,7 +174,7 @@ class HeaderBar extends Component {
                                     <Paper className={classes.addStoryPaper} >
                                         <InputBase placeholder="URL of Article" onChange={this.handleChangeInput} onKeyDown={this.handleKeyDown} />
                                         <Tooltip title="Submit" placement="bottom">
-                                            <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit}>
+                                            <IconButton className={classes.iconButton} color="secondary" onClick={this.handleClickSubmit} aria-label="submit">
                                                 <AddCircleOutlineIcon />
                                             </IconButton>
                                         </Tooltip>
@@ -189,7 +188,7 @@ class HeaderBar extends Component {
                                         </IconButton>
                                     </Tooltip>
                                     <Tooltip title="Add Article" placement="bottom">
-                                        <IconButton color="secondary" onClick={this.handleClickAdd}>
+                                        <IconButton color="secondary" onClick={this.handleClickAdd} aria-label="add">
                                             <AddCircleOutlineIcon />
                                         </IconButton>
                                     </Tooltip>
