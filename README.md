@@ -1,75 +1,34 @@
 # The Positive Statesman
 "Sharing 'Positive' Stories using sentiment analysis"
 
-![Positive Statesman](https://raw.githubusercontent.com/louisheery/positive-statesman/master/file_dump/Positive%20Statesman%20Banner%20Logo.png?token=ADUEJK6FUP3XRTBJZ7DZKC26VAJMG)
-
+![Positive Statesman_LOGO](https://github.com/louisheery/positive-statesman/raw/master/file_dump/Positive%20Statesman%20Banner%20Logo.png)
 
 ![Positive Statesman](https://github.com/louisheery/positive-statesman/raw/master/file_dump/ps-homepage.png)
 
-## Git Tutorial
-## How to Push Code to Github
-1. Update your 'Local' version of 'Master' Branch
+
+## SECTION 1: How to Run the Positive Statesman
+1. Clone the Repository
 ```
-git pull origin master
+$ git clone https://github.com/louisheery/positive-statesman.git
 ```
 
-2. Create a new 'Local' version of a seperate Branch for which you are currently working on i.e. 'adding-react-router' Branch
+2. Run Backend -- CD into correct folder and Run Django server
 ```
-git checkout -b adding-react-router
-```
-
-3. Push your 'adding-react-router' Branch to the 'Online' version. This automatically creates a pull request for 'adding-react-router' on Online version to be merged into 'Master' on Online version.
-```
-git push origin adding-react-router
-```
-
-4. Someone else will review the pull request and merge it to the Master of Online version at some point in the future.
-
-5. And run a cleanup to delete this temporary 'adding-react-router' from the Local machine (this can only be done once the branch is merged)
-```
-git sweep
-```
-
-## How to run server
-1. Start the server
-```
+cd /<containing-folder>/positive-statesman/
 python3 manage.py runserver
 ```
-
-Server is now running at localhost:8000/
-
-### If there are any errors running server do the following
-
-1. Activate the correct python environment
-```
-source env/bin/activate
-```
-
-2. Install any missing requirements
-```
-pip3 install -r requirements.txt
-```
-
-## How to automatically compile frontend code as you work
-1. Run yarn dev to automatically compile the frontend with webpack
+3. Run Frontend -- Run yarn dev to automatically compile the frontend with webpack
 ```
 yarn dev
 ```
 
-### If there are any errors running yarn watch
-1. You may need to update yarn (npm) packages
+4. Open Project in Web Browser
+Server is now running at *localhost:8000*
 
-```
-yarn install
-```
 
-## How to read and write to database
 
-1. See https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models
-
-2. I didn't have a look at how to access it through the API yet
-
-## How to inspect the database on django admin
+## SECTION 2: Database Inspection & Troubleshooting
+### How to inspect the database on django admin
 1. All django database models are stored in <articles>/models.py
 
 2. Create your superuser account
@@ -83,7 +42,7 @@ python3 manage.py createsuperuser
 
 5. You can now add data to the database manually
 
-## How to inspect the database on pgAdmin 4 (Advanced)
+### How to inspect the database on pgAdmin 4 (Advanced)
 1. All django database models are stored in <articles>/models.py
 
 2. Download and install pgAdmin 4 on your machine if you want to inspect the database layout.
@@ -119,13 +78,13 @@ python3 manage.py createsuperuser
 
 8. Please don't delete anything!!!
 
-## How to seed database with categories
+### How to seed database with categories
 Navigate to the root directory and run the following command 
 ```
 python manage.py seed_categories
 ```
 
-## How to reset database
+### How to reset database
 *Step 1*: go into the articles/migrations folders and delete all migrations (not the __init__.py and the other special file)
 *Step 2*: delete db.sqlite
 *Step 3*: run the following commands
@@ -134,21 +93,17 @@ python3 manage.py migrate
 python3 manage.py seed_categories
 *Step 4*: go to endpoint /api/fetch-articles
 
-## How to print an ER-Diagram
+### How to print an ER-Diagram
 
 1. Install: brew install graphviz
 
 2. Execute: python3 manage.py graph_models articles -o file_dump/diagrams/er_diagram_`date "+%Y%m%d-%H%M%S"`.svg
 
 3. You can now find the svg file in file_dump/diagrams/
-## Repo Contents
 
-### Libraries and Technologies to research
-- NLP: NLP Toolkit, Bert, Vader, Google BERT
-- NLP Datasets [Google Dataset Search](https://toolbox.google.com/datasetsearch/search?query=positive%20sentiment)
-- Backend Hosting:
-- Backend Libraries: Django
-- Frontend: React
-- Hosting: Azure
-- News APIs: TheGuardian, NewsAPI, Aylien
-- Project Management: Slack, Trello, Basecamp
+### If there are any errors running yarn watch
+1. You may need to update yarn (npm) packages
+
+```
+yarn install
+```
