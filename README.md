@@ -6,7 +6,7 @@
 ![Positive Statesman](https://github.com/louisheery/positive-statesman/raw/master/file_dump/ps-homepage.png)
 
 
-## SECTION 1: How to Run the Positive Statesman
+## How to Run the Positive Statesman
 1. Clone the Repository
 ```
 $ git clone https://github.com/louisheery/positive-statesman.git
@@ -27,7 +27,7 @@ Server is now running at *localhost:8000*
 
 
 
-## SECTION 2: Database Inspection & Troubleshooting
+## Database Inspection & Troubleshooting
 ### How to inspect the database on django admin
 1. All django database models are stored in <articles>/models.py
 
