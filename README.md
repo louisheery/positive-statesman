@@ -60,7 +60,7 @@ python3 manage.py createsuperuser
         Port: 5432
         Maintenance database: postgres
         Username: positive@positive-db
-        Password: #4Flapjacks
+        Password: delet4d
     )
 
 5. It will probably not allow you to connect, because your IP Address is not
