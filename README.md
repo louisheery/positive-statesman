@@ -25,7 +25,10 @@ yarn dev
 4. Open Project in Web Browser
 Server is now running at *localhost:8000*
 
-
+5. Before updating the master branch make sure to compile the frontend for production
+```
+yarn build
+```
 
 ## Database Inspection & Troubleshooting
 ### How to inspect the database on django admin
@@ -82,6 +85,12 @@ python3 manage.py createsuperuser
 Navigate to the root directory and run the following command 
 ```
 python manage.py seed_categories
+```
+
+### How to seed database with articles
+From the project root run the following
+```
+python manage.py generate_articles
 ```
 
 ### How to reset database
