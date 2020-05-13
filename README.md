@@ -87,6 +87,11 @@ yarn jest --coverage
 
 2. Inspect coverage report in console or HTML version in coverage/lcov-report/index.html
 
+## How to run backend testing framework
+```
+python3 manage.py test articles/
+```
+
 ## How to print an ER-Diagram
 
 1. Install the graphviz package
