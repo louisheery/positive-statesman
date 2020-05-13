@@ -21,7 +21,6 @@ class ModelTest(TestCase):
     def create_Article(self):
         return Article.objects.create()
 
-    '''
     def test_article_functions(self):
         print("")
         print("----------------------------------------------------------------------")
@@ -181,8 +180,57 @@ class ViewTest(TestCase):
             qset = av.user_feedback(request, 1, "positive")
         except Exception as e:
             self.fail("Unexpected exception %s" % e) 
+    
+    def test_article_search(self):
 
-    '''
+        print("")
+        print("----------------------------------------------------------------------")
+        print("Testing the search() Function ...")
+        print("----------------------------------------------------------------------")
+        Article.objects.create()
+        Article.objects.create()
+        request = http.HttpRequest()
+        request.method = 'GET'
+        request.GET = http.QueryDict('search=Trump')
+
+        try:
+            qset = av.search_articles(request)
+        except Exception as e:
+            self.fail("Unexpected exception %s" % e) 
+
+    def test_article_average_1(self):
+
+        print("")
+        print("----------------------------------------------------------------------")
+        print("Testing the average() Function ...")
+        print("----------------------------------------------------------------------")
+        Article.objects.create()
+        Article.objects.create()
+        request = http.HttpRequest()
+        request.method = 'GET'
+        request.GET = http.QueryDict('begin=2020-01-01&end=2020-03-01&param=categories')
+
+        try:
+            qset = av.article_average(request)
+        except Exception as e:
+            self.fail("Unexpected exception %s" % e) 
+
+    def test_article_average_2(self):
+
+        print("")
+        print("----------------------------------------------------------------------")
+        print("Testing the average() Function ...")
+        print("----------------------------------------------------------------------")
+        Article.objects.create()
+        Article.objects.create()
+        request = http.HttpRequest()
+        request.method = 'GET'
+        request.GET = http.QueryDict('begin=2020-01-01&end=2020-03-01&param=locations')
+
+        try:
+            qset = av.article_average(request)
+        except Exception as e:
+            self.fail("Unexpected exception %s" % e) 
 
     def test_login(self):
         print("")
