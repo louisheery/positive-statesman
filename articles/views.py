@@ -16,6 +16,7 @@ import json
 from datetime import datetime, timedelta, timezone
 import numpy as np
 import pytz
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def valid_filter(param):
