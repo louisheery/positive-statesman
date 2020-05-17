@@ -30,6 +30,7 @@ const styles = {
   iconButton: {
     padding: 2,
     paddingRight: 8,
+    marginBottom: '4px',
     color: "#347da3"
   },
 
@@ -104,8 +105,9 @@ const styles = {
     marginRight: '65px',
   },
 
-
-
+  popover: {
+    maxWidth: 800
+  }
 }
 
 export default styles;

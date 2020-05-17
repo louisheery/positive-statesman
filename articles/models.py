@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Article(models.Model):
     creation_date = models.DateTimeField(default=utils.timezone.now)
     url = models.URLField(max_length=300)
-    image_url = models.URLField(max_length=300, null=True)
+    image_url = models.URLField(max_length=400, null=True)
     title = models.CharField(max_length=300)
     publish_date = models.DateTimeField(default=utils.timezone.now)
     publisher = models.ForeignKey(
@@ -82,7 +82,7 @@ class Location(models.Model):
 class Reader(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField('Category', blank=True)
-    locations = models.ManyToManyField('Location', blank=True)
+    publishers = models.ManyToManyField('Publisher', blank=True)
 
     class Meta:
         ordering = ['user']

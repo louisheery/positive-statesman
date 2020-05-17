@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -97,15 +97,7 @@
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,19 +113,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">37x</span>
-<span class="cline-any cline-yes">37x</span>
+<span class="cline-any cline-yes">45x</span>
+<span class="cline-any cline-yes">45x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,8 +128,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">315x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,11 +139,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// REACT LIBRARIES
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 &nbsp;
 // MATERIAL UI
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
+&nbsp;
+import { categoryBarTabs } from '../Settings'
+import { remainingCategories } from '../Settings'
 &nbsp;
 // STYLES
 import { withStyles } from '@material-ui/core/styles'
@@ -168,47 +155,36 @@ import styles from '../../assets/styles/components/headers/CategoryBar.js';
 &nbsp;
 class CategoryBar extends Component {
 &nbsp;
-    constructor(props) {
-        super(props);
-        this.state = {
-            tabValue: "top"
-        }
-    }
-&nbsp;
-    handleChangeTabs = (event, newValue) =&gt; {
-        this.setState({ tabValue: newValue })
-    }
-&nbsp;
     render() {
+&nbsp;
         const { classes } = this.props
         return (
             &lt;div&gt;
                 &lt;Tabs
                     className={classes.tabs}
-                    onChange={this.handleChangeTabs}
-                    value={this.state.tabValue}
+                    value={remainingCategories.includes(this.props.location.pathname) &amp;&amp; (<span class="branch-1 cbranch-no" title="branch not covered" >this.props.location.pathname.slice(0, 12) === "/categories/" </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >this.props.location.pathname.length === 1)</span> ? <span class="branch-0 cbranch-no" title="branch not covered" >this.props.location.pathname </span>: false}
                     variant="scrollable"
                 &gt;
-                    &lt;Tab className={classes.tab} component={Link} to="/" value={"top"} label="Home" /&gt;
-                    &lt;Tab className={classes.tab} component={Link} to={'/business'} value="/business" label="Business" /&gt;
-                    &lt;Tab className={classes.tab} component={Link} to={'/politics'} value="/politics" label="Politics" /&gt;
-                    &lt;Tab className={classes.tab} component={Link} to={'/sport'} value="/sport" label="Sport" /&gt;
-                    &lt;Tab className={classes.tab} component={Link} to={'/arts'} value="/arts" label="Arts" /&gt;
-                    &lt;Tab className={classes.tab} component={Link} to={'/science'} value="/science" label="Science" /&gt;
+                    &lt;Tab className={classes.tab} component={Link} to="/" value={"/"} label="Home" /&gt;
+&nbsp;
+                    {categoryBarTabs.map((cat, i) =&gt; {
+                        return &lt;Tab className={classes.tab} component={Link} to={`/categories/${cat}`} value={`/categories/${cat}`} label={cat.replace(/^\w/, c =&gt; c.toUpperCase())} key={i} /&gt;
+                    })}
+&nbsp;
                 &lt;/Tabs&gt;
             &lt;/div&gt;
         )
     }
 }
 &nbsp;
-export default withStyles(styles)(CategoryBar)</pre></td></tr></table></pre>
+export default withRouter(withStyles(styles)(CategoryBar))</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Feb 26 2020 11:37:34 GMT+0000 (Greenwich Mean Time)
+                at Fri Apr 24 2020 17:50:02 GMT+0200 (Central European Summer Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

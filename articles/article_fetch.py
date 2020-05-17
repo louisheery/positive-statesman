@@ -45,26 +45,35 @@ def generate_articles():
     
     # 1.    Fetch articles
 
-    api_response = fetch_articles(api_instance)
-    stories = api_response.stories
-    # TBD error handling
+    eligible_publishers = ["theguardian.com","nytimes.com","ft.com","bloomberg.com","reuters.com","apnews.com","thetimes.co.uk","washingtonpost.com","afp.com","abcnews.go.com","time.com","wsj.com","economist.com","politico.com",
+            "bbc.com","pbs.com","thehill.com","usatoday.com","npr.org","cbsnews.com","axios.com","huffpost.com","newyorker.com","nationalreview.com","slate.com","theatlantic.com","theweek.com","vanityfair.com","msnbc.com","cnn.com",
+            "theamericanconservative.com","vox.com","mic.com","independent.co.uk","thesun.co.uk","metro.co.uk","dailymail.co.uk","telegraph.co.uk","latimes.com","cnet.com","engadget.com","theverge.com","vice.com","hollywoodreporter.com",
+            "newsweek.com","forbes.com","sciencemag.org","rte.com","natgeo.com","wanderlust.co.uk","skysports.com","espn.com","theathletic.co.uk","phys.org","physicsworld.com","sky.com","techradar.com","entertainmentdaily.co.uk",
+            "digitalspy.com","inews.co.uk","ign.com","france24.com","dw.com","euronews.com","thelocal.it","elpais.com","cbc.ca","globalnews.ca","nationalpost.com","msn.com","nbcnews.com","abc.net.au","scmp.com","seattletimes.com",
+            "independent.ie","standard.co.uk","wired.co.uk","fortune.com","techcrunch.com","usnews.com"]
+    for publisher in eligible_publishers:
+        api_response = fetch_articles(api_instance, publisher)
+        if api_response:
+            stories = api_response.stories
+            # TBD error handling
 
-    # 2.    Get the full text for every article
-    # 2.1       Analyse sentiment
-    for story in stories:
-        save_from_story(story)
+            # 2.    Get the full text for every article
+            # 2.1       Analyse sentiment
+            for story in stories:
+                save_from_story(story)
         
 
 
-def fetch_articles(api_instance):
+def fetch_articles(api_instance, publisher):
     try:
         api_response = api_instance.list_stories(
             published_at_start='NOW-1DAYS',
             published_at_end='NOW',
-            per_page=100,
+            per_page=10,
             categories_taxonomy='iab-qag',
             categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20'],
             #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
+            source_domain=[publisher],
             language=['en'],
             #next_page_cursor=next_page_cursor
         )

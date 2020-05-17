@@ -33,7 +33,6 @@ async function fetchArticles(params = {}) {
 }
 
 async function userFeedback(pk, vote) {
-  console.log("Vote Button pressed: pk=" + String(pk) + " & vote=" + vote)
   var csrftoken = getCookie('csrftoken');
 
   fetch(`/api/user-feedback/`, {
@@ -45,31 +44,27 @@ async function userFeedback(pk, vote) {
     },
     body: JSON.stringify({ "pk": pk, "vote": vote })
   }).then((response) => {
-    console.log(response);
     response.json().then((data) => {
-      console.log(data);
     });
   });
 }
 
 async function addArticle(url) {
-  console.log("User submitted url: " + String(url))
   var csrftoken = getCookie('csrftoken');
-
-  fetch(`/api/submit-article/`, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken
-    },
-    body: JSON.stringify({ "url": url })
-  }).then((response) => {
-    console.log(response);
-    response.json().then((data) => {
-      console.log(data);
-    });
-  });
+  try {
+    var response = await fetch(`/api/submit-article/`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({ "url": url })
+    })
+    return await response.statusText != "Not Found"
+  } catch (err) {
+    return false
+  }
 }
 
 async function searchArticle(input) {

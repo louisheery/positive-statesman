@@ -2,129 +2,152 @@
 import React, { Component } from 'react';
 
 // REDUX LIBRARIES
-import reducer from '../../store/reducers/reducer';
-import { connect, Provider } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import store from "../../store/store";
-import { userGETData, avaliableData } from '../../store/actions/actions';
+import { userFetchData } from '../../store/actions/actions';
 
 // INTERNAL REACT COMPONENTS
 import NewsFeedRow from './NewsFeedRow';
 import NewsFeedHeader from './NewsFeedHeader';
 
+import { defaultCategoryNames } from '../Settings'
+import { categoryDictionary } from '../Settings'
+import { publisherDictionary } from '../Settings'
+
 // STYLES
 import { withStyles } from '@material-ui/core/styles';
 import styles from '../../assets/styles/components/newsfeed/NewsFeed.js';
-import Typography from 'material-ui/styles/typography';
 
 class NewsFeed extends Component {
 
-    constructor(props) {
-        super(props)
-
-        const { categoryId } = this.props;
-
-        this.state = {
-            newsFeedDictionary: {
-                QUERY_TODAY: ['', 'Trending Today', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                QUERY_THISWEEK: ['', 'Trending This Week', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 50, 73, 1)'],
-                QUERY_THISMONTH: ['', 'Trending This Month', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                QUERY_ALLTIME: ['', 'Trending All Time', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 209, 56, 1)'],
-                QUERY_USA: ['', 'Trending in USA', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                QUERY_UK: ['', 'Trending in UK', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                QUERY_WORLD: ['', 'Trending Worldwide', { category: categoryId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
-
-                x180: ['/art', 'Art, Culture & Entertainment', { category: 'iab-qagIAB1', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'],
-                x219: ['/business', 'Business', { category: 'iab-qagIAB3', limit: 6, offset: 0, sentiment_score_min: 0.5 }],
-                x237: ['/politics', 'Law, Government & Politics', { category: 'iab-qagIAB11', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(112, 0, 27, 1)'],
-                x212: ['/science', 'Science', { category: 'iab-qagIAB15', limit: 6, offset: 0, sentiment_score_min: 0.0 }, 'rgba(0, 209, 56, 1)'],
-                x128: ['/sport', 'Sport', { category: 'iab-qagIAB17', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(43, 128, 255, 1)'],
-                x84: ['/tech', 'Technology', { category: 'iab-qagIAB19', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(139, 0, 194, 1)'],
-                x181: ['/travel', 'Travel', { category: 'iab-qagIAB20', limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(0, 186, 93, 1)'],
-            },
-        }
-
-    }
-
     static propTypes = {
+        isLoggedIn: PropTypes.bool,
         userCategories: PropTypes.array,
         userPublishers: PropTypes.array,
-        userGETData: PropTypes.func.isRequired,
+        userFetchData: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
-        this.props.userGETData('GET', 'category');
+        const { isLoggedIn } = this.props;
+
+        if (isLoggedIn) {
+            this.props.userFetchData('GET', 'category');
+            this.props.userFetchData('GET', 'publisher');
+        }
+    }
+
+    vlookup(matrix, origin, destination, publisher) {
+        for (var key in matrix) {
+            if (matrix[key][origin] == publisher) {
+                return matrix[key][destination];
+            }
+        }
+        return '';
     }
 
     render() {
+        const { classes, pageName, categoryId, publisherId, userCategories, userPublishers } = this.props;
 
-        const { classes, categoryId } = this.props;
+        var userCodes;
+        var userNewsFeedData = [];
 
-        var newsFeedState;
+        // A: Publisher Page
+        if (publisherId !== undefined) {
+
+            userCodes = defaultCategoryNames
+
+            for (i = 0; i < userCodes.length; i = i + 1) {
+                var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i])
+                var categoryName = userCodes[i];
+                var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i])
+                userNewsFeedData.push([categoryURL, categoryName, { category: categoryCode, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0 }, 'rgba(227, 216, 0, 1)'])
+            }
 
 
-        
+            // B: Home Page
+        } else if (categoryId === '') {
 
-        if (this.props.categoryId === '') {
+            // B1: Home Page with User Not Logged in OR Home Page with User Logged in and No preferences Setup
+            if (userCategories == null) {
 
-            if (this.props.userCategories == null) {
+                userCodes = defaultCategoryNames
 
-                newsFeedState = {
-
-                    newsFeedRow: [this.state.newsFeedDictionary.x219, this.state.newsFeedDictionary.x237, this.state.newsFeedDictionary.x128, this.state.newsFeedDictionary.x84, this.state.newsFeedDictionary.x212, this.state.newsFeedDictionary.x180, this.state.newsFeedDictionary.x181,]
-
-
+                for (i = 0; i < userCodes.length; i = i + 1) {
+                    var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i]);
+                    var categoryName = userCodes[i];
+                    var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i]);
+                    userNewsFeedData.push([categoryURL, categoryName, { category: categoryCode, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0 }, 'rgba(227, 216, 0, 1)'])
                 }
+
+
+
+                // B2: Home Page with User Logged In and Preferences Setup
             } else {
 
-                var userCategoriesCodes = this.props.userCategories.map(function (x) { return 'x' + x[0] })
+                userNewsFeedData.push(['/', 'Recommended Stories', { category: 'recommended', limit: 6, offset: 0, sentiment_score_min: 0 }])
 
-                let allCategoriesCodes = ['x180', 'x219', 'x237', 'x212', 'x128', 'x84', 'x181']
-                let remainingCategoriesCodes = allCategoriesCodes.filter(x => !userCategoriesCodes.includes(x));
+                if (userPublishers != null) {
 
-                userCategoriesCodes = userCategoriesCodes.concat(remainingCategoriesCodes)
-
-                var userCategoriesData = [];
-                for (var i = 0; i < userCategoriesCodes.length; i = i + 1) {
-                    var code = userCategoriesCodes[i]
-                    userCategoriesData.push(this.state.newsFeedDictionary[code])
-                }
-
-                newsFeedState = {
-
-                    newsFeedRow: userCategoriesData
-                }
-            }
-        } else {
-            newsFeedState = {
-                newsFeedRow: [this.state.newsFeedDictionary.QUERY_TODAY, this.state.newsFeedDictionary.QUERY_THISWEEK, this.state.newsFeedDictionary.QUERY_THISMONTH, this.state.newsFeedDictionary.QUERY_ALLTIME, this.state.newsFeedDictionary.QUERY_USA, this.state.newsFeedDictionary.QUERY_UK, this.state.newsFeedDictionary.QUERY_WORLD,],
-            }
-        }
-
-            return (
-                <div className={classes.grid}>
-
-                    <NewsFeedHeader categoryName={this.props.categoryName} categoryId={this.props.categoryId} />
-
-
-                    {
-                        newsFeedState.newsFeedRow.map((newsFeedRow, i) => {
-                            return (
-                                <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} itemColor={newsFeedRow[3]} />
-                            );
-                        })
+                    var userPublishersCodes = userPublishers.map(function (x) { return x[1] })
+                    for (var i = 0; i < userPublishersCodes.length; i = i + 1) {
+                        var publisherURL = this.vlookup(publisherDictionary, 1, 0, userPublishersCodes[i]);
+                        var publisherName = userPublishersCodes[i];
+                        var publisherCode = this.vlookup(publisherDictionary, 1, 2, userPublishersCodes[i]);
+                        userNewsFeedData.push([publisherURL, publisherName, { publisher: publisherCode, limit: 6, offset: 0, sentiment_score_min: 0 }, 'rgba(227, 216, 0, 1)'])
                     }
-                </div>
-            )
+
+                }
+                if (userCategories != null) {
+
+                    userCodes = userCategories.map(function (x) { return x[1] })
+                    var remainingCategoriesCodes = defaultCategoryNames.filter(x => !userCodes.includes(x));
+                    userCodes = userCodes.concat(remainingCategoriesCodes)
+
+                    for (i = 0; i < userCodes.length; i = i + 1) {
+                        var categoryURL = this.vlookup(categoryDictionary, 1, 0, userCodes[i]);
+                        var categoryName = userCodes[i];
+                        var categoryCode = this.vlookup(categoryDictionary, 1, 2, userCodes[i]);
+                        userNewsFeedData.push([categoryURL, categoryName, { category: categoryCode, publisher: publisherId, limit: 6, offset: 0, sentiment_score_min: 0.5 }, 'rgba(227, 216, 0, 1)'])
+                    }
+                }
+            }
+
+            // C: Category Page
+        } else {
+
+            for (i = 0; i < 6; i = i + 1) {
+                userNewsFeedData.push(['', '', { category: categoryCode, limit: 6, offset: 6 * i, sentiment_score_min: 0.5 }])
+            }
         }
+
+
+
+
+        return (
+            <div className={classes.grid}>
+
+                <NewsFeedHeader pageName={pageName} categoryId={categoryId} publisherId={publisherId} />
+
+
+                {
+                    userNewsFeedData.map((newsFeedRow, i) => {
+                        return (
+
+                            <NewsFeedRow key={Math.random() + i} newsFeedRow={newsFeedRow[0]} newsFeedRowTitle={newsFeedRow[1]} newsFeedRowFetchData={newsFeedRow[2]} newFeedRowNumber={i} />
+                        );
+                    })
+                }
+            </div>
+        )
     }
+}
 
-    const mapStateToProps = state => {
-        return {
-            userCategories: state.reducer.userCategories,
-            userPublishers: state.reducer.userPublishers,
-        };
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.reducer.isLoggedIn,
+        userCategories: state.reducer.userCategories,
+        userPublishers: state.reducer.userPublishers,
     };
+};
 
-export default connect(mapStateToProps, { userGETData })(withStyles(styles)(NewsFeed))
+export default connect(mapStateToProps, { userFetchData })(withStyles(styles)(NewsFeed))
