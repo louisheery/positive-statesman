@@ -67,11 +67,11 @@ def generate_articles():
 def fetch_articles(api_instance, publisher):
     try:
         api_response = api_instance.list_stories(
-            published_at_start='NOW-1DAYS',
+            published_at_start='NOW-8DAYS',
             published_at_end='NOW',
             per_page=10,
             categories_taxonomy='iab-qag',
-            categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20'],
+            categories_id=['IAB1', 'IAB3', 'IAB11', 'IAB15', 'IAB17', 'IAB19', 'IAB20', 'IAB4', 'IAB5', 'IAB6', 'IAB7', 'IAB8', 'IAB9', 'IAB10', 'IAB13', 'IAB14', 'IAB16', 'IAB18', 'IAB21'],
             #source_domain=['bbc.co.uk', 'news.yahoo.com', 'yahoo.com', 'guardian.co.uk', ],
             source_domain=[publisher],
             language=['en'],
