@@ -16,4 +16,5 @@ urlpatterns = [
     path('popular/publisher/', views.popular_publisher),
     path('search-articles/', views.search_articles),
     path('analytics/', views.article_average),
+    path('public/score/', views.score_api),
 ]

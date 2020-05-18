@@ -16,6 +16,7 @@ import json
 from datetime import datetime, timedelta, timezone
 import numpy as np
 import pytz
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def valid_filter(param):
@@ -660,3 +661,19 @@ def article_average(request):
 
     else:
         return JsonResponse({"msg": "Only GET requests allowed."}, status=405)
+
+@csrf_exempt
+def score_api(request):
+    if request.method == 'POST':
+        _json = json.loads(request.body)
+        if not "text" in _json:
+            return JsonResponse({"msg": "'text' field is required"}, status=422)
+        text = _json["text"]
+        if not isinstance(text, str):
+            return JsonResponse({"msg": "'text' field must be a string"}, status=422)
+        if len(text) < 100:
+            return JsonResponse({"msg": "'text' string must be at least 100 characters"}, status=422)
+
+        anaylser = SentimentIntensityAnalyzer()
+        score = article_fetch.sentiment_score(anaylser, text)
+        return JsonResponse({"score": score}, status=200)
